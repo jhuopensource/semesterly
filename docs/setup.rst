@@ -28,41 +28,42 @@ Steps are below on getting your local development environment running:
 
      https://www.docker.com/get-started
 
- 2. Create **semesterly/local_settings.py** as follows:
+2. Create **semesterly/local_settings.py** as follows:
 
-     .. code-block:: bash
+    .. code-block:: bash
 
-         DEBUG = True
-         TEMPLATE_DEBUG = DEBUG
-         DATABASES = {
-            'default': {
-                'ENGINE': 'django.db.backends.postgresql_psycopg2',
-                'NAME': 'postgres',
-                'USER': 'postgres',
-                'PASSWORD': '',
-                'HOST': 'db',
-                'PORT': '5432',
-            }
+     DEBUG = True
+     TEMPLATE_DEBUG = DEBUG
+     DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': 'postgres',
+            'USER': 'postgres',
+            'PASSWORD': '',
+            'HOST': 'db',
+            'PORT': '5432',
         }
+     }
 
-     .. note:: **ATTENTION:** When you clone the repo, you get a folder called semesterly and inside there is another folder called semesterly. Put this in the second semesterly folder.
+    .. note:: **ATTENTION:** When you clone the repo, you get a folder called semesterly and inside there is another folder called semesterly. Put this in the second semesterly folder.
 
- 3. Edit **semesterly/dev_credentials.py** and add a value for JHU_API_KEY in single quotes like below.
+3. Edit **semesterly/dev_credentials.py** and add a value for JHU_API_KEY in single quotes like below.
+
     You can request this API KEY from http://sis.jhu.edu/api.
 
-     .. code-block:: bash
+    .. code-block:: bash
 
-         'JHU_API_KEY': 'xxxxxxxx',
+     'JHU_API_KEY': 'xxxxxxxx',
 
-     .. note:: **ATTENTION:** This is also in the second semesterly directory.
+    .. note:: **ATTENTION:** This is also in the second semesterly directory.
 
-     Now run this command in your terminal to make sure that this file isn't tracked by Git and your API key stays local to you.
+    Now run this command in your terminal to make sure that this file isn't tracked by Git and your API key stays local to you.
 
-     .. code-block:: bash
+    .. code-block:: bash
 
          git update-index --skip-worktree semesterly/dev_credentials.py
 
- 3. Add this entry to your hosts file as follows (This file is in c:\Windows\System32\drivers\etc\hosts or /etc/hosts)
+4. Add this entry to your hosts file as follows (This file is in c:\Windows\System32\drivers\etc\hosts or /etc/hosts)
 
      .. code-block:: bash
 
@@ -70,24 +71,24 @@ Steps are below on getting your local development environment running:
 
      .. note:: **ATTENTION:** If you're working on other schools, add their URLs here as well (i.e. uoft.sem.ly for University of Toronto).
 
- 4. Launch terminal or a command window and run:
+5. Launch terminal or a command window and run:
 
-     .. code-block:: bash
+    .. code-block:: bash
 
-         docker-compose build
-         docker-compose up
+        docker-compose build
+        docker-compose up
 
     The **build** command creates a local Database and build of your source code.
     The **up** command runs everything. Be careful not to build when you don't need to as this will destroy your entire database and you'll need to ingest/digest again to get your course data (which takes about 30 minutes).
 
-     You now have Semester.ly running. If this is the first time, you will want some data which done in the next step.
+    You now have Semester.ly running. If this is the first time, you will want some data which done in the next step.
 
- 5. Getting JHU data for a given term. In a new terminal run the following
+6. Getting JHU data for a given term. In a new terminal run the following
 
-     .. code-block:: bash
+    .. code-block:: bash
 
-         docker exec -it $(docker ps -q -f ancestor=semesterly) /bin/bash
-        * OR if that doesn't work
+        docker exec -it $(docker ps -q -f ancestor=semesterly) /bin/bash
+        * OR *
         docker exec -it $(docker ps -q -f ancestor=semesterly) shell
 
      This will put you inside of the shell. Now you can get courses by running these commands:
@@ -97,8 +98,8 @@ Steps are below on getting your local development environment running:
          python manage.py ingest jhu --term Spring --years 2018
          python manage.py digest jhu
 
- 6.  Open a browser and visit http://jhu.sem.ly:8000 and hack away.
-         You can skip ahead to **Advanced Configuration** or **How it All Works** now.
+7.  Open a browser and visit http://jhu.sem.ly:8000 and hack away.
+    You can skip ahead to **Advanced Configuration** or **How it All Works** now.
 
 Option 2: Setup using a Python Virtual Environment
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
