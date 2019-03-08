@@ -53,30 +53,30 @@ Steps are below on getting your local development environment running:
 
     .. code-block:: bash
 
-     'JHU_API_KEY': 'xxxxxxxx',
+        'JHU_API_KEY': 'xxxxxxxx',
 
     .. note:: **ATTENTION:** This is also in the second semesterly directory.
 
-    Now run this command in your terminal to make sure that this file isn't tracked by Git and your API key stays local to you.
+     Now run this command in your terminal to make sure that this file isn't tracked by Git and your API key stays local to you.
 
-    .. code-block:: bash
+     .. code-block:: bash
 
          git update-index --skip-worktree semesterly/dev_credentials.py
 
 4. Add this entry to your hosts file as follows (This file is in c:\Windows\System32\drivers\etc\hosts or /etc/hosts)
 
-     .. code-block:: bash
+    .. code-block:: bash
 
-         127.0.0.1       sem.ly jhu.sem.ly
+     127.0.0.1       sem.ly jhu.sem.ly
 
-     .. note:: **ATTENTION:** If you're working on other schools, add their URLs here as well (i.e. uoft.sem.ly for University of Toronto).
+    .. note:: **ATTENTION:** If you're working on other schools, add their URLs here as well (i.e. uoft.sem.ly for University of Toronto).
 
 5. Launch terminal or a command window and run:
 
     .. code-block:: bash
 
-        docker-compose build
-        docker-compose up
+         docker-compose build
+         docker-compose up
 
     The **build** command creates a local Database and build of your source code.
     The **up** command runs everything. Be careful not to build when you don't need to as this will destroy your entire database and you'll need to ingest/digest again to get your course data (which takes about 30 minutes).
@@ -91,7 +91,7 @@ Steps are below on getting your local development environment running:
         * OR *
         docker exec -it $(docker ps -q -f ancestor=semesterly) shell
 
-     This will put you inside of the shell. Now you can get courses by running these commands:
+    This will put you inside of the shell. Now you can get courses by running these commands:
 
     .. code-block:: bash
 
@@ -99,7 +99,7 @@ Steps are below on getting your local development environment running:
          python manage.py digest jhu
 
 7.  Open a browser and visit http://jhu.sem.ly:8000 and hack away.
-    You can skip ahead to **Advanced Configuration** or **How it All Works** now.
+        You can skip ahead to **Advanced Configuration** or **How it All Works** now.
 
 Option 2: Setup using a Python Virtual Environment
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
