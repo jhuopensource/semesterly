@@ -24,8 +24,7 @@ def add_mock(apps, schema_editor):
 		"AS.171.101",
 		"AS.171.102",
 		"AS.171.104",
-		"AS.171.108",
-		"EN.625.109"
+		"AS.171.108"
 	]
 
 	integration, created = Integration.objects.get_or_create(name="PILOT")
@@ -39,18 +38,6 @@ def add_mock(apps, schema_editor):
 				courseint, created = CourseIntegration.objects.get_or_create(course_id=course.id, integration_id=integration.id)
 				courseint.semester.add(s20)
 				courseint.save()
-				if Section.objects.filter(course_id=course.id, semester=s20).exists():
-					sections = list(Section.objects.filter(course_id=course.id, semester=s20))
-					for section in sections:
-						offering1, created = PilotOffering.objects.get_or_create(day='M', time_start="5:00pm", time_end="7:00pm", size=10, course_name=course.name)
-						offering1.sections.add(section.id)
-						offering1.save()
-						offering2, created = PilotOffering.objects.get_or_create(day='T', time_start="5:00pm", time_end="7:00pm", size=10,course_name=course.name)
-						offering2.sections.add(section.id)
-						offering2.save()
-						offering3, created = PilotOffering.objects.get_or_create(day='W', time_start="5:00pm", time_end="7:00pm", size=10,course_name=course.name)
-						offering3.sections.add(section.id)
-						offering3.save()
 
 
 
