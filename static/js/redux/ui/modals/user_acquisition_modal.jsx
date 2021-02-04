@@ -121,7 +121,7 @@ class UserAcquisitionModal extends React.Component {
             <span className="img-icon">
               <i className="fa fa-envelope-o" />
             </span>
-            <span>Sebastian's Mock Button</span>
+            <span>Sebastian's Mock Button Test 2</span>
           </button>
         </div>
       </Modal>
