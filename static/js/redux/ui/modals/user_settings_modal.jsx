@@ -26,7 +26,7 @@ class UserSettingsModal extends React.Component {
   static isIncomplete(prop) {
     return prop === undefined || prop === '';
   }
-
+  
   constructor(props) {
     super(props);
     this.state = {
@@ -109,6 +109,7 @@ class UserSettingsModal extends React.Component {
   }
 
   render() {
+    let favorite_num = 10; // bad choice, but temporary anyway
     const modalStyle = {
       width: '100%',
     };
@@ -314,6 +315,9 @@ class UserSettingsModal extends React.Component {
                 searchable
                 onChange={this.changeClassYear}
               />
+            </div>
+            <div className="preference cf">
+              <h3>This is your favorite number: {favorite_num}</h3>
             </div>
             { preferences }
             { !this.state.isSigningUp ? notifications : null }
