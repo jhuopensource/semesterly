@@ -317,7 +317,7 @@ class UserSettingsModal extends React.Component {
               />
             </div>
             <div className="preference cf">
-              <h3>This is your favorite number: {favorite_num}</h3>
+              <h3>This is your FAVORITE number: {favorite_num}</h3>
             </div>
             { preferences }
             { !this.state.isSigningUp ? notifications : null }
