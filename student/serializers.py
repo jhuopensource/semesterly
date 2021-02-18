@@ -65,4 +65,5 @@ class StudentSerializer(serializers.ModelSerializer):
             'LoginToken',
             'LoginHash',
             'timeAcceptedTos',
+            'favorite_num',
         )

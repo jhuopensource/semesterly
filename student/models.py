@@ -34,6 +34,7 @@ class Student(models.Model):
         user if they have signed up (that is, signed out users are not
         represented by Student objects).
     """
+    favorite_num = models.IntegerField(default=10)
     FRESHMAN = 'FR'
     SOPHOMORE = 'SO'
     JUNIOR = 'JR'
