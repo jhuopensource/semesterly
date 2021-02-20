@@ -113,7 +113,7 @@ class UserAcquisitionModal extends React.Component {
           <button
             className="btn abnb-btn secondary eight-px-top" onClick={() => {
               const link = document.createElement('a');
-              link.href = "https://semester.ly/press"
+              link.href = 'https://semester.ly/press';
               document.body.appendChild(link);
               link.click();
             }}
@@ -121,7 +121,7 @@ class UserAcquisitionModal extends React.Component {
             <span className="img-icon">
               <i className="fa fa-envelope-o" />
             </span>
-            <span>James' Mock Button</span>
+            <span>James&apos; Mock Button</span>
           </button>
         </div>
       </Modal>
