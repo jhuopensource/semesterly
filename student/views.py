@@ -155,7 +155,8 @@ class UserView(RedirectToSignupMixin, APIView):
             'img_url': img_url,
             'hasGoogle': has_google,
             'hasFacebook': has_facebook,
-            'notifications': has_notifications_enabled
+            'notifications': has_notifications_enabled,
+            'favorite_num': student.favorite_num
         }
         for r in reactions:
             context[r['title']] = r['count']
