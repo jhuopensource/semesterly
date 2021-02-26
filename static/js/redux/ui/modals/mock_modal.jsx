@@ -44,6 +44,13 @@ class MockModal extends React.Component {
       width: '100%',
     };
 
+    const studentInfo =
+      (<div>
+        <p>First Name: {this.props.userInfo.userFirstName}</p>
+        <p>Last Name: {this.props.userInfo.userLastName}</p>
+        <p>Class Year: {this.props.userInfo.class_year}</p>
+      </div>)
+
     return (<Modal
       ref={(c) => { this.modal = c; }}
       className="abnb-modal"
@@ -53,6 +60,7 @@ class MockModal extends React.Component {
       }}
     >
       {modalHeader}
+      {studentInfo}
     </Modal >
     );
   }
@@ -60,6 +68,7 @@ class MockModal extends React.Component {
 
 MockModal.propTypes = {
   toggleMockModal: PropTypes.func.isRequired,
+  userInfo: SemesterlyPropTypes.userInfo.isRequired,
   isVisible: PropTypes.bool.isRequired,
 }
 
