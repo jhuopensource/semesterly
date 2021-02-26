@@ -15,7 +15,7 @@ import datetime
 from django.db.models import Q
 from django.forms import model_to_dict
 
-from student.models import Student, PersonalTimetable
+from student.models import Student, PersonalTimetable, Yeet
 from timetable.models import Course
 from timetable.serializers import DisplayTimetableSerializer
 
@@ -48,6 +48,14 @@ def get_student(request):
         return Student.objects.get(user=request.user)
     else:
         return None
+
+
+def get_yeet(request):
+    """
+    Returns:
+        (:obj:`Yeet`): My Yeet object
+    """
+    return Yeet.objects.get(id=1)
 
 
 def get_classmates_from_course_id(

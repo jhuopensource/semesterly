@@ -175,6 +175,14 @@ export const userInfo = PropTypes.shape({
   timeAcceptedTos: PropTypes.string,
 });
 
+// Should match YeetSerializer
+export const yeetInfo = PropTypes.shape({
+  name: PropTypes.string,
+  favorite_song: PropTypes.string,
+  favorite_artist: PropTypes.string,
+  is_will_bad: PropTypes.bool,
+})
+
 export const schoolSpecificInfo = PropTypes.shape({
   areasName: PropTypes.string.isRequired,
   campuses: PropTypes.shape({}),

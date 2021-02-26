@@ -98,6 +98,21 @@ class Student(models.Model):
                                  "https://accounts.google.com/o/oauth2/token", 'my-user-agent/1.0')
 
 
+class Yeet(models.Model):
+    """Database object for practice. Contains some simple fields.
+    """
+    name = models.CharField(max_length=255, null=True)
+    favorite_song = models.CharField(max_length=255, null=True)
+    favorite_artist = models.CharField(max_length=255, null=True)
+    is_will_bad = models.BooleanField(default=True)
+
+    def __str__(self):
+        return "{0}".format(self.name)
+
+    def __unicode__(self):
+        return "%s" % self.name
+    
+
 class Reaction(models.Model):
     """ Database object representing a reaction to a course.
 

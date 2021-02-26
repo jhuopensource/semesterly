@@ -12,19 +12,19 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU General Public License for more details.
 */
 
-import { connect } from 'react-redux';
-import MockModal from '../../modals/mock_modal';
-import { toggleMockModal } from '../../../actions/modal_actions';
+import * as ActionTypes from '../constants/actionTypes';
 
-const mapStateToProps = state => ({
-  isVisible: state.mockModal.isVisible,
-  userInfo: state.userInfo.data,
-  yeetInfo: state.yeetInfo.data,
-});
+export const initialState = {
+  data: { },
+};
 
-const MockModalContainer = connect(
-  mapStateToProps,
-  { toggleMockModal },
-)(MockModal);
+const yeetInfo = (state = initialState, action) => {
+  switch (action.type) {
+    case ActionTypes.INIT_STATE:
+      return Object.assign({}, state, { data: action.data.currentYeet });
+    default:
+      return state;
+  }
+};
 
-export default MockModalContainer;
+export default yeetInfo;

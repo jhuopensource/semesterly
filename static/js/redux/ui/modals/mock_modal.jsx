@@ -49,6 +49,11 @@ class MockModal extends React.Component {
         <p>First Name: {this.props.userInfo.userFirstName}</p>
         <p>Last Name: {this.props.userInfo.userLastName}</p>
         <p>Class Year: {this.props.userInfo.class_year}</p>
+        <hr/>
+        <p>Name: {this.props.yeetInfo.name}</p>
+        <p>Favorite song: {this.props.yeetInfo.favorite_song}</p>
+        <p>Favorite artist: {this.props.yeetInfo.favorite_artist}</p>
+        <p>Is Will bad?: {this.props.yeetInfo.is_will_bad ? "Yes" : "No"}</p>
       </div>)
 
     return (<Modal
@@ -69,6 +74,7 @@ class MockModal extends React.Component {
 MockModal.propTypes = {
   toggleMockModal: PropTypes.func.isRequired,
   userInfo: SemesterlyPropTypes.userInfo.isRequired,
+  yeetInfo: SemesterlyPropTypes.yeetInfo.isRequired,
   isVisible: PropTypes.bool.isRequired,
 }
 

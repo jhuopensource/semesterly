@@ -14,7 +14,7 @@ from rest_framework import serializers
 
 from courses.serializers import CourseSerializer
 from timetable.serializers import DisplayTimetableSerializer
-from student.models import Student
+from student.models import Student, Yeet
 
 
 def get_student_dict(school, student, semester):
@@ -65,4 +65,19 @@ class StudentSerializer(serializers.ModelSerializer):
             'LoginToken',
             'LoginHash',
             'timeAcceptedTos',
+        )
+
+
+def get_yeet_dict(yeet):
+    return dict(**YeetSerializer(yeet).data)
+
+
+class YeetSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Yeet
+        fields = (
+            'name',
+            'favorite_song',
+            'favorite_artist',
+            'is_will_bad'
         )
