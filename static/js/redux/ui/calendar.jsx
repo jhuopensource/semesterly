@@ -186,7 +186,7 @@ class Calendar extends React.Component {
           <span>Open Mock Modal</span>
         </ReactTooltip>
       </div>
-    )
+    );
     const addSISButton = this.props.registrarSupported ? (
       <div className="cal-btn-wrapper">
         <button

@@ -158,13 +158,13 @@ class DayCalendar extends React.Component {
     const saveIcon = this.props.saving ? <i className="fa fa-spin fa-circle-o-notch" /> :
     <i className="fa fa-floppy-o" />;
     const openMockModalButton = (
-        <button
-          onClick={() => this.props.toggleMockModal()}
-          className="save-timetable"
-        >
-          <img src="/static/img/star.png" alt="Open mock modal" />
-        </button>
-    )
+      <button
+        onClick={() => this.props.toggleMockModal()}
+        className="save-timetable"
+      >
+        <img src="/static/img/star.png" alt="Open mock modal" />
+      </button>
+    );
     const shareButton = (
       <button
         onClick={this.fetchShareTimetableLink}

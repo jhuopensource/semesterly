@@ -19,7 +19,7 @@ const mockModal = (state = {
 }, action) => {
   switch (action.type) {
     case ActionTypes.TOGGLE_MOCK_MODAL:
-      return { isVisible: !state.isVisible }
+      return { isVisible: !state.isVisible };
     default:
       return state;
   }

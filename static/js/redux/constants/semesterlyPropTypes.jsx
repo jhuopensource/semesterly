@@ -181,7 +181,7 @@ export const yeetInfo = PropTypes.shape({
   favorite_song: PropTypes.string,
   favorite_artist: PropTypes.string,
   is_will_bad: PropTypes.bool,
-})
+});
 
 export const schoolSpecificInfo = PropTypes.shape({
   areasName: PropTypes.string.isRequired,
