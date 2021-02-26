@@ -88,6 +88,8 @@ export const react = (cid, title) => (dispatch) => {
   });
 };
 
+export const toggleMockModal = () => ({ type: ActionTypes.TOGGLE_MOCK_MODAL });
+
 export const togglePreferenceModal = () => ({ type: ActionTypes.TOGGLE_PREFERENCE_MODAL });
 
 export const triggerSaveCalendarModal = () => ({ type: ActionTypes.TRIGGER_SAVE_CALENDAR_MODAL });

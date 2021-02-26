@@ -41,7 +41,7 @@ class SocialProfile extends React.Component {
         <div>
           <div onMouseDown={this.toggleDropdown}>
             <div className="social-pro-pic" style={{ backgroundImage: `url(${this.props.userInfo.img_url})` }} />
-            <h2>{this.props.userInfo.userFirstNam}</h2>
+            <h2>{this.props.userInfo.userFirstName}</h2>
             <span className={classNames('tip-down', { down: this.state.showDropdown })} />
           </div>
           <div

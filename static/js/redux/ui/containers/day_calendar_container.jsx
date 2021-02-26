@@ -20,7 +20,7 @@ import {
     createICalFromTimetable,
     fetchShareTimetableLink,
 } from '../../actions/calendar_actions';
-import { togglePreferenceModal, triggerSaveCalendarModal } from '../../actions/modal_actions';
+import { toggleMockModal, togglePreferenceModal, triggerSaveCalendarModal } from '../../actions/modal_actions';
 import { getMaxEndHour } from '../../reducers/root_reducer';
 
 const mapStateToProps = (state) => {
@@ -43,6 +43,7 @@ const DayCalendarContainer = connect(
     // NOTE: uses this syntax to avoid onClick accidentally passing a callback
     saveTimetable: () => saveTimetable(),
     fetchShareTimetableLink,
+    toggleMockModal,
     togglePreferenceModal,
     triggerSaveCalendarModal,
     createICalFromTimetable,
