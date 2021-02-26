@@ -22,6 +22,7 @@ import {
 } from '../../actions/calendar_actions';
 import { togglePreferenceModal, triggerSaveCalendarModal } from '../../actions/modal_actions';
 import { getMaxEndHour } from '../../reducers/root_reducer';
+import { toggleMockModal } from '../../actions/modal_actions';
 
 const mapStateToProps = (state) => {
   const { isFetchingShareLink, shareLink, shareLinkValid } = state.calendar;
@@ -47,6 +48,7 @@ const DayCalendarContainer = connect(
     triggerSaveCalendarModal,
     createICalFromTimetable,
     handleCreateNewTimetable,
+    toggleMockModal,
   },
 )(DayCalendar);
 

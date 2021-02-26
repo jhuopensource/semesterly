@@ -157,7 +157,14 @@ class DayCalendar extends React.Component {
   render() {
     const saveIcon = this.props.saving ? <i className="fa fa-spin fa-circle-o-notch" /> :
     <i className="fa fa-floppy-o" />;
-
+    const openMockModalButton = (
+        <button
+          onClick={() => this.props.toggleMockModal()}
+          className="save-timetable"
+        >
+          <img src="/static/img/star.png" alt="Open mock modal" />
+        </button>
+    )
     const shareButton = (
       <button
         onClick={this.fetchShareTimetableLink}
@@ -221,6 +228,7 @@ class DayCalendar extends React.Component {
             <PaginationContainer />
           </div>
           <div className="fc-right">
+            { openMockModalButton }
             { shareButton }
             { shareLink }
             { addButton }
@@ -301,6 +309,7 @@ DayCalendar.defaultProps = {
 DayCalendar.propTypes = {
   togglePreferenceModal: PropTypes.func.isRequired,
   triggerSaveCalendarModal: PropTypes.func.isRequired,
+  toggleMockModal: PropTypes.func.isRequired,
   isFetchingShareLink: PropTypes.bool.isRequired,
   endHour: PropTypes.number.isRequired,
   handleCreateNewTimetable: PropTypes.func.isRequired,
