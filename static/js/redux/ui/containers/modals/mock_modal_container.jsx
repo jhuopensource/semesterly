@@ -17,12 +17,11 @@ import MockModal from '../../modals/mock_modal';
 import { toggleMockModal } from '../../../actions/modal_actions';
 import { toggleConflicts } from '../../../actions/timetable_actions';
 
-
 const mapStateToProps = state => ({
+    userInfo: state.userInfo.data,
     isVisible: state.mockModal.isVisible,
     withConflicts: state.preferences.try_with_conflicts,
 });
-
 
 const MockModalContainer = connect(
     mapStateToProps,

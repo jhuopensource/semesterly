@@ -15,7 +15,7 @@ GNU General Public License for more details.
 import PropTypes from 'prop-types';
 import React from 'react';
 import Modal from 'boron/FadeModal';
-import SortMenuContainer from '../containers/sort_menu_container';
+import * as SemesterlyPropTypes from '../../constants/semesterlyPropTypes';
 
 class MockModal extends React.Component {
   componentDidUpdate() {
@@ -36,13 +36,19 @@ class MockModal extends React.Component {
     };
     return (
         <Modal
-            ref={(c) => { this.modal = c; }}
-            className="pref-modal max-modal"
-            modalStyle={modalStyle}
-            onHide={this.props.toggleMockModal}
+          ref={(c) => { this.modal = c; }}
+          className="pref-modal max-modal"
+          modalStyle={modalStyle}
+          onHide={this.props.toggleMockModal}
         >
           <div id="perf-modal-wrapper">
             {modalHeader}
+            <div className="preference cf">
+              <h5>First Name: {this.props.userInfo.userFirstName}</h5>
+              <h5>Last Name: {this.props.userInfo.userLastName}</h5>
+              <h5>Graduation Year: {this.props.userInfo.class_year}</h5>
+            </div>
+            {/*
             <div className="conflict-row">
               <div style={{ marginRight: 'auto', marginLeft: '15%' }}>
                 <p style={{ margin: 0 }}>Conflicts: </p>
@@ -66,6 +72,8 @@ class MockModal extends React.Component {
             </div>
             <hr style={{ marginTop: 0, width: '80%' }} />
             <SortMenuContainer />
+            */}
+            {/*
             <div className="preference-footer">
               <button
                   className="btn btn-primary"
@@ -75,6 +83,7 @@ class MockModal extends React.Component {
                 Save and Close
               </button>
             </div>
+            */}
           </div>
         </Modal>
     );
@@ -82,10 +91,9 @@ class MockModal extends React.Component {
 }
 
 MockModal.propTypes = {
-  toggleConflicts: PropTypes.func.isRequired,
-  withConflicts: PropTypes.bool.isRequired,
+  userInfo: SemesterlyPropTypes.userInfo.isRequired,
   toggleMockModal: PropTypes.func.isRequired,
-  isVisible: PropTypes.bool.isRequired,
+  //setVisible: PropTypes.func.isRequired,
 };
 
 export default MockModal;

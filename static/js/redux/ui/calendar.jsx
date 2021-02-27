@@ -167,9 +167,9 @@ class Calendar extends React.Component {
       </h4>)
       : null;
     const starButton = (
-        <div className="cal-btn-wrapper">
-          <button
-              onClick={this.props.toggleMockModal}
+      <div className="cal-btn-wrapper">
+        <button
+          onClick={this.props.toggleMockModal}
               className="save-timetable add-button"
               data-tip
           >
