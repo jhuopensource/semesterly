@@ -47,6 +47,7 @@ class StudentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Student
         fields = (
+            'fav_number',
             'class_year',
             'img_url',
             'fbook_uid',
