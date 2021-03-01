@@ -60,6 +60,7 @@ class Student(models.Model):
     last_name = models.CharField(max_length=255, default='', null=True)
     disabilities = models.NullBooleanField(null=True, default=False)
 
+
     def __str__(self):
         return "{0}".format(self.jhed)
 
