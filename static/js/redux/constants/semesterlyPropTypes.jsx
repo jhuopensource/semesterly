@@ -173,6 +173,11 @@ export const userInfo = PropTypes.shape({
   LoginToken: PropTypes.string,
   LoginHash: PropTypes.string,
   timeAcceptedTos: PropTypes.string,
+  temp_mock: PropTypes.arrayOf(PropTypes.shape({
+    age: PropTypes.integer,
+    fav_book: PropTypes.string,
+    fav_lang: PropTypes.string,
+  }))
 });
 
 export const schoolSpecificInfo = PropTypes.shape({
