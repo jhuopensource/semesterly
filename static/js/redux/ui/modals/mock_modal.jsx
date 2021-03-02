@@ -47,6 +47,9 @@ class MockModal extends React.Component {
               <h5>First Name: {this.props.userInfo.userFirstName}</h5>
               <h5>Last Name: {this.props.userInfo.userLastName}</h5>
               <h5>Graduation Year: {this.props.userInfo.class_year}</h5>
+              <h5>Age: {this.props.userInfo.temp_mock.age}</h5>
+              <h5>Favorite Book: {this.props.userInfo.temp_mock.fav_book}</h5>
+              <h5>Favorite Language: {this.props.userInfo.temp_mock.fav_lang}</h5>
             </div>
             {/*
             <div className="conflict-row">
@@ -93,7 +96,6 @@ class MockModal extends React.Component {
 MockModal.propTypes = {
   userInfo: SemesterlyPropTypes.userInfo.isRequired,
   toggleMockModal: PropTypes.func.isRequired,
-  //setVisible: PropTypes.func.isRequired,
 };
 
 export default MockModal;

@@ -26,6 +26,12 @@ from semesterly.settings import get_secret
 hashids = Hashids(salt=get_secret('HASHING_SALT'))
 
 
+class Temp(models.Model):
+    age = models.IntegerField(null=True, default=21)
+    fav_book = models.CharField(max_length=255, default='Looking for Alaska', null=True)
+    fav_lang = models.CharField(max_length=255, default='Assembly', null=True)
+
+
 class Student(models.Model):
     """ Database object representing a student.
 
@@ -59,7 +65,7 @@ class Student(models.Model):
     first_name = models.CharField(max_length=255, default='', null=True)
     last_name = models.CharField(max_length=255, default='', null=True)
     disabilities = models.NullBooleanField(null=True, default=False)
-
+    temp_mock = models.OneToOneField(Temp, blank=True, default='')
 
     def __str__(self):
         return "{0}".format(self.jhed)

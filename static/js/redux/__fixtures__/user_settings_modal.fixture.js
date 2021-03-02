@@ -81,6 +81,7 @@ export const googleFixture = {
       social_all: null,
       userFirstName: 'Noah',
       integrations: [],
+      temp_mock: [],
       isLoggedIn: true,
       userLastName: 'Presler',
       LoginHash: 'xqr',
