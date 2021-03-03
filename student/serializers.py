@@ -14,12 +14,12 @@ from rest_framework import serializers
 
 from courses.serializers import CourseSerializer
 from timetable.serializers import DisplayTimetableSerializer
-from student.models import Student
+from student.models import Student, Temp
 
 
 def get_student_dict(school, student, semester):
     """ Return serialized representation of a student. """
-    user_dict = {'timeAcceptedTos': None, 'isLoggedIn': False, 'timetables': [], 'courses': []}
+    user_dict = {'timeAcceptedTos': None, 'isLoggedIn': False, 'timetables': [], 'courses': [], }
     if student is not None:
         user_dict = dict(user_dict, **StudentSerializer(student).data)
         user_dict['isLoggedIn'] = True
@@ -30,7 +30,18 @@ def get_student_dict(school, student, semester):
         context = {'semester': semester, 'school': school, 'student': student}
         user_dict['timetables'] = DisplayTimetableSerializer.from_model(timetables, many=True).data
         user_dict['courses'] = CourseSerializer(courses, context=context, many=True).data
+        # user_dict['temp_mock'] = dict(user_dict, **TempSerializer(student).data)
     return user_dict
+
+
+# class TempSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = Temp
+#         fields = (
+#             'age',
+#             'fav_book',
+#             'fav_lang',
+#         )
 
 
 class StudentSerializer(serializers.ModelSerializer):
@@ -43,6 +54,7 @@ class StudentSerializer(serializers.ModelSerializer):
     LoginToken = serializers.CharField(source='get_token')
     LoginHash = serializers.CharField(source='get_hash')
     timeAcceptedTos = serializers.DateTimeField(source='time_accepted_tos', format='iso-8601')
+    TempMock = serializers.RelatedField(source='temp_mock', read_only=True)
 
     class Meta:
         model = Student
@@ -65,5 +77,6 @@ class StudentSerializer(serializers.ModelSerializer):
             'LoginToken',
             'LoginHash',
             'timeAcceptedTos',
-            'temp_mock',
+            # 'temp_mock',
+            'TempMock',
         )
