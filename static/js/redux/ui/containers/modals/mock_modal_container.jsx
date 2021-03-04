@@ -19,6 +19,7 @@ import { toggleConflicts } from '../../../actions/timetable_actions';
 
 const mapStateToProps = state => ({
     userInfo: state.userInfo.data,
+    tempInfo: state.tempInfo.data,
     isVisible: state.mockModal.isVisible,
     withConflicts: state.preferences.try_with_conflicts,
 });

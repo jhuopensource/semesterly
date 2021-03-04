@@ -26,6 +26,7 @@ import courseInfo, * as fromCourseInfo from './course_info_reducer';
 import alerts from './alerts_reducer';
 import ui from './ui_reducer';
 import userInfo, * as fromUserInfo from './user_info_reducer';
+import tempInfo from './temp_info_reducer';
 import savingTimetable from './saving_timetable_reducer';
 import classmates from './classmates_reducer';
 import optionalCourses from './optional_courses_reducer';
@@ -81,6 +82,7 @@ const rootReducer = combineReducers({
   ui,
   userAcquisitionModal,
   userInfo,
+  tempInfo,
 });
 
 // timetable/entity selectors

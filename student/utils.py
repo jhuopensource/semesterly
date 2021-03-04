@@ -15,7 +15,7 @@ import datetime
 from django.db.models import Q
 from django.forms import model_to_dict
 
-from student.models import Student, PersonalTimetable
+from student.models import Student, PersonalTimetable, Temp
 from timetable.models import Course
 from timetable.serializers import DisplayTimetableSerializer
 
@@ -36,6 +36,14 @@ def next_weekday(d, weekday):
     if days_ahead <= 0:  # Target day already happened this week
         days_ahead += 7
     return d + datetime.timedelta(days_ahead)
+
+
+def get_temp(request):
+    """
+    Returns:
+        (:obj:`Temp`)
+    """
+    return Temp.objects.get(id=1)
 
 
 def get_student(request):

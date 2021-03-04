@@ -47,46 +47,10 @@ class MockModal extends React.Component {
               <h5>First Name: {this.props.userInfo.userFirstName}</h5>
               <h5>Last Name: {this.props.userInfo.userLastName}</h5>
               <h5>Graduation Year: {this.props.userInfo.class_year}</h5>
-              <h5>Age: {this.props.userInfo.age}</h5>
-              <h5>Favorite Book: {this.props.userInfo.fav_book}</h5>
-              <h5>Favorite Language: {this.props.userInfo.fav_lang}</h5>
+              <h5>Age: {this.props.tempInfo.age}</h5>
+              <h5>Favorite Book: {this.props.tempInfo.fav_book}</h5>
+              <h5>Favorite Language: {this.props.tempInfo.fav_lang}</h5>
             </div>
-            {/*
-            <div className="conflict-row">
-              <div style={{ marginRight: 'auto', marginLeft: '15%' }}>
-                <p style={{ margin: 0 }}>Conflicts: </p>
-              </div>
-              <div style={{ marginLeft: 'auto', marginRight: '10%' }}>
-                <label className="switch switch-slide" htmlFor="with-conflicts">
-                  <input
-                      id="with-conflicts"
-                      className="switch-input"
-                      type="checkbox"
-                      checked={this.props.withConflicts}
-                      onChange={this.props.toggleConflicts}
-                  />
-                  <span
-                      className="switch-label" data-on="Enabled"
-                      data-off="Disabled"
-                  />
-                  <span className="switch-handle" />
-                </label>
-              </div>
-            </div>
-            <hr style={{ marginTop: 0, width: '80%' }} />
-            <SortMenuContainer />
-            */}
-            {/*
-            <div className="preference-footer">
-              <button
-                  className="btn btn-primary"
-                  style={{ marginLeft: 'auto', marginRight: '10%' }}
-                  onClick={() => this.modal.hide()}
-              >
-                Save and Close
-              </button>
-            </div>
-            */}
           </div>
         </Modal>
     );
@@ -96,6 +60,7 @@ class MockModal extends React.Component {
 MockModal.propTypes = {
   userInfo: SemesterlyPropTypes.userInfo.isRequired,
   toggleMockModal: PropTypes.func.isRequired,
+  tempInfo: SemesterlyPropTypes.tempInfo.isRequired,
 };
 
 export default MockModal;

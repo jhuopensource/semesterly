@@ -152,6 +152,12 @@ export const denormalizedSlot = PropTypes.shape({
   is_locked: PropTypes.bool.isRequired,
 });
 
+export const tempInfo = PropTypes.shape({
+  age: PropTypes.number,
+  fav_book: PropTypes.string,
+  fav_lang: PropTypes.string,
+});
+
 // should match StudentSerializer + isLoggedIn
 export const userInfo = PropTypes.shape({
   isLoggedIn: PropTypes.bool.isRequired,
@@ -173,11 +179,6 @@ export const userInfo = PropTypes.shape({
   LoginToken: PropTypes.string,
   LoginHash: PropTypes.string,
   timeAcceptedTos: PropTypes.string,
-  temp_mock: PropTypes.shape({
-    age: PropTypes.integer,
-    fav_book: PropTypes.string,
-    fav_lang: PropTypes.string,
-  }),
 });
 
 export const schoolSpecificInfo = PropTypes.shape({

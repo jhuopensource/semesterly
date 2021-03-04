@@ -27,9 +27,9 @@ hashids = Hashids(salt=get_secret('HASHING_SALT'))
 
 
 class Temp(models.Model):
-    age = models.IntegerField(default=21)
-    fav_book = models.CharField(max_length=255, default='Looking for Alaska')
-    fav_lang = models.CharField(max_length=255, default='Assembly')
+    age = models.IntegerField(blank=True, null=True)
+    fav_book = models.CharField(max_length=255, null=True)
+    fav_lang = models.CharField(max_length=255, null=True)
 
 
 class Student(models.Model):
@@ -65,7 +65,7 @@ class Student(models.Model):
     first_name = models.CharField(max_length=255, default='', null=True)
     last_name = models.CharField(max_length=255, default='', null=True)
     disabilities = models.NullBooleanField(null=True, default=False)
-    temp_mock = models.OneToOneField(Temp, on_delete=models.CASCADE, null=True)
+
 
     def __str__(self):
         return "{0}".format(self.jhed)
@@ -163,7 +163,6 @@ class RegistrationToken(models.Model):
     p256dh = models.TextField(default='')
     endpoint = models.TextField(default='')
     student = models.ForeignKey(Student, null=True, default=None)
-
 
 class PilotOffering(models.Model):
     sections = models.ManyToManyField(timetable_models.Section)
