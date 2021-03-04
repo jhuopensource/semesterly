@@ -61,6 +61,7 @@ MockModal.propTypes = {
   userInfo: SemesterlyPropTypes.userInfo.isRequired,
   toggleMockModal: PropTypes.func.isRequired,
   tempInfo: SemesterlyPropTypes.tempInfo.isRequired,
+  isVisible: PropTypes.func.isRequired,
 };
 
 export default MockModal;
