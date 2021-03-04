@@ -43,7 +43,11 @@ def get_temp(request):
     Returns:
         (:obj:`Temp`)
     """
-    return Temp.objects.get(id=1)
+    logged = request.user.is_authenticated()
+    if logged and Student.objects.filter(user=request.user).exists():
+        return Temp.objects.get(student=request.user.id)
+    else:
+        return None
 
 
 def get_student(request):

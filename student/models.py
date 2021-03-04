@@ -26,11 +26,6 @@ from semesterly.settings import get_secret
 hashids = Hashids(salt=get_secret('HASHING_SALT'))
 
 
-class Temp(models.Model):
-    age = models.IntegerField(blank=True, null=True)
-    fav_book = models.CharField(max_length=255, null=True)
-    fav_lang = models.CharField(max_length=255, null=True)
-
 
 class Student(models.Model):
     """ Database object representing a student.
@@ -103,6 +98,13 @@ class Student(models.Model):
                                  get_secret('SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET'), refresh_token,
                                  expires_at,
                                  "https://accounts.google.com/o/oauth2/token", 'my-user-agent/1.0')
+
+
+class Temp(models.Model):
+    age = models.IntegerField(blank=True, null=True)
+    fav_book = models.CharField(max_length=255, null=True)
+    fav_lang = models.CharField(max_length=255, null=True)
+    student = models.OneToOneField(Student, blank=True, null=True)
 
 
 class Reaction(models.Model):
