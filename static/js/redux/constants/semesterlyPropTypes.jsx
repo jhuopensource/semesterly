@@ -152,6 +152,12 @@ export const denormalizedSlot = PropTypes.shape({
   is_locked: PropTypes.bool.isRequired,
 });
 
+export const homeInfo = PropTypes.shape({
+  bed: PropTypes.string,
+  desk: PropTypes.string,
+  chair: PropTypes.string,
+});
+
 // should match StudentSerializer + isLoggedIn
 export const userInfo = PropTypes.shape({
   isLoggedIn: PropTypes.bool.isRequired,

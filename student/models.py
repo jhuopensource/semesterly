@@ -25,6 +25,10 @@ from semesterly.settings import get_secret
 
 hashids = Hashids(salt=get_secret('HASHING_SALT'))
 
+class Home(models.Model):
+    bed = models.CharField(max_length=255, default='', null=True)
+    chair = models.CharField(max_length=255, default='', null=True)
+    desk = models.CharField(max_length=255, default='', null=True)
 
 class Student(models.Model):
     """ Database object representing a student.

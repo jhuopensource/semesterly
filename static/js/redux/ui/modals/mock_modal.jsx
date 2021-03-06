@@ -1,7 +1,8 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import Modal from 'boron/WaveModal';
-import SortMenuContainer from '../containers/sort_menu_container';
+import * as SemesterlyPropTypes from '../../constants/semesterlyPropTypes';
+
 
 class MockModal extends React.Component {
     componentDidMount() {
@@ -29,6 +30,24 @@ class MockModal extends React.Component {
         const modalStyle = {
             width: '100%',
         };
+        const userInfo =
+            (<div className="modal-content">
+                <div>
+                    <p>First name: { this.props.userInfo.userFirstName }</p>
+                    <p>Last Name: { this.props.userInfo.userLastName } </p>
+                    <p>Graduating class: { this.props.userInfo.class_year }</p>
+                </div>
+            </div>);
+
+        const homeInfo =
+            (<div className="modal-content">
+                <div>
+                    <p>Bed: { this.props.homeInfo.bed }</p>
+                    <p>Desk: { this.props.homeInfo.desk } </p>
+                    <p>Chair: { this.props.homeInfo.chair }</p>
+                </div>
+            </div>);
+
         return (
             <Modal
                 ref={(c) => { this.modal = c; }}
@@ -36,7 +55,10 @@ class MockModal extends React.Component {
                 modalStyle={modalStyle}
                 onHide={this.props.toggleMockModal}
             >
-                {modalHeader}
+                { modalHeader }
+                { userInfo }
+                { homeInfo }
+
             </Modal>
         );
     }
@@ -45,6 +67,8 @@ class MockModal extends React.Component {
 MockModal.propTypes = {
     toggleMockModal: PropTypes.func.isRequired,
     isVisible: PropTypes.bool.isRequired,
+    userInfo: SemesterlyPropTypes.userInfo.isRequired,
+    homeInfo: SemesterlyPropTypes.homeInfo.isRequired,
 };
 
 export default MockModal;

@@ -14,7 +14,7 @@ from rest_framework import serializers
 
 from courses.serializers import CourseSerializer
 from timetable.serializers import DisplayTimetableSerializer
-from student.models import Student
+from student.models import Student, Home
 
 
 def get_student_dict(school, student, semester):
@@ -32,6 +32,17 @@ def get_student_dict(school, student, semester):
         user_dict['courses'] = CourseSerializer(courses, context=context, many=True).data
     return user_dict
 
+def get_home_dict(home):
+    return dict(**HomeSerializer(home).data)
+
+class HomeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Home
+        fields = (
+            'chair',
+            'desk',
+            'bed',
+        )
 
 class StudentSerializer(serializers.ModelSerializer):
     userFirstName = serializers.CharField(source='user.first_name')

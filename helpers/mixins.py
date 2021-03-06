@@ -22,8 +22,8 @@ from rest_framework.views import APIView
 
 from agreement.models import Agreement
 from agreement.serializers import AgreementSerializer
-from student.utils import get_student
-from student.serializers import get_student_dict
+from student.utils import get_student, get_home
+from student.serializers import get_student_dict, get_home_dict
 from timetable.models import Semester
 from timetable.school_mappers import SCHOOLS_MAP
 from parsing.schools.active import ACTIVE_SCHOOLS
@@ -66,6 +66,7 @@ class FeatureFlowView(ValidateSubdomainMixin, APIView):
             return HttpResponseRedirect('/')
         self.school = request.subdomain
         self.student = get_student(request)
+        self.home = get_home(request)
 
         feature_flow = self.get_feature_flow(request, *args, **kwargs)
 
@@ -102,6 +103,7 @@ class FeatureFlowView(ValidateSubdomainMixin, APIView):
         init_data = {
             'school': self.school,
             'currentUser': get_student_dict(self.school, self.student, sem),
+            'currentHome': get_home_dict(self.home),
             'currentSemester': curr_sem_index,
             'allSemesters': all_semesters,
             # 'oldSemesters': get_old_semesters(self.school),
