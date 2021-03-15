@@ -1,0 +1,146 @@
+[
+	[
+		{
+			"StudentName": "Cabrejos, Sebastian",
+			"StudentEmail": "scabrej1@jhu.edu",
+			"SIS_ID": "000T11",
+			"JHED_ID": "scabrej1",
+			"Primary_Major": "Computer Science",
+			"Pre-Health": false,
+			"Pre-Law": false
+	}
+	],
+	[ 
+		{
+			"Major": null
+		}
+	],
+	[ 
+		{
+			"Minor": "Robotics"
+		}
+	],
+	[ 
+		{
+			"Advisor": "Shipley, Denise",
+			"Advisor_Email": "scabrej1@jhu.edu"
+		},
+		{
+			"Advisor": "Shpister, Ilya",
+			"Advisor_Email": "scabrej1@jhu.edu"
+	
+		},
+		{
+			"Advisor": "Whitcomb, Louis L",
+			"Advisor_Email": "scabrej1@jhu.edu"
+		}
+	],
+	[
+		{
+			"Term": "Spring 2021",
+			"Term_IDR": "Spring 2021",
+			"OfferingName": "EN.601.310",
+			"SchoolName": "Whiting School of Engineering"
+		},
+	   {
+			"Term": "Spring 2021",
+			"Term_IDR": "Spring 2021",
+			"OfferingName": "EN.601.229",
+			"SchoolName": "Whiting School of Engineering"
+	
+		},
+	   {
+			"Term": "Spring 2021",
+			"Term_IDR": "Spring 2021",
+			"OfferingName": "EN.601.315",
+			"SchoolName": "Whiting School of Engineering"
+	
+		},
+	   {
+			"Term": "Spring 2021",
+			"Term_IDR": "Spring 2021",
+			"OfferingName": "EN.601.433",
+			"SchoolName": "Whiting School of Engineering"
+	
+		},
+	   {
+			"Term": "Spring 2021",
+			"Term_IDR": "Spring 2021",
+			"OfferingName": "EN.601.507",
+			"SchoolName": "Whiting School of Engineering"
+	
+		}
+	],
+	[
+		{
+			"Term": "Spring 2021",
+			"Term_IDR": "Spring 2021",
+			"OfferingName": "EN.601.310",
+			"SchoolName": "Whiting School of Engineering"
+		},
+	   {
+			"Term": "Spring 2021",
+			"Term_IDR": "Spring 2021",
+			"OfferingName": "EN.601.229",
+			"SchoolName": "Whiting School of Engineering"
+	
+		},
+	   {
+			"Term": "Spring 2021",
+			"Term_IDR": "Spring 2021",
+			"OfferingName": "EN.601.315",
+			"SchoolName": "Whiting School of Engineering"
+	
+		},
+	   {
+			"Term": "Spring 2021",
+			"Term_IDR": "Spring 2021",
+			"OfferingName": "EN.601.433",
+			"SchoolName": "Whiting School of Engineering"
+	
+		},
+	   {
+			"Term": "Spring 2021",
+			"Term_IDR": "Spring 2021",
+			"OfferingName": "EN.601.507",
+			"SchoolName": "Whiting School of Engineering"
+	
+		}
+	],
+	[
+		{
+			"Term": "Spring 2021",
+			"Term_IDR": "Spring 2021",
+			"OfferingName": "EN.601.310",
+			"SchoolName": "Whiting School of Engineering"
+		},
+	   {
+			"Term": "Spring 2021",
+			"Term_IDR": "Spring 2021",
+			"OfferingName": "EN.601.229",
+			"SchoolName": "Whiting School of Engineering"
+	
+		},
+	   {
+			"Term": "Spring 2021",
+			"Term_IDR": "Spring 2021",
+			"OfferingName": "EN.601.315",
+			"SchoolName": "Whiting School of Engineering"
+	
+		},
+	   {
+			"Term": "Spring 2021",
+			"Term_IDR": "Spring 2021",
+			"OfferingName": "EN.601.433",
+			"SchoolName": "Whiting School of Engineering"
+	
+		},
+	   {
+			"Term": "Spring 2021",
+			"Term_IDR": "Spring 2021",
+			"OfferingName": "EN.601.507",
+			"SchoolName": "Whiting School of Engineering"
+	
+		}
+	]
+]
