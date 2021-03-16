@@ -40,32 +40,26 @@
     [
       {
         "Term": "Spring 2021",
-        "Term_IDR": "Spring 2021",
         "OfferingName": "EN.601.310"
       },
       {
         "Term": "Spring 2019",
-        "Term_IDR": "Spring 2019",
         "OfferingName": "EN.601.310"
       },
       {
         "Term": "Spring 2020",
-        "Term_IDR": "Spring 2020",
         "OfferingName": "EN.601.229"
       },
       {
         "Term": "Fall 2018",
-        "Term_IDR": "Fall 2018",
         "OfferingName": "EN.601.315"
       },
       {
         "Term": "Fall 2019",
-        "Term_IDR": "Fall 2019",
         "OfferingName": "EN.601.433"
       },
       {
         "Term": "Fall 2020",
-        "Term_IDR": "Fall 2020",
         "OfferingName": "EN.601.507"
       }
     ]
