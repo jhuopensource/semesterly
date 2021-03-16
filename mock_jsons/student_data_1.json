@@ -1,13 +1,12 @@
 {
   "StudentInfo": [
     {
-      "StudentName": "Cabrejos, Sebastian",
-      "StudentEmail": "scabrej1@jhu.edu",
-      "SIS_ID": "000T11",
-      "JHED_ID": "scabrej1",
-      "Primary_Major": "Computer Science",
-      "Pre-Health": false,
-      "Pre-Law": false
+      "FullName": "Cabrejos, Sebastian",
+      "EmailAddress": "scabrej1@jhu.edu",
+      "JhedId": "scabrej1",
+      "PrimaryMajor": "Computer Science",
+      "IsPreHealth": false,
+      "IsPreLaw": false
     }
   ],
   "NonPrimaryMajors": [
@@ -20,119 +19,54 @@
       "Minor": "Robotics"
     }
   ],
-  "AdvisorInfo": [
+  "Advisors": [
     {
-      "Advisor": "Shipley, Denise",
-      "Advisor_Email": "scabrej1@jhu.edu"
+      "FullName": "Shipley, Denise",
+      "JhedId": "scabrej1",
+      "EmailAddress": "scabrej1@jhu.edu"
     },
     {
-      "Advisor": "Shpister, Ilya",
-      "Advisor_Email": "scabrej1@jhu.edu"
+      "FullName": "Shpister, Ilya",
+      "JhedId": "scabrej1",
+      "EmailAddress": "scabrej1@jhu.edu"
     },
     {
-      "Advisor": "Whitcomb, Louis L",
-      "Advisor_Email": "scabrej1@jhu.edu"
+      "FullName": "Whitcomb, Louis L",
+      "JhedId": "scabrej1",
+      "EmailAddress": "scabrej1@jhu.edu"
     }
   ],
-  "CurrentCourses": [
+  "Courses": [
     [
       {
         "Term": "Spring 2021",
         "Term_IDR": "Spring 2021",
-        "OfferingName": "EN.601.310",
-        "SchoolName": "Whiting School of Engineering"
+        "OfferingName": "EN.601.310"
       },
-      {
-        "Term": "Spring 2021",
-        "Term_IDR": "Spring 2021",
-        "OfferingName": "EN.601.229",
-        "SchoolName": "Whiting School of Engineering"
-      },
-      {
-        "Term": "Spring 2021",
-        "Term_IDR": "Spring 2021",
-        "OfferingName": "EN.601.315",
-        "SchoolName": "Whiting School of Engineering"
-      },
-      {
-        "Term": "Spring 2021",
-        "Term_IDR": "Spring 2021",
-        "OfferingName": "EN.601.433",
-        "SchoolName": "Whiting School of Engineering"
-      },
-      {
-        "Term": "Spring 2021",
-        "Term_IDR": "Spring 2021",
-        "OfferingName": "EN.601.507",
-        "SchoolName": "Whiting School of Engineering"
-      }
-    ]
-  ],
-  "CartCourses": [
-    [
-      {
-        "Term": "Fall 2021",
-        "Term_IDR": "Fall 2021",
-        "OfferingName": "EN.601.310",
-        "SchoolName": "Whiting School of Engineering"
-      },
-      {
-        "Term": "Fall 2021",
-        "Term_IDR": "Fall 2021",
-        "OfferingName": "EN.601.229",
-        "SchoolName": "Whiting School of Engineering"
-      },
-      {
-        "Term": "Fall 2021",
-        "Term_IDR": "Fall 2021",
-        "OfferingName": "EN.601.315",
-        "SchoolName": "Whiting School of Engineering"
-      },
-      {
-        "Term": "Fall 2021",
-        "Term_IDR": "Fall 2021",
-        "OfferingName": "EN.601.433",
-        "SchoolName": "Whiting School of Engineering"
-      },
-      {
-        "Term": "Fall 2021",
-        "Term_IDR": "Fall 2021",
-        "OfferingName": "EN.601.507",
-        "SchoolName": "Whiting School of Engineering"
-      }
-    ]
-  ],
-  "CompletedCourses": [
-    [
       {
         "Term": "Spring 2019",
         "Term_IDR": "Spring 2019",
-        "OfferingName": "EN.601.310",
-        "SchoolName": "Whiting School of Engineering"
+        "OfferingName": "EN.601.310"
       },
       {
         "Term": "Spring 2020",
         "Term_IDR": "Spring 2020",
-        "OfferingName": "EN.601.229",
-        "SchoolName": "Whiting School of Engineering"
+        "OfferingName": "EN.601.229"
       },
       {
         "Term": "Fall 2018",
         "Term_IDR": "Fall 2018",
-        "OfferingName": "EN.601.315",
-        "SchoolName": "Whiting School of Engineering"
+        "OfferingName": "EN.601.315"
       },
       {
         "Term": "Fall 2019",
         "Term_IDR": "Fall 2019",
-        "OfferingName": "EN.601.433",
-        "SchoolName": "Whiting School of Engineering"
+        "OfferingName": "EN.601.433"
       },
       {
         "Term": "Fall 2020",
         "Term_IDR": "Fall 2020",
-        "OfferingName": "EN.601.507",
-        "SchoolName": "Whiting School of Engineering"
+        "OfferingName": "EN.601.507"
       }
     ]
   ]
