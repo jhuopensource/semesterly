@@ -135,6 +135,16 @@ class SideBar extends React.Component {
             possible, automatically</h3>
         </div>);
     }
+
+    const betaFeature = (<div>
+      <h4 className="sb-header"> Try our new Beta feature! </h4>
+        <a href="/user/advising">
+          <button className="delete-link">
+              Advising Dashboard
+          </button>
+        </a>
+    </div>)
+
     const finalScheduleLink = (masterSlots.length > 0 &&
       this.props.examSupportedSemesters.indexOf(this.props.semesterIndex) >= 0
       && this.props.hasLoaded) ?
@@ -192,6 +202,7 @@ class SideBar extends React.Component {
         </div>
         { optionalSlotsHeader }
         { optionalSlots }
+        { betaFeature }
         <div id="sb-optional-slots" />
       </div>
     );
