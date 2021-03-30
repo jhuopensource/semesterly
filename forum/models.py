@@ -15,3 +15,6 @@ class Comment(models.Model):
     content = models.TextField()
     timestamp = models.DateTimeField(auto_now_add=True)
     transcript_id = models.ForeignKey(Transcript)
+
+class InviteAdvisors(models.Model):
+    advisor = models.ForeignKey(student_models.Student, on_delete=models.CASCADE)

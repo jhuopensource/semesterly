@@ -43,7 +43,7 @@ class CommentForum extends React.Component {
         const addButton = (
             <div className="cal-btn-wrapper">
                 <button
-                    onClick={this.props.handleCreateNewTimetable}
+                    onClick={this.props.toggleInviteAdvisorsModal}
                     className="save-timetable add-button"
                     data-tip
                     data-for="add-btn-tooltip"
