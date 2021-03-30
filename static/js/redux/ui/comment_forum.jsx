@@ -14,6 +14,7 @@ GNU General Public License for more details.
 
 import React from 'react';
 import * as SemesterlyPropTypes from '../constants/semesterlyPropTypes';
+import ReactTooltip from 'react-tooltip';
 import CommentSlot from './comment_slot';
 import {getNextAvailableColour} from '../util';
 import TextInputContainer from './containers/text_input_container';
@@ -39,6 +40,27 @@ class CommentForum extends React.Component {
                     // fetchCourseInfo={() => this.props.fetchCourseInfo(course.id)}
                 />);
             }) : <div> <p> No messages yet! </p> </div>;
+        const addButton = (
+            <div className="cal-btn-wrapper">
+                <button
+                    onClick={this.props.handleCreateNewTimetable}
+                    className="save-timetable add-button"
+                    data-tip
+                    data-for="add-btn-tooltip"
+                >
+                    <i className="fa fa-plus" />
+                </button>
+                <ReactTooltip
+                    id="add-btn-tooltip"
+                    class="tooltip"
+                    type="dark"
+                    place="bottom"
+                    effect="solid"
+                >
+                    <span>Invite Advisors</span>
+                </ReactTooltip>
+            </div>
+        );
         return (
             <div className="comment-forum no-print">
                 <div className="as-name">
@@ -53,6 +75,7 @@ class CommentForum extends React.Component {
                     // fetchCourseInfo={() => this.props.fetchCourseInfo(course.id)}
                 />
             {/* need to use similar css to search bar for forum input box */}
+                { addButton }
                 <div className="as-header">
                 <TextInputContainer />
                 </div>
