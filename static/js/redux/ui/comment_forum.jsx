@@ -63,10 +63,11 @@ class CommentForum extends React.Component {
         );
         return (
             <div className="comment-forum no-print">
-                <div className="as-name">
+                <div className="cf-name">
                     <p style={{fontSize: "1.25em", fontWeight: "bold", marginTop: "70px" }}>
                         Comments Forum</p>
                 </div>
+                <div className="as-header"></div>
                 { commentSlots }
                 <CommentSlot
                     // key={course.id}
@@ -75,10 +76,7 @@ class CommentForum extends React.Component {
                     // fetchCourseInfo={() => this.props.fetchCourseInfo(course.id)}
                 />
             {/* need to use similar css to search bar for forum input box */}
-                { addButton }
-                <div className="as-header">
                 <TextInputContainer />
-                </div>
                 <button className="accept-tos-btn"
                         style={{position: "fixed", right: "20px", bottom: "20px"}}>
                     Submit
