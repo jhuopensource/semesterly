@@ -19,7 +19,7 @@ import InviteAdvisorsModalContainer from './containers/modals/invite_advisors_mo
 import ReactTooltip from 'react-tooltip';
 import CommentSlot from './comment_slot';
 import {getNextAvailableColour} from '../util';
-import TextInputContainer from './containers/text_input_container';
+import CommentInputContainer from './containers/comment_input_container';
 
 
 class CommentForum extends React.Component {
@@ -72,19 +72,10 @@ class CommentForum extends React.Component {
                 <InviteAdvisorsModalContainer/>
                 { addButton }
                 <div className="as-header"></div>
-                { commentSlots }
-                <CommentSlot
-                    // key={course.id}
-                    // author={author}
-                    //colourIndex={colourIndex}
-                    // fetchCourseInfo={() => this.props.fetchCourseInfo(course.id)}
-                />
-                {/* need to use similar css to search bar for forum input box */}
-                <TextInputContainer />
-                <button className="accept-tos-btn"
-                        style={{position: "fixed", right: "20px", bottom: "20px"}}>
-                    Submit
-                </button>
+                <div className="comment-forum-container">
+                  { commentSlots }
+                </div>
+                <CommentInputContainer />
             </div>)
 
 
