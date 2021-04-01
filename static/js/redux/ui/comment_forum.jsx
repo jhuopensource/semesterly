@@ -13,7 +13,9 @@ GNU General Public License for more details.
 */
 
 import React from 'react';
+import PropTypes from 'prop-types';
 import * as SemesterlyPropTypes from '../constants/semesterlyPropTypes';
+import InviteAdvisorsModalContainer from './containers/modals/invite_advisors_modal_container';
 import ReactTooltip from 'react-tooltip';
 import CommentSlot from './comment_slot';
 import {getNextAvailableColour} from '../util';
@@ -67,6 +69,8 @@ class CommentForum extends React.Component {
                     <p style={{fontSize: "1.25em", fontWeight: "bold", marginTop: "70px" }}>
                         Comments Forum</p>
                 </div>
+                <InviteAdvisorsModalContainer/>
+                { addButton }
                 <div className="as-header"></div>
                 { commentSlots }
                 <CommentSlot
@@ -75,7 +79,7 @@ class CommentForum extends React.Component {
                     //colourIndex={colourIndex}
                     // fetchCourseInfo={() => this.props.fetchCourseInfo(course.id)}
                 />
-            {/* need to use similar css to search bar for forum input box */}
+                {/* need to use similar css to search bar for forum input box */}
                 <TextInputContainer />
                 <button className="accept-tos-btn"
                         style={{position: "fixed", right: "20px", bottom: "20px"}}>
@@ -94,9 +98,9 @@ CommentForum.defaultProps = {
 
 
 CommentForum.propTypes = {
+    toggleInviteAdvisorsModal: PropTypes.func.isRequired,
     //invitedComments: PropTypes.arrayOf(SemesterlyPropTypes.userInfo.invited_transcripts).isRequired,
     //ownedComments: PropTypes.arrayOf(SemesterlyPropTypes.userInfo.owned_transcripts).isRequired,
 };
-
 
 export default CommentForum;

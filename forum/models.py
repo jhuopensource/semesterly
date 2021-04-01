@@ -16,11 +16,7 @@ class Comment(models.Model):
     author = models.ForeignKey(student_models.Student)
     content = models.TextField()
     timestamp = models.DateTimeField(auto_now_add=True)
-    transcript_id = models.ForeignKey(Transcript)
+    transcript = models.ForeignKey(Transcript, related_name='comments')
 
     def get_author_name(self):
         return self.author.user.first_name + ' ' + self.author.user.last_name
-
-class InviteAdvisors(models.Model):
-    advisor = models.ForeignKey(student_models.Student, on_delete=models.CASCADE)
-    transcript = models.ForeignKey(Transcript, related_name='comments')

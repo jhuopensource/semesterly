@@ -26,7 +26,7 @@ class InviteAdvisorsModal extends React.Component {
     const modalHeader =
         (<div className="modal-content">
           <div className="modal-header">
-            <h1>Invite Advisors Modal</h1>
+            <h1>Invite Advisors to Start Chatting</h1>
           </div>
         </div>);
     const modalStyle = {
@@ -44,7 +44,7 @@ class InviteAdvisorsModal extends React.Component {
             <div className="preference cf">
               <h5>Yair Amir</h5>
               <h5>Linda Moulton</h5>
-              <h5>Steven Marra</h5>]
+              <h5>Steven Marra</h5>
               {/* TODO: will need to indicate whether invited already or not */}
               {/* <h5>{this.props.userInfo.userFirstName}</h5>
               <h5>{this.props.userInfo.userLastName}</h5>

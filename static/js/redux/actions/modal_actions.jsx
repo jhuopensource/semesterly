@@ -155,3 +155,7 @@ export const triggerSeparateAccountsModal = () => ({
 export const toggleSeparateAccountsModal = () => ({
   type: ActionTypes.TOGGLE_SEPARATE_ACCOUNTS_MODAL,
 });
+
+export const toggleInviteAdvisorsModal = () => ({
+  type: ActionTypes.TOGGLE_INVITE_ADVISORS_MODAL
+});

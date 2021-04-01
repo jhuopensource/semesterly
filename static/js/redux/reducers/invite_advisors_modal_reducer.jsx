@@ -1,31 +1,24 @@
 /*
 Copyright (C) 2017 Semester.ly Technologies, LLC
-
 Semester.ly is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
 the Free Software Foundation, either version 3 of the License, or
 (at your option) any later version.
-
 Semester.ly is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU General Public License for more details.
 */
 
-import { connect } from 'react-redux';
-import CommentForum from '../comment_forum';
-import { toggleInviteAdvisorsModal } from '../../actions/modal_actions';
+import * as ActionTypes from '../constants/actionTypes';
 
-const mapStateToProps = state => ({
-    userInfo: state.userInfo.data,
-});
+const inviteAdvisorsModal = (state = { isVisible: false }, action) => {
+  switch (action.type) {
+    case ActionTypes.TOGGLE_INVITE_ADVISORS_MODAL:
+      return { isVisible: !state.isVisible };
+    default:
+      return state;
+  }
+};
 
-
-const CommentForumContainer = connect(
-    mapStateToProps,
-    {
-        toggleInviteAdvisorsModal
-    },
-)(CommentForum);
-
-export default CommentForumContainer;
+export default inviteAdvisorsModal;
