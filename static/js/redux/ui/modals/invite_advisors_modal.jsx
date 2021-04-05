@@ -32,6 +32,12 @@ class InviteAdvisorsModal extends React.Component {
     const modalStyle = {
       width: '100%',
     };
+
+    let advisorList = (this.props.advisors.length > 0) ?
+      this.props.advisors.map((advisor) => {
+        return (<h5>{advisor}</h5>);
+      }) : <h5>You currently don't have any advisors. </h5>;
+
     return (
         <Modal
           ref={(c) => { this.modal = c; }}
@@ -42,9 +48,7 @@ class InviteAdvisorsModal extends React.Component {
           <div id="perf-modal-wrapper">
             {modalHeader}
             <div className="preference cf">
-              <h5>Yair Amir</h5>
-              <h5>Linda Moulton</h5>
-              <h5>Steven Marra</h5>
+              {advisorList}
               {/* TODO: will need to indicate whether invited already or not */}
               {/* <h5>{this.props.userInfo.userFirstName}</h5>
               <h5>{this.props.userInfo.userLastName}</h5>

@@ -32,7 +32,13 @@ class CommentForum extends React.Component {
           semester_name: 'Spring',
           semester_year: 2021,
           transcript: null,
-          comments: null
+          comments: null,
+          //TODO: Set this to list of student's advisors from SIS
+          advisors: [
+            'Yair Amir',
+            'Linda Moulton',
+            'Steven Marra',
+          ]
         };
     }
 
@@ -44,6 +50,7 @@ class CommentForum extends React.Component {
           this.setState({comments: this.state.transcript.comments});
         });
       // TODO: Check for error response
+      // TODO: Add function for fetching list of advisors from SIS data and saving their names in this.state.advisors
     }
 
   render() {
@@ -86,7 +93,7 @@ class CommentForum extends React.Component {
                         Comments Forum
                     </p>
                 </div>
-                <InviteAdvisorsModalContainer/>
+                <InviteAdvisorsModalContainer advisors={this.state.advisors}/>
                 { addButton }
                 <div className="as-header"></div>
                 <div className="comment-forum-container">
