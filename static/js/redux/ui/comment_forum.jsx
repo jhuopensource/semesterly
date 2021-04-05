@@ -87,14 +87,16 @@ class CommentForum extends React.Component {
         }
 
         return (
-            <div className="comment-forum no-print">
+            <div className="comment-forum">
                 <div className="cf-name">
-                    <p style={{fontSize: "1.25em", fontWeight: "bold", marginTop: "70px" }}>
+                    <div className="title">
                         Comments Forum
-                    </p>
+                    </div>
+                  <div className="plus">
+                    { addButton }
+                  </div>
                 </div>
                 <InviteAdvisorsModalContainer advisors={this.state.advisors}/>
-                { addButton }
                 <div className="as-header"></div>
                 <div className="comment-forum-container">
                   { transcript }

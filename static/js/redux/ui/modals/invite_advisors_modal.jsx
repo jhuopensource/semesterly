@@ -13,6 +13,7 @@ GNU General Public License for more details.
 import PropTypes from 'prop-types';
 import React from 'react';
 import Modal from 'boron/FadeModal';
+import AdvisorRow from '../advisor_row';
 import * as SemesterlyPropTypes from '../../constants/semesterlyPropTypes';
 
 class InviteAdvisorsModal extends React.Component {
@@ -24,35 +25,31 @@ class InviteAdvisorsModal extends React.Component {
 
   render() {
     const modalHeader =
-        (<div className="modal-content">
-          <div className="modal-header">
-            <h1>Invite Advisors to Start Chatting</h1>
-          </div>
-        </div>);
+        (<div className="modal-header">
+            Invite Advisors to Forum
+          </div>);
+
     const modalStyle = {
-      width: '100%',
+      width: '50%',
     };
 
     let advisorList = (this.props.advisors.length > 0) ?
       this.props.advisors.map((advisor) => {
-        return (<h5>{advisor}</h5>);
+        return (<AdvisorRow advisor={advisor} />);
       }) : <h5>You currently don't have any advisors. </h5>;
 
     return (
         <Modal
           ref={(c) => { this.modal = c; }}
-          className="pref-modal max-modal"
+          className="cf-modal-wrapper"
           modalStyle={modalStyle}
           onHide={this.props.toggleInviteAdvisorsModal}
         >
-          <div id="perf-modal-wrapper">
+          <div className="cf-modal">
             {modalHeader}
-            <div className="preference cf">
+            <div className="ad-modal-wrapper">
               {advisorList}
-              {/* TODO: will need to indicate whether invited already or not */}
-              {/* <h5>{this.props.userInfo.userFirstName}</h5>
-              <h5>{this.props.userInfo.userLastName}</h5>
-              <h5>{this.props.userInfo.class_year}</h5>] */}
+              {/* TODO: Add the invite/remove functionality */}
             </div>
           </div>
         </Modal>
