@@ -28,9 +28,8 @@ class CommentForum extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-          //TODO: Set this to the semester that is selected on the LHS
-          semester_name: 'Spring',
-          semester_year: 2021,
+          semester_name: '',
+          semester_year: '',
           transcript: null,
           comments: null,
           //TODO: Set this to list of student's advisors from SIS
@@ -40,6 +39,23 @@ class CommentForum extends React.Component {
             'Steven Marra',
           ]
         };
+    }
+
+    fetchTranscript() {
+      if (this.props.selected_semester != null) {
+        let semester_name = this.props.selected_semester.toString().split(' ')[0];
+        let semester_year = this.props.selected_semester.toString().split(' ')[1];
+
+        fetch(getTranscriptCommentsBySemester(semester_name, semester_year))
+          .then(response => response.json())
+          .then(data => {
+            this.setState({transcript: data.transcript});
+            this.setState({comments: this.state.transcript.comments});
+          });
+      } else {
+        this.setState({transcript: null});
+        this.setState({comments: null});
+      }
     }
 
     componentDidMount() {
@@ -53,7 +69,7 @@ class CommentForum extends React.Component {
       // TODO: Add function for fetching list of advisors from SIS data and saving their names in this.state.advisors
     }
 
-  render() {
+    render() {
 
         const addButton = (
           <div className="cal-btn-wrapper">
@@ -78,12 +94,14 @@ class CommentForum extends React.Component {
         );
 
         let transcript;
-        if (this.state.comments != null) {
+        if (this.state.transcript != null && this.state.comments != null) {
             transcript = <Transcript
                 comments={this.state.comments}
             />;
+        } else if (this.state.transcript === null) {
+          transcript = <div className="empty-state"><h4> <p> No semester selected! </p> </h4></div>;
         } else {
-            transcript = <div className="empty-state"><h4> <p> No comments yet! </p> </h4></div>;
+          transcript = <div className="empty-state"><h4> <p> No comments yet! </p> </h4></div>;
         }
 
         return (
