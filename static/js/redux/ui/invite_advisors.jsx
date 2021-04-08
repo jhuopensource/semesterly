@@ -12,7 +12,6 @@ GNU General Public License for more details.
 
 import PropTypes from 'prop-types';
 import React from 'react';
-import Modal from 'boron/FadeModal';
 import AdvisorRow from './advisor_row';
 import * as SemesterlyPropTypes from '../constants/semesterlyPropTypes';
 
@@ -39,12 +38,6 @@ class InviteAdvisors extends React.Component {
       }) : <h5>You currently don't have any advisors. </h5>;
 
     return (
-        <Modal
-          ref={(c) => { this.modal = c; }}
-          className="cf-modal-wrapper"
-          modalStyle={modalStyle}
-          onHide={this.props.toggleInviteAdvisorsModal}
-        >
           <div className="cf-modal">
             {modalHeader}
             <div className="ad-modal-wrapper">
@@ -52,7 +45,6 @@ class InviteAdvisors extends React.Component {
               {/* TODO: Add the invite/remove functionality */}
             </div>
           </div>
-        </Modal>
     );
   }
 }

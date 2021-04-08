@@ -14,7 +14,7 @@ GNU General Public License for more details.
 
 import { connect } from 'react-redux';
 import CommentForum from '../comment_forum';
-import { toggleInviteAdvisorsModal } from '../../actions/modal_actions';
+// import { toggleSaveCalendarModal } from '../../actions/modal_actions';
 
 const mapStateToProps = state => ({
     userInfo: state.userInfo.data,
@@ -24,7 +24,7 @@ const mapStateToProps = state => ({
 const CommentForumContainer = connect(
     mapStateToProps,
     {
-        toggleInviteAdvisorsModal
+        // toggleSaveCalendarModal
     },
 )(CommentForum);
 

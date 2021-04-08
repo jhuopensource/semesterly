@@ -11,23 +11,22 @@ GNU General Public License for more details.
 */
 
 import { connect } from 'react-redux';
-import InviteAdvisorsModal from '../../invite_advisors';
-import { toggleInviteAdvisorsModal } from '../../../actions/modal_actions';
-import { toggleConflicts } from '../../../actions/timetable_actions';
+import InviteAdvisors from '../invite_advisors';
+import { toggleConflicts } from '../../actions/timetable_actions';
 
 const mapStateToProps = state => ({
     // userInfo: state.userInfo.data,
-    isVisible: state.inviteAdvisorsModal.isVisible,
+    // isVisible: state.inviteAdvisorsModal.isVisible,
     // withConflicts: state.preferences.try_with_conflicts,
 });
 
-const InviteAdvisorsModalContainer = connect(
+const InviteAdvisorsContainer = connect(
     mapStateToProps,
     {
-        toggleInviteAdvisorsModal,
+        // toggleInviteAdvisorsModal,
         toggleConflicts,
-        applyPreferences: toggleInviteAdvisorsModal,
+        // applyPreferences: toggleInviteAdvisorsModal,
     },
-)(InviteAdvisorsModal);
+)(InviteAdvisors);
 
-export default InviteAdvisorsModalContainer;
+export default InviteAdvisorsContainer;

@@ -15,7 +15,7 @@ GNU General Public License for more details.
 import React from 'react';
 import PropTypes from 'prop-types';
 import * as SemesterlyPropTypes from '../constants/semesterlyPropTypes';
-import InviteAdvisorsModalContainer from './containers/modals/invite_advisors_modal_container';
+import InviteAdvisorsContainer from './containers/invite_advisors_container';
 import ReactTooltip from 'react-tooltip';
 import CommentSlot from './comment_slot';
 import {getNextAvailableColour} from '../util';
@@ -74,7 +74,7 @@ class CommentForum extends React.Component {
         const addButton = (
           <div className="cal-btn-wrapper">
             <button
-              onClick={this.props.toggleInviteAdvisorsModal}
+              // onClick={this.props.toggleInviteAdvisorsModal}
               className="save-timetable add-button"
               data-tip
               data-for="add-btn-tooltip"
@@ -114,7 +114,7 @@ class CommentForum extends React.Component {
                     { addButton }
                   </div>
                 </div>
-                <InviteAdvisorsModalContainer advisors={this.state.advisors}/>
+                <InviteAdvisorsContainer advisors={this.state.advisors}/>
                 <div className="as-header"></div>
                 <div className="comment-forum-container">
                   { transcript }
@@ -133,7 +133,7 @@ CommentForum.defaultProps = {
 
 
 CommentForum.propTypes = {
-    toggleInviteAdvisorsModal: PropTypes.func.isRequired,
+    // toggleInviteAdvisorsModal: PropTypes.func.isRequired,
     //invitedComments: PropTypes.arrayOf(SemesterlyPropTypes.userInfo.invited_transcripts).isRequired,
     //ownedComments: PropTypes.arrayOf(SemesterlyPropTypes.userInfo.owned_transcripts).isRequired,
 };
