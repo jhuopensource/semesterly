@@ -13,10 +13,10 @@ GNU General Public License for more details.
 import PropTypes from 'prop-types';
 import React from 'react';
 import Modal from 'boron/FadeModal';
-import AdvisorRow from '../advisor_row';
-import * as SemesterlyPropTypes from '../../constants/semesterlyPropTypes';
+import AdvisorRow from './advisor_row';
+import * as SemesterlyPropTypes from '../constants/semesterlyPropTypes';
 
-class InviteAdvisorsModal extends React.Component {
+class InviteAdvisors extends React.Component {
   componentDidUpdate() {
     if (this.props.isVisible) {
       this.modal.show();
@@ -57,11 +57,11 @@ class InviteAdvisorsModal extends React.Component {
   }
 }
 
-InviteAdvisorsModal.propTypes = {
+InviteAdvisors.propTypes = {
 //   userInfo: SemesterlyPropTypes.userInfo.isRequired,
-  toggleMockModal: PropTypes.func.isRequired,
+//   toggleInviteAdvisorsModal: PropTypes.func.isRequired,
 //   tempInfo: SemesterlyPropTypes.tempInfo.isRequired,
   isVisible: PropTypes.func.isRequired,
 };
 
-export default InviteAdvisorsModal;
+export default InviteAdvisors;

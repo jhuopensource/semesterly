@@ -11,7 +11,7 @@ GNU General Public License for more details.
 */
 
 import { connect } from 'react-redux';
-import InviteAdvisorsModal from '../../modals/invite_advisors_modal';
+import InviteAdvisorsModal from '../../invite_advisors';
 import { toggleInviteAdvisorsModal } from '../../../actions/modal_actions';
 import { toggleConflicts } from '../../../actions/timetable_actions';
 
