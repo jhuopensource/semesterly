@@ -52,7 +52,8 @@ class CommentInput extends React.Component {
 				data: {
 					jhed: this.props.userInfo.jhed,
 					timestamp: new Date(Date.now()),
-					content: this.state.comment }
+					content: this.state.comment
+				}
 			}),
 		// }).then((res) => {
 		// 	return res.json();
@@ -62,7 +63,7 @@ class CommentInput extends React.Component {
 		// 	// console.log(content)
 		// }).catch((error) => {
 		// 	console.log(error)
-		// })
+		})
 	}
 
 	render() {
