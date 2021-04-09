@@ -58,6 +58,28 @@ class CommentForum extends React.Component {
 
     render() {
 
+        const addAdvisorsButton = (
+            <div className="cal-btn-wrapper">
+                <button
+                    // onClick={this.props.toggleInviteAdvisorsModal}
+                    className="save-timetable add-button"
+                    data-tip
+                    data-for="add-btn-tooltip"
+                >
+                    <i className="fa fa-plus" />
+                </button>
+                <ReactTooltip
+                    id="add-btn-tooltip"
+                    class="tooltip"
+                    type="dark"
+                    place="bottom"
+                    effect="solid"
+                >
+                    <span>Invite Advisors</span>
+                </ReactTooltip>
+            </div>
+        );
+
         let transcript;
         if (this.state.transcript != null && this.state.comments != null) {
             transcript = <Transcript
@@ -72,15 +94,16 @@ class CommentForum extends React.Component {
         return (
             <div className="comment-forum no-print">
                 <div className="cf-name">
-                    <p style={{fontSize: "1.25em", fontWeight: "bold", marginTop: "70px" }}>
-                        Comments Forum
-                    </p>
+                    <h3 className="title"> Comments Forum </h3>
+                    {/*<div className="fc-right">*/}
+                    { addAdvisorsButton }
+                    {/*</div>*/}
                 </div>
-                <div className="as-header"></div>
+                <div className="as-header">{}</div>
                 <div className="comment-forum-container">
                   { transcript }
                 </div>
-                <div className="as-header"></div>
+                <div className="as-header">{}</div>
                 <CommentInputContainer />
             </div>
         );
