@@ -16,6 +16,7 @@ import React from 'react';
 import CommentInputContainer from './containers/comment_input_container';
 import Transcript from './transcript';
 import {getTranscriptCommentsBySemester} from '../constants/endpoints';
+import AdvisorMenu from "./advisor_menu";
 
 
 class CommentForum extends React.Component {
@@ -25,7 +26,13 @@ class CommentForum extends React.Component {
           semester_name: '',
           semester_year: '',
           transcript: null,
-          comments: null
+          comments: null,
+          //TODO: Set this to list of student's advisors from SIS
+          advisors: [
+              'Yair Amir',
+              'Linda Moulton',
+              'Steven Marra',
+          ]
         };
     }
 
@@ -58,28 +65,6 @@ class CommentForum extends React.Component {
 
     render() {
 
-        const addAdvisorsButton = (
-            <div className="cal-btn-wrapper">
-                <button
-                    // onClick={this.props.toggleInviteAdvisorsModal}
-                    className="save-timetable add-button"
-                    data-tip
-                    data-for="add-btn-tooltip"
-                >
-                    <i className="fa fa-plus" />
-                </button>
-                <ReactTooltip
-                    id="add-btn-tooltip"
-                    class="tooltip"
-                    type="dark"
-                    place="bottom"
-                    effect="solid"
-                >
-                    <span>Invite Advisors</span>
-                </ReactTooltip>
-            </div>
-        );
-
         let transcript;
         if (this.state.transcript != null && this.state.comments != null) {
             transcript = <Transcript
@@ -95,9 +80,7 @@ class CommentForum extends React.Component {
             <div className="comment-forum no-print">
                 <div className="cf-name">
                     <h3 className="title"> Comments Forum </h3>
-                    {/*<div className="fc-right">*/}
-                    { addAdvisorsButton }
-                    {/*</div>*/}
+                    <AdvisorMenu advisors={this.state.advisors}/>
                 </div>
                 <div className="as-header">{}</div>
                 <div className="comment-forum-container">
