@@ -84,7 +84,7 @@
 
     h3 {
       color: $ga1a1a1;
-      font-size: 12px;
+      font-size: 14px;
       font-weight: 400;
       margin-top: 8px;
     }
@@ -103,13 +103,12 @@
 }
 
 .comment-bubble {
-  outline-color: #00A1FF;
-  background: #00A1FF;
+  background: #1e3a66;
   color: white;
-  border-radius: 25px;
+  border-radius: 15px;
   font-size: 12px;
   padding: 10px;
-  margin: 5px;
+  margin: 8px;
 
   .author {
     font-weight: bold;
@@ -119,18 +118,6 @@
 .comment-timestamp {
   font-size: 10px;
   float: right;
-}
-
-.tt-name {
-  background-color: $gfff;
-  cursor: pointer;
-  font-size: 12px;
-  padding: 5px 5px 5px 20px;
-  transition: background-color .3s;
-
-  :hover {
-    background-color: $geee;
-  }
 }
 
 .as-header {
@@ -183,6 +170,33 @@
     line-height: 14px;
     margin: 0;
   }
+}
+
+.title {
+  font-size: 1.25em;
+  font-weight: bold;
+  font-family: "Roboto", Arial, sans-serif;
+  margin-top: 30px;
+  width: 95%;
+  float: left;
+}
+
+.advisor-dropdown {
+  background-color: $gfff;
+  border: 1px solid $ge6e6e6;
+  box-shadow: 0 2px 10px $black-transparent-2;
+  display: none;
+  min-width: 105px;
+  position: absolute;
+  right: 10px;
+  top: 100px;
+  width: 200px;
+  z-index: 100;
+
+  &.down {
+    display: block;
+  }
+
 }
 
 .sb-master-slots {
