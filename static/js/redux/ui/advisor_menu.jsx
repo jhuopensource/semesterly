@@ -40,7 +40,7 @@ class AdvisorMenu extends React.Component {
     render() {
 
         const addAdvisorsButton = (
-            <div className="cal-btn-wrapper" style={{textAlign: "end"}}>
+            <div style={{margin: "right"}}>
                 <button
                 className="save-timetable add-button"
                 data-for="add-btn-tooltip"
@@ -60,6 +60,28 @@ class AdvisorMenu extends React.Component {
             </div>
         );
 
+        const addButton = (
+            <div className="cal-btn-wrapper">
+                <button
+                    //onClick={}
+                    className="save-timetable add-button"
+                    data-tip
+                    data-for="add-btn-tooltip"
+                >
+                    <i className="fa fa-plus" />
+                </button>
+                <ReactTooltip
+                    id="add-btn-tooltip"
+                    class="tooltip"
+                    type="dark"
+                    place="bottom"
+                    effect="solid"
+                >
+                    <span>Add to forum </span>
+                </ReactTooltip>
+            </div>
+        );
+
 
         return (
             <ClickOutHandler onClickOut={this.hideDropDown}>
@@ -67,8 +89,14 @@ class AdvisorMenu extends React.Component {
                     { addAdvisorsButton }
                 </div>
                 <div className={classNames('advisor-dropdown', { down: this.state.showDropdown })}>
-                    Add Advisors
-                    <AdvisorRow advisors={this.props.advisors}/>
+                    <p> Invite Advisors to Comment Forum </p>
+                    <div className="ad-modal-wrapper">
+                        {(this.props.advisors) ?
+                            (this.props.advisors.map((advisor) => {
+                                <AdvisorRow advisor={advisor} />
+                            })) : <h5>You currently don't have any advisors. </h5>;
+                        }
+                    </div>
                 </div>
             </ClickOutHandler>
         );

@@ -29,9 +29,9 @@ class CommentForum extends React.Component {
           comments: null,
           //TODO: Set this to list of student's advisors from SIS
           advisors: [
-              'Yair Amir',
-              'Linda Moulton',
-              'Steven Marra',
+              { advisor: 'Yair Amir'},
+              { advisor: 'Linda Moulton'},
+              { advisor: 'Steven Marra'},
           ]
         };
     }
@@ -80,8 +80,8 @@ class CommentForum extends React.Component {
             <div className="comment-forum no-print">
                 <div className="cf-name">
                     <h3 className="title"> Comments Forum </h3>
-                    <AdvisorMenu advisors={this.state.advisors}/>
                 </div>
+                <AdvisorMenu advisors={this.state.advisors}/>
                 <div className="as-header">{}</div>
                 <div className="comment-forum-container">
                   { transcript }
