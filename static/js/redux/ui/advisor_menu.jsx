@@ -37,6 +37,10 @@ class AdvisorMenu extends React.Component {
         this.setState({showDropdown: false});
     }
 
+    handleAdd() {
+
+    }
+
     render() {
 
         const toggleAdvisorMenuBtn = (
@@ -63,13 +67,15 @@ class AdvisorMenu extends React.Component {
         const addButton = (
             <div className="cal-btn-wrapper">
                 <button
-                    //onClick={}
+                    onClick={() => this.handleAdd()}
                     className="save-timetable add-button"
                     data-tip
                     data-for="add-btn-tooltip"
                 >
+                    {this.state.
                     <i className="fa fa-plus" />
                 </button>
+
                 <ReactTooltip
                     id="add-btn-tooltip"
                     class="tooltip"
@@ -84,9 +90,13 @@ class AdvisorMenu extends React.Component {
 
         let advisorList = (this.props.advisors.length > 0) ?
             this.props.advisors.map((name, i) => {
-                return (<p key={i} style={{padding: "5px"}}> {name} {addButton} </p>);
+                return (<p key={i} style={{padding: "5px"}}> {name}
+                    <addButton
+                        advisor={name}
+                    />
+                    </p>);
             }) : <p style={{textAlign: "center", fontSize:"10pt"}}> You are not connected to any advisors </p>;
-        
+
         return (
             <ClickOutHandler onClickOut={this.hideDropDown}>
                 <div onMouseDown={this.toggleDropdown}>
@@ -96,6 +106,7 @@ class AdvisorMenu extends React.Component {
                     <p style={{textAlign: "center", marginTop: "5px", fontWeight: "bold"}}> Invite Advisors to Comment Forum </p>
                     <div className="ad-modal-wrapper">
                         { advisorList }
+                        { addButton }
                     </div>
                 </div>
             </ClickOutHandler>
