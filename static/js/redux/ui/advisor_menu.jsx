@@ -39,7 +39,7 @@ class AdvisorMenu extends React.Component {
 
     render() {
 
-        const addAdvisorsButton = (
+        const toggleAdvisorMenu = (
             <div style={{margin: "right"}}>
                 <button
                 className="save-timetable add-button"
@@ -81,21 +81,36 @@ class AdvisorMenu extends React.Component {
                 </ReactTooltip>
             </div>
         );
+        
+        function AdvisorRow() {
+            const { advisors } = this.props
+            return (
+                ( advisors != null) ?
+                    (advisors.map((advisor) => {
+                    return (
+                        <div className="ad-row">
+                            <p className="ad-name">
+                                { advisor }
+                                <div className="ad-icon">{addButton}</div>
+                            </p>
+                        </div>
+                        )})
+                    ) : <p> You currently are not connected to any advisors </p>
+
+            )
+        }
+
 
 
         return (
             <ClickOutHandler onClickOut={this.hideDropDown}>
                 <div onMouseDown={this.toggleDropdown}>
-                    { addAdvisorsButton }
+                    { toggleAdvisorMenu }
                 </div>
                 <div className={classNames('advisor-dropdown', { down: this.state.showDropdown })}>
                     <p> Invite Advisors to Comment Forum </p>
                     <div className="ad-modal-wrapper">
-                        {(this.props.advisors) ?
-                            (this.props.advisors.map((advisor) => {
-                                <AdvisorRow advisor={advisor} />
-                            })) : <h5>You currently don't have any advisors. </h5>;
-                        }
+                        { this.props.advisors ? <p>yes</p> : <p> You currently are not connected to any advisors </p>}
                     </div>
                 </div>
             </ClickOutHandler>
@@ -104,4 +119,4 @@ class AdvisorMenu extends React.Component {
 
 }
 
-              export default AdvisorMenu;
+export default AdvisorMenu;
