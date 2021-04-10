@@ -39,7 +39,7 @@ class AdvisorMenu extends React.Component {
 
     render() {
 
-        const toggleAdvisorMenu = (
+        const toggleAdvisorMenuBtn = (
             <div style={{margin: "right"}}>
                 <button
                 className="save-timetable add-button"
@@ -82,7 +82,7 @@ class AdvisorMenu extends React.Component {
             </div>
         );
         
-        function AdvisorRow() {
+        function advisorRow() {
             const { advisors } = this.props
             return (
                 ( advisors != null) ?
@@ -105,10 +105,10 @@ class AdvisorMenu extends React.Component {
         return (
             <ClickOutHandler onClickOut={this.hideDropDown}>
                 <div onMouseDown={this.toggleDropdown}>
-                    { toggleAdvisorMenu }
+                    { toggleAdvisorMenuBtn }
                 </div>
                 <div className={classNames('advisor-dropdown', { down: this.state.showDropdown })}>
-                    <p> Invite Advisors to Comment Forum </p>
+                    <p style={{textAlign: "center"}}> Invite Advisors to Comment Forum </p>
                     <div className="ad-modal-wrapper">
                         { this.props.advisors ? <p>yes</p> : <p> You currently are not connected to any advisors </p>}
                     </div>
