@@ -65,16 +65,22 @@ class CommentForum extends React.Component {
 
     render() {
 
-        let transcript;
-        if (this.state.transcript != null && this.state.comments != null) {
-            transcript = <Transcript
-                comments={this.state.comments}
-            />;
-        } else if (this.state.transcript === null) {
-          transcript = <div className="empty-state"><h4> <p> No semester selected! </p> </h4></div>;
-        } else {
-          transcript = <div className="empty-state"><h4> <p> No comments yet! </p> </h4></div>;
-        }
+        
+      let transcript;
+      if (this.props.transcript != null && this.props.transcript.comments != null) {
+          transcript = <Transcript
+              comments={this.props.transcript.comments}
+          />;
+      } else if (this.props.transcript === null) {
+        transcript = <div className="empty-state"><h4> <p> No semester selected! </p> </h4></div>;
+      } else if (this.props.transcript.comments === null){
+        transcript = <div className="empty-state"><h4> <p> No comments yet! </p> </h4></div>;
+      }
+
+      const displayInput = (this.props.selected_semester === null) ? null : (<CommentInputContainer
+        semester_name={this.props.selected_semester.toString().split(' ')[0]}
+        semester_year={this.props.selected_semester.toString().split(' ')[1]}
+      />);
 
         return (
             <div className="comment-forum no-print">
@@ -87,6 +93,7 @@ class CommentForum extends React.Component {
                   { transcript }
                 </div>
                 <div className="as-header">{}</div>
+                  { displayInput }
                 <CommentInputContainer />
             </div>
         );
