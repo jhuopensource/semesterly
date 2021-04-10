@@ -83,20 +83,17 @@ class AdvisorMenu extends React.Component {
         );
         
         function advisorRow() {
-            const { advisors } = this.props
             return (
-                ( advisors != null) ?
-                    (advisors.map((advisor) => {
-                    return (
-                        <div className="ad-row">
-                            <p className="ad-name">
-                                { advisor }
-                                <div className="ad-icon">{addButton}</div>
-                            </p>
-                        </div>
-                        )})
-                    ) : <p> You currently are not connected to any advisors </p>
-
+                (this.props.advisor.map((advisor) => {
+                return (
+                    <div className="ad-row">
+                        <p className="ad-name">
+                            { advisor }
+                            <div className="ad-icon">{addButton}</div>
+                        </p>
+                    </div>
+                    )})
+                )
             )
         }
 
@@ -110,7 +107,7 @@ class AdvisorMenu extends React.Component {
                 <div className={classNames('advisor-dropdown', { down: this.state.showDropdown })}>
                     <p style={{textAlign: "center"}}> Invite Advisors to Comment Forum </p>
                     <div className="ad-modal-wrapper">
-                        { this.props.advisors ? <p>yes</p> : <p> You currently are not connected to any advisors </p>}
+                        { this.props.advisor ? <p>{advisorRow()}</p> : <p> You currently are not connected to any advisors </p>}
                     </div>
                 </div>
             </ClickOutHandler>
