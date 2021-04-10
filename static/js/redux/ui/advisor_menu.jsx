@@ -81,22 +81,12 @@ class AdvisorMenu extends React.Component {
                 </ReactTooltip>
             </div>
         );
-        
-        function advisorRow() {
-            return (
-                (this.props.advisor.map((advisor) => {
-                return (
-                    <div className="ad-row">
-                        <p className="ad-name">
-                            { advisor }
-                            <div className="ad-icon">{addButton}</div>
-                        </p>
-                    </div>
-                    )})
-                )
-            )
-        }
 
+        let advisorList = (this.props.advisors.length > 0) ?
+            this.props.advisors.map((name, i) => {
+                return (<p key={i} style={{padding: "5px"}}> {name} {addButton} </p>);
+            }) : <p style={{textAlign: "center", fontSize:"10pt"}}> You are not connected to any advisors </p>;
+        
         return (
             <ClickOutHandler onClickOut={this.hideDropDown}>
                 <div onMouseDown={this.toggleDropdown}>
@@ -105,7 +95,7 @@ class AdvisorMenu extends React.Component {
                 <div className={classNames('advisor-dropdown', { down: this.state.showDropdown })}>
                     <p style={{textAlign: "center", marginTop: "5px", fontWeight: "bold"}}> Invite Advisors to Comment Forum </p>
                     <div className="ad-modal-wrapper">
-                        { this.props.advisor ? <p> {advisorRow()} </p> : <p style={{textAlign: "center", fontSize:"10pt"}}> You are not connected to any advisors </p>}
+                        { advisorList }
                     </div>
                 </div>
             </ClickOutHandler>

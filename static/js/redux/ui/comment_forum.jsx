@@ -29,9 +29,9 @@ class CommentForum extends React.Component {
           comments: null,
           //TODO: Set this to list of student's advisors from SIS
           advisors: [
-              { advisor: 'Yair Amir'},
-              { advisor: 'Linda Moulton'},
-              { advisor: 'Steven Marra'},
+              'Yair Amir',
+              'Linda Moulton',
+              'Steven Marra',
           ]
         };
     }
