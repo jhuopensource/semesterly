@@ -97,17 +97,15 @@ class AdvisorMenu extends React.Component {
             )
         }
 
-
-
         return (
             <ClickOutHandler onClickOut={this.hideDropDown}>
                 <div onMouseDown={this.toggleDropdown}>
                     { toggleAdvisorMenuBtn }
                 </div>
                 <div className={classNames('advisor-dropdown', { down: this.state.showDropdown })}>
-                    <p style={{textAlign: "center"}}> Invite Advisors to Comment Forum </p>
+                    <p style={{textAlign: "center", marginTop: "5px", fontWeight: "bold"}}> Invite Advisors to Comment Forum </p>
                     <div className="ad-modal-wrapper">
-                        { this.props.advisor ? <p>{advisorRow()}</p> : <p> You currently are not connected to any advisors </p>}
+                        { this.props.advisor ? <p> {advisorRow()} </p> : <p style={{textAlign: "center", fontSize:"10pt"}}> You are not connected to any advisors </p>}
                     </div>
                 </div>
             </ClickOutHandler>
