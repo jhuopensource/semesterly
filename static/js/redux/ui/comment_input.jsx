@@ -26,15 +26,6 @@ class CommentInput extends React.Component {
 		};
 	}
 
-	// componentWillMount() {
-	// 	$(document.body).on('keydown', (e) => {
-	// 		if (e.key === 'Enter') {
-	// 			//TODO: this.sendComment();
-	// 			$('input.transcript.comments').blur();
-	// 		}
-	// 	});
-	// }
-
 	sendContent(event) {
 		this.setState({ comment: event.target.value });
 	}
@@ -53,15 +44,6 @@ class CommentInput extends React.Component {
 				content: this.state.comment
 			}),
 		});
-		//.then((res) => {
-		// 	return res.json();
-		// }).then((data) => {
-		// 	console.log("DATA = " + JSON.stringify(data));
-		// 	// const content = JSON.stringify(data)
-		// 	// console.log(content)
-		// }).catch((error) => {
-		// 	console.log(error);
-		// })
 	}
 
 	render() {
