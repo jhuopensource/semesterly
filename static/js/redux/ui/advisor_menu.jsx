@@ -19,6 +19,8 @@ import ClickOutHandler from 'react-onclickout';
 import ReactTooltip from 'react-tooltip';
 import * as SemesterlyPropTypes from '../constants/semesterlyPropTypes';
 import AdvisorRow from "./advisor_row";
+import {getTranscriptCommentsBySemester} from "../constants/endpoints";
+import CommentInput from "./comment_input";
 
 class AdvisorMenu extends React.Component {
     constructor(props) {
@@ -37,43 +39,41 @@ class AdvisorMenu extends React.Component {
         this.setState({showDropdown: false});
     }
 
-    handleAdd() {
-
-    }
-
     render() {
+        const { semester_name, semester_year } = this.props;
 
         const toggleAdvisorMenuBtn = (
             <div style={{margin: "right"}}>
                 <button
-                className="save-timetable add-button"
-                data-for="add-btn-tooltip"
+                    className="save-timetable add-button"
+                    data-for="add-btn-tooltip"
                 >
                     <i className="fa fa-plus" />
                 </button>
-
-                <ReactTooltip
-                id="add-btn-tooltip"
-                class="tooltip"
-                type="dark"
-                place="bottom"
-                effect="solid"
-                >
-                    <span>Invite Advisors</span>
-                </ReactTooltip>
             </div>
         );
 
-        const addButton = (
-            <div className="cal-btn-wrapper">
+        function handleAdd(advisor, added) {
+            fetch(getTranscriptCommentsBySemester(semester_name, semester_year, advisor), {
+                method:  added === false  ? 'ADD' : 'REMOVE',
+                body: JSON.stringify({
+                    jhed: advisor
+                })
+            });
+        }
+
+        function addOrRemoveBtn(advisor, added) {
+            let span = added === false ? "Add Advisor" : "Remove Advisor";
+            return (
+            <div style={{width:"30px"}}>
                 <button
-                    onClick={() => this.handleAdd()}
+                    onClick={() => handleAdd(advisor, added)}
                     className="save-timetable add-button"
                     data-tip
                     data-for="add-btn-tooltip"
                 >
-                    {this.state.
-                    <i className="fa fa-plus" />
+                    {/*if (this.props.addedAdvisors)*/}
+                    <i className={ added === false ? "fa fa-plus" : "minus"}/>
                 </button>
 
                 <ReactTooltip
@@ -83,18 +83,19 @@ class AdvisorMenu extends React.Component {
                     place="bottom"
                     effect="solid"
                 >
-                    <span>Add to forum </span>
+                  <span>{span}</span>
                 </ReactTooltip>
             </div>
-        );
+            );
+        }
 
         let advisorList = (this.props.advisors.length > 0) ?
-            this.props.advisors.map((name, i) => {
-                return (<p key={i} style={{padding: "5px"}}> {name}
-                    <addButton
-                        advisor={name}
-                    />
-                    </p>);
+            this.props.advisors.map((advisor, i) => {
+                return (<div key={i} style={{padding: "5px"}}>
+                    {/* if name in addedAdvisors, removeBtn, else addBtn */}
+                    {this.props.addedAdvisors.find((e) => e === advisor.jhed ) ? addOrRemoveBtn(advisor.jhed, true) : addOrRemoveBtn(advisor.jhed, false) }
+                    <p style={{ marginLeft: "50px"}}> {advisor.name} </p>
+                    </div>);
             }) : <p style={{textAlign: "center", fontSize:"10pt"}}> You are not connected to any advisors </p>;
 
         return (
@@ -106,7 +107,6 @@ class AdvisorMenu extends React.Component {
                     <p style={{textAlign: "center", marginTop: "5px", fontWeight: "bold"}}> Invite Advisors to Comment Forum </p>
                     <div className="ad-modal-wrapper">
                         { advisorList }
-                        { addButton }
                     </div>
                 </div>
             </ClickOutHandler>
@@ -114,5 +114,14 @@ class AdvisorMenu extends React.Component {
     }
 
 }
+
+
+AdvisorMenu.propTypes = {
+    isLoggedIn: PropTypes.bool.isRequired,
+    semester_name: PropTypes.string.isRequired,
+    semester_year: PropTypes.string.isRequired,
+    advisors: PropTypes.array.isRequired,
+    addedAdvisors: PropTypes.array.isRequired,
+};
 
 export default AdvisorMenu;
