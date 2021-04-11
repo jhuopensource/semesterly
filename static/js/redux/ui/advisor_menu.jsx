@@ -63,7 +63,7 @@ class AdvisorMenu extends React.Component {
         }
 
         function addOrRemoveBtn(advisor, added) {
-            let span = added === false ? "Add Advisor" : "Remove Advisor";
+            let span = (!added ? 'Add Advisor' : 'Remove Advisor');
             return (
             <div style={{width:"30px"}}>
                 <button
@@ -73,7 +73,7 @@ class AdvisorMenu extends React.Component {
                     data-for="add-btn-tooltip"
                 >
                     {/*if (this.props.addedAdvisors)*/}
-                    <i className={ added === false ? "fa fa-plus" : "minus"}/>
+                    <i className={classNames('fa', { 'fa-plus': !added, 'fa-check': added })} />
                 </button>
 
                 <ReactTooltip
