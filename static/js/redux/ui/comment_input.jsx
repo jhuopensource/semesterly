@@ -72,7 +72,7 @@ class CommentInput extends React.Component {
 }
 
 CommentInput.propTypes = {
-	isLoggedIn: PropTypes.bool.isRequired,
+	// isLoggedIn: PropTypes.bool.isRequired,
 	semester_name: PropTypes.string.isRequired,
 	semester_year: PropTypes.string.isRequired,
 };

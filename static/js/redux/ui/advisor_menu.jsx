@@ -43,7 +43,7 @@ class AdvisorMenu extends React.Component {
         const { semester_name, semester_year } = this.props;
 
         const toggleAdvisorMenuBtn = (
-            <div style={{margin: "right"}}>
+            <div style={{margin: "right", marginTop: "5px"}}>
                 <button
                     className="save-timetable add-button"
                     data-for="add-btn-tooltip"
@@ -104,7 +104,9 @@ class AdvisorMenu extends React.Component {
                     { toggleAdvisorMenuBtn }
                 </div>
                 <div className={classNames('advisor-dropdown', { down: this.state.showDropdown })}>
-                    <p style={{textAlign: "center", marginTop: "5px", fontWeight: "bold"}}> Invite Advisors to Comment Forum </p>
+                    <p style={{maxWidth: "70%", fontWeight: "bold", margin: "auto", textAlign: "center", marginTop: "10px"}}>
+                        Invite Advisors to Comment Forum
+                    </p>
                     <div className="ad-modal-wrapper">
                         { advisorList }
                     </div>
@@ -117,7 +119,6 @@ class AdvisorMenu extends React.Component {
 
 
 AdvisorMenu.propTypes = {
-    isLoggedIn: PropTypes.bool.isRequired,
     semester_name: PropTypes.string.isRequired,
     semester_year: PropTypes.string.isRequired,
     advisors: PropTypes.array.isRequired,
