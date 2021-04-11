@@ -27,12 +27,27 @@ class CommentForum extends React.Component {
           semester_year: '',
           transcript: null,
           comments: null,
+          addedAdvisors: [
+              'yamir',
+              'lmoulton',
+              '',
+          ],
           //TODO: Set this to list of student's advisors from SIS
           advisors: [
-              'Yair Amir',
-              'Linda Moulton',
-              'Steven Marra',
+              {
+                  name: 'Yair Amir',
+                  jhed: 'yamir'
+              },
+              {
+                  name: 'Linda Moulton',
+                  jhed: 'lmoulton'
+              },
+              {
+                  name: 'Steven Marra',
+                  jhed: 'smarra'
+              },
           ]
+
         };
     }
 
@@ -46,6 +61,7 @@ class CommentForum extends React.Component {
           .then(data => {
             this.setState({transcript: data.transcript});
             this.setState({comments: this.state.transcript.comments});
+            // this.setState({addedAdvisors: this.state.transcript.advisors});
           });
       } else {
         this.setState({transcript: null});
@@ -64,8 +80,6 @@ class CommentForum extends React.Component {
     }
 
     render() {
-
-        
       let transcript;
       if (this.props.transcript != null && this.props.transcript.comments != null) {
           transcript = <Transcript
@@ -77,23 +91,20 @@ class CommentForum extends React.Component {
         transcript = <div className="empty-state"><h4> <p> No comments yet! </p> </h4></div>;
       }
 
-      const displayInput = (this.props.selected_semester === null) ? null : (<CommentInputContainer
-        semester_name={this.props.selected_semester.toString().split(' ')[0]}
-        semester_year={this.props.selected_semester.toString().split(' ')[1]}
-      />);
-
         return (
             <div className="comment-forum no-print">
                 <div className="cf-name">
                     <h3 className="title"> Comments Forum </h3>
                 </div>
-                <AdvisorMenu advisors={this.state.advisors}/>
+                <AdvisorMenu
+                    advisors={this.state.advisors}
+                    addedAdvisors={this.state.addedAdvisors}
+                />
                 <div className="as-header">{}</div>
                 <div className="comment-forum-container">
                   { transcript }
                 </div>
                 <div className="as-header">{}</div>
-                  { displayInput }
                 <CommentInputContainer />
             </div>
         );
