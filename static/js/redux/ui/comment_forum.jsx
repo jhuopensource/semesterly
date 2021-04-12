@@ -98,12 +98,14 @@ class CommentForum extends React.Component {
                 <div className="cf-name">
                     <h3 className="title"> Comments Forum </h3>
                 </div>
+                {this.props.transcript &&
                 <AdvisorMenu
                     semester_name={semester_name}
                     semester_year={semester_year}
                     advisors={this.state.advisors}
                     addedAdvisors={this.state.addedAdvisors}
                 />
+                }
                 <div className="as-header">{}</div>
                 <div className="comment-forum-container">
                   { transcript }
