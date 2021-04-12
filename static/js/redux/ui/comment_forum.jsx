@@ -18,6 +18,8 @@ import Transcript from './transcript';
 import {getTranscriptCommentsBySemester} from '../constants/endpoints';
 import AdvisorMenu from "./advisor_menu";
 
+let semester_name;
+let semester_year;
 
 class CommentForum extends React.Component {
     constructor(props) {
@@ -53,8 +55,8 @@ class CommentForum extends React.Component {
 
     fetchTranscript() {
       if (this.props.selected_semester != null) {
-        let semester_name = this.props.selected_semester.toString().split(' ')[0];
-        let semester_year = this.props.selected_semester.toString().split(' ')[1];
+        semester_name = this.props.selected_semester.toString().split(' ')[0];
+        semester_year = this.props.selected_semester.toString().split(' ')[1];
 
         fetch(getTranscriptCommentsBySemester(semester_name, semester_year))
           .then(response => response.json())
@@ -97,6 +99,8 @@ class CommentForum extends React.Component {
                     <h3 className="title"> Comments Forum </h3>
                 </div>
                 <AdvisorMenu
+                    semester_name={semester_name}
+                    semester_year={semester_year}
                     advisors={this.state.advisors}
                     addedAdvisors={this.state.addedAdvisors}
                 />
