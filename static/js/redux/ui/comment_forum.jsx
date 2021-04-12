@@ -63,7 +63,7 @@ class CommentForum extends React.Component {
           .then(data => {
             this.setState({transcript: data.transcript});
             this.setState({comments: this.state.transcript.comments});
-            // this.setState({addedAdvisors: this.state.transcript.advisors});
+            //this.setState({addedAdvisors: this.state.transcript.advisors});
           });
       } else {
         this.setState({transcript: null});

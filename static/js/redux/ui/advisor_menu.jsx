@@ -21,6 +21,7 @@ import * as SemesterlyPropTypes from '../constants/semesterlyPropTypes';
 import AdvisorRow from "./advisor_row";
 import {getTranscriptCommentsBySemester} from "../constants/endpoints";
 import CommentInput from "./comment_input";
+import Cookie from "js-cookie";
 
 class AdvisorMenu extends React.Component {
     constructor(props) {
@@ -56,14 +57,19 @@ class AdvisorMenu extends React.Component {
         function handleAdd(advisor, added) {
             fetch(getTranscriptCommentsBySemester(semester_name, semester_year, advisor), {
                 method:  added === false  ? 'ADD' : 'REMOVE',
+                headers: {
+                    'X-CSRFToken': Cookie.get('csrftoken'),
+                    accept: 'application/json',
+                    'Content-Type': 'application/json',
+                },
                 body: JSON.stringify({
                     jhed: advisor
                 })
             });
         }
 
+
         function addOrRemoveBtn(advisor, added) {
-            let span = (!added ? 'Add Advisor' : 'Remove Advisor');
             return (
             <div style={{width:"30px"}}>
                 <button
@@ -83,7 +89,7 @@ class AdvisorMenu extends React.Component {
                     place="bottom"
                     effect="solid"
                 >
-                  <span>{span}</span>
+                  <span>Add or Remove Advisor</span>
                 </ReactTooltip>
             </div>
             );
