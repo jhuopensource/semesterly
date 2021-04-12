@@ -18,7 +18,6 @@ import classNames from 'classnames';
 import ClickOutHandler from 'react-onclickout';
 import ReactTooltip from 'react-tooltip';
 import * as SemesterlyPropTypes from '../constants/semesterlyPropTypes';
-import AdvisorRow from "./advisor_row";
 import {getTranscriptCommentsBySemester} from "../constants/endpoints";
 import CommentInput from "./comment_input";
 import Cookie from "js-cookie";
