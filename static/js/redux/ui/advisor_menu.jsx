@@ -40,7 +40,7 @@ class AdvisorMenu extends React.Component {
     }
 
     render() {
-        const { semester_name, semester_year } = this.props;
+        const { addRemoveAdvisor } = this.props;
 
         const toggleAdvisorMenuBtn = (
             <div style={{margin: "right", marginTop: "5px"}}>
@@ -53,23 +53,23 @@ class AdvisorMenu extends React.Component {
             </div>
         );
 
-        function addRemoveAdvisor(advisor, added) {
-            fetch(getTranscriptCommentsBySemester(semester_name, semester_year, advisor), {
-                method:  'PATCH',
-                headers: {
-                    'X-CSRFToken': Cookie.get('csrftoken'),
-                    accept: 'application/json',
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    jhed: advisor,
-                    action: added === false  ? 'add' : 'remove'
-                })
-            });
-        }
+        // function addRemoveAdvisor(advisor, added) {
+        //     fetch(getTranscriptCommentsBySemester(semester_name, semester_year, advisor), {
+        //         method:  'PATCH',
+        //         headers: {
+        //             'X-CSRFToken': Cookie.get('csrftoken'),
+        //             accept: 'application/json',
+        //             'Content-Type': 'application/json',
+        //         },
+        //         body: JSON.stringify({
+        //             jhed: advisor,
+        //             action: added === false  ? 'add' : 'remove'
+        //         })
+        //     });
+        // }
 
 
-        function addOrRemoveBtn(advisor, added) {
+        const addRemoveBtn = (advisor, added) => {
             return (
             <div style={{width:"30px"}}>
                 <button
@@ -95,11 +95,11 @@ class AdvisorMenu extends React.Component {
             );
         }
 
-        let advisorList = (this.props.advisors.length > 0) ?
+        const advisorList = (this.props.advisors.length > 0) ?
             this.props.advisors.map((advisor, i) => {
                 return (<div key={i} style={{padding: "5px"}}>
                     {/* if name in addedAdvisors, removeBtn, else addBtn */}
-                    {this.props.addedAdvisors.find((e) => e === advisor.jhed ) ? addOrRemoveBtn(advisor.jhed, true) : addOrRemoveBtn(advisor.jhed, false) }
+                    {addRemoveBtn(advisor.jhed, this.props.addedAdvisors.includes(advisor.jhed))}
                     <p style={{ marginLeft: "50px"}}> {advisor.name} </p>
                     </div>);
             }) : <p style={{textAlign: "center", fontSize:"10pt"}}> You are not connected to any advisors </p>;

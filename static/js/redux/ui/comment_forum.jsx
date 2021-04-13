@@ -17,6 +17,7 @@ import CommentInputContainer from './containers/comment_input_container';
 import Transcript from './transcript';
 import {getTranscriptCommentsBySemester} from '../constants/endpoints';
 import AdvisorMenu from "./advisor_menu";
+import Cookie from "js-cookie";
 
 let semester_name;
 let semester_year;
@@ -31,8 +32,7 @@ class CommentForum extends React.Component {
           comments: null,
           addedAdvisors: [
               'yamir',
-              'lmoulton',
-              '',
+              'lmoulton'
           ],
           //TODO: Set this to list of student's advisors from SIS
           advisors: [
@@ -61,14 +61,40 @@ class CommentForum extends React.Component {
         fetch(getTranscriptCommentsBySemester(semester_name, semester_year))
           .then(response => response.json())
           .then(data => {
-            this.setState({transcript: data.transcript});
-            this.setState({comments: this.state.transcript.comments});
-            //this.setState({addedAdvisors: this.state.transcript.advisors});
+            this.setState({ transcript: data.transcript });
+            this.setState({ comments: this.state.transcript.comments });
+            //this.setState({ addedAdvisors: this.state.transcript.advisors });
           });
       } else {
-        this.setState({transcript: null});
-        this.setState({comments: null});
+        this.setState({ transcript: null });
+        this.setState({ comments: null });
       }
+    }
+
+    addRemoveAdvisor(advisor, added) {
+        fetch(getTranscriptCommentsBySemester(semester_name, semester_year, advisor), {
+            method:  'PATCH',
+            headers: {
+                'X-CSRFToken': Cookie.get('csrftoken'),
+                accept: 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                jhed: advisor,
+                action: !added ? 'add' : 'remove'
+            })
+        });
+
+        const { addedAdvisors } = this.state;
+        if (added) {
+            const indexToRemove = addedAdvisors.indexOf(advisor);
+            if (indexToRemove !== -1) {
+                addedAdvisors.splice(indexToRemove, 1);
+            }
+        } else {
+            addedAdvisors.push(advisor);
+        }
+        this.setState({ addedAdvisors });
     }
 
     componentDidMount() {
@@ -104,9 +130,11 @@ class CommentForum extends React.Component {
                     semester_year={semester_year}
                     advisors={this.state.advisors}
                     addedAdvisors={this.state.addedAdvisors}
+                    addAdvisor={this.state.addAdvisor}
+                    addRemoveAdvisor={this.addRemoveAdvisor.bind(this)}
                 />
                 }
-                <div className="as-header">{}</div>
+                <div className="as-header">{this.state.advisors.name}</div>
                 <div className="comment-forum-container">
                   { transcript }
                 </div>
