@@ -122,15 +122,15 @@
 
 .as-header {
   clear: both;
-  color: $g777;
-  font-size: 14px;
-  font-weight: 300;
+  color: $primary-navy;
+  font-size: 14pt;
+  font-weight: bold;
   margin: 0;
   padding: 10px 5px;
   position: relative;
 
   &::after {
-    background-color: $g777;
+    background-color: $gddd;
     bottom: 5px;
     content: "";
     display: block;

@@ -85,6 +85,7 @@ class CommentForum extends React.Component {
             })
         });
 
+        // just for frontend testing
         const { addedAdvisors } = this.state;
         if (added) {
             const indexToRemove = addedAdvisors.indexOf(advisor);
@@ -102,7 +103,7 @@ class CommentForum extends React.Component {
     }
 
     componentDidUpdate(prevProps) {
-      if(this.props.selected_semester !== prevProps.selected_semester) {
+      if (this.props.selected_semester !== prevProps.selected_semester) {
         this.fetchTranscript();
       }
     }
@@ -110,38 +111,45 @@ class CommentForum extends React.Component {
     render() {
       let transcript;
       if (this.props.transcript != null && this.props.transcript.comments != null) {
-          transcript = <Transcript
-              comments={this.props.transcript.comments}
-          />;
+        transcript = <Transcript comments={this.props.transcript.comments} />;
       } else if (this.props.transcript === null) {
         transcript = <div className="empty-state"><h4> <p> No semester selected! </p> </h4></div>;
       } else if (this.props.transcript.comments === null){
         transcript = <div className="empty-state"><h4> <p> No comments yet! </p> </h4></div>;
       }
 
-        return (
-            <div className="comment-forum no-print">
-                <div className="cf-name">
-                    <h3 className="title"> Comments Forum </h3>
-                </div>
-                {this.props.transcript &&
-                <AdvisorMenu
-                    semester_name={semester_name}
-                    semester_year={semester_year}
-                    advisors={this.state.advisors}
-                    addedAdvisors={this.state.addedAdvisors}
-                    addAdvisor={this.state.addAdvisor}
-                    addRemoveAdvisor={this.addRemoveAdvisor.bind(this)}
-                />
-                }
-                <div className="as-header">{this.state.advisors.name}</div>
-                <div className="comment-forum-container">
-                  { transcript }
-                </div>
-                <div className="as-header">{}</div>
-                <CommentInputContainer />
-            </div>
-        );
+      const displayAdvisorNames = () => {
+        const names = []
+        const { advisors, addedAdvisors } = this.state
+        advisors.forEach(({ jhed, name }) => {
+          if (addedAdvisors.includes(jhed)) names.push(name)
+        })
+        return names.join(", ")
+      }
+
+      return (
+        <div className="comment-forum no-print">
+          <div className="cf-name">
+            <h3 className="title"> Comments Forum </h3>
+          </div>
+          {this.props.transcript &&
+          <AdvisorMenu
+            semester_name={semester_name}
+            semester_year={semester_year}
+            advisors={this.state.advisors}
+            addedAdvisors={this.state.addedAdvisors}
+            addAdvisor={this.state.addAdvisor}
+            addRemoveAdvisor={this.addRemoveAdvisor.bind(this)}
+          />
+          }
+          <div className="as-header">{displayAdvisorNames()}</div>
+          <div className="comment-forum-container">
+            { transcript }
+          </div>
+          <div className="as-header">{}</div>
+          <CommentInputContainer />
+        </div>
+      );
     }
 }
 
