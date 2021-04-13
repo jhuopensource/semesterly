@@ -53,16 +53,17 @@ class AdvisorMenu extends React.Component {
             </div>
         );
 
-        function handleAdd(advisor, added) {
+        function addRemoveAdvisor(advisor, added) {
             fetch(getTranscriptCommentsBySemester(semester_name, semester_year, advisor), {
-                method:  added === false  ? 'ADD' : 'REMOVE',
+                method:  'PATCH',
                 headers: {
                     'X-CSRFToken': Cookie.get('csrftoken'),
                     accept: 'application/json',
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    jhed: advisor
+                    jhed: advisor,
+                    action: added === false  ? 'add' : 'remove'
                 })
             });
         }
@@ -72,7 +73,7 @@ class AdvisorMenu extends React.Component {
             return (
             <div style={{width:"30px"}}>
                 <button
-                    onClick={() => handleAdd(advisor, added)}
+                    onClick={() => addRemoveAdvisor(advisor, added)}
                     className="save-timetable add-button"
                     data-tip
                     data-for="add-btn-tooltip"
