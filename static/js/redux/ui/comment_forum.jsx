@@ -14,6 +14,10 @@ GNU General Public License for more details.
 
 import React from 'react';
 import CommentInputContainer from './containers/comment_input_container';
+import AdvisorMenu from "./advisor_menu";
+import {getTranscriptCommentsBySemester} from "../constants/endpoints";
+import Cookie from "js-cookie";
+
 let semester_name;
 let semester_year;
 

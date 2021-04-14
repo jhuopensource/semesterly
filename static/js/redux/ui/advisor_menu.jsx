@@ -17,10 +17,6 @@ import React from 'react';
 import classNames from 'classnames';
 import ClickOutHandler from 'react-onclickout';
 import ReactTooltip from 'react-tooltip';
-import * as SemesterlyPropTypes from '../constants/semesterlyPropTypes';
-import {getTranscriptCommentsBySemester} from "../constants/endpoints";
-import CommentInput from "./comment_input";
-import Cookie from "js-cookie";
 
 class AdvisorMenu extends React.Component {
     constructor(props) {
@@ -52,22 +48,6 @@ class AdvisorMenu extends React.Component {
                 </button>
             </div>
         );
-
-        // function addRemoveAdvisor(advisor, added) {
-        //     fetch(getTranscriptCommentsBySemester(semester_name, semester_year, advisor), {
-        //         method:  'PATCH',
-        //         headers: {
-        //             'X-CSRFToken': Cookie.get('csrftoken'),
-        //             accept: 'application/json',
-        //             'Content-Type': 'application/json',
-        //         },
-        //         body: JSON.stringify({
-        //             jhed: advisor,
-        //             action: added === false  ? 'add' : 'remove'
-        //         })
-        //     });
-        // }
-
 
         const addRemoveBtn = (advisor, added) => {
             return (
