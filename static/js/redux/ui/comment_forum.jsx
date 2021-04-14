@@ -13,12 +13,11 @@ GNU General Public License for more details.
 */
 
 import React from 'react';
-import PropTypes from 'prop-types';
 import CommentInputContainer from './containers/comment_input_container';
-import Transcript from './transcript';
-import {getTranscriptCommentsBySemester} from '../constants/endpoints';
+import PropTypes from 'prop-types';
 import AdvisorMenu from "./advisor_menu";
 import Cookie from "js-cookie";
+import Comment from './comment';
 
 
 let semester_name;
@@ -113,14 +112,27 @@ class CommentForum extends React.Component {
     render() {
       let transcript;
       if (this.props.transcript != null && this.props.transcript.comments != null) {
-        transcript = <Transcript comments={this.props.transcript.comments} />;
+        transcript = this.props.transcript.comments.map(comment => (
+            <Comment
+                key={comment.timestamp}
+                author={comment.author_name}
+                content={comment.content}
+                timestamp={comment.timestamp}
+            />
+        ));
       } else if (this.props.transcript === null) {
         transcript = <div className="empty-state"><h4> <p> No semester selected! </p> </h4></div>;
-      } else if (this.props.transcript.comments === null){
+      } else if (this.props.transcript.comments === null) {
         transcript = <div className="empty-state"><h4> <p> No comments yet! </p> </h4></div>;
       }
 
-      const displayAdvisorNames = () => {
+    const displayInput = (this.props.selected_semester === null) ? null : (<CommentInputContainer
+        semester_name={this.props.selected_semester.toString().split(' ')[0]}
+        semester_year={this.props.selected_semester.toString().split(' ')[1]}
+    />);
+
+
+    const displayAdvisorNames = () => {
         const names = []
         const { advisors, addedAdvisors } = this.state
         advisors.forEach(({ jhed, name }) => {
@@ -149,32 +161,10 @@ class CommentForum extends React.Component {
             { transcript }
           </div>
           <div className="as-header">{}</div>
-          <CommentInputContainer />
+          { displayInput }
         </div>
       );
     }
-
-    const displayInput = (this.props.selected_semester === null) ? null : (<CommentInputContainer
-      semester_name={this.props.selected_semester.toString().split(' ')[0]}
-      semester_year={this.props.selected_semester.toString().split(' ')[1]}
-    />);
-
-    return (
-      <div className="comment-forum no-print">
-        <div className="cf-name">
-          <p style={{ fontSize: '1.25em', fontWeight: 'bold', marginTop: '70px' }}>
-              Comments Forum
-          </p>
-        </div>
-        <div className="as-header" />
-        <div className="comment-forum-container">
-          { transcript }
-        </div>
-        <div className="as-header" />
-        { displayInput }
-      </div>
-    );
-  }
 }
 
 CommentForum.defaultProps = {
@@ -196,5 +186,6 @@ CommentForum.propTypes = {
     })),
   }),
 };
+
 
 export default CommentForum;
