@@ -48,7 +48,7 @@ class AdvisorMenu extends React.Component {
                     className="save-timetable add-button"
                     data-for="add-btn-tooltip"
                 >
-                    <i className="fa fa-plus" />
+                    <i className="fa fa-users" />
                 </button>
             </div>
         );
@@ -71,7 +71,7 @@ class AdvisorMenu extends React.Component {
 
         const addRemoveBtn = (advisor, added) => {
             return (
-            <div style={{width:"30px"}}>
+            <div className="add-button">
                 <button
                     onClick={() => addRemoveAdvisor(advisor, added)}
                     className="save-timetable add-button"
@@ -98,11 +98,11 @@ class AdvisorMenu extends React.Component {
         const advisorList = (advisors.length > 0) ?
             advisors.map((advisor, i) => {
                 return (
-                    <div key={i} style={{padding: "5px"}}>
+                    <row key={i} style={{padding: "5px"}}>
                         {/* if name in addedAdvisors, removeBtn, else addBtn */}
                         {addRemoveBtn(advisor.jhed, addedAdvisors.includes(advisor.jhed))}
-                        <p style={{ marginLeft: "50px"}}> {advisor.name} </p>
-                    </div>
+                        <p className="advisor"> {advisor.name} </p>
+                    </row>
                 );
             }) : <p style={{textAlign: "center", fontSize:"10pt"}}> You are not connected to any advisors </p>;
 

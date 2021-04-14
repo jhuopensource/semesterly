@@ -98,6 +98,19 @@
   }
 }
 
+row {
+  display: flex;
+  flex-direction: row;
+}
+.add-button {
+  flex: 1;
+  order: 1;
+}
+.advisor {
+  flex: 2;
+  order: 2;
+}
+
 .comment-row {
   margin: 10px;
 }
