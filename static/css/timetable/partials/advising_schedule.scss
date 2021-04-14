@@ -101,36 +101,15 @@
 row {
   display: flex;
   flex-direction: row;
-}
-.add-button {
-  flex: 1;
-  order: 1;
-}
-.advisor {
-  flex: 2;
-  order: 2;
-}
 
-.comment-row {
-  margin: 10px;
-}
-
-.comment-bubble {
-  background: #1e3a66;
-  color: white;
-  border-radius: 15px;
-  font-size: 12px;
-  padding: 10px;
-  margin: 8px;
-
-  .author {
-    font-weight: bold;
+  .add-button {
+    flex: 1;
+    order: 1;
   }
-}
-
-.comment-timestamp {
-  font-size: 10px;
-  float: right;
+  .advisor {
+    flex: 2;
+    order: 2;
+  }
 }
 
 .as-header {
@@ -152,6 +131,38 @@ row {
     position: absolute;
     width: 100%;
   }
+}
+
+  .comment-row {
+    margin: 10px;
+
+    .owner {
+      outline-color: #00A1FF;
+      background: #00A1FF;
+    }
+
+    .guest {
+      outline-color: lightslategray;
+      background: lightslategray;
+    }
+  }
+
+  .comment-bubble {
+    color: white;
+    border-radius: 20px;
+    font-size: 12px;
+    padding: 10px;
+    margin: 5px;
+
+    .author {
+      font-weight: bold;
+    }
+
+  }
+
+.comment-timestamp {
+  font-size: 10px;
+  float: right;
 }
 
 .as-header-link {
