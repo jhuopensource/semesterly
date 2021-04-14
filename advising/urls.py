@@ -9,7 +9,6 @@
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
-
 from django.conf.urls import url
 from django.contrib import admin
 from django.http import HttpResponseRedirect
@@ -24,5 +23,4 @@ urlpatterns = [
     url(r'^advising/*$', advising.views.AdvisingView.as_view()),
     url(r'^advising/jhu_signup/*$',
         FeatureFlowView.as_view(feature_name='JHU_SIGNUP', is_advising=True)),
-    url(r'^advising/sis_post/$', advising.views.StudentSISView.as_view()), 
 ]

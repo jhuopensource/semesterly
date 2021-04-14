@@ -13,13 +13,11 @@ GNU General Public License for more details.
 */
 
 import React from 'react';
-import PropTypes from 'prop-types';
 import CommentInputContainer from './containers/comment_input_container';
 import Transcript from './transcript';
 import {getTranscriptCommentsBySemester} from '../constants/endpoints';
 import AdvisorMenu from "./advisor_menu";
 import Cookie from "js-cookie";
-
 
 let semester_name;
 let semester_year;
@@ -153,48 +151,6 @@ class CommentForum extends React.Component {
         </div>
       );
     }
-
-    const displayInput = (this.props.selected_semester === null) ? null : (<CommentInputContainer
-      semester_name={this.props.selected_semester.toString().split(' ')[0]}
-      semester_year={this.props.selected_semester.toString().split(' ')[1]}
-    />);
-
-    return (
-      <div className="comment-forum no-print">
-        <div className="cf-name">
-          <p style={{ fontSize: '1.25em', fontWeight: 'bold', marginTop: '70px' }}>
-              Comments Forum
-          </p>
-        </div>
-        <div className="as-header" />
-        <div className="comment-forum-container">
-          { transcript }
-        </div>
-        <div className="as-header" />
-        { displayInput }
-      </div>
-    );
-  }
 }
-
-CommentForum.defaultProps = {
-  selected_semester: null,
-  transcript: null,
-};
-
-CommentForum.propTypes = {
-  // displayed_semester: PropTypes.string.isRequired,
-  selected_semester: PropTypes.string,
-  transcript: PropTypes.shape({
-    semester_name: PropTypes.string,
-    semester_year: PropTypes.string,
-    owner: PropTypes.string,
-    comments: PropTypes.arrayOf(PropTypes.shape({
-      author_name: PropTypes.string,
-      content: PropTypes.string,
-      timestamp: PropTypes.date,
-    })),
-  }),
-};
 
 export default CommentForum;

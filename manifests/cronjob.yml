@@ -5,7 +5,7 @@ metadata:
   namespace: semesterly-dev
 spec:
   schedule: "40 19 * * *"
-  successfulJobsHistoryLimit: 1
+  successfulJobsHistoryLimit: 0
   failedJobsHistoryLimit: 1
   jobTemplate:
     spec:

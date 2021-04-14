@@ -38,7 +38,6 @@ class StudentSerializer(serializers.ModelSerializer):
     userFirstName = serializers.CharField(source='user.first_name')
     userLastName = serializers.CharField(source='user.last_name')
     userFullName = serializers.CharField(source='get_full_name')
-    isAdvisor = serializers.BooleanField(source='is_advisor')
     # TODO: switch to camelCase
     FacebookSignedUp = serializers.BooleanField(source='is_signed_up_through_fb')
     GoogleSignedUp = serializers.BooleanField(source='is_signed_up_through_google')
@@ -55,9 +54,6 @@ class StudentSerializer(serializers.ModelSerializer):
             'img_url',
             'fbook_uid',
             'major',
-            'primary_major',
-            'other_majors',
-            'minors',
             'social_courses',
             'social_offerings',
             'social_all',
@@ -68,7 +64,6 @@ class StudentSerializer(serializers.ModelSerializer):
             'userFirstName',
             'userLastName',
             'userFullName',
-            'isAdvisor',
             'FacebookSignedUp',
             'GoogleSignedUp',
             'jhuSignedUp',
