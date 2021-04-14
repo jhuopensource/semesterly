@@ -90,7 +90,6 @@ SOCIAL_AUTH_FACEBOOK_SECRET = get_secret('SOCIAL_AUTH_FACEBOOK_SECRET')
 SOCIAL_AUTH_AZUREAD_TENANT_OAUTH2_KEY = get_secret('SOCIAL_AUTH_AZURE_TENANT_KEY')
 SOCIAL_AUTH_AZUREAD_TENANT_OAUTH2_SECRET = get_secret('SOCIAL_AUTH_AZURE_TENANT_SECRET')
 SOCIAL_AUTH_AZUREAD_TENANT_OAUTH2_TENANT_ID = get_secret('SOCIAL_AUTH_AZURE_TENANT_ID')
-STUDENT_SIS_AUTH_SECRET = get_secret('STUDENT_SIS_AUTH_SECRET')
 
 SOCIAL_AUTH_AUTHENTICATION_BACKENDS = (
     'social_core.backends.facebook.FacebookOAuth2',
@@ -185,9 +184,7 @@ INSTALLED_APPS = (
     'agreement',
     'parsing',
     'pilot',
-    'advising',
     'forum',
-    'corsheaders',
 )
 
 REST_FRAMEWORK ={
@@ -197,7 +194,6 @@ REST_FRAMEWORK ={
 SESSION_ENGINE = 'django.contrib.sessions.backends.db'
 
 MIDDLEWARE_CLASSES = (
-    'corsheaders.middleware.CorsMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -251,12 +247,6 @@ ROOT_URLCONF = 'semesterly.urls'
 
 WSGI_APPLICATION = 'semesterly.wsgi.application'
 
-CORS_ORIGIN_WHITELIST = (
-    'https://sis.jhu.edu',
-)
-CSRF_TRUSTED_ORIGINS = (
-    'sis.jhu.edu',
-)
 
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases

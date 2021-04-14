@@ -29,9 +29,7 @@ SECRETS = {
     'SOCIAL_AUTH_FACEBOOK_SECRET': '75f855457ff18db012e57ccaaf3470eb',
     'FB_TEST_EMAIL': 'open_ejvbpxf_user@tfbnw.net',
     'FB_TEST_PASS': 'asdfasdfdsfdsfadfdsflsdflglfg',
-    'SOCIAL_AUTH_AZURE_TENANT_KEY': None,
-    'SOCIAL_AUTH_AZURE_TENANT_SECRET': None,
-    'SOCIAL_AUTH_AZURE_TENANT_ID': None,
+    'SOCIAL_AUTH_AZURE_SECRET': 'shh',
 
     #Not essential for testing, but can be filled in for advanced usage
     'GW_PASS': None,
@@ -39,7 +37,6 @@ SECRETS = {
     'JHU_API_KEY': None,
     'VANDY_USER': None,
     'VANDY_PASS': None,
-    'STUDENT_SIS_AUTH_SECRET': None,
 
     #Not essential for testing, but can be filled in for advanced mailing usage
     'MAILER_SERVER': None,
