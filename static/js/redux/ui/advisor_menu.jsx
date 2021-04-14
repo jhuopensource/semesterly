@@ -48,7 +48,7 @@ class AdvisorMenu extends React.Component {
                     className="save-timetable add-button"
                     data-for="add-btn-tooltip"
                 >
-                    <i className="fa fa-users" />
+                    <i className="fa fa-user-plus" />
                 </button>
             </div>
         );
