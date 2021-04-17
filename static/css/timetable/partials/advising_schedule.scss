@@ -65,7 +65,7 @@
   }
 
   .comment-forum-container {
-    height: 50vh;
+    height: 82%;
     overflow-y: auto;
 
     .empty-state {
@@ -97,12 +97,12 @@
     margin: 10px;
 
     .owner {
-      outline-color: #00A1FF;
+      outline-color: #00a1ff;
       background: #00A1FF;
     }
 
     .guest {
-      outline-color: lightslategray;
+      outline-color: #778899;
       background: lightslategray;
     }
   }
@@ -110,14 +110,19 @@
   .comment-bubble {
     color: white;
     border-radius: 20px;
-    font-size: 12px;
     padding: 10px;
     margin: 5px;
 
     .author {
       font-weight: bold;
+      font-size: 10pt;
     }
 
+    .content {
+      max-width: 460px;
+      font-size: 10pt;
+      word-break: break-word;
+    }
   }
 
   .comment-timestamp {
