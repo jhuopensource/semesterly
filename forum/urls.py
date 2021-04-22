@@ -14,6 +14,7 @@ from django.conf.urls import url
 from django.contrib import admin
 
 import forum.views
+from helpers.mixins import FeatureFlowView
 
 admin.autodiscover()
 
@@ -21,4 +22,6 @@ urlpatterns = [
     url(r'^advising/forum/all/$', forum.views.ForumView.as_view()),
     url(r'^advising/forum/(?P<sem_name>.+?)/(?P<year>[0-9]{4})/$',
         forum.views.ForumTranscriptView.as_view()),
+    url(r'^advising/forum/(?P<sem_name>.+?)/(?P<year>[0-9]{4})/submit/$',
+        FeatureFlowView.as_view(feature_name='SUBMIT_COMMENT', is_advising=True)),
 ]

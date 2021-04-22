@@ -43,6 +43,8 @@ export const acceptTOSEndpoint = () => '/tos/accept/';
 // TODO: Replace with real endpoint
 export const getTranscriptCommentsBySemester = (semesterName, semesterYear) => `/advising/forum/${semesterName}/${semesterYear}/`;
 
+export const getTranscriptAfterSubmit = (semesterName, semesterYear) => `/advising/forum/${semesterName}/${semesterYear}/submit`;
+
 export const getRetrievedSemesters = () => '/advising/sis_semesters/';
 
 export function getCourseShareLinkFromModal(code, semester) {

@@ -43,6 +43,8 @@ const mapStateToProps = (state) => {
       && activeTTLength >= 1),
     explorationModalIsVisible: state.explorationModal.isVisible,
     dataLastUpdated: state.school.dataLastUpdated,
+
+    selected_semester: state.selected_semester,
   };
 };
 

@@ -111,7 +111,7 @@
     color: white;
     border-radius: 20px;
     padding: 10px;
-    margin: 5px;
+    //margin: 5px;
 
     .author {
       font-weight: bold;
@@ -122,12 +122,14 @@
       max-width: 460px;
       font-size: 10pt;
       word-break: break-word;
+      margin: 0;
     }
   }
 
   .comment-timestamp {
     font-size: 10px;
     float: right;
+    margin-right: 10px;
   }
 
   row {

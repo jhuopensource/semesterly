@@ -38,9 +38,9 @@ class CommentForum extends React.Component {
               <div className="author">
                 {comment.author_name}
               </div>
-              <div>
+              <p className="content">
                 {comment.content}
-              </div>
+              </p>
             </div>
             <div className="comment-timestamp">
               {timestamp.toDateString()},
@@ -52,11 +52,11 @@ class CommentForum extends React.Component {
             <div className="author">
               {comment.author_name}
             </div>
-            <div>
+            <p className="content">
               {comment.content}
-            </div>
+            </p>
           </div>
-          <div className="comment-timestamp" style={{ float: 'left' }}>
+          <div className="comment-timestamp">
             {timestamp.toDateString()},
             {timestamp.toLocaleTimeString()}
           </div>
@@ -74,6 +74,7 @@ class CommentForum extends React.Component {
     const displayInput = (this.props.selected_semester === null) ? null : (<CommentInputContainer
       semester_name={this.props.selected_semester.toString().split(' ')[0]}
       semester_year={this.props.selected_semester.toString().split(' ')[1]}
+      // submitContent={this.submitContent.bind(this)}
     />);
 
     const displayAdvisorNames = () => {
@@ -101,7 +102,7 @@ class CommentForum extends React.Component {
         <div className="comment-forum-container">
           { transcript }
         </div>
-        <div className="as-header" />
+        <div className="as-header" style={{bottom: "10px"}}/>
         { displayInput }
       </div>
     );

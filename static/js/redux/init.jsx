@@ -163,6 +163,10 @@ const handleFlows = featureFlow => (dispatch) => {
     case 'SEPARATE_ACCOUNTS':
       dispatch({ type: ActionTypes.TRIGGER_SEPARATE_ACCOUNTS_MODAL });
       break;
+    case 'SUBMIT_COMMENT':
+      const semester = [`(?P<sem_name>.+?), (?P<year>[0-9]{4})`];
+      dispatch({ type: ActionTypes.OVERRIDE_TRANSCRIPT, selected_semester: semester});
+      break;
     default:
       // unexpected feature name
       break;
