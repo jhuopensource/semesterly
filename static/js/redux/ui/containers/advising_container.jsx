@@ -44,7 +44,8 @@ const mapStateToProps = (state) => {
     explorationModalIsVisible: state.explorationModal.isVisible,
     dataLastUpdated: state.school.dataLastUpdated,
 
-    selected_semester: state.selected_semester,
+    callback: state.advising.callback,
+    selected_semester: state.advising.selected_semester,
   };
 };
 

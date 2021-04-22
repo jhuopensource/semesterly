@@ -15,6 +15,7 @@ GNU General Public License for more details.
 import { combineReducers } from 'redux';
 import { createSelector } from 'reselect';
 import { getMaxHourBasedOnWindowHeight } from '../util';
+import advising from "./advising_reducer";
 import school from './school_reducer';
 import semester, * as fromSemester from './semester_reducer';
 import calendar from './calendar_reducer';
@@ -51,6 +52,7 @@ import entities, * as fromEntities from './entities_reducer';
 import SISImportDataModal from './SIS_import_data_modal_reducer';
 
 const rootReducer = combineReducers({
+  advising,
   alerts,
   calendar,
   classmates,

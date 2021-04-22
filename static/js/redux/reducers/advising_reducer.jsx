@@ -20,7 +20,12 @@ const advising = (state = {
 }, action) => {
   switch (action.type) {
     case ActionTypes.OVERRIDE_TRANSCRIPT:
-      return Object.assign({}, state, { selected_semester: action.selected_semester, callback: true});
+      console.log("reducer");
+      console.log((JSON.stringify(action.selected)));
+      return {
+        selected_semester: action.selected,
+        callback: true,
+      };
     default:
       return state;
   }

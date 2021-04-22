@@ -77,6 +77,11 @@ class Advising extends React.Component {
 
   componentDidMount() {
     this.fetchSemesters();
+
+    if (this.state.callback === true) {
+      console.log("true");
+      this.fetchTranscript(this.state.selected_semester);
+    } else if (this.state.callback === false) { console.log("failed");}
   }
 
   fetchSemesters() {
@@ -243,6 +248,8 @@ Advising.propTypes = {
     name: PropTypes.string.isRequired,
     year: PropTypes.string.isRequired,
   }).isRequired,
+  callback: PropTypes.bool.isRequired,
+  selected_semester: PropTypes.string.isRequired,
 };
 
 export default Advising;

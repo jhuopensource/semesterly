@@ -15,7 +15,7 @@ GNU General Public License for more details.
 import PropTypes from 'prop-types';
 import React from 'react';
 import Cookie from 'js-cookie';
-import { getTranscriptCommentsBySemester } from '../constants/endpoints';
+import {getTranscriptAfterSubmit, getTranscriptCommentsBySemester} from '../constants/endpoints';
 import * as SemesterlyPropTypes from '../constants/semesterlyPropTypes';
 
 class CommentInput extends React.Component {
@@ -29,8 +29,9 @@ class CommentInput extends React.Component {
   }
 
   componentDidUpdate() {
+    const { semester_name, semester_year } = this.props;
     if (this.state.submitted === true ) {
-      window.location.reload();
+      window.location.href = getTranscriptAfterSubmit(semester_name, semester_year);
       this.setState({submitted: !this.state.submitted});
     }
   }

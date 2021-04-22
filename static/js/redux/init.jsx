@@ -164,8 +164,12 @@ const handleFlows = featureFlow => (dispatch) => {
       dispatch({ type: ActionTypes.TRIGGER_SEPARATE_ACCOUNTS_MODAL });
       break;
     case 'SUBMIT_COMMENT':
-      const semester = [`(?P<sem_name>.+?), (?P<year>[0-9]{4})`];
-      dispatch({ type: ActionTypes.OVERRIDE_TRANSCRIPT, selected_semester: semester});
+      console.log("init");
+      const queryString = window.location.href;
+      console.log(queryString);
+      const url = queryString.split("/");
+      const semester = url[5].concat(" ", url[6]);
+      dispatch({ type: ActionTypes.OVERRIDE_TRANSCRIPT, selected: semester});
       break;
     default:
       // unexpected feature name
