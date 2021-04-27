@@ -560,3 +560,8 @@ export const handleAgreement = (currentUser, timeUpdatedTos) => (dispatch) => {
     }
   }
 };
+
+export const overrideTranscript = semester => ({
+  type: ActionTypes.OVERRIDE_TRANSCRIPT,
+  semester: semester,
+});

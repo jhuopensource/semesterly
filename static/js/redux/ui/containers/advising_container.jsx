@@ -16,7 +16,7 @@ import { connect } from 'react-redux';
 import HTML5Backend from 'react-dnd-html5-backend';
 import { DragDropContext } from 'react-dnd';
 import Advising from '../advising';
-import { saveTimetable } from '../../actions/user_actions';
+import { saveTimetable, overrideTranscript } from '../../actions/user_actions';
 import { setActiveTimetable } from '../../actions/timetable_actions';
 import {
   getActiveTimetableCourses,
@@ -53,9 +53,10 @@ const mapStateToProps = (state) => {
 const AdvisingContainer = connect(
   mapStateToProps,
   {
+    overrideTranscript,
     saveTimetable,
     setPgActive: setActiveTimetable,
-  },
+  }
 )(Advising);
 
 export default DragDropContext(HTML5Backend)(AdvisingContainer);
