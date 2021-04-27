@@ -47,20 +47,20 @@ class CommentForum extends React.Component {
               {timestamp.toLocaleTimeString()}
             </div>
           </span>) :
-        (<span className="comment-row">
-          <div className="comment-bubble guest">
-            <div className="author">
-              {comment.author_name}
+          (<span className="comment-row">
+            <div className="comment-bubble guest">
+              <div className="author">
+                {comment.author_name}
+              </div>
+              <div className="comment-content">
+                {comment.content}
+              </div>
             </div>
-            <p className="content">
-              {comment.content}
-            </p>
-          </div>
-          <div className="comment-timestamp">
-            {timestamp.toDateString()},
+            <div className="comment-timestamp" style={{ float: 'left' }}>
+              {timestamp.toDateString()},
             {timestamp.toLocaleTimeString()}
-          </div>
-        </span>);
+            </div>
+          </span>);
         return (<span key={timestamp}>
           {ownerView}
         </span>);
@@ -79,8 +79,8 @@ class CommentForum extends React.Component {
 
     const displayAdvisorNames = () => {
       const names = [];
-      const advisorList = (this.props.transcript) ? this.props.transcript.advisor_names : [];
-      advisorList.forEach(name => names.push(name));
+      const advisorList = (this.props.transcript) ? this.props.transcript.advisors : [];
+      advisorList.forEach(advisor => names.push(advisor.full_name));
       return names.join(', ');
     };
 
@@ -90,17 +90,17 @@ class CommentForum extends React.Component {
           <h3 className="title"> Comments Forum</h3>
         </div>
         {this.props.selected_semester &&
-        <AdvisorMenu
-          semester={this.props.selected_semester}
-          advisors={userInfo.advisors}
-          transcript={this.props.transcript}
-          addAdvisor={this.state.addAdvisor}
-          addRemoveAdvisor={this.props.addRemoveAdvisor}
-        />
+          <AdvisorMenu
+            semester={this.props.selected_semester}
+            advisors={userInfo.advisors}
+            transcript={this.props.transcript}
+            addAdvisor={this.state.addAdvisor}
+            addRemoveAdvisor={this.props.addRemoveAdvisor}
+          />
         }
         <div className="cf-header">{this.props.selected_semester && displayAdvisorNames()}</div>
         <div className="comment-forum-container">
-          { transcript }
+          {transcript}
         </div>
         <div className="as-header" style={{bottom: "10px"}}/>
         { displayInput }
@@ -118,17 +118,7 @@ CommentForum.propTypes = {
   userInfo: SemesterlyPropTypes.userInfo.isRequired,
   addRemoveAdvisor: PropTypes.func.isRequired,
   selected_semester: PropTypes.string,
-  transcript: PropTypes.shape({
-    semester_name: PropTypes.string,
-    semester_year: PropTypes.string,
-    owner: PropTypes.string,
-    advisor_names: PropTypes.arrayOf(PropTypes.string),
-    comments: PropTypes.arrayOf(PropTypes.shape({
-      author_name: PropTypes.string,
-      content: PropTypes.string,
-      timestamp: PropTypes.date,
-    })),
-  }),
+  transcript: SemesterlyPropTypes.transcript,
 };
 
 export default CommentForum;

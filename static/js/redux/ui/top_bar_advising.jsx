@@ -13,8 +13,6 @@ GNU General Public License for more details.
 */
 
 import React from 'react';
-import ReactTooltip from 'react-tooltip';
-import PropTypes from 'prop-types';
 import SocialProfileContainer from './containers/social_profile_container';
 import * as SemesterlyPropTypes from '../constants/semesterlyPropTypes';
 
@@ -80,42 +78,28 @@ class TopBarAdvising extends React.Component {
   }
 
   render() {
-    const SISImportDataModalButton = (
+    const ReturnToScheduleButton = (
       <div className="cal-btn-wrapper">
-        <button
-          onClick={() => this.props.triggerSISImportDataModal()}
-          className="import-data"
-          data-tip
-          data-for="mock-btn-tooltip"
-        >
-          {/* TODO: Move import data button (below) to optimal position */}
-          <div className="import-data">
-            <p>Import Data</p>
-          </div>
-        </button>
-        <ReactTooltip
-          id="mock-btn-tooltip"
-          class="tooltip"
-          type="dark"
-          place="bottom"
-          effect="solid"
-        >
-          <span>SIS Import Data Modal</span>
-        </ReactTooltip>
+        <a href="/">
+          <button
+            className="return-to-schedule"
+            data-tip
+          >
+            <p style={{ color: 'gray' }}>Return to Schedule</p>
+          </button>
+        </a>
       </div>
     );
     return (
       <div className="top-bar">
-        <a href="/" className="semesterly-name">
-          <img
-            alt="logo"
-            className="semesterly-logo no-print"
-            src="/static/img/logo2.0-32x32.png"
-          />
-          <div className="semesterly-name no-print">
-            Semester.ly - Advising Dashboard
-          </div>
-        </a>
+        <img
+          alt="logo"
+          className="semesterly-logo no-print"
+          src="/static/img/logo2.0-32x32.png"
+        />
+        <div className="semesterly-name no-print">
+          Semester.ly - Advising Dashboard
+        </div>
         <div className="print-content print">
           {this.props.userInfo.isLoggedIn && this.props.userInfo.userFirstName ?
             this.renderUserForPrint() : null}
@@ -130,7 +114,7 @@ class TopBarAdvising extends React.Component {
         </div>
         <SocialProfileContainer />
         <span>
-          {SISImportDataModalButton}
+          { ReturnToScheduleButton }
         </span>
         <div className="navicon" onClick={this.toggleComments}>
           <span />
@@ -142,7 +126,6 @@ class TopBarAdvising extends React.Component {
 }
 
 TopBarAdvising.propTypes = {
-  triggerSISImportDataModal: PropTypes.func.isRequired,
   userInfo: SemesterlyPropTypes.userInfo.isRequired,
   currentSemester: SemesterlyPropTypes.semester.isRequired,
 };

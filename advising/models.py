@@ -17,8 +17,21 @@ import timetable.models as timetable_models
 
 
 class Advisor(models.Model):
+    """
+    Represents an advisor imported from SIS. These are used as placeholders
+    for advisor users until they actually log in.
+
+    Attributes:
+        first_name (:obj:`CharField`): The advisor's first name
+        last_name (:obj:`CharField`): The advisor's last name
+        jhed (:obj:`CharField`): The advisor's jhed, ending in @jh.edu
+        email_address (:obj:`CharField`): The advisor's email
+    """
     first_name = models.CharField(max_length=255, null=True, default='')
     last_name = models.CharField(max_length=255, null=True, default='')
     jhed = models.CharField(max_length=255, null=True, default='')
     email_address = models.CharField(
         max_length=255, null=True, default='')
+
+    def get_full_name(self):
+        return "{} {}".format(self.first_name, self.last_name)

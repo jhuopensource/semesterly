@@ -46,6 +46,7 @@ const mapStateToProps = (state) => {
 
     callback: state.advising.callback,
     selected_semester: state.advising.selected_semester,
+    userInfo: state.userInfo.data,
   };
 };
 

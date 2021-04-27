@@ -132,6 +132,10 @@
     margin-right: 10px;
   }
 
+  .comment-content {
+    word-wrap: break-word;
+  }
+
   row {
     display: flex;
     flex-direction: row;

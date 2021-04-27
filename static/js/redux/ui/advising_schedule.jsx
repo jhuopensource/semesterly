@@ -13,6 +13,7 @@ GNU General Public License for more details.
 */
 
 import PropTypes from 'prop-types';
+import ReactTooltip from 'react-tooltip';
 import React from 'react';
 import CourseListRow from './course_list_row';
 import * as SemesterlyPropTypes from '../constants/semesterlyPropTypes';
@@ -26,6 +27,27 @@ class AdvisingSchedule extends React.Component {
   }
 
   render() {
+    const SISImportDataModalButton = (
+      <div className="cal-btn-wrapper" style={{ display: 'inline', verticalAlign: 'middle' }}>
+        <button
+          onClick={() => this.props.triggerSISImportDataModal()}
+          data-tip
+          className="save-timetable add-button"
+          data-for="import-data-btn-tooltip"
+        >
+          <i className="fa fa-upload" />
+        </button>
+        <ReactTooltip
+          id="import-data-btn-tooltip"
+          class="tooltip"
+          type="dark"
+          place="right"
+          effect="solid"
+        >
+          <span>Import SIS Data</span>
+        </ReactTooltip>
+      </div>
+    );
     const courseListRows = (this.props.displayed_semesters !== null) ?
       this.props.displayed_semesters.map(semester =>
         (<CourseListRow
@@ -39,15 +61,19 @@ class AdvisingSchedule extends React.Component {
           courseToColourIndex={this.props.courseToColourIndex}
           isCourseInRoster={this.props.isCourseInRoster}
           fetchCourseInfo={this.props.fetchCourseInfo}
+          timetableName={this.props.timetableName}
+          userInfo={this.props.userInfo}
         />),
       ) : <div className="empty-state"><h4><p> No semesters yet! </p></h4></div>;
 
     return (
       <div className="advising-schedule-inner">
-        <p style={{ fontSize: '1.5em', fontWeight: 'bold', marginTop: '25px' }}>
+        <div className="advising-schedule-header">
           Course Summary
-        </p>
-        {courseListRows}
+          &nbsp;&nbsp;&nbsp;
+          { SISImportDataModalButton }
+        </div>
+        { courseListRows }
       </div>
     );
   }
@@ -55,11 +81,14 @@ class AdvisingSchedule extends React.Component {
 
 AdvisingSchedule.defaultProps = {
   selected_semester: null,
+  displayed_semesters: null,
 };
 
 AdvisingSchedule.propTypes = {
+  userInfo: SemesterlyPropTypes.userInfo.isRequired,
+  triggerSISImportDataModal: PropTypes.func.isRequired,
   selected_semester: PropTypes.string,
-  displayed_semesters: PropTypes.arrayOf(PropTypes.string).isRequired,
+  displayed_semesters: PropTypes.arrayOf(PropTypes.string),
   coursesInTimetable: PropTypes.arrayOf(SemesterlyPropTypes.denormalizedCourse).isRequired,
   courseToColourIndex: PropTypes.shape({
     id: PropTypes.string,
@@ -72,6 +101,7 @@ AdvisingSchedule.propTypes = {
     name: PropTypes.string.isRequired,
     year: PropTypes.string.isRequired,
   }).isRequired,
+  timetableName: PropTypes.string.isRequired,
 };
 
 export default AdvisingSchedule;

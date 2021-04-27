@@ -23,6 +23,7 @@ import {
   fetchCourseInfo,
   showFinalExamsModal,
   togglePeerModal,
+  triggerSISImportDataModal,
 } from '../../actions/modal_actions';
 import {
   addOrRemoveCourse,
@@ -40,6 +41,7 @@ const mapStateToProps = (state) => {
   const optionalCourses = state.optionalCourses.courses.map(cid => getDenormCourseById(state, cid));
   return {
     semester: getCurrentSemester(state),
+    userInfo: state.userInfo.data,
     semesterIndex: state.semester.current,
     examSupportedSemesters: state.semester.exams,
     coursesInTimetable,
@@ -52,6 +54,7 @@ const mapStateToProps = (state) => {
     isCourseInRoster: courseId => timetable.slots.some(s => s.course === courseId),
     hasLoaded: !state.timetables.isFetching,
     getShareLink: courseCode => getCourseShareLink(courseCode, getCurrentSemester(state)),
+    timetableName: timetable.name,
   };
 };
 
@@ -66,6 +69,7 @@ const AdvisingScheduleContainer = connect(
     deleteTimetable,
     launchFinalExamsModal: showFinalExamsModal,
     loadTimetable,
+    triggerSISImportDataModal,
   },
 )(AdvisingSchedule);
 
