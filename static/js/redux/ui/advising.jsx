@@ -70,17 +70,19 @@ class Advising extends React.Component {
   }
 
   fetchAdvisees() {
-    fetch(getAllTranscripts())
-      .then(response => response.json())
-      .then((data) => {
-        this.setState({ displayed_advisees: data.invited_transcripts });
-      });
+    if (this.props.userInfo.isAdvisor) {
+      fetch(getAllTranscripts())
+        .then(response => response.json())
+        .then((data) => {
+          this.setState({ displayed_advisees: data.invited_transcripts });
+        });
+    }
   }
 
   fetchSemesters(newSelectedAdvisee) {
     this.setState({ loading_semesters: true }, () => {
       const semesters = [`${this.props.semester.name} ${this.props.semester.year}`];
-      const jhed = (this.props.userInfo.isAdvisor && newSelectedAdvisee) ?
+      const jhed = (this.props.userInfo.isAdvisor && newSelectedAdvisee != null) ?
         newSelectedAdvisee.owner_jhed : this.props.userInfo.jhed;
       this.setState({ selected_advisee: newSelectedAdvisee });
       fetch(getRetrievedSemesters(jhed))
