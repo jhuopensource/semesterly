@@ -16,7 +16,6 @@ from courses.serializers import CourseSerializer
 from timetable.serializers import DisplayTimetableSerializer
 from student.models import Student
 
-
 def get_student_dict(school, student, semester):
     """ Return serialized representation of a student. """
     user_dict = {'timeAcceptedTos': None, 'isLoggedIn': False, 'timetables': [], 'courses': []}
@@ -31,7 +30,6 @@ def get_student_dict(school, student, semester):
         user_dict['timetables'] = DisplayTimetableSerializer.from_model(timetables, many=True).data
         user_dict['courses'] = CourseSerializer(courses, context=context, many=True).data
     return user_dict
-
 
 class StudentSerializer(serializers.ModelSerializer):
     userFirstName = serializers.CharField(source='user.first_name')
@@ -48,6 +46,7 @@ class StudentSerializer(serializers.ModelSerializer):
         model = Student
         fields = (
             'class_year',
+            'favorite_num',
             'img_url',
             'fbook_uid',
             'major',

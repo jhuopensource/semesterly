@@ -25,6 +25,7 @@ from analytics.models import FinalExamModalView
 from student.models import Student
 
 from student.utils import get_student
+
 from student.models import *
 from analytics.models import *
 from timetable.models import Semester

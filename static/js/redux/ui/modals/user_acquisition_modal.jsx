@@ -119,6 +119,21 @@ class UserAcquisitionModal extends React.Component {
             </span>
             <span>Email Coming Soon</span>
           </button>
+
+          <button
+            className="btn abnb-btn secondary eight-px-top" onClick={() => {
+                const link = document.createElement('a');
+                link.href = 'https://semester.ly/press';
+                link.target = '_blank';
+                link.click();
+            }}
+          >
+            <span className="img-icon">
+              <i className="fa fa-envelope-o" />
+            </span>
+            <span>Ameya Button</span>
+          </button>
+
         </div>
       </Modal>
     );

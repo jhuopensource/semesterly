@@ -102,6 +102,7 @@ class FeatureFlowView(ValidateSubdomainMixin, APIView):
         init_data = {
             'school': self.school,
             'currentUser': get_student_dict(self.school, self.student, sem),
+            #'currentMovie': get_movie_dict(get_movie());
             'currentSemester': curr_sem_index,
             'allSemesters': all_semesters,
             # 'oldSemesters': get_old_semesters(self.school),

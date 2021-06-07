@@ -17,6 +17,7 @@ from rest_framework import status
 
 from student.models import RegistrationToken
 from student.utils import get_student
+
 from helpers.mixins import ValidateSubdomainMixin
 
 

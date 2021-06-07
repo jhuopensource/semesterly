@@ -58,6 +58,7 @@ class Student(models.Model):
     pre_health = models.NullBooleanField(null=True, default=False)
     first_name = models.CharField(max_length=255, default='', null=True)
     last_name = models.CharField(max_length=255, default='', null=True)
+    favorite_num = models.IntegerField(blank=True, null=True)
     disabilities = models.NullBooleanField(null=True, default=False)
 
     def __str__(self):
@@ -65,6 +66,9 @@ class Student(models.Model):
 
     def __unicode__(self):
         return "%s" % (self.jhed)
+
+    def get_num(self):
+        return self.favorite_num
 
     def get_token(self):
         return TimestampSigner().sign(self.id).split(':', 1)[1]
@@ -132,6 +136,10 @@ class PersonalEvent(models.Model):
     time_start = models.CharField(max_length=15)
     time_end = models.CharField(max_length=15)
 
+class Movie(models.Model):
+    movie_name = models.CharField(max_length=100)
+    director_name = models.CharField(max_length=100)
+    release_year = models.IntegerField(blank=True, null=True)
 
 class PersonalTimetable(timetable_models.Timetable):
     """ Database object representing a timetable created (and saved) by a user.

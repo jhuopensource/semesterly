@@ -156,6 +156,7 @@ export const denormalizedSlot = PropTypes.shape({
 export const userInfo = PropTypes.shape({
   isLoggedIn: PropTypes.bool.isRequired,
   class_year: PropTypes.number,
+  favorite_num: PropTypes.number,
   img_url: PropTypes.string,
   fbook_uid: PropTypes.string,
   major: PropTypes.string,
@@ -194,6 +195,7 @@ export const foreignUser = PropTypes.shape({
   userLastName: PropTypes.string,
   img_url: PropTypes.string.isRequired,
   class_year: PropTypes.number,
+  favorite_num: PropTypes.number,
 });
 
 export const peer = PropTypes.shape({
