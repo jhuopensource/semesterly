@@ -42,7 +42,7 @@ urlpatterns = [
     re_path('', include('analytics.urls')),
     re_path('', include('agreement.urls')),
     re_path('', include('pilot.urls')),
-    re_path(r'admin/*', include(admin.site.urls)),
+    re_path(r'admin/*', admin.site.urls),
 
     # Automatic deployment endpoint
     re_path(r'deploy_staging/', semesterly.views.deploy_staging),
