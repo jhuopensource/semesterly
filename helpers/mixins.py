@@ -30,16 +30,14 @@ from parsing.schools.active import ACTIVE_SCHOOLS
 from timetable.utils import get_current_semesters
 
 
-class ValidateSubdomainMixin(object):
+class ValidateSubdomainMixin:
     """
     Mixin which validates subdomain, redirecting user to index if the school
     is not in :obj:`ACTIVE_SCHOOLS`.
     """
 
     def dispatch(self, request, *args, **kwargs):
-        if request.subdomain == "queens":
-            return render(request, 'queens_error.html')
-        elif request.subdomain not in ACTIVE_SCHOOLS:
+        if request.subdomain not in ACTIVE_SCHOOLS:
             return render(request, 'index.html')
         return super(ValidateSubdomainMixin, self).dispatch(request, *args, **kwargs)
 
@@ -62,7 +60,7 @@ class FeatureFlowView(ValidateSubdomainMixin, APIView):
         return {}
 
     def get(self, request, *args, **kwargs):
-        if not self.allow_unauthenticated and not request.user.is_authenticated():
+        if not self.allow_unauthenticated and not request.user.is_authenticated:
             return HttpResponseRedirect('/')
         self.school = request.subdomain
         self.student = get_student(request)
@@ -82,7 +80,7 @@ class FeatureFlowView(ValidateSubdomainMixin, APIView):
             sem = Semester.objects.get(**all_semesters[curr_sem_index])
 
         integrations = []
-        if self.student and self.student.user.is_authenticated():
+        if self.student and self.student.user.is_authenticated:
             self.student.school = self.school
             self.student.save()
             for i in self.student.integrations.all():
@@ -107,8 +105,8 @@ class FeatureFlowView(ValidateSubdomainMixin, APIView):
             # 'oldSemesters': get_old_semesters(self.school),
             'uses12HrTime': SCHOOLS_MAP[self.school].ampm,
             'studentIntegrations': integrations,
-            'examSupportedSemesters': map(all_semesters.index,
-                                          final_exams),
+            'examSupportedSemesters': list(map(all_semesters.index,
+                                          final_exams)),
             'latestAgreement': AgreementSerializer(Agreement.objects.latest()).data,
             'registrar': SCHOOLS_MAP[self.school].registrar,
 

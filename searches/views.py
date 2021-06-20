@@ -10,7 +10,6 @@
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 
-
 import operator
 
 from django.core.paginator import Paginator, EmptyPage
@@ -28,6 +27,7 @@ from student.models import Student
 from student.utils import get_student
 from timetable.models import Semester
 from helpers.mixins import ValidateSubdomainMixin, CsrfExemptMixin
+from functools import reduce, cmp_to_key
 
 
 class CourseSearchList(CsrfExemptMixin, ValidateSubdomainMixin, APIView):
@@ -43,6 +43,25 @@ class CourseSearchList(CsrfExemptMixin, ValidateSubdomainMixin, APIView):
         # else:
         #     course_match_objs = baseline_search(request.subdomain, query, sem)[:4]
         course_match_objs = baseline_search(request.subdomain, query, sem).distinct()[:4]
+
+        # TODO: CHECK THIS AGAIN FOR PYTHON 3 MIGRATION!
+        # # sorts queries by course number through a comparator
+        # def course_comparator(course1, course2):
+        #     #isolate course number from XX0000
+        #     c1=int(str(course1)[2:6])
+        #     c2=int(str(course2)[2:6])
+        #     if c1 < c2:
+        #         return -1
+        #     elif c1 > c2:
+        #         return 1
+        #     else:
+        #         return 0
+        # course_match_objs = baseline_search(request.subdomain, query, sem).distinct()
+        # #only sort if results is less than 100 for efficiency sake
+        # if len(course_match_objs) < 100:
+        #     course_match_objs = sorted(course_match_objs, key=cmp_to_key(course_comparator))
+        # #display only 12 courses to avoid displaying too many.
+        # course_match_objs = course_match_objs[:12]
         save_analytics_course_search(query[:200], course_match_objs[:2], sem, request.subdomain,
                                      get_student(request))
         course_matches = [CourseSerializer(course, context={'semester': sem, 'school': school}).data
@@ -89,7 +108,7 @@ class CourseSearchList(CsrfExemptMixin, ValidateSubdomainMixin, APIView):
                                      get_student(request),
                                      advanced=True)
         student = None
-        logged = request.user.is_authenticated()
+        logged = request.user.is_authenticated
         if logged and Student.objects.filter(user=request.user).exists():
             student = Student.objects.get(user=request.user)
         serializer_context = {'semester': sem, 'student': student, 'school': request.subdomain}

@@ -21,6 +21,7 @@ https://docs.djangoproject.com/en/1.6/ref/settings/
 """
 
 import djcelery
+import dj_database_url
 import os
 import yaml
 
@@ -44,7 +45,7 @@ def get_secret(key):
             return SECRETS[key]
         except:
             try:
-                from dev_credentials import SECRETS
+                from .dev_credentials import SECRETS
                 return SECRETS[key]
             except:
                 raise ValueError("""'%s' not correctly configured.
@@ -61,7 +62,7 @@ ALLOWED_HOSTS = ['*']
 
 SOCIAL_AUTH_FACEBOOK_SCOPE = [
     'email',
-    'user_friends',
+#    'user_friends',
 ]
 SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {
     'fields': 'id,name,email'
@@ -193,13 +194,14 @@ REST_FRAMEWORK ={
 
 SESSION_ENGINE = 'django.contrib.sessions.backends.db'
 
-MIDDLEWARE_CLASSES = (
+MIDDLEWARE = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'semesterly.middleware.subdomain_middleware.SubdomainMiddleware',
     'social_django.middleware.SocialAuthExceptionMiddleware',
     'rollbar.contrib.django.middleware.RollbarNotifierMiddleware',
@@ -241,6 +243,8 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
 )
 
+SOCIAL_AUTH_POSTGRES_JSONFIELD = True
+
 ROOT_URLCONF = 'semesterly.urls'
 
 WSGI_APPLICATION = 'semesterly.wsgi.application'
@@ -252,7 +256,7 @@ WSGI_APPLICATION = 'semesterly.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': '',  # os.path.join(BASE_DIR, 'db.postgresql')
+        'NAME': os.path.join(BASE_DIR, 'db.postgresql'),  # os.path.join(BASE_DIR, 'db.postgresql')
         'USER': '',
         'PASSWORD': '',
         'HOST': 'localhost',
@@ -282,6 +286,8 @@ EMAIL_PORT = 587
 
 DEFAULT_FROM_EMAIL = 'semesterly.logging@gmail.com'
 SERVER_EMAIL = DEFAULT_FROM_EMAIL
+
+SECURE_SSL_REDIRECT = True
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
@@ -313,8 +319,35 @@ STATICFILES_DIRS = (
 
 )
 
-STATIC_ROOT=""
+# STATIC_ROOT=""
 
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [
+            os.path.join(PROJECT_DIRECTORY,'templates/'),
+            os.path.join(PROJECT_DIRECTORY,'semesterly/templates/'),
+        ],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.contrib.auth.context_processors.auth',
+                'django.template.context_processors.debug',
+                'django.template.context_processors.i18n',
+                'django.template.context_processors.media',
+                'django.template.context_processors.static',
+                'django.template.context_processors.tz',
+                'django.contrib.messages.context_processors.messages',
+                'social_django.context_processors.backends',
+                'social_django.context_processors.login_redirect',
+            ],
+        },
+    },
+]
 
 # Caching
 CACHES = {
@@ -326,19 +359,9 @@ CACHES = {
 CACHALOT_ENABLED = True
 
 try:
-    from local_settings import *
+    from .local_settings import *
 except:
     pass
-
-if not DEBUG:
-    ROLLBAR = {
-        'access_token': '23c5a378cd1943cfb40d5217dfb7f766',
-        'environment': 'development' if DEBUG else 'production',
-        'root': BASE_DIR,
-    }
-    import rollbar
-    rollbar.init(**ROLLBAR)
-
 
 # Begin Celery stuff.
 djcelery.setup_loader()
@@ -363,3 +386,6 @@ CELERYD_CHDIR = BASE_DIR
 # CELERYBEAT_SCHEDULE = {}
 
 # End Celery stuff.
+
+db_from_env = dj_database_url.config()
+DATABASES['default'].update(db_from_env)

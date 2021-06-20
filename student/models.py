@@ -39,7 +39,7 @@ class Student(models.Model):
     JUNIOR = 'JR'
     SENIOR = 'SR'
     class_year = models.IntegerField(blank=True, null=True)
-    user = models.OneToOneField(User)
+    user = models.OneToOneField(User, on_delete=models.deletion.CASCADE)
     img_url = models.CharField(max_length=300, default=-1)
     friends = models.ManyToManyField("self", blank=True)
     fbook_uid = models.CharField(max_length=255, default='')
@@ -114,7 +114,7 @@ class Reaction(models.Model):
         ('HARD', 'HARD'),
         ('EASY', 'EASY'),
         ('INTERESTING', 'INTERESTING'))
-    student = models.ForeignKey('student.Student')
+    student = models.ForeignKey('student.Student', on_delete=models.deletion.CASCADE)
     course = models.ManyToManyField(timetable_models.Course)
     title = models.CharField(max_length=50, choices=REACTION_CHOICES)
     time_created = models.DateTimeField(auto_now_add=True)
@@ -140,7 +140,7 @@ class PersonalTimetable(timetable_models.Timetable):
         Courses and Sections that it represents.
     """
     name = models.CharField(max_length=100)
-    student = models.ForeignKey(Student)
+    student = models.ForeignKey(Student, on_delete=models.deletion.CASCADE)
     last_updated = models.DateTimeField(auto_now=True)
     # TODO: change to foreign key from personal event -> personal timetable
     events = models.ManyToManyField(PersonalEvent)
@@ -156,6 +156,8 @@ class RegistrationToken(models.Model):
     p256dh = models.TextField(default='')
     endpoint = models.TextField(default='')
     student = models.ForeignKey(Student, null=True, default=None)
+    # TODO: Check the line below again for PYTHON 3 MIGRATION!
+    # student = models.ForeignKey(Student, null=True, default=None, on_delete=models.deletion.CASCADE)
 
 class PilotOffering(models.Model):
     sections = models.ManyToManyField(timetable_models.Section)
@@ -176,3 +178,4 @@ class PilotOffering(models.Model):
 
     def __unicode__(self):
         return "Course: %s, Day: %s, Time: %s - %s" % (self.course_name, self.day, self.time_start, self.time_end)
+    

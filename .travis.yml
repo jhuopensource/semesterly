@@ -6,9 +6,13 @@ services:
   - postgresql
 language: python
 python:
-- "3.9"
+- "3.9" # was 3.5, may change back
 env:
-  - NODE_ENV=production NODE_VERSION="10.23.0" DATABASE_URL="postgresql://localhost/travis_test"
+  global:
+    - NUMPY_VERSION=1.13.1
+    - SCIPY_VERSION=0.19.1
+    - REQST_VERSION=2.18.4
+    - NODE_ENV=production NODE_VERSION="8.15.0"
 branches:
   only:
   - master

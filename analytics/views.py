@@ -11,7 +11,7 @@
 # GNU General Public License for more details.
 
 import json
-import urllib2
+import urllib.request, urllib.error, urllib.parse
 import heapq
 from dateutil import tz
 from datetime import timedelta, datetime
@@ -103,31 +103,35 @@ def view_analytics_dashboard(request):
                 "calendar_exports_by_type": json.dumps({"ics": ics_calendar_exports, "google": google_calendar_exports}),
                 "jhu_most_popular_courses": [], # needs to be refactored; was causing timeout on server because too slow
                 "uoft_most_popular_courses": [], # needs to be refactored; was causing timeout on server because too slow
-                "umd_most_popular_courses": [] # needs to be refactored; was causing timeout on server because too slow
-            })
+                "umd_most_popular_courses": [], # needs to be refactored; was causing timeout on server because too slow
+                "itcr_most_popular_courses": []
+            },
+            context_instance=RequestContext(request))
     else:
         raise Http404
 
 def save_analytics_timetable(courses, semester, school, student=None):
     """Create an analytics time table entry."""
-    analytics_timetable = AnalyticsTimetable.objects.create(
+    """analytics_timetable = AnalyticsTimetable.objects.create(
         semester=semester,
         school=school,
         time_created=datetime.now(),
         student=student)
     analytics_timetable.courses.add(*courses)
-    analytics_timetable.save()
+    analytics_timetable.save()"""
+    pass
 
 def save_analytics_course_search(query, courses, semester, school, student=None, advanced=False):
     """Create an analytics course search entry."""
-    course_search = AnalyticsCourseSearch.objects.create(
+    """course_search = AnalyticsCourseSearch.objects.create(
         query=query,
         semester=semester,
         school=school,
         student=student,
         is_advanced=advanced)
     course_search.courses.add(*courses)
-    course_search.save()
+    course_search.save()"""
+    pass
 
 def number_timetables(**parameters):
     """
@@ -146,7 +150,7 @@ def number_timetables(**parameters):
     if "distinct" in parameters:
         timetables = timetables.distinct(parameters.pop("distinct"))
     timetables = timetables.filter(
-        **{param: val for (param, val) in parameters.iteritems() if val is not None})
+        **{param: val for (param, val) in parameters.items() if val is not None})
     return timetables.count()
 
 def number_timetables_per_hour(Timetable=AnalyticsTimetable, school=None,
@@ -191,7 +195,7 @@ def number_of_reactions(max_only=False):
         reactions = Reaction.objects.filter(title=title)
         num_reactions[title] = len(reactions)
     if max_only:
-        return max(num_reactions.iterkeys(), key=num_reactions.get)
+        return max(iter(num_reactions.keys()), key=num_reactions.get)
     else:
         return num_reactions
 
