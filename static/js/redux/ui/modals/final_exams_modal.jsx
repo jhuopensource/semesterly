@@ -234,8 +234,8 @@ export default class FinalExamsModal extends React.Component {
     Object.keys(finals).forEach((course) => {
       const m = finals[course].split(' ')[0].split('/')['0'];
       const d = finals[course].split(' ')[0].split('/')['1'];
-      minDate = (new Date(2017, Number(m - 1), Number(d)) < minDate) ?
-        new Date(2017, Number(m - 1), Number(d)) : minDate;
+      minDate = (new Date(this.props.year, Number(m - 1), Number(d)) < minDate) ?
+        new Date(this.props.year, Number(m - 1), Number(d)) : minDate;
       if (finals[course].includes('Exam time not found')) {
         this.noTimeFinals.push(course);
         delete finals[course];
@@ -467,6 +467,7 @@ FinalExamsModal.defaultProps = {
   shareLink: '',
   loadingCachedTT: false,
   finalExamSchedule: null,
+  year: null,
 };
 
 FinalExamsModal.propTypes = {
@@ -497,5 +498,6 @@ FinalExamsModal.propTypes = {
   getFinalExamShareLink: PropTypes.func.isRequired,
   launchUserAcquisitionModal: PropTypes.func.isRequired,
   isShare: PropTypes.bool.isRequired,
+  year: PropTypes.string,
 };
 

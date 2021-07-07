@@ -26,4 +26,5 @@ class FinalExamShare(models.Model):
     school = models.CharField(max_length=50)
     student = models.ForeignKey(Student, null=True, default=None)
     exam_json = JSONField()
+    exam_year = models.CharField(max_length=4, default=None)
     last_updated = models.DateTimeField(auto_now=True)

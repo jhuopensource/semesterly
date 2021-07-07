@@ -56,19 +56,19 @@ const getCourseToColorIdx = (index, finalExams) => {
 const mapStateToProps = (state) => {
   const slots = getActiveTimetable(state).slots;
   const hasFinalExams = state.finalExamsModal.finalExams !== null &&
-    Object.keys(state.finalExamsModal.finalExams).length > 0;
+    Object.keys(state.finalExamsModal.finalExams.schedule).length > 0;
   return {
     logFinalExamView,
     isShare: state.finalExamsModal.fromShare,
     isVisible: state.finalExamsModal.isVisible,
     finalExamSchedule: hasFinalExams ?
-      createSchedule(state.finalExamsModal.finalExams) : {},
+      createSchedule(state.finalExamsModal.finalExams.schedule) : {},
     hasRecievedSchedule: Boolean(state.finalExamsModal.finalExams),
     loading: state.finalExamsModal.isLoading,
-    courseToColourIndex: getCourseToColorIdx(state.ui.courseToColourIndex,
-      state.finalExamsModal.finalExams),
+    courseToColourIndex: hasFinalExams ? getCourseToColorIdx(state.ui.courseToColourIndex,
+      state.finalExamsModal.finalExams.schedule) : {},
     courseDetails: hasFinalExams ?
-      remapCourseDetails(state.finalExamsModal.finalExams) : {},
+      remapCourseDetails(state.finalExamsModal.finalExams.schedule) : {},
     activeLoadedTimetableName: state.finalExamsModal.fromShare ?
       'Shared Final Exam Schedule' : state.savingTimetable.activeTimetable.name,
     hasNoCourses: !hasFinalExams && slots.length === 0,
@@ -76,6 +76,7 @@ const mapStateToProps = (state) => {
     loadingCachedTT: state.timetables.loadingCachedTT,
     userInfo: state.userInfo.data,
     shareLink: state.finalExamsModal.link,
+    year: hasFinalExams ? state.finalExamsModal.finalExams.year : null,
   };
 };
 

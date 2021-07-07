@@ -30,7 +30,12 @@ class ExamView(CsrfExemptMixin, APIView):
 
     def post(self, request):
         final_exam_schedule = JHUFinalExamScheduler().make_schedule(request.data)
-        return Response(final_exam_schedule, status=status.HTTP_200_OK)
+        exam_year = JHUFinalExamScheduler().year(request.data)
+        json_data = {
+            'schedule': final_exam_schedule,
+            'year': exam_year
+        }
+        return Response(json_data, status=status.HTTP_200_OK)
 
 
 class ExamLink(FeatureFlowView):
@@ -40,13 +45,19 @@ class ExamLink(FeatureFlowView):
         exam_id = hashids.decrypt(slug)[0]
         exam_json = get_object_or_404(FinalExamShare, id=exam_id).exam_json
         exam_schedule = JHUFinalExamScheduler().make_schedule(exam_json)
-        return {'exam': exam_schedule}
+        exam_year = JHUFinalExamScheduler().year(request.data)
+        json_data = {
+            'schedule': exam_schedule,
+            'year': exam_year
+        }
+        return json_data
 
     def post(self, request):
         new_link = FinalExamShare.objects.create(
             school=request.subdomain,
             student=get_student(request),
-            exam_json=request.data
+            exam_json=request.data,
+            exam_year=request.year
         )
         new_link.save()
 

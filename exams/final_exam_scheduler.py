@@ -25,6 +25,11 @@ class FinalExamScheduler:
         self.year = ""
         self.sem = ""
 
+    def year(self, tt):
+        semester = tt['courses'][0]["slots"][0]["semester"]
+        self.year = semester["year"]
+        return self.year
+
     def make_schedule(self, tt):
         '''
         Takes a timetable
@@ -40,7 +45,7 @@ class FinalExamScheduler:
         semester = tt['courses'][0]["slots"][0]["semester"]
         self.year = semester["year"]
         self.sem = semester["name"]
-        if self.year  == "2017" and self.sem == "Spring":
+        if self.year == "2017" and self.sem == "Spring":
             self.list_of_rules = self.s17
         elif self.year == "2017" and self.sem == "Fall":
             self.list_of_rules = self.f17
