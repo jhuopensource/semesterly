@@ -1,0 +1,27 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: semesterly-ingress
+  namespace: semesterly-prod
+spec:
+  rules:
+  - host: semester.ly
+    http:
+      paths:
+      - backend:
+          serviceName: semesterly-service
+          servicePort: 80
+        path: /
+        pathType: ImplementationSpecific
+  - host: jhu.semester.ly
+    http:
+      paths:
+      - backend:
+          serviceName: semesterly-service
+          servicePort: 80
+        path: /
+        pathType: ImplementationSpecific
+  tls:
+  - hosts:
+    - semester.ly
+    secretName: semesterly-wildcard-tls
