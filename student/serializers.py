@@ -14,7 +14,9 @@ from rest_framework import serializers
 
 from courses.serializers import CourseSerializer
 from timetable.serializers import DisplayTimetableSerializer
+from forum.serializers import TranscriptSerializer
 from student.models import Student
+from advising.serializers import AdvisorSerializer
 
 
 def get_student_dict(school, student, semester):
@@ -36,13 +38,17 @@ def get_student_dict(school, student, semester):
 class StudentSerializer(serializers.ModelSerializer):
     userFirstName = serializers.CharField(source='user.first_name')
     userLastName = serializers.CharField(source='user.last_name')
+    userFullName = serializers.CharField(source='get_full_name')
+    isAdvisor = serializers.BooleanField(source='is_advisor')
     # TODO: switch to camelCase
     FacebookSignedUp = serializers.BooleanField(source='is_signed_up_through_fb')
     GoogleSignedUp = serializers.BooleanField(source='is_signed_up_through_google')
+    jhuSignedUp = serializers.BooleanField(source='is_signed_up_through_jhu')
     GoogleLoggedIn = serializers.BooleanField(source='is_logged_in_google')
     LoginToken = serializers.CharField(source='get_token')
     LoginHash = serializers.CharField(source='get_hash')
     timeAcceptedTos = serializers.DateTimeField(source='time_accepted_tos', format='iso-8601')
+    advisors = AdvisorSerializer(many=True)
 
     class Meta:
         model = Student
@@ -51,16 +57,24 @@ class StudentSerializer(serializers.ModelSerializer):
             'img_url',
             'fbook_uid',
             'major',
+            'primary_major',
+            'other_majors',
+            'minors',
             'social_courses',
             'social_offerings',
             'social_all',
             'emails_enabled',
             'school',
+            'jhed',
             'integrations',
             'userFirstName',
             'userLastName',
+            'userFullName',
+            'isAdvisor',
+            'advisors',
             'FacebookSignedUp',
             'GoogleSignedUp',
+            'jhuSignedUp',
             'GoogleLoggedIn',
             'LoginToken',
             'LoginHash',

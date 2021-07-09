@@ -18,10 +18,12 @@ from django.conf import settings
 from django.core.signing import TimestampSigner
 from django.db import models
 from django.contrib.auth.models import User
+from django.contrib.postgres.fields import ArrayField
 from hashids import Hashids
 from oauth2client.client import GoogleCredentials
 import timetable.models as timetable_models
 from semesterly.settings import get_secret
+from advising.models import Advisor
 
 hashids = Hashids(salt=get_secret('HASHING_SALT'))
 
@@ -54,11 +56,16 @@ class Student(models.Model):
     school = models.CharField(max_length=100, null=True)
     time_accepted_tos = models.DateTimeField(null=True)
     hopid = models.CharField(max_length=10, null=True, default='')
-    jhed = models.CharField(max_length=10, null=True, default='')
+    jhed = models.CharField(max_length=255, null=True, default='')
     pre_health = models.NullBooleanField(null=True, default=False)
     first_name = models.CharField(max_length=255, default='', null=True)
     last_name = models.CharField(max_length=255, default='', null=True)
     disabilities = models.NullBooleanField(null=True, default=False)
+    advisors = models.ManyToManyField(Advisor, related_name='students')
+    primary_major = models.CharField(max_length=255, default='')
+    other_majors = ArrayField(models.CharField(max_length=255, default=''), default=list)
+    minors = ArrayField(models.CharField(max_length=255, default=''), default=list)
+    sis_registered_sections = models.ManyToManyField(timetable_models.Section)
 
     def __str__(self):
         return "{0}".format(self.jhed)
@@ -78,6 +85,9 @@ class Student(models.Model):
     def is_signed_up_through_google(self):
         return self.provider_exists('google-oauth2')
 
+    def is_signed_up_through_jhu(self):
+        return self.provider_exists('azuread-tenant-oauth2')
+
     def provider_exists(self, provider):
         return self.user.social_auth.filter(provider=provider).exists()
 
@@ -96,6 +106,12 @@ class Student(models.Model):
                                  get_secret('SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET'), refresh_token,
                                  expires_at,
                                  "https://accounts.google.com/o/oauth2/token", 'my-user-agent/1.0')
+
+    def get_full_name(self):
+        return self.user.first_name + ' ' + self.user.last_name
+
+    def is_advisor(self):
+        return Advisor.objects.filter(jhed=self.jhed).exists()
 
 
 class Reaction(models.Model):

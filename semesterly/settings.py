@@ -145,6 +145,7 @@ SOCIAL_AUTH_PIPELINE = (
     # Update the user record with any changed info from the auth service.
     'social_core.pipeline.user.user_details',
     'authpipe.utils.create_student',
+    'authpipe.utils.connect_advisors',
 )
 
 # Webpack
@@ -185,6 +186,9 @@ INSTALLED_APPS = (
     'agreement',
     'parsing',
     'pilot',
+    'advising',
+    'forum',
+    'corsheaders',
 )
 
 REST_FRAMEWORK ={
@@ -194,6 +198,7 @@ REST_FRAMEWORK ={
 SESSION_ENGINE = 'django.contrib.sessions.backends.db'
 
 MIDDLEWARE_CLASSES = (
+    'corsheaders.middleware.CorsMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -203,6 +208,7 @@ MIDDLEWARE_CLASSES = (
     'semesterly.middleware.subdomain_middleware.SubdomainMiddleware',
     'social_django.middleware.SocialAuthExceptionMiddleware',
     'rollbar.contrib.django.middleware.RollbarNotifierMiddleware',
+    'semesterly.middleware.separate_accounts_middleware.SeparateAccountsSocialAuthExceptionMiddleware',
 )
 
 TEMPLATES = [
@@ -211,6 +217,7 @@ TEMPLATES = [
         'DIRS': [
             os.path.join(PROJECT_DIRECTORY, 'templates/'),
             os.path.join(PROJECT_DIRECTORY, 'semesterly/templates/'),
+            os.path.join(PROJECT_DIRECTORY, 'advising/templates'),
         ],
         'OPTIONS': {
             'debug': DEBUG,
@@ -245,6 +252,12 @@ ROOT_URLCONF = 'semesterly.urls'
 
 WSGI_APPLICATION = 'semesterly.wsgi.application'
 
+CORS_ORIGIN_WHITELIST = (
+    'https://sis.jhu.edu',
+)
+CSRF_TRUSTED_ORIGINS = (
+    'sis.jhu.edu',
+)
 
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases

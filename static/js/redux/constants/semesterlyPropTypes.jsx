@@ -159,6 +159,9 @@ export const userInfo = PropTypes.shape({
   img_url: PropTypes.string,
   fbook_uid: PropTypes.string,
   major: PropTypes.string,
+  primary_major: PropTypes.string,
+  other_majors: PropTypes.arrayOf(PropTypes.string),
+  minors: PropTypes.arrayOf(PropTypes.string),
   social_courses: PropTypes.bool,
   social_offerings: PropTypes.bool,
   social_all: PropTypes.bool,
@@ -167,12 +170,35 @@ export const userInfo = PropTypes.shape({
   integrations: PropTypes.arrayOf(PropTypes.shape({})),
   userFirstName: PropTypes.string,
   userLastName: PropTypes.string,
+  userFullName: PropTypes.string,
+  isAdvisor: PropTypes.bool,
+  advisors: PropTypes.arrayOf(PropTypes.shape({})),
   FacebookSignedUp: PropTypes.bool,
   GoogleSignedUp: PropTypes.bool,
   GoogleLoggedIn: PropTypes.bool,
+  jhuSignedUp: PropTypes.bool,
   LoginToken: PropTypes.string,
   LoginHash: PropTypes.string,
   timeAcceptedTos: PropTypes.string,
+});
+
+export const transcript = PropTypes.shape({
+  semester_name: PropTypes.string,
+  semester_year: PropTypes.string,
+  owner: PropTypes.string,
+  advisors: PropTypes.arrayOf(PropTypes.shape({
+    first_name: PropTypes.string,
+    last_name: PropTypes.string,
+    full_name: PropTypes.string,
+    jhed: PropTypes.string,
+    email_address: PropTypes.string,
+    is_pending: PropTypes.bool,
+  })),
+  comments: PropTypes.arrayOf(PropTypes.shape({
+    author_name: PropTypes.string,
+    content: PropTypes.string,
+    timestamp: PropTypes.date,
+  })),
 });
 
 export const schoolSpecificInfo = PropTypes.shape({

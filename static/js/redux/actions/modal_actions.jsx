@@ -96,6 +96,8 @@ export const toggleSaveCalendarModal = () => ({ type: ActionTypes.TOGGLE_SAVE_CA
 
 export const openSignUpModal = () => ({ type: ActionTypes.TOGGLE_SIGNUP_MODAL });
 
+export const openJHUSignupModal = () => ({ type: ActionTypes.TOGGLE_JHU_SIGNUP_MODAL });
+
 export const changeUserInfo = info => ({
   type: ActionTypes.CHANGE_USER_INFO,
   data: info,
@@ -144,4 +146,30 @@ export const setUserSettingsModalVisible = () => ({
 
 export const setUserSettingsModalHidden = () => ({
   type: ActionTypes.SET_SETTINGS_MODAL_HIDDEN,
+});
+
+export const triggerSeparateAccountsModal = () => ({
+  type: ActionTypes.TRIGGER_SEPARATE_ACCOUNTS_MODAL,
+});
+
+export const toggleSeparateAccountsModal = () => ({
+  type: ActionTypes.TOGGLE_SEPARATE_ACCOUNTS_MODAL,
+});
+
+// SIS MODAL
+export const triggerSISImportDataModal = () => ({
+  type: ActionTypes.TRIGGER_SIS_IMPORT_DATA_MODAL,
+});
+
+export const toggleSISImportDataModal = () => ({
+  type: ActionTypes.TOGGLE_SIS_IMPORT_DATA_MODAL,
+});
+
+// ADD ADVISOR MODAL
+export const triggerAddAdvisorModal = () => ({
+  type: ActionTypes.TRIGGER_ADD_ADVISOR_MODAL,
+});
+
+export const toggleAddAdvisorModal = () => ({
+  type: ActionTypes.TOGGLE_ADD_ADVISOR_MODAL,
 });

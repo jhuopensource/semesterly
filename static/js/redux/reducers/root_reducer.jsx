@@ -32,6 +32,8 @@ import optionalCourses from './optional_courses_reducer';
 import explorationModal, * as fromExplorationModal from './exploration_modal_reducer';
 import customSlots from './custom_slots_reducer';
 import signupModal from './signup_modal_reducer';
+import jhuSignupModal from './jhu_signup_modal_reducer';
+import separateAccountsModal from './separate_accounts_reducer';
 import peerModal from './peer_modal_reducer';
 import preferenceModal from './preference_modal_reducer';
 import friends from './friends_reducer';
@@ -46,6 +48,8 @@ import textbookModal from './textbook_modal_reducer';
 import finalExamsModal from './final_exams_modal_reducer';
 import registrar from './registrar_reducer';
 import entities, * as fromEntities from './entities_reducer';
+import SISImportDataModal from './SIS_import_data_modal_reducer';
+import AddAdvisorModal from './add_advisor_modal_reducer';
 
 const rootReducer = combineReducers({
   alerts,
@@ -60,6 +64,7 @@ const rootReducer = combineReducers({
   friends,
   integrationModal,
   integrations,
+  jhuSignupModal,
   notificationToken,
   optionalCourses,
   peerModal,
@@ -71,6 +76,7 @@ const rootReducer = combineReducers({
   school,
   searchResults,
   semester,
+  separateAccountsModal,
   signupModal,
   termsOfServiceBanner,
   termsOfServiceModal,
@@ -79,6 +85,8 @@ const rootReducer = combineReducers({
   ui,
   userAcquisitionModal,
   userInfo,
+  SISImportDataModal,
+  AddAdvisorModal,
 });
 
 // timetable/entity selectors

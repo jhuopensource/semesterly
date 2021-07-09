@@ -20,6 +20,8 @@ from django.core.signing import TimestampSigner, BadSignature, SignatureExpired
 from hashids import Hashids
 
 from student.models import Student
+from advising.models import Advisor
+from forum.models import Transcript
 from semesterly.settings import get_secret
 
 hashids = Hashids(salt=get_secret('HASHING_SALT'))
@@ -47,6 +49,12 @@ def associate_students(strategy, details, response, user, *args, **kwargs):
     try:
         email = kwargs['details']['email']
         kwargs['user'] = User.objects.get(email=email)
+    except BaseException:
+        pass
+    try:
+        jhed = response['unique_name']
+        student = Student.objects.get(jhed=jhed).user
+        kwargs['user'] = student.user
     except BaseException:
         pass
     try:
@@ -129,6 +137,27 @@ def create_student(strategy, details, response, user, *args, **kwargs):
                         new_student.save()
                         friend_student.save()
     if backend_name == 'azuread-tenant-oauth2':
-        print('hi')
+        new_student.jhed = response['unique_name']
+        new_student.save()
 
     return kwargs
+
+
+def connect_advisors(strategy, details, response, user, *args, **kwargs):
+    backend_name = kwargs['backend'].name
+    if backend_name != 'azuread-tenant-oauth2':
+        return
+    try:
+        advisor_user = Student.objects.get(jhed=response['unique_name'])
+        advisor = Advisor.objects.get(jhed=response['unique_name'])
+    except (Student.DoesNotExist, Advisor.DoesNotExist) as e:
+        return
+
+    for transcript in Transcript.objects.all():
+        if advisor in transcript.pending_advisors.all():
+            transcript.pending_advisors.remove(advisor)
+            if advisor_user not in transcript.advisors.all():
+                transcript.advisors.add(advisor_user)
+                transcript.save()
+        elif advisor_user in transcript.advisors.all():
+            break

@@ -42,6 +42,8 @@ urlpatterns = [
     url('', include('analytics.urls')),
     url('', include('agreement.urls')),
     url('', include('pilot.urls')),
+    url('', include('advising.urls')),
+    url('', include('forum.urls')),
     url(r'admin/*', include(admin.site.urls)),
 
     # Automatic deployment endpoint

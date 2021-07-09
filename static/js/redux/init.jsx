@@ -20,6 +20,7 @@ import thunkMiddleware from 'redux-thunk';
 import { Provider } from 'react-redux';
 import rootReducer from './reducers/root_reducer';
 import SemesterlyContainer from './ui/containers/semesterly_container';
+import AdvisingContainer from './ui/containers/advising_container';
 import { fetchMostClassmatesCount, handleAgreement, isRegistered } from './actions/user_actions';
 import {
   handleCreateNewTimetable, loadCachedTimetable, loadTimetable,
@@ -42,6 +43,7 @@ const store = createStore(rootReducer,
     window.devToolsExtension && window.devToolsExtension(),
     applyMiddleware(thunkMiddleware),
 );
+let advising = false;
 
 // load initial timetable from user data if logged in or local storage
 const setupTimetables = (userTimetables, allSemesters, oldSemesters) => (dispatch) => {
@@ -94,6 +96,9 @@ const handleFlows = featureFlow => (dispatch) => {
   switch (featureFlow.name) {
     case 'SIGNUP':
       dispatch({ type: ActionTypes.TRIGGER_SIGNUP_MODAL });
+      break;
+    case 'JHU_SIGNUP':
+      dispatch({ type: ActionTypes.TRIGGER_JHU_SIGNUP_MODAL });
       break;
     case 'USER_ACQ':
       dispatch({ type: ActionTypes.TRIGGER_ACQUISITION_MODAL });
@@ -155,6 +160,9 @@ const handleFlows = featureFlow => (dispatch) => {
     case 'DELETE_ACCOUNT':
       dispatch(overrideSettingsShow(true));
       break;
+    case 'SEPARATE_ACCOUNTS':
+      dispatch({ type: ActionTypes.TRIGGER_SEPARATE_ACCOUNTS_MODAL });
+      break;
     default:
       // unexpected feature name
       break;
@@ -163,6 +171,7 @@ const handleFlows = featureFlow => (dispatch) => {
 
 const setup = () => (dispatch) => {
   initData = JSON.parse(initData);
+  advising = initData.isAdvising;
 
   dispatch({ type: ActionTypes.INIT_STATE, data: initData });
 
@@ -189,7 +198,10 @@ store.dispatch(
     setup(),
 );
 
+const dashboard = advising ? <AdvisingContainer /> : <SemesterlyContainer />;
+
 render(
   <Provider store={store}>
-    <SemesterlyContainer />
-  </Provider>, document.getElementsByClassName('page')[0]);
+    {dashboard}
+  </Provider>, document.getElementsByClassName('page')[0],
+);

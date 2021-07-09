@@ -1,0 +1,458 @@
+# Copyright (C) 2017 Semester.ly Technologies, LLC
+#
+# Semester.ly is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# Semester.ly is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+from __future__ import unicode_literals
+
+from django.contrib.auth.models import User
+from django.test import TestCase
+from django.core.urlresolvers import resolve
+from rest_framework import status
+from rest_framework.test import APITestCase, APIRequestFactory, force_authenticate
+from helpers.test.test_cases import UrlTestCase
+
+from forum.models import Comment, Transcript
+from student.models import Student, PersonalTimetable
+from timetable.models import Semester, Course, Section
+from advising.models import Advisor
+from serializers import TranscriptSerializer, CommentSerializer
+import datetime
+
+
+def setUpTranscriptDependencies(self):
+    """Creates a student and advisor Student model and semester Fall 2019"""
+    user = User.objects.create_user(
+        username='JJam',
+        password='XD',
+        first_name='James',
+        last_name='Wang',)
+    self.student = Student.objects.create(user=user)
+    self.student.jhed = 'jwang380@jh.edu'
+    self.student.save()
+    user = User.objects.create_user(
+        username='rbiz',
+        password='k',
+        first_name='Rishi',
+        last_name='Biswas',)
+    Advisor.objects.create(
+        first_name='Rishi', last_name='Biswas',
+        jhed='rbiswas4@jh.edu', email_address='rbiswas4@jhu.edu').save()
+    self.advisor = Student.objects.create(user=user)
+    self.advisor.jhed = 'rbiswas4@jh.edu'
+    self.advisor.save()
+    self.semester = Semester.objects.create(name='Fall', year='2019')
+    self.semester.save()
+
+
+def setUpTranscriptDependenciesNoAdvisor(self):
+    """Creates a student and semester Fall 2019"""
+    user = User.objects.create_user(
+        username='JJam',
+        password='XD',
+        first_name='James',
+        last_name='Wang',)
+    self.student = Student.objects.create(user=user)
+    self.student.jhed = 'jwang380@jh.edu'
+    self.student.save()
+    self.semester = Semester.objects.create(name='Fall', year='2019')
+    self.semester.save()
+
+
+def setUpTranscript(self):
+    """Creates a transcript for the student and adds the advisor to it."""
+    setUpTranscriptDependencies(self)
+    self.transcript = Transcript.objects.create(
+        owner=self.student,
+        semester=self.semester,
+    )
+    self.transcript.advisors.add(self.advisor)
+
+
+def setUpTranscriptNoAdvisor(self):
+    """Creates a transcript for the student without an advisor"""
+    setUpTranscriptDependenciesNoAdvisor(self)
+    self.transcript = Transcript.objects.create(
+        owner=self.student,
+        semester=self.semester,
+    )
+
+
+def setUpTranscriptUnauthenticatedAdvisor(self):
+    """Creates a transcript and an Advisor that's not a Student model"""
+    setUpTranscriptNoAdvisor(self)
+    self.advisor = Advisor.objects.create(
+        first_name='Rishi', last_name='Biswas',
+        email_address='rbiswas4@jhu.edu', jhed='rbiswas4@jh.edu')
+    self.advisor.save()
+
+
+def setUpPersonalTimetable(self):
+    self.fall2019, _ = Semester.objects.get_or_create(name='Fall', year='2019')
+    self.discrete, _ = Section.objects.get_or_create(
+        course=Course.objects.get_or_create(
+            code='EN.557.171')[0], meeting_section='(03)', semester=self.fall2019)
+    self.discrete.save()
+
+    self.tt, _ = PersonalTimetable.objects.get_or_create(
+        student=self.student, semester=self.fall2019, school='uoft', name='gg')
+    self.tt.save()
+
+
+def add_comment(self, author, content):
+    """Returns a comment with the author, content, and time set to now"""
+    timestamp = datetime.datetime.now()
+    return Comment.objects.create(
+        author=author,
+        content=content,
+        timestamp=timestamp,
+        transcript=self.transcript,
+    )
+
+
+def get_response(request, user, url, *args):
+    force_authenticate(request, user=user)
+    request.user = user
+    request.subdomain = 'uoft'
+    view = resolve(url).func
+    return view(request, *args)
+
+
+class Serializers(TestCase):
+    """Tests the TranscriptSerializer and CommentSerializer
+    Note: Does not check the comment's timestamp due to formatting issues
+    (Feel free to write it in)
+    """
+
+    def setUp(self):
+        setUpTranscript(self)
+
+    def test_comment_serialization(self):
+        content = 'I play Pokemon GO every day.'
+        author = self.student
+        comment = add_comment(self, author, content)
+
+        serialized = CommentSerializer(comment).data
+        self.assertEquals(author.get_full_name(),
+                          serialized['author_name'])
+        self.assertEquals(content, serialized['content'])
+
+    def assert_comment(self, expected, actual):
+        self.assertEquals(expected['author_name'], actual['author_name'])
+        self.assertEquals(expected['content'], actual['content'])
+
+    def test_transcript_serialization(self):
+        student_comment = add_comment(self, self.student, "Jason's a god")
+        advisor_comment = add_comment(self, self.advisor, "Who's Jason?")
+
+        serialized = TranscriptSerializer(self.transcript).data
+        s = CommentSerializer(student_comment).data
+        a = CommentSerializer(advisor_comment).data
+        self.assert_comment(s, serialized['comments'][0])
+        self.assert_comment(a, serialized['comments'][1])
+        self.assertEquals(self.semester.name, serialized['semester_name'])
+        self.assertEquals(self.semester.year, serialized['semester_year'])
+        self.assertEquals(self.student.get_full_name(),
+                          serialized['owner_name'])
+        self.assertEquals(self.student.jhed, serialized['owner_jhed'])
+        self.assertEquals(self.advisor.jhed, serialized['advisors'][0]['jhed'])
+
+
+class UrlsTest(TestCase, UrlTestCase):
+    """ Test forum/urls.py """
+
+    def setUp(self):
+        Semester.objects.create(name='Fall', year='2016').save()
+        Student.objects.create(user=User.objects.create(username='jjam',
+                                                        password='xd'),
+                               jhed='jwang380@jh.edu').save()
+
+    def test_urls_call_correct_views(self):
+        self.assertUrlResolvesToView(
+            '/advising/forum/all/', 'forum.views.ForumView')
+        self.assertUrlResolvesToView(
+            '/advising/forum/Fall/2016/',
+            'forum.views.ForumTranscriptView',
+            kwargs={'sem_name': 'Fall', 'year': '2016', })
+        self.assertUrlResolvesToView(
+            '/advising/forum/Fall/2016/jwang380@jh.edu/',
+            'forum.views.ForumTranscriptView',
+            kwargs={
+                'sem_name': 'Fall', 'year': '2016', 'jhed': 'jwang380@jh.edu',
+            })
+
+
+class ForumViewTest(APITestCase):
+    def setUp(self):
+        setUpTranscript(self)
+        self.factory = APIRequestFactory()
+
+    def test_get_forums_student(self):
+        add_comment(self, self.student, 'Hello good sir')
+        url = '/advising/forum/all/'
+        request = self.factory.get(url, format='json')
+        response = get_response(request, self.student.user, url)
+
+        self.assertEquals(response.status_code, status.HTTP_200_OK)
+        expected = TranscriptSerializer(self.transcript).data
+        actual = response.data['owned_transcripts'][0]
+        self.assertEquals(expected, actual)
+
+    def test_get_forums_advisor(self):
+        add_comment(self, self.student, 'You take care')
+        url = '/advising/forum/all/'
+        request = self.factory.get(url, format='json')
+        response = get_response(request, self.advisor.user, url)
+
+        self.assertEquals(response.status_code, status.HTTP_200_OK)
+        expected = TranscriptSerializer(self.transcript).data
+        actual = response.data['invited_transcripts'][0]
+        self.assertEquals(expected, actual)
+
+
+class ForumTranscriptViewTest(APITestCase):
+    """Notes:
+        "existent" means in the database with an associated user/Student.
+        "added/removed" means added/removed to/from the testing Transcript.
+    """
+
+    def setUp(self):
+        self.factory = APIRequestFactory()
+
+    def test_get_transcript(self):
+        setUpTranscript(self)
+        add_comment(self, self.advisor, 'Jihyun is cool')
+        url = '/advising/forum/Fall/2019/{}/'.format(self.student.jhed)
+        request = self.factory.get(url, format='json')
+        response = get_response(
+            request, self.student.user, url, 'Fall', '2019', self.student.jhed)
+
+        self.assertEquals(response.status_code, status.HTTP_200_OK)
+        expected = TranscriptSerializer(self.transcript).data
+        actual = response.data['transcript']
+        self.assertEquals(expected, actual)
+
+    def test_create_transcript(self):
+        setUpTranscriptDependencies(self)
+        with self.assertRaises(Transcript.DoesNotExist):
+            transcript = Transcript.objects.get(
+                semester=self.semester, owner=self.student)
+        url = '/advising/forum/Fall/2019/{}/'.format(self.student.jhed)
+        request = self.factory.get(url, format='json')
+        response = get_response(
+            request, self.student.user, url, 'Fall', '2019', self.student.jhed)
+        self.assertEquals(response.status_code, status.HTTP_201_CREATED)
+        transcript = Transcript.objects.get(
+            semester=self.semester, owner=self.student)
+
+    def test_delete_transcript(self):
+        setUpTranscript(self)
+        url = '/advising/forum/Fall/2019/'
+        request = self.factory.delete(url, format='json')
+        response = get_response(
+            request, self.student.user, url, 'Fall', '2019')
+        self.assertEquals(response.status_code, status.HTTP_204_NO_CONTENT)
+        with self.assertRaises(Transcript.DoesNotExist):
+            Transcript.objects.get(semester=self.semester, owner=self.student)
+
+    def test_create_comments(self):
+        setUpTranscript(self)
+        content = 'Stan Oh My Girl, fromis_9, f(x), LOONA'
+        data = {
+            'content': content,
+            'timestamp': datetime.datetime.now(),
+            'jhed': self.student.jhed,
+        }
+        url = '/advising/forum/Fall/2019/'
+        request = self.factory.post(url, data=data, format='json')
+        response = get_response(
+            request, self.student.user, url, 'Fall', '2019')
+        self.assertEquals(response.status_code, status.HTTP_201_CREATED)
+        comment = Comment.objects.get(
+            transcript=self.transcript, author=self.student)
+        self.assertEquals(content, comment.content)
+
+        content = 'Stan YUKIKA - literally Simon'
+        data = {
+            'content': content,
+            'timestamp': datetime.datetime.now(),
+            'jhed': self.student.jhed,
+        }
+        url = '/advising/forum/Fall/2019/'
+        request = self.factory.post(url, data=data, format='json')
+        response = get_response(
+            request, self.advisor.user, url, 'Fall', '2019')
+        self.assertEquals(response.status_code, status.HTTP_201_CREATED)
+        comment = Comment.objects.get(
+            transcript=self.transcript, author=self.advisor)
+        self.assertEquals(content, comment.content)
+
+    def test_add_advisor(self):
+        setUpTranscriptNoAdvisor(self)
+        self.assertEquals(self.transcript.advisors.count(), 0)
+        user = User.objects.create_user(
+            username='rbiz',
+            password='k',
+            first_name='Rishi',
+            last_name='Biswas',)
+        advisor = Student.objects.create(user=user)
+        advisor.jhed = 'rbiswas4@jh.edu'
+        advisor.save()
+        Advisor.objects.create(
+            first_name='Rishi', last_name='Biswas',
+            jhed='rbiswas4@jh.edu', email_address='rbiswas4@jhu.edu')
+        data = {
+            'action': 'add',
+            'jhed': advisor.jhed,
+        }
+        url = '/advising/forum/Fall/2019/'
+        request = self.factory.patch(url, data=data, format='json')
+        response = get_response(
+            request, self.student.user, url, 'Fall', '2019')
+        self.assertEquals(response.status_code, status.HTTP_200_OK)
+        self.assertEquals(self.transcript.advisors.count(), 1)
+
+    def test_add_nonexistent_advisor(self):
+        setUpTranscriptNoAdvisor(self)
+        self.assertEquals(self.transcript.advisors.count(), 0)
+        data = {
+            'action': 'add',
+            'jhed': 'rbiswas4@jh.edu',
+        }
+        url = '/advising/forum/Fall/2019/'.format(self.student.jhed)
+        request = self.factory.patch(url, data=data, format='json')
+        response = get_response(
+            request, self.student.user, url, 'Fall', '2019')
+        self.assertEquals(response.status_code, status.HTTP_404_NOT_FOUND)
+        self.assertEquals(self.transcript.advisors.count(), 0)
+
+    def test_add_added_advisor(self):
+        setUpTranscript(self)
+        self.assertEquals(self.transcript.advisors.count(), 1)
+        data = {
+            'action': 'add',
+            'jhed': 'rbiswas4@jh.edu',
+        }
+        url = '/advising/forum/Fall/2019/'
+        request = self.factory.patch(url, data=data, format='json')
+        response = get_response(
+            request, self.student.user, url, 'Fall', '2019')
+        self.assertEquals(response.status_code, status.HTTP_200_OK)
+        self.assertEquals(self.transcript.advisors.count(), 1)
+
+    def test_remove_advisor(self):
+        setUpTranscript(self)
+        self.assertEquals(self.transcript.advisors.count(), 1)
+        data = {
+            'action': 'remove',
+            'jhed': self.advisor.jhed,
+        }
+        url = '/advising/forum/Fall/2019/'
+        request = self.factory.patch(url, data=data, format='json')
+        response = get_response(
+            request, self.student.user, url, 'Fall', '2019')
+        self.assertEquals(response.status_code, status.HTTP_200_OK)
+        self.assertEquals(self.transcript.advisors.count(), 0)
+
+    def test_remove_nonexistent_advisor(self):
+        setUpTranscript(self)
+        data = {
+            'action': 'remove',
+            'jhed': 'scabrej1jfung4',
+        }
+        url = '/advising/forum/Fall/2019/'
+        request = self.factory.patch(url, data=data, format='json')
+        response = get_response(
+            request, self.student.user, url, 'Fall', '2019')
+        self.assertEquals(response.status_code, status.HTTP_404_NOT_FOUND)
+        self.assertEquals(self.transcript.advisors.count(), 1)
+
+    def test_remove_removed_advisor(self):
+        self.test_remove_advisor()
+        self.assertEquals(self.transcript.advisors.count(), 0)
+        data = {
+            'action': 'remove',
+            'jhed': self.advisor.jhed,
+        }
+        url = '/advising/forum/Fall/2019/'
+        request = self.factory.patch(url, data=data, format='json')
+        response = get_response(
+            request, self.student.user, url, 'Fall', '2019')
+        self.assertEquals(response.status_code, status.HTTP_200_OK)
+        self.assertEquals(self.transcript.advisors.count(), 0)
+
+    def test_add_advisor_and_timetable(self):
+        setUpTranscriptNoAdvisor(self)
+        setUpPersonalTimetable(self)
+        self.assertEquals(self.transcript.advisors.count(), 0)
+        advisor = Student.objects.create(user=User.objects.create(
+            username='rbiz', password='k'), jhed='rbiswas4@jh.edu')
+        Advisor.objects.create(
+            first_name='Rishi', last_name='Biswas',
+            jhed='rbiswas4@jh.edu', email_address='rbiswas4@jhu.edu')
+
+        data = {
+            'action': 'add',
+            'jhed': advisor.jhed,
+            'tt_name': self.tt.name,
+        }
+        url = '/advising/forum/Fall/2019/'
+        request = self.factory.patch(url, data=data, format='json')
+        response = get_response(
+            request, self.student.user, url, 'Fall', '2019')
+        self.assertEquals(response.status_code, status.HTTP_200_OK)
+        self.transcript.refresh_from_db()
+        self.assertEquals(self.transcript.advisors.count(), 1)
+        self.assertEquals(self.transcript.timetable, self.tt)
+
+    def test_add_pending_advisor(self):
+        setUpTranscriptUnauthenticatedAdvisor(self)
+        data = {
+            'action': 'add',
+            'jhed': self.advisor.jhed,
+        }
+        url = '/advising/forum/Fall/2019/'
+        request = self.factory.patch(url, data=data, format='json')
+        response = get_response(
+            request, self.student.user, url, 'Fall', '2019')
+        self.assertEquals(response.status_code, status.HTTP_200_OK)
+        self.assertEquals(self.transcript.pending_advisors.count(), 1)
+
+    def test_remove_pending_advisor(self):
+        self.test_add_pending_advisor()
+        self.assertEquals(self.transcript.pending_advisors.count(), 1)
+        data = {
+            'action': 'remove',
+            'jhed': self.advisor.jhed,
+        }
+        url = '/advising/forum/Fall/2019/'
+        request = self.factory.patch(url, data=data, format='json')
+        response = get_response(
+            request, self.student.user, url, 'Fall', '2019')
+        self.assertEquals(response.status_code, status.HTTP_200_OK)
+        self.assertEquals(self.transcript.advisors.count(), 0)
+
+    def test_pending_advisors_remove_on_authentication(self):
+        self.test_add_pending_advisor()
+        self.assertEquals(self.transcript.pending_advisors.count(), 1)
+        self.assertEquals(self.transcript.advisors.count(), 0)
+
+        advisor_user = Student.objects.create(
+            user=User.objects.create(first_name='Rishi', last_name='Biswas'),
+            jhed=self.advisor.jhed)
+        from authpipe.utils import connect_advisors
+
+        class Backend:
+            name = 'azuread-tenant-oauth2'
+        connect_advisors(
+            None, None, {'unique_name': self.advisor.jhed},
+            advisor_user.user, backend=Backend())
+
+        self.assertEquals(self.transcript.advisors.count(), 1)
+        self.assertEquals(self.transcript.pending_advisors.count(), 0)

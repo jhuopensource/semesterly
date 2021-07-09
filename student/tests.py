@@ -237,7 +237,7 @@ class UserTimetableViewTest(APITestCase):
 
     def test_rename_timetable(self):
         data = {
-            'id': 10,
+            'id': 1000,
             'semester': {
                 'name': 'Winter',
                 'year': '1995'
@@ -252,7 +252,7 @@ class UserTimetableViewTest(APITestCase):
             'has_conflict': False
         }
         PersonalTimetable.objects.create(
-            id=10,
+            id=1000,
             name='oldtt',
             school='uoft',
             semester=self.sem,
@@ -264,11 +264,11 @@ class UserTimetableViewTest(APITestCase):
         view = resolve('/user/timetables/').func
         response = view(request)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(PersonalTimetable.objects.get(id=10).name, 'renamed')
+        self.assertEqual(PersonalTimetable.objects.get(id=1000).name, 'renamed')
 
     def test_delete_timetable(self):
         PersonalTimetable.objects.create(
-            id=20,
+            id=2000,
             name='todelete',
             school='uoft',
             semester=self.sem,
@@ -280,7 +280,7 @@ class UserTimetableViewTest(APITestCase):
         view = resolve('/user/timetables/').func
         response = view(request, 'Winter', '1995', 'todelete')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertFalse(PersonalTimetable.objects.filter(id=20).exists())
+        self.assertFalse(PersonalTimetable.objects.filter(id=2000).exists())
 
 
 class ClassmateViewTest(APITestCase):
