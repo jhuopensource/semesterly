@@ -1,5 +1,5 @@
-FROM scabrej1/semesterly-py3-base:latest
-# sgerli/horariotec-base:
+FROM scabrej1/semesterly-py3_9-base:latest
+
 RUN mkdir /code
 WORKDIR /code
 
@@ -26,6 +26,9 @@ COPY ./build/run_parser.sh /code/run_parser.sh
 RUN pip install -r /code/requirements.txt
 # This is needed on newer ubuntu
 RUN pip install psycopg2-binary
+
+RUN curl -sL https://deb.nodesource.com/setup_14.x | bash -
+RUN apt-get install -y nodejs
 
 RUN npm install
 RUN npm run build
