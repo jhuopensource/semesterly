@@ -1,0 +1,153 @@
+.comment-forum-container {
+  height: 82%;
+  overflow-y: auto;
+
+  .empty-state {
+    margin: 0 auto;
+    text-align: center;
+    width: 280px;
+
+    img {
+      width: 280px;
+    }
+
+    h3 {
+      color: $ga1a1a1;
+      font-size: 12px;
+      font-weight: 400;
+      margin-top: 8px;
+    }
+
+    h4 {
+      color: $gbbb;
+      font-size: 14px;
+      margin-bottom: 0;
+      margin-top: 5px;
+    }
+  }
+}
+
+.comment-row {
+  margin: 10px;
+
+  .owner {
+    outline-color: #00A1FF;
+    background: #00A1FF;
+  }
+
+  .guest {
+    outline-color: lightslategray;
+    background: lightslategray;
+  }
+}
+
+.comment-bubble {
+  color: white;
+  border-radius: 20px;
+  font-size: 12px;
+  padding: 10px;
+  margin: 5px;
+
+  .author {
+    font-weight: bold;
+  }
+}
+
+.comment-timestamp {
+  font-size: 10px;
+  float: right;
+}
+
+.comment-content {
+  word-wrap: break-word;
+}
+
+row {
+  display: flex;
+  flex-direction: row;
+
+  .add-button {
+    flex: 1;
+    order: 1;
+  }
+  .advisor {
+    flex: 2;
+    order: 2;
+  }
+}
+
+.cf-header {
+  clear: both;
+  color: $primary-navy;
+  font-size: 14pt;
+  font-weight: bold;
+  margin: 0;
+  padding: 10px 5px;
+  position: relative;
+
+  &::after {
+    background-color: $gddd;
+    bottom: 5px;
+    content: "";
+    display: block;
+    height: 1px;
+    left: 0;
+    position: absolute;
+    width: 100%;
+  }
+}
+
+.cf-text-input {
+  position: relative;
+  width: 100%;
+}
+
+.cf-input {
+  float: left;
+  width: 85%;
+  resize: none;
+  overflow: visible;
+  margin: 2px 1% 2px 3%;
+  padding: 0px 10px 0px 10px;
+  border-color: rgba(128, 128, 128, 0.32);
+  border-radius: 25px 25px 25px 25px;
+  line-height: 25px;
+  background-color: #f2f3f5;
+  font-size: 14px;
+  outline: 0;
+
+  &::-webkit-input-placeholder {
+    font-size: 14px;
+    line-height: 25px;
+  }
+
+  &::-moz-placeholder {
+    font-size: 14px;
+    line-height: 25px;
+  }
+
+  &:-ms-input-placeholder {
+    font-size: 14px;
+    line-height: 25px;
+  }
+
+  &:-moz-placeholder {
+    font-size: 14px;
+    line-height: 25px;
+  }
+}
+
+.send-btn {
+  float: left;
+  width: 25px;
+  background-color: $green;
+  border: 0;
+  outline: 0;
+  border-radius: 25px;
+  color: $gfff;
+  margin: 2px 3% 2px 1%;
+
+  i {
+    margin-right: 10px;
+  }
+}
