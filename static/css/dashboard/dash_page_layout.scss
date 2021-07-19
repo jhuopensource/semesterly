@@ -50,21 +50,9 @@
   border: none;
   background: transparent;
   float: right;
-  margin: 0;
-  padding: 0;
-
-  p {
-    display: inline-block;
-    float: left;
-    font-family: "Palanquin", Arial, sans-serif;
-    font-size: 20px;
-    font-weight: 500;
-    height: 50px;
-    line-height: 500px;
-    width: 200px;
-    margin: 0;
-    background: #fff;
-  }
+  height: 50px;
+  color: gray;
+  font-size: 20px;
 }
 
 .advising-schedule-header {
