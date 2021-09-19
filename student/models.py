@@ -59,8 +59,6 @@ class Student(models.Model):
     first_name = models.CharField(max_length=255, default='', null=True)
     last_name = models.CharField(max_length=255, default='', null=True)
     disabilities = models.NullBooleanField(null=True, default=False)
-    # adding favorite_num
-    favorite_num = models.IntegerField(blank=True, null=True)
 
     def __str__(self):
         return "{0}".format(self.jhed)
