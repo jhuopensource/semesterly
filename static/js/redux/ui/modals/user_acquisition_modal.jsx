@@ -117,6 +117,20 @@ class UserAcquisitionModal extends React.Component {
             <span>Continue with Google</span>
           </button>
 
+          <button
+            className="btn abnb-btn secondary eight-px-top" onClick={() => {
+            const link = document.createElement('a');
+            link.href = '/press';
+            document.body.appendChild(link);
+            link.click();
+          }}
+          >
+            <span className="img-icon">
+              <i className="fa fa-envelope-o" />
+            </span>
+            <span>My Mock Button</span>
+          </button>
+
 
           {/* <button
             className="btn abnb-btn secondary eight-px-top" onClick={() => {
