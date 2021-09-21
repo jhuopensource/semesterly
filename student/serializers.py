@@ -14,7 +14,7 @@ from rest_framework import serializers
 
 from courses.serializers import CourseSerializer
 from timetable.serializers import DisplayTimetableSerializer
-from student.models import Student
+from student.models import Student, MockModel
 
 
 def get_student_dict(school, student, semester):
@@ -30,6 +30,8 @@ def get_student_dict(school, student, semester):
         context = {'semester': semester, 'school': school, 'student': student}
         user_dict['timetables'] = DisplayTimetableSerializer.from_model(timetables, many=True).data
         user_dict['courses'] = CourseSerializer(courses, context=context, many=True).data
+        user_dict['mock_data'] = MockSerializer(context=context).data
+
     return user_dict
 
 
@@ -66,3 +68,8 @@ class StudentSerializer(serializers.ModelSerializer):
             'LoginHash',
             'timeAcceptedTos',
         )
+
+class MockSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = MockModel
+        fields = '__all__'

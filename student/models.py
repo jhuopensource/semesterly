@@ -176,3 +176,9 @@ class PilotOffering(models.Model):
 
     def __unicode__(self):
         return "Course: %s, Day: %s, Time: %s - %s" % (self.course_name, self.day, self.time_start, self.time_end)
+
+class MockModel(models.Model):
+    student = models.ForeignKey(Student, null=True, default=None, on_delete=models.deletion.CASCADE)
+    favorite_food = models.TextField(null=True)
+    favorite_movie = models.TextField(null=True)
+    least_favorite_num = models.IntegerField(null=True)
