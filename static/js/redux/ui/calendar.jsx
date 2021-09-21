@@ -161,6 +161,29 @@ class Calendar extends React.Component {
   }
 
   render() {
+    const openMockModal = (
+      <div className="cal-btn-wrapper">
+        <button
+          type="submit"
+          form="form1"
+          className="save-timetable add-button"
+          data-for="mock-modal-btn-tooltip"
+          data-tip
+          onClick={() => this.props.toggleMockModal()}
+        >
+          <img src="/static/img/star.png" alt="Mock Modal" style={{ marginTop: '2px' }} />
+        </button>
+        <ReactTooltip
+          id="mock-modal-btn-tooltip"
+          class="tooltip"
+          type="dark"
+          place="bottom"
+          effect="solid"
+        >
+          <span>Open Mock Modal</span>
+        </ReactTooltip>
+      </div>
+    );
     const description = this.state.hoverCustomSlot ?
       (<h4 className="custom-instructions">
         Click, drag, and release to create your custom event
@@ -342,6 +365,7 @@ class Calendar extends React.Component {
             { pilot }
           </div>
           <div className="fc-right">
+            { openMockModal }
             { addSISButton }
             { addCustomEventButton }
             { shareButton }
