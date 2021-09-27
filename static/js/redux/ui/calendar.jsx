@@ -170,7 +170,7 @@ class Calendar extends React.Component {
     const addMockButton = (
       <div className="cal-btn-wrapper">
         <button
-          onClick={this.props.togglePreferenceModal}
+          onClick={this.props.toggleMockModal}
           className="save-timetable"
           data-tip
           data-for="mock-btn-tooltip"
@@ -476,6 +476,7 @@ Calendar.defaultProps = {
 };
 
 Calendar.propTypes = {
+  toggleMockModal: PropTypes.func.isRequired,
   togglePreferenceModal: PropTypes.func.isRequired,
   triggerSaveCalendarModal: PropTypes.func.isRequired,
   isFetchingShareLink: PropTypes.bool.isRequired,
