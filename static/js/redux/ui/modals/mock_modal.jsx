@@ -15,8 +15,10 @@ GNU General Public License for more details.
 import PropTypes from 'prop-types';
 import React from 'react';
 import Modal from 'boron/FadeModal';
+import * as SemesterlyPropTypes from '../../constants/semesterlyPropTypes';
 
 class MockModal extends React.Component {
+  
   componentDidUpdate() {
     if (this.props.isVisible) {
       this.modal.show();
@@ -42,7 +44,11 @@ class MockModal extends React.Component {
       >
         <div id="perf-modal-wrapper">
           {modalHeader}
-          <h2>First Name: </h2>
+          <font size = "-2">
+            <center> First Name:</center>
+            <center> Last Name:</center>
+            <center> Major:</center>
+          </font>
         </div>
       </Modal>
     );
@@ -50,8 +56,7 @@ class MockModal extends React.Component {
 }
 
 MockModal.propTypes = {
-  toggleConflicts: PropTypes.func.isRequired,
-  withConflicts: PropTypes.bool.isRequired,
+  userInfo: SemesterlyPropTypes.userInfo.isRequired,
   toggleMockModal: PropTypes.func.isRequired,
   isVisible: PropTypes.bool.isRequired,
 };
