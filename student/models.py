@@ -97,6 +97,10 @@ class Student(models.Model):
                                  expires_at,
                                  "https://accounts.google.com/o/oauth2/token", 'my-user-agent/1.0')
 
+class ThreeColors(models.Model):
+    color1 = models.CharField(max_length=255, default='red')
+    color2 = models.CharField(max_length=255, default='green')
+    color3 = models.CharField(max_length=255, default='blue')
 
 class Reaction(models.Model):
     """ Database object representing a reaction to a course.

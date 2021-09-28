@@ -15,6 +15,7 @@ from rest_framework import serializers
 from courses.serializers import CourseSerializer
 from timetable.serializers import DisplayTimetableSerializer
 from student.models import Student
+from student.models import ThreeColors
 
 
 def get_student_dict(school, student, semester):
@@ -28,8 +29,10 @@ def get_student_dict(school, student, semester):
             school=school, semester=semester).order_by('-last_updated')
         courses = {course for timetable in timetables for course in timetable.courses.all()}
         context = {'semester': semester, 'school': school, 'student': student}
+        colors = student.colors_set.all()
         user_dict['timetables'] = DisplayTimetableSerializer.from_model(timetables, many=True).data
         user_dict['courses'] = CourseSerializer(courses, context=context, many=True).data
+        user_dict['colors'] = ThreeColorsSerializer(colors, many=True).data
     return user_dict
 
 
@@ -65,4 +68,17 @@ class StudentSerializer(serializers.ModelSerializer):
             'LoginToken',
             'LoginHash',
             'timeAcceptedTos',
+        )
+
+class ThreeColorsSerializer(serializers.ModelSerializer):
+    colorOne = serializers.CharField(source='color1')
+    colorTwo = serializers.CharField(source='color2')
+    colorThree = serializers.CharField(source='color3')
+
+    class Meta:
+        model = ThreeColors
+        fields = (
+            'colorOne',
+            'colorTwo',
+            'colorThree',
         )
