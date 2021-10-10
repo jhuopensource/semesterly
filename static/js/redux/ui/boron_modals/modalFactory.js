@@ -1,10 +1,11 @@
 var React = require('react');
+var createReactClass = require('create-react-class');
 var transitionEvents = require('domkit/transitionEvents');
 var appendVendorPrefix = require('domkit/appendVendorPrefix');
 
 module.exports = function(animation){
 
-    return React.createClass({
+    return createReactClass({
         getDefaultProps: function() {
             return {
                 className: "",
