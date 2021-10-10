@@ -1,0 +1,59 @@
+{
+  "name": "boron",
+  "version": "0.2.3",
+  "description": "A collection of dialog animations with React.js",
+  "main": "Boron.js",
+  "author": "Yuanyan Cao",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yuanyan/boron.git"
+  },
+  "dependencies": {
+    "domkit": "^0.0.1"
+  },
+  "peerDependencies": {
+    "react": ">=0.14.0"
+  },
+  "devDependencies": {
+    "react-dom": ">=0.14.0",
+    "reactify": "^0.17.0",
+    "browserify": "^6.3.3",
+    "browserify-shim": "^3.8.0",
+    "chalk": "^0.5.1",
+    "codemirror": "^5.0.0",
+    "del": "^0.1.3",
+    "gulp": "^3.8.10",
+    "gulp-bump": "^0.1.11",
+    "gulp-connect": "^2.2.0",
+    "gulp-gh-pages": "^0.4.0",
+    "gulp-git": "^0.5.5",
+    "gulp-less": "^1.3.6",
+    "gulp-rename": "^1.2.0",
+    "gulp-streamify": "^0.0.5",
+    "gulp-uglify": "^1.0.1",
+    "gulp-util": "^3.0.1",
+    "merge-stream": "^0.1.6",
+    "vinyl-paths": "^1.0.0",
+    "vinyl-source-stream": "^1.0.0",
+    "watchify": "^2.1.1",
+    "gulp-react": "^3.0.1"
+  },
+  "browserify": {
+    "transform": [
+      "reactify"
+    ]
+  },
+  "browserify-shim": {
+    "react": "global:React"
+  },
+  "scripts": {
+    "release": "gulp release"
+  },
+  "keywords": [
+    "react",
+    "react-component",
+    "dialog",
+    "modal"
+  ]
+}
