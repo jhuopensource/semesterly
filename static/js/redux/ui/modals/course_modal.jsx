@@ -16,7 +16,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
 import Clipboard from 'clipboard';
-import Modal from 'boron/WaveModal';
+import Modal from '../boron_modals/WaveModal';
 import { AreaBubble, WritingIntensive } from '../search_result';
 import CourseModalBodyContainer from '../containers/modals/course_modal_body_container';
 import { ShareLink } from '../master_slot';
