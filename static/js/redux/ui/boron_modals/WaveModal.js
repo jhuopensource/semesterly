@@ -200,7 +200,7 @@ const hideContentAnimation = animation.hideContentAnimation;
 const showBackdropAnimation = animation.showBackdropAnimation;
 const hideBackdropAnimation = animation.hideBackdropAnimation;
 
-module.exports = modalFactory({
+const waveModal = modalFactory({
   getRef(willHidden) {
     return 'content';
   },
@@ -240,3 +240,5 @@ module.exports = modalFactory({
     });
   },
 });
+
+export default waveModal;

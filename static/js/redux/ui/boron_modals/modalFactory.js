@@ -1,9 +1,9 @@
-const React = require('react');
-const createReactClass = require('create-react-class');
-const transitionEvents = require('domkit/transitionEvents');
-const appendVendorPrefix = require('domkit/appendVendorPrefix');
+import React from 'react';
+import createReactClass from 'create-react-class';
+import transitionEvents from 'domkit/transitionEvents';
+import appendVendorPrefix from 'domkit/appendVendorPrefix';
 
-module.exports = function (animation) {
+function modalFactory(animation) {
   return createReactClass({
     getDefaultProps() {
       return {
@@ -157,4 +157,6 @@ module.exports = function (animation) {
       window.removeEventListener('keydown', this.listenKeyboard, true);
     },
   });
-};
+}
+
+export default modalFactory;
