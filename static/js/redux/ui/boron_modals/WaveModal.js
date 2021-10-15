@@ -1,6 +1,6 @@
-const modalFactory = require('./modalFactory');
-const insertKeyframesRule = require('domkit/insertKeyframesRule');
-const appendVendorPrefix = require('domkit/appendVendorPrefix');
+import modalFactory from './modalFactory';
+import insertKeyframesRule from 'domkit/insertKeyframesRule';
+import appendVendorPrefix from 'domkit/appendVendorPrefix';
 
 const animation = {
   show: {
