@@ -125,7 +125,7 @@ function collectCreateDrop(connect) {
 }
 
 class Cell extends React.Component {
-  render(){
+  render() {
     return (
       this.props.connectDragTarget(
         this.props.connectCreateTarget(
