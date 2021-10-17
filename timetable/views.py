@@ -14,6 +14,11 @@
 import itertools
 import logging
 
+from django.core.mail import send_mail, BadHeaderError
+from django.http import HttpResponse, HttpResponseRedirect
+from django.shortcuts import render, redirect
+from .forms import FeatureForm
+
 from django.shortcuts import get_object_or_404
 from hashids import Hashids
 from rest_framework import status
@@ -29,6 +34,7 @@ from timetable.models import Semester, Course, Section
 from timetable.utils import update_locked_sections, courses_to_timetables, DisplayTimetable
 from helpers.mixins import ValidateSubdomainMixin, FeatureFlowView, CsrfExemptMixin
 from semesterly.settings import get_secret
+from django.conf import settings
 
 hashids = Hashids(salt=get_secret('HASHING_SALT'))
 logger = logging.getLogger(__name__)
@@ -166,3 +172,29 @@ class TimetableLinkView(FeatureFlowView):
 
         response = {'slug': hashids.encrypt(shared_timetable.id)}
         return Response(response, status=status.HTTP_200_OK)
+
+
+def featureForm(request):
+    if request.method == 'GET':
+        form = FeatureForm()
+    else:
+        form = FeatureForm(request.POST)
+        if form.is_valid():
+            subject = 'Feature Request Received'
+            from_email = settings.EMAIL_HOST_USER #TODO PUT IN THE CORRECT EMAIL
+
+            name = form.cleaned_data['name']
+            email = form.cleaned_data['email']
+            feature = form.cleaned_data['feature_request']
+            message = f'You have received a feature request! \n User\'s Name: {name} \n Email: {email} \n Feature Requested: {feature}'
+
+            try:
+                send_mail(subject, message, from_email, ['ameyajhu@gmail.com']) #TODO PUT IN THE CORRECT EMAIL
+            except BadHeaderError:
+                return HttpResponse('Invalid header found.')
+            return redirect('thanks')
+
+    return render(request, "feature_request_modal.html", {'form': form})
+
+def thanks(request):
+    return HttpResponse('Thank you for submitting a feature request!')

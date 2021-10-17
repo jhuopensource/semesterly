@@ -1,0 +1,22 @@
+.form-group{
+  margin: 20px 50px;
+}
+
+#contact-for{
+  align-items: center;
+}
+
+.btn-primary{
+margin: auto;
+}
+
+@media (max-width: 460px) {
+  .sort-menu {
+    font-size: 12px;
+  }
+
+  .select {
+    // overwrite flat-ui on mobile
+    font-size: 12px !important;
+  }
+}
