@@ -18,8 +18,6 @@ import { DragDropContext } from 'react-dnd';
 import Semesterly from '../semesterly';
 import { saveTimetable } from '../../actions/user_actions';
 import { setActiveTimetable } from '../../actions/timetable_actions';
-import { toggleFeatureRequestModal } from '../../actions/modal_actions';
-
 import { getTimetables, getActiveTimetableCourses } from '../../reducers/root_reducer';
 
 const mapStateToProps = (state) => {
@@ -52,7 +50,6 @@ const SemesterlyContainer = connect(
   {
     saveTimetable,
     setPgActive: setActiveTimetable,
-    toggleFeatureRequestModal,
   },
 )(Semesterly);
 

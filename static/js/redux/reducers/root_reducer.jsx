@@ -34,7 +34,6 @@ import customSlots from './custom_slots_reducer';
 import signupModal from './signup_modal_reducer';
 import peerModal from './peer_modal_reducer';
 import preferenceModal from './preference_modal_reducer';
-import featureRequestModal from "./feature_request_modal_reducer";
 import friends from './friends_reducer';
 import notificationToken from './notification_token_reducer';
 import integrationModal from './integration_modal_reducer';
@@ -65,7 +64,6 @@ const rootReducer = combineReducers({
   optionalCourses,
   peerModal,
   preferenceModal,
-  featureRequestModal,
   preferences,
   registrar,
   saveCalendarModal,
