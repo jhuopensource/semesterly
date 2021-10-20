@@ -14,7 +14,7 @@ from django.conf.urls import re_path
 from django.contrib import admin
 from django.http import HttpResponseRedirect
 from django.views.generic.base import RedirectView
-
+from . import views
 import timetable.views
 from helpers.mixins import FeatureFlowView
 
@@ -36,6 +36,8 @@ urlpatterns = [
     # re_path(r'^callback/google_calendar/*$', FeatureFlowView.as_view(feature_name='GCAL_CALLBACK')),
 
     re_path(r'^timetable/.*$', RedirectView.as_view(url="/")),
+    re_path(r'^feature/', views.featureForm, name = "featureForm"),
+    re_path(r'^thanks/', views.thanks, name = "thanks"),
 
     re_path(r'^complete/facebook/.*$', FeatureFlowView.as_view()),
 

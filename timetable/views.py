@@ -20,11 +20,17 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
+from django.conf import settings
+from django.shortcuts import render, redirect
+from django.http import HttpResponse, HttpResponseRedirect
+from django.core.mail import send_mail, BadHeaderError
+from .forms import FeatureForm
+
 from analytics.models import SharedTimetable
 from analytics.views import save_analytics_timetable
 from courses.serializers import CourseSerializer
 from student.utils import get_student
-from timetable.serializers import DisplayTimetableSerializer
+from timetable.serializers import DisplayTimetableSerializer, FeatureFormSerializer
 from timetable.models import Semester, Course, Section
 from timetable.utils import update_locked_sections, courses_to_timetables, DisplayTimetable
 from helpers.mixins import ValidateSubdomainMixin, FeatureFlowView, CsrfExemptMixin
@@ -166,3 +172,50 @@ class TimetableLinkView(FeatureFlowView):
 
         response = {'slug': hashids.encrypt(shared_timetable.id)}
         return Response(response, status=status.HTTP_200_OK)
+
+class FeatureForm(APIView):
+
+    def get(self, request):
+        #serializer = FeatureFormSerializer(name = '', email = '', feature_request = '')
+        return JsonResponse({'name':'Ameya', 'email':'', 'feature_request':''})
+
+    def post(self, request):
+        if form.is_valid():
+            subject = 'Feature Request Received'
+            from_email = settings.EMAIL_HOST_USER
+
+            name = request.data.get("name", None)
+            email = request.data.get("email", None)
+            feature = request.data.get('feature_request', None)
+            message = f'You have received a feature request! \n User\'s Name: {name} \n Email: {email} \n Feature Requested: {feature}'
+
+            try:
+                send_mail(subject, message, from_email, ['ameyajhu@gmail.com'])
+            except BadHeaderError:
+                return HttpResponse('Invalid header found.')
+            return JsonResponse({'status': 1, 'message': 'Thank you for submitting a feature request'})
+            #return thanks(request)
+
+def featureForm(request):
+    if request.method == 'GET':
+        form = FeatureForm()
+    else:
+        form = FeatureForm(request.POST)
+        if form.is_valid():
+            subject = 'Feature Request Received'
+            from_email = settings.EMAIL_HOST_USER
+
+            name = request.data.name
+            email = request.data.email
+            feature = request.data.feature_request
+            message = f'You have received a feature request! \n User\'s Name: {name} \n Email: {email} \n Feature Requested: {feature}'
+
+            try:
+                send_mail(subject, message, from_email, ['ameyajhu@gmail.com'])
+            except BadHeaderError:
+                return HttpResponse('Invalid header found.')
+            return thanks(request)
+    return render(request, "./feature.html", {'form': form})
+
+def thanks(request):
+    return HttpResponse('Thank you for submitting a feature request!')

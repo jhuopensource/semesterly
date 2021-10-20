@@ -29,6 +29,8 @@ import UserSettingsModalContainer from './containers/modals/user_settings_modal_
 import ExplorationModalContainer from './containers/modals/exploration_modal_container';
 import SignupModalContainer from './containers/modals/signup_modal_container';
 import PreferenceModalContainer from './containers/modals/preference_modal_container';
+import FeatureRequestModalContainer from "./containers/modals/feature_request_modal_container";
+
 import TutModalContainer from './containers/modals/tut_modal_container';
 import PeerModalContainer from './containers/modals/peer_modal_container';
 import IntegrationModalContainer from './containers/modals/integration_modal_container';
@@ -169,6 +171,7 @@ class Semesterly extends React.Component {
         <ExplorationModalContainer />
         <SignupModalContainer />
         <PreferenceModalContainer />
+        <FeatureRequestModalContainer />
         <IntegrationModalContainer />
         <TutModalContainer />
         <PeerModalContainer />
@@ -195,6 +198,11 @@ class Semesterly extends React.Component {
                 <li className="footer-button" role="presentation">
                   <a href="mailto:contact@semester.ly?Subject=Semesterly">
                     Contact us
+                  </a>
+                </li>
+                <li className="footer-button" role="presentation">
+                  <a onClick={this.props.toggleFeatureRequestModal}>
+                    Request a Feature
                   </a>
                 </li>
                 <li className="footer-button" role="presentation">
@@ -268,6 +276,7 @@ Semesterly.propTypes = {
   alertTimetableExists: PropTypes.bool.isRequired,
   saveTimetable: PropTypes.func.isRequired,
   setPgActive: PropTypes.func.isRequired,
+  toggleFeatureRequestModal: PropTypes.func.isRequired,
 };
 
 export default Semesterly;
