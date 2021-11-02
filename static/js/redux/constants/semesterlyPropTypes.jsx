@@ -130,6 +130,8 @@ export const denormalizedCourse = PropTypes.shape({
 // should match EventSerializer
 export const customEvent = PropTypes.shape({
   name: PropTypes.string.isRequired,
+  location: PropTypes.string.isRequired,
+  color: PropTypes.string.isRequired,
   day: PropTypes.string.isRequired,
   time_end: PropTypes.string.isRequired,
   time_start: PropTypes.string.isRequired,
