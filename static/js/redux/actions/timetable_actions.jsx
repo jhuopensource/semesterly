@@ -415,6 +415,8 @@ export const addCustomSlot = (timeStart, timeEnd, day, preview, id) => (dispatch
       time_start: timeStart, // match backend slot attribute names
       time_end: timeEnd,
       name: 'New Custom Event', // default name for custom slot
+      location: '',
+      color: '#D4DBC8',
       day,
       id,
       preview,

@@ -20,6 +20,8 @@ import * as ActionTypes from '../constants/actionTypes';
 //   time_end: 'HH:MM',
 //   day: one of MTWRF
 //   name: slot's title
+//   location: slot's optional description
+//   color: hex code
 //   id
 //   preview: whether the slot is just a preview or has been added
 
