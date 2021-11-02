@@ -310,6 +310,8 @@ class UserTimetableView(ValidateSubdomainMixin,
         to_delete.delete()
         for event in events:
             event_obj = PersonalEvent.objects.create(name=event['name'],
+                                                     location=event['location'],
+                                                     color=event['color'],
                                                      time_start=event['time_start'],
                                                      time_end=event['time_end'],
                                                      day=event['day'])
