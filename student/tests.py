@@ -106,7 +106,7 @@ class UserViewTest(APITestCase):
         tt = PersonalTimetable.objects.create(
             semester=sem, school='skool', name='mytt', student=self.student)
         event = PersonalEvent.objects.create(
-            name='gym', day='T', time_start='8:00', time_end='9:00')
+            name='gym', location='rec center', color='#ffffff', day='T', time_start='8:00', time_end='9:00')
         tt.events.add(event)
         tt.courses.add(course)
         tt.sections.add(section)
