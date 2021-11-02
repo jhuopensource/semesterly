@@ -127,7 +127,7 @@ class PersonalEvent(models.Model):
     when a user is not free. Courses are scheduled around it.
     """
     name = models.CharField(max_length=50)
-    location = models.CharField(max_length=50)
+    location = models.CharField(max_length=50, default='')
     color = models.CharField(max_length=7, default='#D4DBC8')
     day = models.CharField(max_length=1)
     time_start = models.CharField(max_length=15)
