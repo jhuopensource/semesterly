@@ -124,10 +124,11 @@ class PersonalEvent(models.Model):
     """
     A custom event that has been saved to a user's PersonalTimetable
     so that it persists across refresh, device, and session. Marks
-    when a user is not free. Courses are scheduled around it.abs
-
+    when a user is not free. Courses are scheduled around it.
     """
     name = models.CharField(max_length=50)
+    location = models.CharField(max_length=50)
+    color = models.CharField(max_length=7, default='#D4DBC8')
     day = models.CharField(max_length=1)
     time_start = models.CharField(max_length=15)
     time_end = models.CharField(max_length=15)
