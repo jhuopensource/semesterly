@@ -1,5 +1,4 @@
-FROM semesterly.azurecr.io/semesterly-base-py3:latest
-# sgerli/horariotec-base:
+FROM jhuopensource/semesterly-base-py3:latest
 RUN mkdir /code
 WORKDIR /code
 
