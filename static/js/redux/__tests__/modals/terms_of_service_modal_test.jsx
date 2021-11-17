@@ -11,58 +11,56 @@ but WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU General Public License for more details.
 */
-
 import React from 'react';
 import thunk from 'redux-thunk';
-import Provider from 'react-redux/src/components/Provider';
 import configureMockStore from 'redux-mock-store';
-import renderer from 'react-test-renderer';
-import { tosModalFixture, userInfoFixture } from '../../__fixtures__/terms_of_service_modal.fixture';
-import TermsOfServiceModalContainer from '../../ui/containers/terms_of_service_modal_container';
+import { renderWithRedux } from '../../test-utils';
+import {
+  tosModalFixture,
+  userInfoFixture,
+} from '../../__fixtures__/terms_of_service_modal.fixture';
 import { handleAgreement } from '../../actions/user_actions';
 import * as ActionTypes from '../../constants/actionTypes';
+import TermsOfServiceModalContainer from '../../ui/containers/terms_of_service_modal_container';
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
 
 describe('TOS Modal', () => {
   it('shows when isVisible is true', () => {
-    const store = mockStore({
+    const initialState = {
       termsOfServiceModal: tosModalFixture,
       userInfo: userInfoFixture,
+    };
+
+    const { container } = renderWithRedux(<TermsOfServiceModalContainer />, {
+      preloadedState: initialState,
     });
-    const tree = renderer.create(
-      <Provider store={store}><TermsOfServiceModalContainer /></Provider>,
-    ).toJSON();
-    delete tree.children[0].children[0].props.style.animationName;
-    delete tree.children[1].props.style.animationName;
-    expect(tree).toMatchSnapshot();
+    expect(container).toMatchSnapshot();
   });
 
   it('shows welcome message for new users', () => {
     const newUser = userInfoFixture;
     newUser.data.timeAcceptedTos = null;
-    const store = mockStore({
+    const initialState = {
       termsOfServiceModal: tosModalFixture,
       userInfo: userInfoFixture,
+    };
+    const { container } = renderWithRedux(<TermsOfServiceModalContainer />, {
+      preloadedState: initialState,
     });
-    const tree = renderer.create(
-      <Provider store={store}><TermsOfServiceModalContainer /></Provider>,
-    ).toJSON();
-    delete tree.children[0].children[0].props.style.animationName;
-    delete tree.children[1].props.style.animationName;
-    expect(tree).toMatchSnapshot();
+    expect(container).toMatchSnapshot();
   });
 
   it('is hidden when isVisible is false', () => {
-    const store = mockStore({
+    const initialState = {
       termsOfServiceModal: { ...tosModalFixture, isVisible: false },
       userInfo: userInfoFixture,
+    };
+    const { container } = renderWithRedux(<TermsOfServiceModalContainer />, {
+      preloadedState: initialState,
     });
-    const tree = renderer.create(
-      <Provider store={store}><TermsOfServiceModalContainer /></Provider>,
-    ).toJSON();
-    expect(tree).toMatchSnapshot();
+    expect(container).toMatchSnapshot();
   });
 });
 

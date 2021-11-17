@@ -59,6 +59,8 @@ DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
+USE_X_FORWARDED_HOST = True
+
 SOCIAL_AUTH_FACEBOOK_SCOPE = [
     'email',
     'user_friends',
@@ -194,6 +196,7 @@ REST_FRAMEWORK ={
 SESSION_ENGINE = 'django.contrib.sessions.backends.db'
 
 MIDDLEWARE = (
+    'semesterly.middleware.middleware.MultipleProxyMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -216,12 +219,13 @@ TEMPLATES = [
             'debug': DEBUG,
             'context_processors': [
                 'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.request',
                 'django.template.context_processors.debug',
                 'django.template.context_processors.i18n',
                 'django.template.context_processors.media',
                 'django.template.context_processors.static',
                 'django.template.context_processors.tz',
-                'django.contrib.messages.context_processors.messages',
                 'social_django.context_processors.backends',
                 'social_django.context_processors.login_redirect',
             ],
@@ -247,6 +251,7 @@ ROOT_URLCONF = 'semesterly.urls'
 
 WSGI_APPLICATION = 'semesterly.wsgi.application'
 
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
@@ -255,8 +260,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': os.path.join(BASE_DIR, 'db.postgresql'),  # os.path.join(BASE_DIR, 'db.postgresql')
-        'USER': '',
-        'PASSWORD': '',
+        'USER': 'postgres',
+        'PASSWORD': 'postgres',
         'HOST': 'localhost',
         'PORT': '5432',
     }
