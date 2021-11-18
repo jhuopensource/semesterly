@@ -32,6 +32,7 @@ import explorationModal, * as fromExplorationModal from './exploration_modal_red
 import customSlots from './custom_slots_reducer';
 import signupModal from './signup_modal_reducer';
 import peerModal from './peer_modal_reducer';
+import featureDashboardModal from './feature_dashboard_modal_reducer';
 import preferenceModal from './preference_modal_reducer';
 import friends from './friends_reducer';
 import notificationToken from './notification_token_reducer';
@@ -62,6 +63,7 @@ const reducers = {
   notificationToken,
   optionalCourses,
   peerModal,
+  featureDashboardModal,
   preferenceModal,
   preferences,
   registrar,

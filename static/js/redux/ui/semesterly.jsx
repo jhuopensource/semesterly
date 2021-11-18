@@ -28,6 +28,7 @@ import SideBarContainer from './containers/side_bar_container';
 import ExplorationModalContainer from './containers/modals/exploration_modal_container';
 import SignupModalContainer from './containers/modals/signup_modal_container';
 import PreferenceModalContainer from './containers/modals/preference_modal_container';
+import FeatureDashboardModalContainer from './containers/modals/feature_dashboard_modal_container';
 import TutModalContainer from './containers/modals/tut_modal_container';
 import PeerModalContainer from './containers/modals/peer_modal_container';
 import IntegrationModalContainer from './containers/modals/integration_modal_container';
@@ -38,7 +39,6 @@ import TermsOfServiceModalContainer from './containers/terms_of_service_modal_co
 import TermsOfServiceBannerContainer from './containers/terms_of_service_banner_container';
 import TextbookModalContainer from './containers/modals/textbook_modal_container';
 import UserSettingsModal from './modals/user_settings_modal';
-
 
 class Semesterly extends React.Component {
   constructor(props) {
@@ -169,6 +169,7 @@ class Semesterly extends React.Component {
         <ExplorationModalContainer />
         <SignupModalContainer />
         <PreferenceModalContainer />
+        <FeatureDashboardModalContainer />
         <IntegrationModalContainer />
         <TutModalContainer />
         <PeerModalContainer />
@@ -191,6 +192,11 @@ class Semesterly extends React.Component {
                 </li>
                 <li className="footer-button" role="presentation">
                   <a href="/privacypolicy">Privacy</a>
+                </li>
+                <li className="footer-button" role="presentation">
+                  <a onClick={this.props.toggleFeatureDashboardModal}>
+                    Feature Requests
+                  </a>
                 </li>
                 <li className="footer-button" role="presentation">
                   <a href="mailto:contact@semester.ly?Subject=Semesterly">
