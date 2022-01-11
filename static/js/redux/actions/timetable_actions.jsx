@@ -241,7 +241,7 @@ export const loadCachedTimetable = (allSemesters, oldSemesters) => (dispatch, ge
       // if no personal TTs and local storage data is valid, load cached timetable
       dispatch({ type: ActionTypes.SET_ALL_PREFERENCES, preferences: localPreferences });
       dispatch(updateSemester(matchedIndex));
-      dispatch(courseSectionsSlice.receiveCourseSections(localCourseSections));
+      dispatch(courseSectionsActions.receiveCourseSections(localCourseSections));
       dispatch(fetchStateTimetables(localActive));
     }
   }
