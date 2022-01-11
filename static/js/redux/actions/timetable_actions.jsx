@@ -44,6 +44,7 @@ import {
 } from './initActions';
 import { timetablesActions } from '../state/slices/timetablesSlice';
 import { customEventsAction } from '../state/slices/customEventsSlice';
+import courseSectionsSlice, { courseSectionsActions } from '../state/slices/courseSectionsSlice';
 
 let customEventUpdateTimer; // keep track of user's custom event actions for autofetch
 
@@ -83,10 +84,7 @@ export const fetchTimetables = (requestBody, removing, newActive = 0) => (dispat
         // receive new info into state
         dispatch(receiveCourses(json.courses));
         dispatch(receiveTimetables(json.timetables));
-        dispatch({
-          type: ActionTypes.RECEIVE_COURSE_SECTIONS,
-          courseSections: json.new_c_to_s,
-        });
+        dispatch(courseSectionsActions.receiveCourseSections(json.new_c_to_s));
         dispatch(changeActiveTimetable(newActive));
         // cache new info into local storage
         if (!state.userInfo.data.isLoggedIn) {
@@ -138,10 +136,9 @@ export const lockTimetable = timetable => (dispatch, getState) => {
   if (timetable.has_conflict) {
     dispatch({ type: ActionTypes.TURN_CONFLICTS_ON });
   }
-  dispatch({
-    type: ActionTypes.RECEIVE_COURSE_SECTIONS,
-    courseSections: lockActiveSections(getDenormTimetable(state, timetable)),
-  });
+  dispatch(courseSectionsActions.receiveCourseSections(
+    lockActiveSections(getDenormTimetable(state, timetable))
+  ));
   dispatch(receiveTimetables([timetable]));
   if (state.userInfo.data.isLoggedIn) {
     dispatch(fetchClassmates(timetable));
@@ -183,10 +180,7 @@ export const createNewTimetable = (ttName = 'Untitled Schedule') => (dispatch) =
 
 export const nullifyTimetable = () => (dispatch) => {
   dispatch(receiveTimetables([{ slots: [], has_conflict: false }]));
-  dispatch({
-    type: ActionTypes.RECEIVE_COURSE_SECTIONS,
-    courseSections: {},
-  });
+  dispatch(courseSectionsActions.receiveCourseSections({}));
   dispatch(changeActiveSavedTimetable({
     timetable: { name: 'Untitled Schedule', slots: [], events: [], has_conflict: false },
     upToDate: false,
@@ -247,10 +241,7 @@ export const loadCachedTimetable = (allSemesters, oldSemesters) => (dispatch, ge
       // if no personal TTs and local storage data is valid, load cached timetable
       dispatch({ type: ActionTypes.SET_ALL_PREFERENCES, preferences: localPreferences });
       dispatch(updateSemester(matchedIndex));
-      dispatch({
-        type: ActionTypes.RECEIVE_COURSE_SECTIONS,
-        courseSections: localCourseSections,
-      });
+      dispatch(courseSectionsSlice.receiveCourseSections(localCourseSections));
       dispatch(fetchStateTimetables(localActive));
     }
   }
