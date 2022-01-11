@@ -44,7 +44,7 @@ import {
 } from './initActions';
 import { timetablesActions } from '../state/slices/timetablesSlice';
 import { customEventsAction } from '../state/slices/customEventsSlice';
-import courseSectionsSlice, { courseSectionsActions } from '../state/slices/courseSectionsSlice';
+import { courseSectionsActions } from '../state/slices/courseSectionsSlice';
 
 let customEventUpdateTimer; // keep track of user's custom event actions for autofetch
 
