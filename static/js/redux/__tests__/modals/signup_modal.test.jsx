@@ -11,13 +11,14 @@ but WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU General Public License for more details.
 */
-import "@testing-library/jest-dom/extend-expect";
-import React from "react";
-import { renderWithRedux } from "../../test-utils";
-import SignupModalContainer from "../../ui/containers/modals/signup_modal_container";
+import '@testing-library/jest-dom/extend-expect';
+import React from 'react';
+import { renderWithRedux } from '../../test-utils';
+import SignupModalContainer from '../../ui/containers/modals/signup_modal_container';
 
-describe("Signup Modal", () => {
-  it("shows when isVisible is true", () => {
+
+describe('Signup Modal', () => {
+  it('shows when isVisible is true', () => {
     const initialState = {
       signupModal: { isVisible: true },
     };
@@ -25,16 +26,17 @@ describe("Signup Modal", () => {
       preloadedState: initialState,
     });
     expect(container).not.toBeEmptyDOMElement();
-    expect(container).toHaveTextContent("That feature requires an account...");
+    expect(container).toHaveTextContent('That feature requires an account...');
   });
 
-  it("is hidden when isVisible is false", () => {
+  it('is hidden when isVisible is false', () => {
     const initialState = {
       signupModal: { isVisible: false },
     };
     const { container } = renderWithRedux(<SignupModalContainer />, {
       preloadedState: initialState,
-    });
+    },
+    );
     expect(container).toBeEmptyDOMElement();
   });
 });
