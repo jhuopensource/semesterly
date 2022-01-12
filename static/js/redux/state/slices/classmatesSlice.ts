@@ -1,7 +1,7 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface ClassmateSliceState {
-  courseToClassmates: any; // map<course_ids: string, object>
+  courseToClassmates: any;  // map<course_ids: string, object>
   isFetching: boolean;
 }
 
@@ -12,7 +12,7 @@ const initialState: ClassmateSliceState = {
 
 const classmatesSlice = createSlice({
   name: "classmates",
-  initialState,
+  initialState: initialState,
   reducers: {
     classmatesReceived: (state, action) => {
       state.courseToClassmates = action.payload;
