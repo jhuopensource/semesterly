@@ -93,8 +93,6 @@ const Calendar = (props: CalendarProps) => {
     }, 60 * 1000);
   }, []);
 
-  // TODO : Test share link shows properly
-
   const getCalendarRows = () => {
     const rows = [];
     for (let i = 8; i <= props.endHour; i++) {
