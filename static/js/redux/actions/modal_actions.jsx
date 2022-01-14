@@ -14,15 +14,30 @@ GNU General Public License for more details.
 
 import fetch from 'isomorphic-fetch';
 import Cookie from 'js-cookie';
+import { normalize } from 'normalizr';
 import {
-  getClassmatesInCourseEndpoint,
-  getCourseInfoEndpoint,
-  getReactToCourseEndpoint,
+    getClassmatesInCourseEndpoint,
+    getCourseInfoEndpoint,
+    getReactToCourseEndpoint,
 } from '../constants/endpoints';
+import { courseSchema } from '../schema';
 import { getSchool, getSemester } from '../actions/school_actions';
 import * as ActionTypes from '../constants/actionTypes';
-import { courseInfoActions } from '../state/slices';
-import { setCourseReactions, setCourseInfo } from './initActions';
+
+export const setCourseInfo = json => ({
+  type: ActionTypes.COURSE_INFO_RECEIVED,
+  response: normalize(json, courseSchema),
+});
+
+export const setCourseClassmates = json => ({
+  type: ActionTypes.COURSE_CLASSMATES_RECEIVED,
+  data: json,
+});
+
+export const setCourseId = id => ({
+  type: ActionTypes.SET_COURSE_ID,
+  id,
+});
 
 export const fetchCourseClassmates = courseId => (dispatch, getState) => {
   const state = getState();
@@ -31,19 +46,19 @@ export const fetchCourseClassmates = courseId => (dispatch, getState) => {
   })
     .then(response => response.json())
     .then((json) => {
-      dispatch(courseInfoActions.courseClassmatesReceived(json));
+      dispatch(setCourseClassmates(json));
     });
 };
 
 export const fetchCourseInfo = courseId => (dispatch, getState) => {
-  dispatch(courseInfoActions.requestCourseInfo());
+  dispatch({ type: ActionTypes.REQUEST_COURSE_INFO });
   fetch(getCourseInfoEndpoint(courseId, getSemester(getState())), {
     credentials: 'include',
   })
-    .then(response => response.json())
-    .then((json) => {
-      dispatch(setCourseInfo(json));
-    });
+  .then(response => response.json())
+  .then((json) => {
+    dispatch(setCourseInfo(json));
+  });
   dispatch(fetchCourseClassmates(courseId));
 };
 
@@ -61,21 +76,16 @@ export const react = (cid, title) => (dispatch) => {
     }),
     credentials: 'include',
   })
-    .then(response => response.json())
-    .then((json) => {
-      if (!json.error) {
-        // TODO: remove below
-        dispatch({
-          id: cid,
-          type: ActionTypes.SET_COURSE_REACTIONS,
-          reactions: json.reactions,
-        });
-        dispatch(setCourseReactions({
-          id: cid,
-          reactions: json.reactions,
-        }));
-      }
-    });
+  .then(response => response.json())
+  .then((json) => {
+    if (!json.error) {
+      dispatch({
+        id: cid,
+        type: ActionTypes.SET_COURSE_REACTIONS,
+        reactions: json.reactions,
+      });
+    }
+  });
 };
 
 export const togglePreferenceModal = () => ({ type: ActionTypes.TOGGLE_PREFERENCE_MODAL });
@@ -90,6 +100,8 @@ export const hideExplorationModal = () => ({ type: ActionTypes.HIDE_EXPLORATION_
 
 export const showExplorationModal = () => ({ type: ActionTypes.SHOW_EXPLORATION_MODAL });
 
+export const hideFinalExamsModal = () => ({ type: ActionTypes.HIDE_FINAL_EXAMS_MODAL });
+
 export const triggerAcquisitionModal = () => ({ type: ActionTypes.TRIGGER_ACQUISITION_MODAL });
 
 export const toggleAcquisitionModal = () => ({ type: ActionTypes.TOGGLE_ACQUISITION_MODAL });
@@ -99,6 +111,8 @@ export const toggleIntegrationModal = () => ({ type: ActionTypes.TOGGLE_INTEGRAT
 export const togglePeerModal = () => ({ type: ActionTypes.TOGGLE_PEER_MODAL });
 
 export const triggerTextbookModal = () => ({ type: ActionTypes.TRIGGER_TEXTBOOK_MODAL });
+
+export const showFinalExamsModal = () => ({ type: ActionTypes.SHOW_FINAL_EXAMS_MODAL });
 
 export const overrideSettingsShow = data => ({
   type: ActionTypes.OVERRIDE_SETTINGS_SHOW,
