@@ -71,7 +71,7 @@ lxml==4.6.3
 mccabe==0.6.1
 mock==2.0.0
 nltk==3.6.5
-numpy==1.16.5
+numpy==1.21.0
 oauth==1.0.1
 oauth2client==4.1.2
 oauthlib==2.0.2
