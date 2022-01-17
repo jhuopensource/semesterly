@@ -131,3 +131,4 @@ virtualenv==15.1.0
 watchdog==0.8.3
 webdriver-manager==3.5.2
 webencodings==0.5.1
+whitenoise==4.1.4
