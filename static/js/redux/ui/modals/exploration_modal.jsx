@@ -12,19 +12,21 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU General Public License for more details.
 */
 
-import PropTypes from 'prop-types';
-import React from 'react';
-import { DropModal } from 'boron-15';
-import isEqual from 'lodash/isEqual';
-import classNames from 'classnames';
-import CourseModalBodyContainer from '../containers/modals/course_modal_body_container';
-import { ShareLink } from '../master_slot';
+import PropTypes from "prop-types";
+import React from "react";
+import { DropModal } from "boron-15";
+import isEqual from "lodash/isEqual";
+import classNames from "classnames";
+import CourseModalBodyContainer from "../containers/modals/course_modal_body_container";
+import { ShareLink } from "../master_slot";
 import {
-  Filter, SelectedFilter, SelectedFilterSection,
-} from '../advanced_search_filters';
-import * as SemesterlyPropTypes from '../../constants/semesterlyPropTypes';
-import { VERBOSE_DAYS } from '../../constants/constants';
-import TimeSelector from '../time_selector';
+  Filter,
+  SelectedFilter,
+  SelectedFilterSection,
+} from "../advanced_search_filters";
+import * as SemesterlyPropTypes from "../../constants/semesterlyPropTypes";
+import { VERBOSE_DAYS } from "../../constants/constants";
+import TimeSelector from "../time_selector";
 
 class ExplorationModal extends React.Component {
   constructor(props) {
@@ -41,10 +43,13 @@ class ExplorationModal extends React.Component {
       addedDays: [],
       shareLinkShown: false,
       hasUpdatedCourses: false,
+      selected: 0,
+      didSearch: false,
     };
     this.toggle = this.toggle.bind(this);
     this.fetchAdvancedSearchResults = this.fetchAdvancedSearchResults.bind(this);
-    this.fetchAdvancedSearchResultsWrapper = this.fetchAdvancedSearchResultsWrapper.bind(this);
+    this.fetchAdvancedSearchResultsWrapper =
+      this.fetchAdvancedSearchResultsWrapper.bind(this);
     this.addOrRemoveCourse = this.addOrRemoveCourse.bind(this);
     this.changeTimer = false;
     this.hide = this.hide.bind(this);
@@ -66,7 +71,10 @@ class ExplorationModal extends React.Component {
     if (nextProps.advancedSearchResults !== this.props.advancedSearchResults) {
       this.setState({ hasUpdatedCourses: true });
     }
-    if (nextProps.advancedSearchResults.length > 0 && this.props.advancedSearchResults === 0) {
+    if (
+      nextProps.advancedSearchResults.length > 0 &&
+      this.props.advancedSearchResults === 0
+    ) {
       this.props.fetchCourseClassmates(nextProps.advancedSearchResults[0].id);
     }
   }
@@ -83,14 +91,19 @@ class ExplorationModal extends React.Component {
       times: prevState.times,
       levels: prevState.levels,
     };
-    if (!isEqual(filters, prevFilters) && this.props.page > 1) {
+    if (!isEqual(filters, prevFilters)) {
       this.props.clearPagination();
     }
-    $('.exp-search-results').scroll(() => {
-      const expSearchResultsDiv = $('.exp-search-results');
-      const scrollPercent = (100 * expSearchResultsDiv.scrollTop()) / (($(document).height())
-        - expSearchResultsDiv.height());
-      if (scrollPercent > 40 && !prevState.hasUpdatedCourses && this.state.hasUpdatedCourses) {
+    $(".exp-search-results").scroll(() => {
+      const expSearchResultsDiv = $(".exp-search-results");
+      const scrollPercent =
+        (100 * expSearchResultsDiv.scrollTop()) /
+        ($(document).height() - expSearchResultsDiv.height());
+      if (
+        scrollPercent > 40 &&
+        !prevState.hasUpdatedCourses &&
+        this.state.hasUpdatedCourses
+      ) {
         this.setState({ hasUpdatedCourses: false });
         this.props.paginate();
         this.fetchAdvancedSearchResultsWrapper();
@@ -128,21 +141,23 @@ class ExplorationModal extends React.Component {
     }
     const query = this.input.value;
     const { areas, departments, times, levels } = filters;
+    this.setState({ didSearch: false });
     this.props.fetchAdvancedSearchResults(query, {
       areas,
       departments,
       times,
       levels,
     });
+    this.setState({ didSearch: true });
   }
 
   fetchAdvancedSearchResultsWrapper() {
     if (this.changeTimer) clearTimeout(this.changeTimer);
     this.changeTimer = setTimeout(() => {
-            // fetchAdvancedSearchResults requires that its argument contain
-            // at least the filters. since this.state has them, we simply pass this.state
-            // as its argument. there are other aspects of state that are irrelevant for the call,
-            // but we include them for the brevity of just passing this.state
+      // fetchAdvancedSearchResults requires that its argument contain
+      // at least the filters. since this.state has them, we simply pass this.state
+      // as its argument. there are other aspects of state that are irrelevant for the call,
+      // but we include them for the brevity of just passing this.state
       this.fetchAdvancedSearchResults(this.state);
       this.changeTimer = false;
     }, 200);
@@ -157,17 +172,23 @@ class ExplorationModal extends React.Component {
       return;
     }
     const updatedFilter = [...this.state[filterType], filter];
-    this.fetchAdvancedSearchResults(Object.assign({}, this.state, { [filterType]: updatedFilter }));
+    this.fetchAdvancedSearchResults(
+      Object.assign({}, this.state, { [filterType]: updatedFilter })
+    );
 
     this.setState({ [filterType]: updatedFilter });
   }
 
-  removeFilter(filterType, filter) {
+  removeFilter(filterType, filter = undefined) {
     if (this.props.isFetching) {
       return;
     }
-    const updatedFilter = this.state[filterType].filter(f => f !== filter);
-    this.fetchAdvancedSearchResults(Object.assign({}, this.state, { [filterType]: updatedFilter }));
+    const updatedFilter =
+      filter === undefined ? [] : this.state[filterType].filter((f) => f !== filter);
+    this.fetchAdvancedSearchResults(
+      Object.assign({}, this.state, { [filterType]: updatedFilter })
+    );
+    this.setState({ addedDays: [] });
     this.setState({ [filterType]: updatedFilter });
   }
 
@@ -180,7 +201,7 @@ class ExplorationModal extends React.Component {
     });
   }
 
-  addOrRemoveCourse(id, section = '') {
+  addOrRemoveCourse(id, section = "") {
     this.props.addOrRemoveCourse(id, section);
     this.hide();
   }
@@ -190,13 +211,12 @@ class ExplorationModal extends React.Component {
     this.hide();
   }
 
-
   handleTimesChange(values, component) {
     if (this.props.isFetching) {
       return;
     }
     const times = [...this.state.times];
-    const i = times.findIndex(t => t.day === component);
+    const i = times.findIndex((t) => t.day === component);
     times[i] = Object.assign({}, times[i], values);
     this.setState({
       times,
@@ -209,14 +229,15 @@ class ExplorationModal extends React.Component {
     }
     const availableDays = VERBOSE_DAYS;
     const addedDays = [...this.state.addedDays, day];
-    addedDays.sort((a, b) => (
-            availableDays.indexOf(a) - availableDays.indexOf(b)
-        ));
-    const times = [...this.state.times, {
-      min: 8,
-      max: 24,
-      day,
-    }];
+    addedDays.sort((a, b) => availableDays.indexOf(a) - availableDays.indexOf(b));
+    const times = [
+      ...this.state.times,
+      {
+        min: 8,
+        max: 24,
+        day,
+      },
+    ];
     const stateUpdate = {
       addedDays,
       times,
@@ -228,7 +249,7 @@ class ExplorationModal extends React.Component {
   removeTimeFilter(day) {
     const { times, addedDays } = this.state;
     const addedDayIndex = addedDays.indexOf(day);
-    const timesIndex = times.findIndex(t => t.day === day);
+    const timesIndex = times.findIndex((t) => t.day === day);
     if (addedDayIndex === -1) {
       return;
     }
@@ -237,10 +258,7 @@ class ExplorationModal extends React.Component {
         ...addedDays.slice(0, addedDayIndex),
         ...addedDays.slice(addedDayIndex + 1),
       ],
-      times: [
-        ...times.slice(0, timesIndex),
-        ...times.slice(timesIndex + 1),
-      ],
+      times: [...times.slice(0, timesIndex), ...times.slice(timesIndex + 1)],
     };
     this.setState(stateUpdate);
     this.fetchAdvancedSearchResults(Object.assign({}, this.state, stateUpdate));
@@ -248,48 +266,61 @@ class ExplorationModal extends React.Component {
 
   render() {
     const modalStyle = {
-      width: '100%',
-      backgroundColor: 'transparent',
+      width: "100%",
+      backgroundColor: "transparent",
     };
     const { advancedSearchResults, active, inRoster } = this.props;
-    const numSearchResults = advancedSearchResults.length > 0 ?
-      <p>returned { advancedSearchResults.length } Search Results</p> : null;
-    const searchResults = advancedSearchResults.map((c, i) => (<ExplorationSearchResult
-      key={c.id} code={c.code} name={c.name}
-      onClick={() => this.props.setAdvancedSearchResultIndex(i, c.id)}
-    />));
+    const numSearchResults =
+      !this.props.isFetching && advancedSearchResults.length > 0 ? (
+        <p>returned {advancedSearchResults.length} Search Results</p>
+      ) : null;
+    const searchResults = advancedSearchResults.map((c, i) => (
+      // eslint-disable-next-line no-use-before-define
+      <ExplorationSearchResult
+        key={c.id}
+        code={c.code}
+        name={c.name}
+        isSelected={this.state.selected === i}
+        onClick={() => {
+          this.props.setAdvancedSearchResultIndex(i, c.id);
+          this.setState({ selected: i });
+        }}
+      />
+    ));
     let courseModal = null;
     if (active >= 0 && active < advancedSearchResults.length) {
       const selectedCourse = advancedSearchResults[active];
-      const shareLink = this.state.shareLinkShown ?
-                (<ShareLink
-                  link={this.props.getShareLink(selectedCourse.code)}
-                  onClickOut={this.hideShareLink}
-                />) :
-                null;
+      const shareLink = this.state.shareLinkShown ? (
+        <ShareLink
+          link={this.props.getShareLink(selectedCourse.code)}
+          onClickOut={this.hideShareLink}
+        />
+      ) : null;
       courseModal = (
         <div className="modal-content">
           <div className="modal-header">
-            <h1>{ selectedCourse.name }</h1>
-            <h2>{ selectedCourse.code }</h2>
+            <h1>{selectedCourse.name}</h1>
+            <h2>{selectedCourse.code}</h2>
             <div className="modal-share" onClick={this.showShareLink}>
               <i className="fa fa-share-alt" />
             </div>
-            { shareLink }
-            {
-                          inRoster ? null :
-                          <div
-                            className="modal-save"
-                            onClick={() => this.addOrRemoveOptionalCourse(selectedCourse)}
-                          >
-                            <i className="fa fa-bookmark" />
-                          </div>
-                      }
-            <div className="modal-add" onClick={() => this.addOrRemoveCourse(selectedCourse.id)}>
+            {shareLink}
+            {inRoster ? null : (
+              <div
+                className="modal-save"
+                onClick={() => this.addOrRemoveOptionalCourse(selectedCourse)}
+              >
+                <i className="fa fa-bookmark" />
+              </div>
+            )}
+            <div
+              className="modal-add"
+              onClick={() => this.addOrRemoveCourse(selectedCourse.id)}
+            >
               <i
-                className={classNames('fa', {
-                  'fa-plus': !inRoster,
-                  'fa-check': inRoster,
+                className={classNames("fa", {
+                  "fa-plus": !inRoster,
+                  "fa-check": inRoster,
                 })}
               />
             </div>
@@ -306,132 +337,160 @@ class ExplorationModal extends React.Component {
         </div>
       );
     }
-    const filterTypes = ['departments', 'areas', 'levels'];
-    const filters = filterTypes.map(filterType => (
-            this.props[filterType].length === 0 ? null :
-            <Filter
-              results={this.props[filterType]}
-              key={filterType} filterType={filterType}
-              add={this.addFilter} show={this.state[`show_${filterType}`]}
-              isFiltered={this.isFiltered}
-              isFetching={this.props.isFetching}
-              onClickOut={this.hideAll}
-              schoolSpecificInfo={this.props.schoolSpecificInfo}
-            />
-        ));
+    const filterTypes = ["departments", "areas", "levels"];
+    const filters = filterTypes.map((filterType) =>
+      this.props[filterType].length === 0 ? null : (
+        <Filter
+          results={this.props[filterType]}
+          key={filterType}
+          filterType={filterType}
+          add={this.addFilter}
+          show={this.state[`show_${filterType}`]}
+          isFiltered={this.isFiltered}
+          isFetching={this.props.isFetching}
+          onClickOut={this.hideAll}
+          schoolSpecificInfo={this.props.schoolSpecificInfo}
+        />
+      )
+    );
     const selectedFilterSections = filterTypes.map((filterType) => {
       if (this.props[filterType].length === 0) {
         return null;
       }
       const availableFilters = this.props[filterType];
-            // sort selected filters according to the order in which they were received from props
-      const sortedFilters = this.state[filterType].concat().sort((a, b) => (
-                availableFilters.indexOf(a) - availableFilters.indexOf(b)
-            ));
-      const selectedItems = sortedFilters.map(name => (
+      // sort selected filters according to the order in which they were received from props
+      const sortedFilters = this.state[filterType]
+        .concat()
+        .sort((a, b) => availableFilters.indexOf(a) - availableFilters.indexOf(b));
+      const selectedItems = sortedFilters.map((name) => (
         <SelectedFilter
-          key={name} name={name}
+          key={name}
+          name={name}
           remove={() => this.removeFilter(filterType, name)}
         />
-            ));
+      ));
       const name = this.props.schoolSpecificInfo[`${filterType}Name`];
 
       return (
         <SelectedFilterSection
-          key={filterType} name={name}
+          key={filterType}
+          name={name}
+          type={filterType}
           toggle={this.toggle(filterType)}
+          removeAll={() => this.removeFilter(filterType)}
         >
-
           {selectedItems}
-
         </SelectedFilterSection>
       );
     });
 
     const timeFilters = this.state.addedDays.map((d) => {
-      const timeState = this.state.times.find(t => t.day === d);
+      const timeState = this.state.times.find((t) => t.day === d);
       const value = { min: timeState.min, max: timeState.max };
-      return (<TimeSelector
-        key={timeState.day}
-        day={timeState.day}
-        value={value}
-        onChange={(x, y = timeState.day) => this.handleTimesChange(x, y)}
-        onChangeComplete={() => this.fetchAdvancedSearchResults(this.state)}
-        remove={this.removeTimeFilter}
-      />);
+      return (
+        <TimeSelector
+          key={timeState.day}
+          day={timeState.day}
+          value={value}
+          onChange={(x, y = timeState.day) => this.handleTimesChange(x, y)}
+          onChangeComplete={() => this.fetchAdvancedSearchResults(this.state)}
+          remove={this.removeTimeFilter}
+        />
+      );
     });
-    const explorationLoader = this.props.isFetching ?
-      <i className="fa fa-spin fa-refresh" /> : null;
+    const explorationLoader = <i className="fa fa-spin fa-refresh" />;
     const content = (
-      <div className={classNames('exploration-content', { loading: this.props.isFetching })}>
-        <div
-          className="exploration-header cf"
-        >
-          <div
-            className="col-4-16 exp-title"
-          >
+      <div
+        className={classNames("exploration-content", {
+          loading: this.props.isFetching,
+        })}
+      >
+        <div className="exploration-header cf">
+          <div className="col-4-16 exp-title">
             <i className="fa fa-compass" />
             <h1>Advanced Search</h1>
           </div>
           <div className="col-5-16">
             <input
-              ref={(c) => { this.input = c; }}
+              ref={(c) => {
+                this.input = c;
+              }}
               placeholder={`Searching ${this.props.semesterName}`}
               onInput={() => {
                 this.props.clearPagination();
                 this.fetchAdvancedSearchResultsWrapper();
-              }
-                            }
+              }}
             />
           </div>
-          <div
-            className="exploration-close"
-            onMouseDown={() => this.modal.hide()}
-          >
+          <div className="exploration-close" onMouseDown={() => this.modal.hide()}>
             <i className="fa fa-times" />
           </div>
         </div>
         <div className="exploration-body">
           <div className="col-4-16 exp-filters">
-            { selectedFilterSections }
+            {selectedFilterSections}
             <SelectedFilterSection
-              key={'times'} name={'Day/Times'}
-              toggle={this.toggle('times')}
+              key={"times"}
+              name={"Day/Times"}
+              toggle={this.toggle("times")}
+              type={"times"}
+              removeAll={() => {
+                this.removeFilter("times");
+              }}
             >
               {timeFilters}
-
             </SelectedFilterSection>
           </div>
           <div className="col-5-16 exp-search-results">
-            <div id="exp-search-list">
-              { numSearchResults }
-              { searchResults }
-              {explorationLoader}
+            <div id="exp-search-list" style={{ height: "calc(100% - 20px)" }}>
+              {numSearchResults}
+              {this.state.didSearch &&
+                !this.props.isFetching &&
+                (searchResults.length ? (
+                  searchResults
+                ) : (
+                  <p>No courses have been found</p>
+                ))}
+              {this.props.isFetching ? (
+                <div
+                  style={{
+                    height: "100%",
+                    display: "flex",
+                    flexDirection: "row",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
+                  {explorationLoader}
+                </div>
+              ) : null}
             </div>
           </div>
-          { filters }
+          {filters}
           <Filter
-            results={['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']}
-            filterType={'times'}
-            add={this.addDayForTimesFilter} show={this.state.show_times}
+            results={["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]}
+            filterType={"times"}
+            add={this.addDayForTimesFilter}
+            show={this.state.show_times}
             isFiltered={this.isFiltered}
             isFetching={this.props.isFetching}
             onClickOut={this.hideAll}
             schoolSpecificInfo={this.props.schoolSpecificInfo}
           />
-          {
-                        this.props.isFetching && this.props.page === 1 ? null :
-                        <div className="col-7-16 exp-modal">
-                          { courseModal }
-                        </div>
-                    }
+          {this.props.isFetching ? null : (
+            <div className="col-7-16 exp-modal">{courseModal}</div>
+          )}
         </div>
       </div>
-        );
+    );
     return (
       <DropModal
-        ref={(c) => { this.modal = c; }}
-        className={classNames('exploration-modal max-modal', { trans: this.props.hasHoveredResult })}
+        ref={(c) => {
+          this.modal = c;
+        }}
+        className={classNames("exploration-modal max-modal", {
+          trans: this.props.hasHoveredResult,
+        })}
         modalStyle={modalStyle}
         onHide={this.props.hideExplorationModal}
       >
@@ -441,10 +500,14 @@ class ExplorationModal extends React.Component {
   }
 }
 
-const ExplorationSearchResult = ({ name, code, onClick }) => (
-  <div className="exp-s-result" onClick={onClick}>
-    <h4>{ name } </h4>
-    <h5> { code }</h5>
+const ExplorationSearchResult = ({ name, code, onClick, isSelected }) => (
+  <div
+    className="exp-s-result"
+    onClick={onClick}
+    style={{ backgroundColor: isSelected ? "#eeeeee" : undefined }}
+  >
+    <h4>{name}</h4>
+    <h5>{code}</h5>
   </div>
 );
 
@@ -452,6 +515,7 @@ ExplorationSearchResult.propTypes = {
   name: PropTypes.string.isRequired,
   code: PropTypes.string.isRequired,
   onClick: PropTypes.func.isRequired,
+  isSelected: PropTypes.bool.isRequired,
 };
 
 ExplorationModal.defaultProps = {
@@ -463,7 +527,8 @@ ExplorationModal.propTypes = {
   inRoster: PropTypes.bool,
   addOrRemoveCourse: PropTypes.func.isRequired,
   addOrRemoveOptionalCourse: PropTypes.func.isRequired,
-  advancedSearchResults: PropTypes.arrayOf(SemesterlyPropTypes.denormalizedCourse).isRequired,
+  advancedSearchResults: PropTypes.arrayOf(SemesterlyPropTypes.denormalizedCourse)
+    .isRequired,
   clearPagination: PropTypes.func.isRequired,
   active: PropTypes.number.isRequired,
   fetchAdvancedSearchResults: PropTypes.func.isRequired,
@@ -472,7 +537,6 @@ ExplorationModal.propTypes = {
   paginate: PropTypes.func.isRequired,
   isVisible: PropTypes.bool.isRequired,
   isFetching: PropTypes.bool.isRequired,
-  page: PropTypes.number.isRequired,
   hideExplorationModal: PropTypes.func.isRequired,
   schoolSpecificInfo: SemesterlyPropTypes.schoolSpecificInfo.isRequired,
   unHoverSection: PropTypes.func.isRequired,
@@ -482,4 +546,3 @@ ExplorationModal.propTypes = {
 };
 
 export default ExplorationModal;
-

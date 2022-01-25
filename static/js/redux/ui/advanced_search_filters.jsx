@@ -12,11 +12,12 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU General Public License for more details.
 */
 
-import PropTypes from 'prop-types';
-import React from 'react';
-import ClickOutHandler from 'react-onclickout';
-import classNames from 'classnames';
-import * as SemesterlyPropTypes from '../constants/semesterlyPropTypes';
+/* eslint-disable react/prop-types */
+import PropTypes from "prop-types";
+import React from "react";
+import ClickOutHandler from "react-onclickout";
+import classNames from "classnames";
+import * as SemesterlyPropTypes from "../constants/semesterlyPropTypes";
 
 export class Filter extends React.Component {
   constructor(props) {
@@ -33,12 +34,12 @@ export class Filter extends React.Component {
 
   filterResults(event) {
     const query = event.target.value.toLowerCase();
-    if (query === '') {
+    if (query === "") {
       this.setState({ results: this.props.results });
     } else {
       const results = this.props.results;
       this.setState({
-        results: results.filter(r => r.toLowerCase().includes(query)),
+        results: results.filter((r) => r.toLowerCase().includes(query)),
       });
     }
   }
@@ -49,35 +50,36 @@ export class Filter extends React.Component {
     }
     const { filterType, schoolSpecificInfo } = this.props;
     const placeholder = schoolSpecificInfo[`${filterType}Name`];
-    const results = this.state.results.map((r, i) => (<li
-      key={r}
-      onClick={() => this.props.add(filterType, r)}
-      className={classNames({ loading: this.props.isFetching })}
-    >
-      <i
-        className={classNames({
-          fa: true,
-          'fa-check': this.props.isFiltered(filterType, r),
-        })}
-      />
-      <h6>{r}</h6>
-    </li>));
+    const results = this.state.results.map((r) => (
+      <li
+        key={r}
+        onClick={() => this.props.add(filterType, r)}
+        className={classNames({ loading: this.props.isFetching })}
+      >
+        <i
+          className={classNames({
+            fa: true,
+            "fa-check": this.props.isFiltered(filterType, r),
+          })}
+        />
+        <h6>{r}</h6>
+      </li>
+    ));
     return (
       <ClickOutHandler onClickOut={this.props.onClickOut}>
         <div className="filter-pop-out open">
           <input
-            ref={(ref) => { this.filterInput = ref; }}
+            ref={(ref) => {
+              this.filterInput = ref;
+            }}
             placeholder={placeholder}
             onInput={this.filterResults}
           />
           <div className="fpo-list">
-            <ul>
-              { results }
-            </ul>
+            <ul>{results}</ul>
           </div>
         </div>
       </ClickOutHandler>
-
     );
   }
 }
@@ -95,10 +97,25 @@ Filter.propTypes = {
 
 // eslint-disable-next-line react/prop-types
 export const SelectedFilter = ({ name, remove }) => (
-  <h6>
+  <div
+    style={{
+      borderStyle: "solid",
+      borderWidth: "1px",
+      borderColor: "black",
+      borderRadius: "5px",
+      padding: "0 5px 0 5px",
+      margin: "0 0 3px 5px",
+      width: "auto",
+      display: "flex",
+      flexWrap: "wrap",
+      flexDirection: "row",
+      justifyContent: "space-between",
+      alignItems: "center",
+    }}
+  >
+    <span style={{ marginRight: "2px" }}>{name}</span>
     <i className="fa fa-times" onClick={() => remove()} />
-    <span>{ name }</span>
-  </h6>
+  </div>
 );
 
 SelectedFilter.propTypes = {
@@ -106,17 +123,28 @@ SelectedFilter.propTypes = {
   remove: PropTypes.func.isRequired,
 };
 
-// eslint-disable-next-line react/prop-types
-export const SelectedFilterSection = ({ name, toggle, children }) => (
+export const SelectedFilterSection = ({ name, toggle, children, type, removeAll }) => (
   <div className="exp-filter-section open">
     <h3 className="exp-header">
-      <span>{ name.substring(0, name.length - 1) } Filter</span>
-      <i
-        className="fa fa-plus"
-        onClick={toggle}
-      />
+      <span>{name.substring(0, name.length - 1)} Filter</span>
+      <i className="fa fa-plus" onClick={toggle} />
+      <i className="clear-all">
+        <div onClick={removeAll}>Clear All</div>
+      </i>
     </h3>
-    { children.length > 0 ? children : <h6 className="none-selected">None Selected</h6> }
+    {children.length > 0 ? (
+      <div
+        style={{
+          display: "flex",
+          flexDirection: type === "times" ? "column" : "row",
+          flexWrap: "wrap",
+        }}
+      >
+        {children}
+      </div>
+    ) : (
+      <h6 className="none-selected">None Selected</h6>
+    )}
   </div>
 );
 
@@ -124,4 +152,3 @@ SelectedFilterSection.propTypes = {
   name: PropTypes.string.isRequired,
   toggle: PropTypes.func.isRequired,
 };
-
