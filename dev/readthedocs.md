@@ -39,7 +39,7 @@ answer the following questions.
    88
 
 11. What is a FeatureFlowView?
-   Upon initial page load, it retrives all the data needed by the Frontend and stores them in a global variable called initData. 
+   Upon initial page load, it retrieves all the data needed by the Frontend and stores them in a global variable called initData. 
    initData is then picked up by setup() in init.jsx and passed to the redux state for any other future uses. 
 
 
