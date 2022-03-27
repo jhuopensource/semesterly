@@ -25,7 +25,7 @@ export const getTimetablesEndpoint = () => "/timetables/";
 export const getLoadSavedTimetablesEndpoint = (semester) =>
   `/user/timetables/${semester.name}/${semester.year}/`;
 export const getSaveTimetableEndpoint = () => "/user/timetables/";
-export const getUpdateEventEndpoint = () => "/user/events/";
+export const getPersonalEventEndpoint = () => "/user/events/";
 export const getDeleteTimetableEndpoint = (semester, name) =>
   `/user/timetables/${semester.name}/${semester.year}/${name}/`;
 export const getTimetablePreferencesEndpoint = (id) =>
@@ -61,3 +61,5 @@ export function getCourseShareLinkFromModal(code, semester) {
 export function getCourseShareLink(code, semester) {
   return `/course/${encodeURIComponent(code)}/${semester.name}/${semester.year}`;
 }
+
+export const getNewsEndpoint = () => "notifications/news";
