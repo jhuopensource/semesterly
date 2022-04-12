@@ -11,6 +11,7 @@ docs/build/
 env/
 github-request-body
 htmlcov/
+.history
 .idea/
 *.log
 *.log
