@@ -222,7 +222,14 @@ const Semesterly = () => {
                 <a href="/privacypolicy">Privacy</a>
               </li>
               <li className="footer-button" role="presentation">
-                <a href="javascript:void(0);">semesterly[at]jhu[dot]edu</a>
+                <a
+                  href=""
+                  onClick={(e) => {
+                    e.preventDefault();
+                  }}
+                >
+                  semesterly[at]jhu[dot]edu
+                </a>
               </li>
               <li className="footer-button" role="presentation">
                 <a
