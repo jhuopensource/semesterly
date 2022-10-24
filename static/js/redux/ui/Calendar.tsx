@@ -58,7 +58,7 @@ const Row = (props: RowProps) => {
   );
 };
 
-export const ShowWeekendsButton = (props: { isMobile: boolean }) => {
+export const ShowWeekendsSwitch = (props: { isMobile: boolean }) => {
   const showWeekend = useAppSelector((state) => state.preferences.showWeekend);
   const dispatch = useDispatch();
   const theme = useAppSelector((state) => state.preferences.theme);
@@ -302,7 +302,7 @@ const Calendar = (props: CalendarProps) => {
   );
   const toolbar = isComparingTimetables ? (
     <>
-      <ShowWeekendsButton isMobile={false} />
+      <ShowWeekendsSwitch isMobile={false} />
     </>
   ) : (
     <>
@@ -312,7 +312,7 @@ const Calendar = (props: CalendarProps) => {
       {shareLink}
       {addNewTimetableButton}
       {saveToCalendarButton}
-      <ShowWeekendsButton isMobile={false} />
+      <ShowWeekendsSwitch isMobile={false} />
     </>
   );
 
