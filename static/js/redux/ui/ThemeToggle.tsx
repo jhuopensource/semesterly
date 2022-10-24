@@ -83,12 +83,11 @@ const ThemeToggle = () => {
     // Check if a theme is valid.
     if (availableThemes.indexOf(curTheme) !== -1) {
       setTheme(curTheme);
-      dispatch(preferencesActions.setTheme(curTheme))
-      
+      dispatch(preferencesActions.setTheme(curTheme));
     } else {
       // Set the first element as the default theme
       setTheme(availableThemes[0]);
-      dispatch(preferencesActions.setTheme(availableThemes[0]))
+      dispatch(preferencesActions.setTheme(availableThemes[0]));
     }
   }, []);
 
@@ -106,7 +105,7 @@ const ThemeToggle = () => {
 
     // Store in localStorage
     localStorage.setItem(themeLocalStorageKey, theme);
-    dispatch(preferencesActions.setTheme(theme))
+    dispatch(preferencesActions.setTheme(theme));
   }, [theme]);
 
   return (

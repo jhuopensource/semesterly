@@ -69,12 +69,16 @@ export const ShowWeekendsSwitch = (props: { isMobile: boolean }) => {
           size="small"
           checked={showWeekend}
           color="default"
-          sx={{ "& .MuiSwitch-switchBase": {
-                  '& + .MuiSwitch-track': {
-                    backgroundColor: theme === "light" ? "" : "#777" 
-                  },
-              }, 
-                "& .MuiSwitch-thumb": { backgroundColor: theme === "light" ? "lightgray" : "#777" }}}
+          sx={{
+            "& .MuiSwitch-switchBase": {
+              "& + .MuiSwitch-track": {
+                backgroundColor: theme === "light" ? "" : "#777",
+              },
+            },
+            "& .MuiSwitch-thumb": {
+              backgroundColor: theme === "light" ? "lightgray" : "#777",
+            },
+          }}
           onChange={() => dispatch(preferencesActions.toggleShowWeekend())}
         />
       </div>
