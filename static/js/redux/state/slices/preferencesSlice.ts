@@ -4,15 +4,18 @@ import { changeActiveSavedTimetable } from "../../actions/initActions";
 import { Timetable } from "../../constants/commonTypes";
 import { getTimetablePreferencesEndpoint } from "../../constants/endpoints";
 import Cookie from "js-cookie";
+import { string } from "prop-types";
 
 interface PreferencesSliceState {
   tryWithConflicts: boolean;
   showWeekend: boolean;
+  theme: string;
 }
 
 const initialState: PreferencesSliceState = {
   tryWithConflicts: false,
   showWeekend: true,
+  theme: "",
 };
 
 export const savePreferences =
@@ -47,6 +50,9 @@ const preferencesSlice = createSlice({
     },
     toggleShowWeekend: (state) => {
       state.showWeekend = !state.showWeekend;
+    },
+    setTheme: (state, { payload }: PayloadAction<string>) => {
+      state.theme = payload;
     },
     setAllPreferences: (state, { payload }: PayloadAction<PreferencesSliceState>) => {
       state.tryWithConflicts = payload.tryWithConflicts;

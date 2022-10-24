@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import Switch from "@mui/material/Switch";
 import { styled } from "@mui/material/styles";
+import { useDispatch } from "react-redux";
+import { preferencesActions } from "../state/slices/preferencesSlice";
 
 const ThemeSwitch = styled(Switch)(({ theme }) => ({
   width: 53,
@@ -72,6 +74,7 @@ const themeLocalStorageKey = "main_theme";
 
 const ThemeToggle = () => {
   const [theme, setTheme] = useState<Theme>("light");
+  const dispatch = useDispatch();
 
   // On Mount
   useEffect(() => {
@@ -80,9 +83,12 @@ const ThemeToggle = () => {
     // Check if a theme is valid.
     if (availableThemes.indexOf(curTheme) !== -1) {
       setTheme(curTheme);
+      dispatch(preferencesActions.setTheme(curTheme))
+      
     } else {
       // Set the first element as the default theme
       setTheme(availableThemes[0]);
+      dispatch(preferencesActions.setTheme(availableThemes[0]))
     }
   }, []);
 
@@ -100,6 +106,7 @@ const ThemeToggle = () => {
 
     // Store in localStorage
     localStorage.setItem(themeLocalStorageKey, theme);
+    dispatch(preferencesActions.setTheme(theme))
   }, [theme]);
 
   return (
