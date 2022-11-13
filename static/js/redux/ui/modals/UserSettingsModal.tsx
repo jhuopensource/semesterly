@@ -349,18 +349,6 @@ const UserSettingsModal = () => {
   );
 
   const curTheme = useAppSelector(selectTheme);
-  const reactSelectDarkColors = {
-    primary: "#4d5057", // selected element: dblue3
-    primary25: "#3d3e42", // hover color: dblue6
-    neutral0: "#2d2e32", // background color: dblue7
-    neutral20: "#5a5d64", // border color: dblue2
-  };
-  const reactSelectLightColors = {
-    primary: "#2684ff",
-    primary25: "#deebff",
-    neutral0: "#ffffff",
-    neutral20: "#cccccc",
-  };
 
   return (
     <Modal
