@@ -348,7 +348,7 @@ const UserSettingsModal = () => {
     <h1>Welcome!</h1>
   );
 
-  const isDarkMode = useAppSelector(selectTheme) === "dark";
+  const isDarkMode = useAppSelector(selectTheme).name === "dark";
   const reactSelectDarkColors = {
     primary: "#4d5057", // selected element: dblue3
     primary25: "#3d3e42", // hover color: dblue6

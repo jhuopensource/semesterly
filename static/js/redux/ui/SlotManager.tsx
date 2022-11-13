@@ -177,7 +177,7 @@ const SlotManager = (props: { days: string[] }) => {
     (state) => state.compareTimetable.comparedTimetable
   );
   const sectionsInBoth = getSectionsInTwoTimetables(activeTimetable, comparedTimetable);
-  const theme = useAppSelector(selectTheme);
+  const curTheme = useAppSelector(selectTheme);
 
   const getComparedTimetableSlotColor = (offering: Offering, courseId: number) => {
     const isOfferingInActiveTimetable = isOfferingInTimetable(
@@ -311,7 +311,7 @@ const SlotManager = (props: { days: string[] }) => {
 
   const getThemedCustomSlotColor = (color: string): string => {
     // maps a custom slot color to a themed color
-    if (theme === "dark" && color === "#F8F6F7") {
+    if (curTheme.name === "dark" && color === "#F8F6F7") {
       return "#979797";
     }
     return color;
