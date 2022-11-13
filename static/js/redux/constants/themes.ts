@@ -42,8 +42,8 @@ const darkTheme: Theme = {
 };
 
 const themeObject: ThemeObject = {
-  light: lightTheme,
-  dark: darkTheme,
+  [lightTheme.name]: lightTheme,
+  [darkTheme.name]: darkTheme,
 };
 
 export default themeObject;

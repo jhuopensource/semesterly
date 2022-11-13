@@ -8,7 +8,7 @@ interface ThemeSliceState {
 }
 
 const themeLocalStorageKey = "main_theme";
-const availableThemes: ThemeName[] = ["light", "dark"];
+const availableThemes: ThemeName[] = Object.keys(themeObject) as ThemeName[];
 
 const getInitialTheme = () => {
   const isBrowserDark =

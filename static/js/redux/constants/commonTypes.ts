@@ -33,7 +33,7 @@ export interface Theme {
 }
 
 export type ThemeObject = {
-  [x in ThemeName]: Theme;
+  [x in ThemeName]?: Theme;
 };
 
 /**
