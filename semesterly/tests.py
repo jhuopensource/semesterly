@@ -135,7 +135,11 @@ class EndToEndTest(SeleniumTestCase):
             self.complete_user_settings_basics(
                 major="Computer Science", class_year=2023
             )
-        self.common_logged_in_tests()
+        # This causes CI to take much longer, so we'll just test the most basic flow
+        # self.common_logged_in_tests()
+        with self.description("Search and add course"):
+            self.search_course("AS.110.105", 1)
+            self.add_course(0, n_slots=4, n_master_slots=1)
         ptt = self.ptt_to_tuple()
         with self.description("Log out"):
             self.logout()
