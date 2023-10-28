@@ -5,8 +5,8 @@ from django.http import HttpResponse
 # Create your views here.
 def send_friend_request(request, userId):
     from_user = request.user
-    from_student = Student.objects.get_or_create(user=from_user)
-    to_student = Student.objects.get(id=userId)
+    from_student = Student.objects.get(user=from_user)
+    to_student = Student.objects.get(user_id=userId)
     friend_request , created = FriendRequest.objects.get_or_create(from_friend=from_student, to_friend=to_student)
  
     if created:
@@ -14,20 +14,19 @@ def send_friend_request(request, userId):
     else:
         return HttpResponse('Friend request failed', 400)
     
-def accept_friend_request(request, requestId):
-    friend_request = FriendRequest.objects.get(id=requestId)
-    if friend_request == request:
-        friend_request.to_user.friends.add(friend_request.from_user)
-        friend_request.from_user.friends.add(friend_request.to_user)
-        friend_request.delete()
-        return HttpResponse('Friend request accepted', 200)
-    else:
-        return HttpResponse('Friend request rejected', 400)
+def accept_friend_request(request, friendRequestId):
+    friend_request = FriendRequest.objects.get(id=friendRequestId)
     
-def reject_friend_request(request, requestId):
-    friend_request = FriendRequest.objects.get(id=requestId)
-    if friend_request.user == request.user:
-        friend_request.delete()
-        return HttpResponse('Friend request rejected', 200)
-    else:
-        return HttpResponse('Friend request failed to reject', 400)
+    friend_request.to_friend.friends.add(friend_request.from_friend)
+    friend_request.from_friend.friends.add(friend_request.to_friend)
+    friend_request.delete()
+    return HttpResponse('Friend request accepted', 200)
+    #else:
+    #    return HttpResponse('Friend request rejected', 400)
+    
+def reject_friend_request(request, friendRequestId):
+    friend_request = FriendRequest.objects.get(id=friendRequestId)
+    friend_request.delete()
+    return HttpResponse('Friend request rejected', 200)
+  #  else:
+   #     return HttpResponse('Friend request failed to reject', 400)
