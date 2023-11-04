@@ -19,7 +19,7 @@ import student.views
 urlpatterns = [
     # profile management
     re_path(r"^user/logout/$", LogoutView.as_view(next_page="/")),
-    re_path(r"^user/settings/$", student.views.UserView.as_view()),
+    re_path(r"^user/(?P<userId>[0-9]+)/settings/$", student.views.UserView.as_view()),
     re_path(
         r"^delete_account/$",
         FeatureFlowView.as_view(

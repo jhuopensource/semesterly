@@ -89,11 +89,12 @@ def accept_tos(request):
 class UserView(RedirectToSignupMixin, APIView):
     """Handles the accessing and mutating of user information and preferences."""
 
-    def get(self, request):
+    def get(self, request, userId):
         """
         Renders the user profile/stats page which indicates all of a student's
         reviews of courses, what social they have connected, etc.
         """
+        print('user id is', userId)
         student: Student = Student.objects.get(user=request.user)
         img_url = (
             f"https://graph.facebook.com/{student.fbook_uid}/picture?width=700&height=700"

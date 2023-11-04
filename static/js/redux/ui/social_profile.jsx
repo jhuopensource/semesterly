@@ -64,7 +64,7 @@ class SocialProfile extends React.Component {
             </a>
             <a href="/user/settings/">
               <i className="fa fa-bar-chart" />
-              <span>Stats</span>
+              <span>Profile</span>
             </a>
             <a href="/user/logout/">
               <i className="fa fa-sign-out" aria-hidden="true" />
