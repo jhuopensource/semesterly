@@ -29,6 +29,7 @@ class SocialProfile extends React.Component {
     this.toggleDropdown = this.toggleDropdown.bind(this);
     this.hideDropDown = this.hideDropDown.bind(this);
     this.toggleDropdown = this.toggleDropdown.bind(this);
+    console.log("SocialProfile props: ", props);
   }
 
   toggleDropdown() {
