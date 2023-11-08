@@ -223,6 +223,14 @@ class SchoolList(APIView):
                     .distinct()
                 )
             ),
+            "sub_schools": sorted(
+                list(
+                    Course.objects.filter(school=school)
+                    .exclude(sub_school__exact="")
+                    .values_list("sub_school", flat=True)
+                    .distinct()
+                )
+            ),
             "last_updated": last_updated,
         }
 

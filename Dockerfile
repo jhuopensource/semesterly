@@ -27,5 +27,6 @@ COPY ./build/run_parser.sh /code/run_parser.sh
 RUN pip3 install -r /code/requirements.txt
 
 # Install package.json dependencies
+
 RUN npm install
 RUN npm run build

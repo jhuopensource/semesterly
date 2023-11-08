@@ -6,6 +6,7 @@ interface SchoolSliceState {
   areas: string[];
   departments: string[];
   levels: string[];
+  subSchools: string[];
   dataLastUpdated: string;
 }
 
@@ -14,6 +15,7 @@ const initialState: SchoolSliceState = {
   areas: [],
   departments: [],
   levels: [],
+  subSchools: [],
   dataLastUpdated: "",
 };
 
@@ -31,9 +33,10 @@ const schoolSlice = createSlice({
           areas,
           departments,
           levels,
+          subSchools,
           last_updated: dataLastUpdated,
         } = action.payload;
-        return { school: state.school, areas, departments, levels, dataLastUpdated };
+        return { school: state.school, areas, departments, levels, subSchools, dataLastUpdated };
       });
   },
 });

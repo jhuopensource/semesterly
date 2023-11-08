@@ -116,6 +116,7 @@ export const fetchAdvancedSearchResults =
       .then((response) => response.json()) // TODO(rohan): error-check the response
       .then((json) => {
         // indicate that courses have been received
+        console.log(json)
         dispatch(receiveAdvancedSearchResults(json));
       });
   };

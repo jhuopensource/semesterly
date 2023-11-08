@@ -26,6 +26,8 @@ import {
   onCustomSlotCreateDrop,
   onCustomSlotUpdateDrop,
 } from "./slotUtils";
+import { useDispatch } from "react-redux";
+import { fetchAdvancedSearchResults } from "../actions/search_actions";
 
 type CustomSlotProps = {
   depth_level: number;
@@ -53,7 +55,18 @@ const dragSlotSource = {
       id: props.id,
     };
   },
-  endDrag() {},
+  endDrag() {
+    const dispatch = useDispatch();
+    dispatch(
+      fetchAdvancedSearchResults(
+        "intermediate",
+        {
+          times: [{min: 8, max: 24, day: "Friday"}],
+        },
+        1
+      )
+    );
+  },
 };
 
 function collectDragSource(connect: any) {
@@ -122,9 +135,11 @@ const CustomSlot = (props: CustomSlotProps) => {
     const endMinute = parseInt(props.time_end.split(":")[1], 10);
 
     const top =
-      startHour * (HALF_HOUR_HEIGHT * 2 + 2) + startMinute * (HALF_HOUR_HEIGHT / 30);
+      (startHour - 8) * (HALF_HOUR_HEIGHT * 2 + 2) +
+      startMinute * (HALF_HOUR_HEIGHT / 30);
     const bottom =
-      endHour * (HALF_HOUR_HEIGHT * 2 + 2) + (endMinute * (HALF_HOUR_HEIGHT / 30) - 1);
+      (endHour - 8) * (HALF_HOUR_HEIGHT * 2 + 2) +
+      (endMinute * (HALF_HOUR_HEIGHT / 30) - 1);
     if (props.preview) {
       // don't take into account conflicts, reduce opacity, increase z-index
       return {

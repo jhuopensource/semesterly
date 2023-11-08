@@ -1,0 +1,4112 @@
+[
+{
+    "model": "timetable.semester",
+    "pk": 46,
+    "fields": {
+        "name": "Summer",
+        "year": "2022"
+    }
+},
+{
+    "model": "timetable.semester",
+    "pk": 6,
+    "fields": {
+        "name": "Spring",
+        "year": "2022"
+    }
+},
+{
+    "model": "timetable.semester",
+    "pk": 4,
+    "fields": {
+        "name": "Spring",
+        "year": "2023"
+    }
+},
+{
+    "model": "timetable.semester",
+    "pk": 5,
+    "fields": {
+        "name": "Fall",
+        "year": "2022"
+    }
+},
+{
+    "model": "timetable.offering",
+    "pk": 26575,
+    "fields": {
+        "section": 23681,
+        "day": "M",
+        "date_start": "08-29-22",
+        "date_end": "10-24-22",
+        "time_start": "15:30",
+        "time_end": "16:50",
+        "location": "Wolfe W5030",
+        "is_short_course": true
+    }
+},
+{
+    "model": "timetable.offering",
+    "pk": 26582,
+    "fields": {
+        "section": 23685,
+        "day": "F",
+        "date_start": "08-29-22",
+        "date_end": "10-24-22",
+        "time_start": "15:30",
+        "time_end": "16:50",
+        "location": "Wolfe W5030",
+        "is_short_course": true
+    }
+},
+{
+    "model": "timetable.offering",
+    "pk": 26580,
+    "fields": {
+        "section": 23684,
+        "day": "R",
+        "date_start": "08-29-22",
+        "date_end": "10-24-22",
+        "time_start": "15:30",
+        "time_end": "16:50",
+        "location": "Wolfe W5030",
+        "is_short_course": true
+    }
+},
+{
+    "model": "timetable.offering",
+    "pk": 26578,
+    "fields": {
+        "section": 23683,
+        "day": "W",
+        "date_start": "08-29-22",
+        "date_end": "10-24-22",
+        "time_start": "15:30",
+        "time_end": "16:50",
+        "location": " ",
+        "is_short_course": true
+    }
+},
+{
+    "model": "timetable.offering",
+    "pk": 26577,
+    "fields": {
+        "section": 23682,
+        "day": "T",
+        "date_start": "08-29-22",
+        "date_end": "10-24-22",
+        "time_start": "15:30",
+        "time_end": "16:50",
+        "location": "Wolfe W5030",
+        "is_short_course": true
+    }
+},
+{
+    "model": "timetable.offering",
+    "pk": 26573,
+    "fields": {
+        "section": 23680,
+        "day": "F",
+        "date_start": "08-29-22",
+        "date_end": "10-24-22",
+        "time_start": "13:30",
+        "time_end": "14:50",
+        "location": "Wolfe W5030",
+        "is_short_course": true
+    }
+},
+{
+    "model": "timetable.offering",
+    "pk": 26571,
+    "fields": {
+        "section": 23679,
+        "day": "R",
+        "date_start": "08-29-22",
+        "date_end": "10-24-22",
+        "time_start": "13:30",
+        "time_end": "14:50",
+        "location": " ",
+        "is_short_course": true
+    }
+},
+{
+    "model": "timetable.offering",
+    "pk": 26570,
+    "fields": {
+        "section": 23678,
+        "day": "W",
+        "date_start": "08-29-22",
+        "date_end": "10-24-22",
+        "time_start": "13:30",
+        "time_end": "14:50",
+        "location": "Wolfe W5030",
+        "is_short_course": true
+    }
+},
+{
+    "model": "timetable.offering",
+    "pk": 26568,
+    "fields": {
+        "section": 23677,
+        "day": "T",
+        "date_start": "08-29-22",
+        "date_end": "10-24-22",
+        "time_start": "13:30",
+        "time_end": "14:50",
+        "location": "Wolfe W5030",
+        "is_short_course": true
+    }
+},
+{
+    "model": "timetable.offering",
+    "pk": 26566,
+    "fields": {
+        "section": 23676,
+        "day": "M",
+        "date_start": "08-29-22",
+        "date_end": "10-24-22",
+        "time_start": "13:30",
+        "time_end": "14:50",
+        "location": "Wolfe W5030",
+        "is_short_course": true
+    }
+},
+{
+    "model": "timetable.offering",
+    "pk": 26564,
+    "fields": {
+        "section": 23675,
+        "day": "F",
+        "date_start": "08-29-22",
+        "date_end": "10-24-22",
+        "time_start": "08:30",
+        "time_end": "09:50",
+        "location": " ",
+        "is_short_course": true
+    }
+},
+{
+    "model": "timetable.offering",
+    "pk": 26562,
+    "fields": {
+        "section": 23674,
+        "day": "R",
+        "date_start": "08-29-22",
+        "date_end": "10-24-22",
+        "time_start": "08:30",
+        "time_end": "09:50",
+        "location": "Wolfe W5030",
+        "is_short_course": true
+    }
+},
+{
+    "model": "timetable.offering",
+    "pk": 26561,
+    "fields": {
+        "section": 23673,
+        "day": "W",
+        "date_start": "08-29-22",
+        "date_end": "10-24-22",
+        "time_start": "08:30",
+        "time_end": "09:50",
+        "location": "Wolfe W5030",
+        "is_short_course": true
+    }
+},
+{
+    "model": "timetable.offering",
+    "pk": 26559,
+    "fields": {
+        "section": 23672,
+        "day": "T",
+        "date_start": "08-29-22",
+        "date_end": "10-24-22",
+        "time_start": "08:30",
+        "time_end": "09:50",
+        "location": " ",
+        "is_short_course": true
+    }
+},
+{
+    "model": "timetable.offering",
+    "pk": 26557,
+    "fields": {
+        "section": 23671,
+        "day": "M",
+        "date_start": "08-29-22",
+        "date_end": "10-24-22",
+        "time_start": "08:30",
+        "time_end": "09:50",
+        "location": " ",
+        "is_short_course": true
+    }
+},
+{
+    "model": "timetable.offering",
+    "pk": 26555,
+    "fields": {
+        "section": 23669,
+        "day": "R",
+        "date_start": "08-29-22",
+        "date_end": "10-24-22",
+        "time_start": "09:00",
+        "time_end": "09:50",
+        "location": " ",
+        "is_short_course": true
+    }
+},
+{
+    "model": "timetable.offering",
+    "pk": 26554,
+    "fields": {
+        "section": 23668,
+        "day": "R",
+        "date_start": "08-29-22",
+        "date_end": "10-24-22",
+        "time_start": "09:00",
+        "time_end": "09:50",
+        "location": "Wolfe W5008",
+        "is_short_course": true
+    }
+},
+{
+    "model": "timetable.offering",
+    "pk": 11911,
+    "fields": {
+        "section": 13595,
+        "day": "R",
+        "date_start": "01-24-22",
+        "date_end": "03-18-22",
+        "time_start": "09:00",
+        "time_end": "09:50",
+        "location": "Wolfe W5008",
+        "is_short_course": true
+    }
+},
+{
+    "model": "timetable.offering",
+    "pk": 83,
+    "fields": {
+        "section": 58,
+        "day": "R",
+        "date_start": "01-23-23",
+        "date_end": "03-17-23",
+        "time_start": "09:00",
+        "time_end": "09:50",
+        "location": "Wolfe W2008",
+        "is_short_course": true
+    }
+},
+{
+    "model": "timetable.offering",
+    "pk": 26550,
+    "fields": {
+        "section": 23662,
+        "day": "R",
+        "date_start": "08-29-22",
+        "date_end": "10-24-22",
+        "time_start": "13:30",
+        "time_end": "14:50",
+        "location": " ",
+        "is_short_course": true
+    }
+},
+{
+    "model": "timetable.offering",
+    "pk": 26548,
+    "fields": {
+        "section": 23662,
+        "day": "T",
+        "date_start": "08-29-22",
+        "date_end": "10-24-22",
+        "time_start": "13:30",
+        "time_end": "14:50",
+        "location": " ",
+        "is_short_course": true
+    }
+},
+{
+    "model": "timetable.offering",
+    "pk": 26546,
+    "fields": {
+        "section": 23661,
+        "day": "R",
+        "date_start": "08-29-22",
+        "date_end": "10-24-22",
+        "time_start": "13:30",
+        "time_end": "14:50",
+        "location": "Wolfe W2008",
+        "is_short_course": true
+    }
+},
+{
+    "model": "timetable.offering",
+    "pk": 26545,
+    "fields": {
+        "section": 23661,
+        "day": "T",
+        "date_start": "08-29-22",
+        "date_end": "10-24-22",
+        "time_start": "13:30",
+        "time_end": "14:50",
+        "location": "Wolfe W2008",
+        "is_short_course": true
+    }
+},
+{
+    "model": "timetable.offering",
+    "pk": 26542,
+    "fields": {
+        "section": 23660,
+        "day": "R",
+        "date_start": "08-29-22",
+        "date_end": "10-24-22",
+        "time_start": "10:30",
+        "time_end": "11:50",
+        "location": " ",
+        "is_short_course": true
+    }
+},
+{
+    "model": "timetable.offering",
+    "pk": 26541,
+    "fields": {
+        "section": 23660,
+        "day": "T",
+        "date_start": "08-29-22",
+        "date_end": "10-24-22",
+        "time_start": "10:30",
+        "time_end": "11:50",
+        "location": " ",
+        "is_short_course": true
+    }
+},
+{
+    "model": "timetable.offering",
+    "pk": 26539,
+    "fields": {
+        "section": 23659,
+        "day": "R",
+        "date_start": "08-29-22",
+        "date_end": "10-24-22",
+        "time_start": "10:30",
+        "time_end": "11:50",
+        "location": "Wolfe W5030",
+        "is_short_course": true
+    }
+},
+{
+    "model": "timetable.offering",
+    "pk": 26538,
+    "fields": {
+        "section": 23659,
+        "day": "T",
+        "date_start": "08-29-22",
+        "date_end": "10-24-22",
+        "time_start": "10:30",
+        "time_end": "11:50",
+        "location": "Wolfe W5030",
+        "is_short_course": true
+    }
+},
+{
+    "model": "timetable.offering",
+    "pk": 26536,
+    "fields": {
+        "section": 23658,
+        "day": "W",
+        "date_start": "08-29-22",
+        "date_end": "10-24-22",
+        "time_start": "10:30",
+        "time_end": "11:50",
+        "location": " ",
+        "is_short_course": true
+    }
+},
+{
+    "model": "timetable.offering",
+    "pk": 26535,
+    "fields": {
+        "section": 23658,
+        "day": "M",
+        "date_start": "08-29-22",
+        "date_end": "10-24-22",
+        "time_start": "10:30",
+        "time_end": "11:50",
+        "location": " ",
+        "is_short_course": true
+    }
+},
+{
+    "model": "timetable.offering",
+    "pk": 26534,
+    "fields": {
+        "section": 23657,
+        "day": "W",
+        "date_start": "08-29-22",
+        "date_end": "10-24-22",
+        "time_start": "10:30",
+        "time_end": "11:50",
+        "location": "Wolfe W3031",
+        "is_short_course": true
+    }
+},
+{
+    "model": "timetable.offering",
+    "pk": 26533,
+    "fields": {
+        "section": 23657,
+        "day": "M",
+        "date_start": "08-29-22",
+        "date_end": "10-24-22",
+        "time_start": "10:30",
+        "time_end": "11:50",
+        "location": "Wolfe W3031",
+        "is_short_course": true
+    }
+},
+{
+    "model": "timetable.offering",
+    "pk": 26531,
+    "fields": {
+        "section": 23656,
+        "day": "W",
+        "date_start": "08-29-22",
+        "date_end": "10-24-22",
+        "time_start": "13:30",
+        "time_end": "14:50",
+        "location": " ",
+        "is_short_course": true
+    }
+},
+{
+    "model": "timetable.offering",
+    "pk": 26530,
+    "fields": {
+        "section": 23656,
+        "day": "M",
+        "date_start": "08-29-22",
+        "date_end": "10-24-22",
+        "time_start": "13:30",
+        "time_end": "14:50",
+        "location": " ",
+        "is_short_course": true
+    }
+},
+{
+    "model": "timetable.offering",
+    "pk": 26528,
+    "fields": {
+        "section": 23655,
+        "day": "W",
+        "date_start": "08-29-22",
+        "date_end": "10-24-22",
+        "time_start": "13:30",
+        "time_end": "14:50",
+        "location": "Wolfe W2303",
+        "is_short_course": true
+    }
+},
+{
+    "model": "timetable.offering",
+    "pk": 26527,
+    "fields": {
+        "section": 23655,
+        "day": "M",
+        "date_start": "08-29-22",
+        "date_end": "10-24-22",
+        "time_start": "13:30",
+        "time_end": "14:50",
+        "location": "Wolfe W2303",
+        "is_short_course": true
+    }
+},
+{
+    "model": "timetable.offering",
+    "pk": 26525,
+    "fields": {
+        "section": 23654,
+        "day": "R",
+        "date_start": "08-29-22",
+        "date_end": "10-24-22",
+        "time_start": "13:30",
+        "time_end": "14:50",
+        "location": "Wolfe W2015",
+        "is_short_course": true
+    }
+},
+{
+    "model": "timetable.offering",
+    "pk": 26523,
+    "fields": {
+        "section": 23654,
+        "day": "T",
+        "date_start": "08-29-22",
+        "date_end": "10-24-22",
+        "time_start": "13:30",
+        "time_end": "14:50",
+        "location": "Wolfe W2015",
+        "is_short_course": true
+    }
+},
+{
+    "model": "timetable.offering",
+    "pk": 26521,
+    "fields": {
+        "section": 23653,
+        "day": "W",
+        "date_start": "08-29-22",
+        "date_end": "10-24-22",
+        "time_start": "09:00",
+        "time_end": "10:20",
+        "location": " ",
+        "is_short_course": true
+    }
+},
+{
+    "model": "timetable.offering",
+    "pk": 26519,
+    "fields": {
+        "section": 23653,
+        "day": "W",
+        "date_start": "08-29-22",
+        "date_end": "10-24-22",
+        "time_start": "10:30",
+        "time_end": "11:50",
+        "location": " ",
+        "is_short_course": true
+    }
+},
+{
+    "model": "timetable.offering",
+    "pk": 26518,
+    "fields": {
+        "section": 23653,
+        "day": "M",
+        "date_start": "08-29-22",
+        "date_end": "10-24-22",
+        "time_start": "10:30",
+        "time_end": "11:50",
+        "location": " ",
+        "is_short_course": true
+    }
+},
+{
+    "model": "timetable.offering",
+    "pk": 26516,
+    "fields": {
+        "section": 23652,
+        "day": "W",
+        "date_start": "08-29-22",
+        "date_end": "10-24-22",
+        "time_start": "09:00",
+        "time_end": "10:20",
+        "location": "Wolfe W3008",
+        "is_short_course": true
+    }
+},
+{
+    "model": "timetable.offering",
+    "pk": 26515,
+    "fields": {
+        "section": 23652,
+        "day": "W",
+        "date_start": "08-29-22",
+        "date_end": "10-24-22",
+        "time_start": "10:30",
+        "time_end": "11:50",
+        "location": "Wolfe W1020",
+        "is_short_course": true
+    }
+},
+{
+    "model": "timetable.offering",
+    "pk": 26514,
+    "fields": {
+        "section": 23652,
+        "day": "M",
+        "date_start": "08-29-22",
+        "date_end": "10-24-22",
+        "time_start": "10:30",
+        "time_end": "11:50",
+        "location": "Wolfe W1020",
+        "is_short_course": true
+    }
+},
+{
+    "model": "timetable.offering",
+    "pk": 11881,
+    "fields": {
+        "section": 13581,
+        "day": "W",
+        "date_start": "01-24-22",
+        "date_end": "03-18-22",
+        "time_start": "09:00",
+        "time_end": "10:20",
+        "location": " ",
+        "is_short_course": true
+    }
+},
+{
+    "model": "timetable.offering",
+    "pk": 11880,
+    "fields": {
+        "section": 13581,
+        "day": "W",
+        "date_start": "01-24-22",
+        "date_end": "03-18-22",
+        "time_start": "10:30",
+        "time_end": "11:50",
+        "location": " ",
+        "is_short_course": true
+    }
+},
+{
+    "model": "timetable.offering",
+    "pk": 11879,
+    "fields": {
+        "section": 13581,
+        "day": "M",
+        "date_start": "01-24-22",
+        "date_end": "03-18-22",
+        "time_start": "10:30",
+        "time_end": "11:50",
+        "location": " ",
+        "is_short_course": true
+    }
+},
+{
+    "model": "timetable.offering",
+    "pk": 11878,
+    "fields": {
+        "section": 13580,
+        "day": "W",
+        "date_start": "01-24-22",
+        "date_end": "03-18-22",
+        "time_start": "09:00",
+        "time_end": "10:20",
+        "location": "Wolfe W5008",
+        "is_short_course": true
+    }
+},
+{
+    "model": "timetable.offering",
+    "pk": 11877,
+    "fields": {
+        "section": 13580,
+        "day": "W",
+        "date_start": "01-24-22",
+        "date_end": "03-18-22",
+        "time_start": "10:30",
+        "time_end": "11:50",
+        "location": "Wolfe W1214",
+        "is_short_course": true
+    }
+},
+{
+    "model": "timetable.offering",
+    "pk": 11876,
+    "fields": {
+        "section": 13580,
+        "day": "M",
+        "date_start": "01-24-22",
+        "date_end": "03-18-22",
+        "time_start": "10:30",
+        "time_end": "11:50",
+        "location": "Wolfe W1214",
+        "is_short_course": true
+    }
+},
+{
+    "model": "timetable.offering",
+    "pk": 26512,
+    "fields": {
+        "section": 23651,
+        "day": "W",
+        "date_start": "08-29-22",
+        "date_end": "10-24-22",
+        "time_start": "15:30",
+        "time_end": "16:20",
+        "location": " ",
+        "is_short_course": true
+    }
+},
+{
+    "model": "timetable.offering",
+    "pk": 26511,
+    "fields": {
+        "section": 23651,
+        "day": "T",
+        "date_start": "08-29-22",
+        "date_end": "10-24-22",
+        "time_start": "13:30",
+        "time_end": "14:20",
+        "location": " ",
+        "is_short_course": true
+    }
+},
+{
+    "model": "timetable.offering",
+    "pk": 26509,
+    "fields": {
+        "section": 23651,
+        "day": "R",
+        "date_start": "08-29-22",
+        "date_end": "10-24-22",
+        "time_start": "10:30",
+        "time_end": "11:50",
+        "location": " ",
+        "is_short_course": true
+    }
+},
+{
+    "model": "timetable.offering",
+    "pk": 26508,
+    "fields": {
+        "section": 23651,
+        "day": "T",
+        "date_start": "08-29-22",
+        "date_end": "10-24-22",
+        "time_start": "10:30",
+        "time_end": "11:50",
+        "location": " ",
+        "is_short_course": true
+    }
+},
+{
+    "model": "timetable.offering",
+    "pk": 26506,
+    "fields": {
+        "section": 23650,
+        "day": "T",
+        "date_start": "08-29-22",
+        "date_end": "10-24-22",
+        "time_start": "13:30",
+        "time_end": "14:20",
+        "location": "Wolfe W2017",
+        "is_short_course": true
+    }
+},
+{
+    "model": "timetable.offering",
+    "pk": 26505,
+    "fields": {
+        "section": 23650,
+        "day": "R",
+        "date_start": "08-29-22",
+        "date_end": "10-24-22",
+        "time_start": "10:30",
+        "time_end": "11:50",
+        "location": "Wolfe W2008",
+        "is_short_course": true
+    }
+},
+{
+    "model": "timetable.offering",
+    "pk": 26503,
+    "fields": {
+        "section": 23650,
+        "day": "T",
+        "date_start": "08-29-22",
+        "date_end": "10-24-22",
+        "time_start": "10:30",
+        "time_end": "11:50",
+        "location": "Wolfe W2008",
+        "is_short_course": true
+    }
+},
+{
+    "model": "timetable.offering",
+    "pk": 26502,
+    "fields": {
+        "section": 23650,
+        "day": "W",
+        "date_start": "08-29-22",
+        "date_end": "10-24-22",
+        "time_start": "15:30",
+        "time_end": "16:30",
+        "location": "Wolfe W5030",
+        "is_short_course": true
+    }
+},
+{
+    "model": "timetable.offering",
+    "pk": 26500,
+    "fields": {
+        "section": 23649,
+        "day": "W",
+        "date_start": "08-29-22",
+        "date_end": "10-24-22",
+        "time_start": "09:00",
+        "time_end": "10:20",
+        "location": " ",
+        "is_short_course": true
+    }
+},
+{
+    "model": "timetable.offering",
+    "pk": 26499,
+    "fields": {
+        "section": 23649,
+        "day": "M",
+        "date_start": "08-29-22",
+        "date_end": "10-24-22",
+        "time_start": "09:00",
+        "time_end": "10:20",
+        "location": " ",
+        "is_short_course": true
+    }
+},
+{
+    "model": "timetable.offering",
+    "pk": 26497,
+    "fields": {
+        "section": 23648,
+        "day": "W",
+        "date_start": "08-29-22",
+        "date_end": "10-24-22",
+        "time_start": "09:00",
+        "time_end": "10:20",
+        "location": "Wolfe W2030",
+        "is_short_course": true
+    }
+},
+{
+    "model": "timetable.offering",
+    "pk": 26495,
+    "fields": {
+        "section": 23648,
+        "day": "M",
+        "date_start": "08-29-22",
+        "date_end": "10-24-22",
+        "time_start": "09:00",
+        "time_end": "10:20",
+        "location": "Wolfe W2030",
+        "is_short_course": true
+    }
+},
+{
+    "model": "timetable.offering",
+    "pk": 26494,
+    "fields": {
+        "section": 23647,
+        "day": "R",
+        "date_start": "08-29-22",
+        "date_end": "10-24-22",
+        "time_start": "15:30",
+        "time_end": "16:50",
+        "location": "Wolfe W2030",
+        "is_short_course": true
+    }
+},
+{
+    "model": "timetable.offering",
+    "pk": 26493,
+    "fields": {
+        "section": 23647,
+        "day": "T",
+        "date_start": "08-29-22",
+        "date_end": "10-24-22",
+        "time_start": "15:30",
+        "time_end": "16:50",
+        "location": "Wolfe W2030",
+        "is_short_course": true
+    }
+},
+{
+    "model": "timetable.offering",
+    "pk": 26491,
+    "fields": {
+        "section": 23646,
+        "day": "F",
+        "date_start": "08-29-22",
+        "date_end": "10-24-22",
+        "time_start": "13:30",
+        "time_end": "14:20",
+        "location": "Wolfe W2015",
+        "is_short_course": true
+    }
+},
+{
+    "model": "timetable.offering",
+    "pk": 26489,
+    "fields": {
+        "section": 23646,
+        "day": "W",
+        "date_start": "08-29-22",
+        "date_end": "10-24-22",
+        "time_start": "13:30",
+        "time_end": "14:20",
+        "location": "Wolfe W2015",
+        "is_short_course": true
+    }
+},
+{
+    "model": "timetable.offering",
+    "pk": 26488,
+    "fields": {
+        "section": 23646,
+        "day": "M",
+        "date_start": "08-29-22",
+        "date_end": "10-24-22",
+        "time_start": "13:30",
+        "time_end": "14:20",
+        "location": "Wolfe W2015",
+        "is_short_course": true
+    }
+},
+{
+    "model": "timetable.offering",
+    "pk": 7917,
+    "fields": {
+        "section": 9800,
+        "day": "F",
+        "date_start": "06-13-22",
+        "date_end": "06-22-22",
+        "time_start": "13:30",
+        "time_end": "17:00",
+        "location": " ",
+        "is_short_course": true
+    }
+},
+{
+    "model": "timetable.offering",
+    "pk": 7916,
+    "fields": {
+        "section": 9800,
+        "day": "R",
+        "date_start": "06-13-22",
+        "date_end": "06-22-22",
+        "time_start": "13:30",
+        "time_end": "17:00",
+        "location": " ",
+        "is_short_course": true
+    }
+},
+{
+    "model": "timetable.offering",
+    "pk": 7915,
+    "fields": {
+        "section": 9800,
+        "day": "W",
+        "date_start": "06-13-22",
+        "date_end": "06-22-22",
+        "time_start": "13:30",
+        "time_end": "17:00",
+        "location": " ",
+        "is_short_course": true
+    }
+},
+{
+    "model": "timetable.offering",
+    "pk": 7914,
+    "fields": {
+        "section": 9800,
+        "day": "T",
+        "date_start": "06-13-22",
+        "date_end": "06-22-22",
+        "time_start": "13:30",
+        "time_end": "17:00",
+        "location": " ",
+        "is_short_course": true
+    }
+},
+{
+    "model": "timetable.offering",
+    "pk": 7913,
+    "fields": {
+        "section": 9800,
+        "day": "M",
+        "date_start": "06-13-22",
+        "date_end": "06-22-22",
+        "time_start": "13:30",
+        "time_end": "17:00",
+        "location": " ",
+        "is_short_course": true
+    }
+},
+{
+    "model": "timetable.offering",
+    "pk": 7912,
+    "fields": {
+        "section": 9799,
+        "day": "F",
+        "date_start": "06-13-22",
+        "date_end": "06-22-22",
+        "time_start": "13:30",
+        "time_end": "17:00",
+        "location": "Wolfe W3008",
+        "is_short_course": true
+    }
+},
+{
+    "model": "timetable.offering",
+    "pk": 7911,
+    "fields": {
+        "section": 9799,
+        "day": "R",
+        "date_start": "06-13-22",
+        "date_end": "06-22-22",
+        "time_start": "13:30",
+        "time_end": "17:00",
+        "location": "Wolfe W3008",
+        "is_short_course": true
+    }
+},
+{
+    "model": "timetable.offering",
+    "pk": 7910,
+    "fields": {
+        "section": 9799,
+        "day": "W",
+        "date_start": "06-13-22",
+        "date_end": "06-22-22",
+        "time_start": "13:30",
+        "time_end": "17:00",
+        "location": "Wolfe W3008",
+        "is_short_course": true
+    }
+},
+{
+    "model": "timetable.offering",
+    "pk": 7909,
+    "fields": {
+        "section": 9799,
+        "day": "T",
+        "date_start": "06-13-22",
+        "date_end": "06-22-22",
+        "time_start": "13:30",
+        "time_end": "17:00",
+        "location": "Wolfe W3008",
+        "is_short_course": true
+    }
+},
+{
+    "model": "timetable.offering",
+    "pk": 7908,
+    "fields": {
+        "section": 9799,
+        "day": "M",
+        "date_start": "06-13-22",
+        "date_end": "06-22-22",
+        "time_start": "13:30",
+        "time_end": "17:00",
+        "location": "Wolfe W3008",
+        "is_short_course": true
+    }
+},
+{
+    "model": "timetable.offering",
+    "pk": 26484,
+    "fields": {
+        "section": 23641,
+        "day": "F",
+        "date_start": "08-29-22",
+        "date_end": "10-24-22",
+        "time_start": "12:00",
+        "time_end": "12:50",
+        "location": "Wolfe W1020",
+        "is_short_course": true
+    }
+},
+{
+    "model": "timetable.offering",
+    "pk": 26483,
+    "fields": {
+        "section": 23641,
+        "day": "W",
+        "date_start": "08-29-22",
+        "date_end": "10-24-22",
+        "time_start": "12:00",
+        "time_end": "12:50",
+        "location": "Wolfe W1020",
+        "is_short_course": true
+    }
+},
+{
+    "model": "timetable.offering",
+    "pk": 26481,
+    "fields": {
+        "section": 23640,
+        "day": "T",
+        "date_start": "08-29-22",
+        "date_end": "10-24-22",
+        "time_start": "13:30",
+        "time_end": "14:50",
+        "location": "Wolfe W8504",
+        "is_short_course": true
+    }
+},
+{
+    "model": "timetable.offering",
+    "pk": 11814,
+    "fields": {
+        "section": 13560,
+        "day": "T",
+        "date_start": "01-24-22",
+        "date_end": "03-18-22",
+        "time_start": "13:30",
+        "time_end": "14:50",
+        "location": "Wolfe W2300",
+        "is_short_course": true
+    }
+},
+{
+    "model": "timetable.offering",
+    "pk": 14,
+    "fields": {
+        "section": 19,
+        "day": "T",
+        "date_start": "01-23-23",
+        "date_end": "03-17-23",
+        "time_start": "13:30",
+        "time_end": "14:50",
+        "location": "Wolfe W8504",
+        "is_short_course": true
+    }
+},
+{
+    "model": "timetable.offering",
+    "pk": 26478,
+    "fields": {
+        "section": 23636,
+        "day": "M",
+        "date_start": "08-29-22",
+        "date_end": "10-24-22",
+        "time_start": "12:00",
+        "time_end": "12:50",
+        "location": " ",
+        "is_short_course": true
+    }
+},
+{
+    "model": "timetable.offering",
+    "pk": 26476,
+    "fields": {
+        "section": 23635,
+        "day": "M",
+        "date_start": "08-29-22",
+        "date_end": "10-24-22",
+        "time_start": "12:00",
+        "time_end": "12:50",
+        "location": "Wolfe W1020",
+        "is_short_course": true
+    }
+},
+{
+    "model": "timetable.offering",
+    "pk": 11809,
+    "fields": {
+        "section": 13554,
+        "day": "M",
+        "date_start": "01-24-22",
+        "date_end": "03-18-22",
+        "time_start": "12:00",
+        "time_end": "12:50",
+        "location": "Wolfe W1020",
+        "is_short_course": true
+    }
+},
+{
+    "model": "timetable.offering",
+    "pk": 13,
+    "fields": {
+        "section": 13,
+        "day": "M",
+        "date_start": "01-23-23",
+        "date_end": "03-17-23",
+        "time_start": "12:00",
+        "time_end": "12:50",
+        "location": "Wolfe W1020",
+        "is_short_course": true
+    }
+},
+{
+    "model": "timetable.offering",
+    "pk": 26475,
+    "fields": {
+        "section": 23632,
+        "day": "F",
+        "date_start": "08-29-22",
+        "date_end": "10-24-22",
+        "time_start": "12:00",
+        "time_end": "13:20",
+        "location": " ",
+        "is_short_course": true
+    }
+},
+{
+    "model": "timetable.offering",
+    "pk": 26474,
+    "fields": {
+        "section": 23631,
+        "day": "F",
+        "date_start": "08-29-22",
+        "date_end": "10-24-22",
+        "time_start": "12:00",
+        "time_end": "13:20",
+        "location": "Wolfe W3011",
+        "is_short_course": true
+    }
+},
+{
+    "model": "timetable.offering",
+    "pk": 11797,
+    "fields": {
+        "section": 13547,
+        "day": "F",
+        "date_start": "01-24-22",
+        "date_end": "03-18-22",
+        "time_start": "12:00",
+        "time_end": "13:20",
+        "location": " ",
+        "is_short_course": true
+    }
+},
+{
+    "model": "timetable.offering",
+    "pk": 11794,
+    "fields": {
+        "section": 13546,
+        "day": "F",
+        "date_start": "01-24-22",
+        "date_end": "03-18-22",
+        "time_start": "12:00",
+        "time_end": "13:20",
+        "location": "Wolfe E2527",
+        "is_short_course": true
+    }
+},
+{
+    "model": "timetable.offering",
+    "pk": 10,
+    "fields": {
+        "section": 7,
+        "day": "F",
+        "date_start": "01-23-23",
+        "date_end": "03-17-23",
+        "time_start": "12:00",
+        "time_end": "13:20",
+        "location": " ",
+        "is_short_course": true
+    }
+},
+{
+    "model": "timetable.offering",
+    "pk": 9,
+    "fields": {
+        "section": 6,
+        "day": "F",
+        "date_start": "01-23-23",
+        "date_end": "03-17-23",
+        "time_start": "12:00",
+        "time_end": "13:20",
+        "location": "Wolfe W2015",
+        "is_short_course": true
+    }
+},
+{
+    "model": "timetable.offering",
+    "pk": 26472,
+    "fields": {
+        "section": 23630,
+        "day": "W",
+        "date_start": "08-29-22",
+        "date_end": "10-24-22",
+        "time_start": "17:30",
+        "time_end": "18:20",
+        "location": " ",
+        "is_short_course": true
+    }
+},
+{
+    "model": "timetable.offering",
+    "pk": 26470,
+    "fields": {
+        "section": 23629,
+        "day": "W",
+        "date_start": "08-29-22",
+        "date_end": "10-24-22",
+        "time_start": "17:30",
+        "time_end": "18:20",
+        "location": "Wolfe W5030",
+        "is_short_course": true
+    }
+},
+{
+    "model": "timetable.offering",
+    "pk": 11783,
+    "fields": {
+        "section": 13543,
+        "day": "W",
+        "date_start": "01-24-22",
+        "date_end": "03-18-22",
+        "time_start": "17:00",
+        "time_end": "17:50",
+        "location": " ",
+        "is_short_course": true
+    }
+},
+{
+    "model": "timetable.offering",
+    "pk": 11780,
+    "fields": {
+        "section": 13542,
+        "day": "W",
+        "date_start": "01-24-22",
+        "date_end": "03-18-22",
+        "time_start": "17:00",
+        "time_end": "17:50",
+        "location": "Wolfe W5030",
+        "is_short_course": true
+    }
+},
+{
+    "model": "timetable.offering",
+    "pk": 2,
+    "fields": {
+        "section": 2,
+        "day": "W",
+        "date_start": "01-23-23",
+        "date_end": "03-17-23",
+        "time_start": "17:30",
+        "time_end": "18:20",
+        "location": " ",
+        "is_short_course": true
+    }
+},
+{
+    "model": "timetable.offering",
+    "pk": 1,
+    "fields": {
+        "section": 1,
+        "day": "W",
+        "date_start": "01-23-23",
+        "date_end": "03-17-23",
+        "time_start": "17:30",
+        "time_end": "18:20",
+        "location": "Wolfe W5030",
+        "is_short_course": true
+    }
+},
+{
+    "model": "timetable.offering",
+    "pk": 26467,
+    "fields": {
+        "section": 23627,
+        "day": "R",
+        "date_start": "08-29-22",
+        "date_end": "10-24-22",
+        "time_start": "13:30",
+        "time_end": "14:50",
+        "location": "Wolfe W1020",
+        "is_short_course": true
+    }
+},
+{
+    "model": "timetable.offering",
+    "pk": 26465,
+    "fields": {
+        "section": 23627,
+        "day": "T",
+        "date_start": "08-29-22",
+        "date_end": "10-24-22",
+        "time_start": "13:30",
+        "time_end": "14:50",
+        "location": "Wolfe W1020",
+        "is_short_course": true
+    }
+},
+{
+    "model": "timetable.section",
+    "pk": 23681,
+    "fields": {
+        "course": 6135,
+        "meeting_section": "(11)",
+        "size": 50,
+        "enrolment": 50,
+        "waitlist": -1,
+        "waitlist_size": -1,
+        "section_type": "L",
+        "instructors": "K. Bandeen RocheM. Diener West",
+        "semester": 5,
+        "was_full": false,
+        "course_section_id": 696307
+    }
+},
+{
+    "model": "timetable.section",
+    "pk": 23685,
+    "fields": {
+        "course": 6135,
+        "meeting_section": "(15)",
+        "size": 50,
+        "enrolment": 50,
+        "waitlist": -1,
+        "waitlist_size": -1,
+        "section_type": "L",
+        "instructors": "M. Diener West",
+        "semester": 5,
+        "was_full": false,
+        "course_section_id": 720396
+    }
+},
+{
+    "model": "timetable.section",
+    "pk": 23684,
+    "fields": {
+        "course": 6135,
+        "meeting_section": "(14)",
+        "size": 50,
+        "enrolment": 24,
+        "waitlist": -1,
+        "waitlist_size": -1,
+        "section_type": "L",
+        "instructors": "M. Diener West",
+        "semester": 5,
+        "was_full": false,
+        "course_section_id": 720395
+    }
+},
+{
+    "model": "timetable.section",
+    "pk": 23683,
+    "fields": {
+        "course": 6135,
+        "meeting_section": "(13)",
+        "size": 50,
+        "enrolment": 31,
+        "waitlist": -1,
+        "waitlist_size": -1,
+        "section_type": "L",
+        "instructors": "M. Diener West",
+        "semester": 5,
+        "was_full": false,
+        "course_section_id": 720394
+    }
+},
+{
+    "model": "timetable.section",
+    "pk": 23682,
+    "fields": {
+        "course": 6135,
+        "meeting_section": "(12)",
+        "size": 50,
+        "enrolment": 28,
+        "waitlist": -1,
+        "waitlist_size": -1,
+        "section_type": "L",
+        "instructors": "K. Bandeen RocheM. Diener West",
+        "semester": 5,
+        "was_full": false,
+        "course_section_id": 720393
+    }
+},
+{
+    "model": "timetable.section",
+    "pk": 23680,
+    "fields": {
+        "course": 6135,
+        "meeting_section": "(10)",
+        "size": 50,
+        "enrolment": 25,
+        "waitlist": -1,
+        "waitlist_size": -1,
+        "section_type": "L",
+        "instructors": "K. Bandeen RocheM. Diener West",
+        "semester": 5,
+        "was_full": false,
+        "course_section_id": 696306
+    }
+},
+{
+    "model": "timetable.section",
+    "pk": 23679,
+    "fields": {
+        "course": 6135,
+        "meeting_section": "(09)",
+        "size": 50,
+        "enrolment": 42,
+        "waitlist": -1,
+        "waitlist_size": -1,
+        "section_type": "L",
+        "instructors": "K. Bandeen RocheM. Diener West",
+        "semester": 5,
+        "was_full": false,
+        "course_section_id": 696305
+    }
+},
+{
+    "model": "timetable.section",
+    "pk": 23678,
+    "fields": {
+        "course": 6135,
+        "meeting_section": "(08)",
+        "size": 65,
+        "enrolment": 65,
+        "waitlist": -1,
+        "waitlist_size": -1,
+        "section_type": "L",
+        "instructors": "K. Bandeen RocheM. Diener West",
+        "semester": 5,
+        "was_full": false,
+        "course_section_id": 696304
+    }
+},
+{
+    "model": "timetable.section",
+    "pk": 23677,
+    "fields": {
+        "course": 6135,
+        "meeting_section": "(07)",
+        "size": 50,
+        "enrolment": 40,
+        "waitlist": -1,
+        "waitlist_size": -1,
+        "section_type": "L",
+        "instructors": "K. Bandeen Roche",
+        "semester": 5,
+        "was_full": false,
+        "course_section_id": 696303
+    }
+},
+{
+    "model": "timetable.section",
+    "pk": 23676,
+    "fields": {
+        "course": 6135,
+        "meeting_section": "(06)",
+        "size": 50,
+        "enrolment": 40,
+        "waitlist": -1,
+        "waitlist_size": -1,
+        "section_type": "L",
+        "instructors": "K. Bandeen RocheM. Diener West",
+        "semester": 5,
+        "was_full": false,
+        "course_section_id": 696302
+    }
+},
+{
+    "model": "timetable.section",
+    "pk": 23675,
+    "fields": {
+        "course": 6135,
+        "meeting_section": "(05)",
+        "size": 50,
+        "enrolment": 32,
+        "waitlist": -1,
+        "waitlist_size": -1,
+        "section_type": "L",
+        "instructors": "K. Bandeen RocheM. Diener West",
+        "semester": 5,
+        "was_full": false,
+        "course_section_id": 696301
+    }
+},
+{
+    "model": "timetable.section",
+    "pk": 23674,
+    "fields": {
+        "course": 6135,
+        "meeting_section": "(04)",
+        "size": 50,
+        "enrolment": 50,
+        "waitlist": -1,
+        "waitlist_size": -1,
+        "section_type": "L",
+        "instructors": "K. Bandeen RocheM. Diener West",
+        "semester": 5,
+        "was_full": false,
+        "course_section_id": 696300
+    }
+},
+{
+    "model": "timetable.section",
+    "pk": 23673,
+    "fields": {
+        "course": 6135,
+        "meeting_section": "(03)",
+        "size": 50,
+        "enrolment": 43,
+        "waitlist": -1,
+        "waitlist_size": -1,
+        "section_type": "L",
+        "instructors": "K. Bandeen RocheM. Diener West",
+        "semester": 5,
+        "was_full": false,
+        "course_section_id": 696299
+    }
+},
+{
+    "model": "timetable.section",
+    "pk": 23672,
+    "fields": {
+        "course": 6135,
+        "meeting_section": "(02)",
+        "size": 50,
+        "enrolment": 50,
+        "waitlist": -1,
+        "waitlist_size": -1,
+        "section_type": "L",
+        "instructors": "K. Bandeen RocheM. Diener West",
+        "semester": 5,
+        "was_full": false,
+        "course_section_id": 696298
+    }
+},
+{
+    "model": "timetable.section",
+    "pk": 23671,
+    "fields": {
+        "course": 6135,
+        "meeting_section": "(01)",
+        "size": 65,
+        "enrolment": 65,
+        "waitlist": -1,
+        "waitlist_size": -1,
+        "section_type": "L",
+        "instructors": "K. Bandeen RocheM. Diener West",
+        "semester": 5,
+        "was_full": false,
+        "course_section_id": 696297
+    }
+},
+{
+    "model": "timetable.section",
+    "pk": 23670,
+    "fields": {
+        "course": 42,
+        "meeting_section": "(000)",
+        "size": 0,
+        "enrolment": 0,
+        "waitlist": -1,
+        "waitlist_size": -1,
+        "section_type": "L",
+        "instructors": "TBA",
+        "semester": 5,
+        "was_full": false,
+        "course_section_id": 696377
+    }
+},
+{
+    "model": "timetable.section",
+    "pk": 13596,
+    "fields": {
+        "course": 42,
+        "meeting_section": "(000)",
+        "size": 0,
+        "enrolment": 0,
+        "waitlist": -1,
+        "waitlist_size": -1,
+        "section_type": "L",
+        "instructors": "TBA",
+        "semester": 6,
+        "was_full": false,
+        "course_section_id": 673198
+    }
+},
+{
+    "model": "timetable.section",
+    "pk": 9939,
+    "fields": {
+        "course": 42,
+        "meeting_section": "(000)",
+        "size": 0,
+        "enrolment": 0,
+        "waitlist": -1,
+        "waitlist_size": -1,
+        "section_type": "L",
+        "instructors": "TBA",
+        "semester": 46,
+        "was_full": false,
+        "course_section_id": 695901
+    }
+},
+{
+    "model": "timetable.section",
+    "pk": 59,
+    "fields": {
+        "course": 42,
+        "meeting_section": "(000)",
+        "size": 0,
+        "enrolment": 0,
+        "waitlist": -1,
+        "waitlist_size": -1,
+        "section_type": "L",
+        "instructors": "TBA",
+        "semester": 4,
+        "was_full": false,
+        "course_section_id": 713473
+    }
+},
+{
+    "model": "timetable.section",
+    "pk": 23669,
+    "fields": {
+        "course": 41,
+        "meeting_section": "(41)",
+        "size": 0,
+        "enrolment": 0,
+        "waitlist": -1,
+        "waitlist_size": -1,
+        "section_type": "L",
+        "instructors": "E. ColantuoniH. Ji",
+        "semester": 5,
+        "was_full": false,
+        "course_section_id": 696613
+    }
+},
+{
+    "model": "timetable.section",
+    "pk": 23668,
+    "fields": {
+        "course": 41,
+        "meeting_section": "(01)",
+        "size": 0,
+        "enrolment": 0,
+        "waitlist": -1,
+        "waitlist_size": -1,
+        "section_type": "L",
+        "instructors": "E. ColantuoniH. Ji",
+        "semester": 5,
+        "was_full": false,
+        "course_section_id": 696612
+    }
+},
+{
+    "model": "timetable.section",
+    "pk": 13595,
+    "fields": {
+        "course": 41,
+        "meeting_section": "(01)",
+        "size": 0,
+        "enrolment": 0,
+        "waitlist": -1,
+        "waitlist_size": -1,
+        "section_type": "L",
+        "instructors": "E. ColantuoniH. Ji",
+        "semester": 6,
+        "was_full": false,
+        "course_section_id": 699411
+    }
+},
+{
+    "model": "timetable.section",
+    "pk": 58,
+    "fields": {
+        "course": 41,
+        "meeting_section": "(01)",
+        "size": 0,
+        "enrolment": 0,
+        "waitlist": -1,
+        "waitlist_size": -1,
+        "section_type": "L",
+        "instructors": "E. ColantuoniH. Ji",
+        "semester": 4,
+        "was_full": false,
+        "course_section_id": 713715
+    }
+},
+{
+    "model": "timetable.section",
+    "pk": 23667,
+    "fields": {
+        "course": 40,
+        "meeting_section": "(000)",
+        "size": 0,
+        "enrolment": 0,
+        "waitlist": -1,
+        "waitlist_size": -1,
+        "section_type": "L",
+        "instructors": "TBA",
+        "semester": 5,
+        "was_full": false,
+        "course_section_id": 696330
+    }
+},
+{
+    "model": "timetable.section",
+    "pk": 13594,
+    "fields": {
+        "course": 40,
+        "meeting_section": "(000)",
+        "size": 0,
+        "enrolment": 0,
+        "waitlist": -1,
+        "waitlist_size": -1,
+        "section_type": "L",
+        "instructors": "TBA",
+        "semester": 6,
+        "was_full": false,
+        "course_section_id": 673149
+    }
+},
+{
+    "model": "timetable.section",
+    "pk": 57,
+    "fields": {
+        "course": 40,
+        "meeting_section": "(000)",
+        "size": 0,
+        "enrolment": 0,
+        "waitlist": -1,
+        "waitlist_size": -1,
+        "section_type": "L",
+        "instructors": "TBA",
+        "semester": 4,
+        "was_full": false,
+        "course_section_id": 713422
+    }
+},
+{
+    "model": "timetable.section",
+    "pk": 23666,
+    "fields": {
+        "course": 39,
+        "meeting_section": "(000)",
+        "size": 0,
+        "enrolment": 0,
+        "waitlist": -1,
+        "waitlist_size": -1,
+        "section_type": "L",
+        "instructors": "TBA",
+        "semester": 5,
+        "was_full": false,
+        "course_section_id": 696282
+    }
+},
+{
+    "model": "timetable.section",
+    "pk": 13593,
+    "fields": {
+        "course": 39,
+        "meeting_section": "(000)",
+        "size": 0,
+        "enrolment": 0,
+        "waitlist": -1,
+        "waitlist_size": -1,
+        "section_type": "L",
+        "instructors": "TBA",
+        "semester": 6,
+        "was_full": false,
+        "course_section_id": 673109
+    }
+},
+{
+    "model": "timetable.section",
+    "pk": 9938,
+    "fields": {
+        "course": 39,
+        "meeting_section": "(000)",
+        "size": 0,
+        "enrolment": 0,
+        "waitlist": -1,
+        "waitlist_size": -1,
+        "section_type": "L",
+        "instructors": "TBA",
+        "semester": 46,
+        "was_full": false,
+        "course_section_id": 695913
+    }
+},
+{
+    "model": "timetable.section",
+    "pk": 56,
+    "fields": {
+        "course": 39,
+        "meeting_section": "(000)",
+        "size": 0,
+        "enrolment": 0,
+        "waitlist": -1,
+        "waitlist_size": -1,
+        "section_type": "L",
+        "instructors": "TBA",
+        "semester": 4,
+        "was_full": false,
+        "course_section_id": 713394
+    }
+},
+{
+    "model": "timetable.section",
+    "pk": 23665,
+    "fields": {
+        "course": 38,
+        "meeting_section": "(000)",
+        "size": 0,
+        "enrolment": 0,
+        "waitlist": -1,
+        "waitlist_size": -1,
+        "section_type": "L",
+        "instructors": "TBA",
+        "semester": 5,
+        "was_full": false,
+        "course_section_id": 696272
+    }
+},
+{
+    "model": "timetable.section",
+    "pk": 13592,
+    "fields": {
+        "course": 38,
+        "meeting_section": "(000)",
+        "size": 0,
+        "enrolment": 0,
+        "waitlist": -1,
+        "waitlist_size": -1,
+        "section_type": "L",
+        "instructors": "TBA",
+        "semester": 6,
+        "was_full": false,
+        "course_section_id": 673099
+    }
+},
+{
+    "model": "timetable.section",
+    "pk": 55,
+    "fields": {
+        "course": 38,
+        "meeting_section": "(000)",
+        "size": 0,
+        "enrolment": 0,
+        "waitlist": -1,
+        "waitlist_size": -1,
+        "section_type": "L",
+        "instructors": "TBA",
+        "semester": 4,
+        "was_full": false,
+        "course_section_id": 713384
+    }
+},
+{
+    "model": "timetable.section",
+    "pk": 23664,
+    "fields": {
+        "course": 37,
+        "meeting_section": "(000)",
+        "size": 0,
+        "enrolment": 0,
+        "waitlist": -1,
+        "waitlist_size": -1,
+        "section_type": "L",
+        "instructors": "TBA",
+        "semester": 5,
+        "was_full": false,
+        "course_section_id": 696257
+    }
+},
+{
+    "model": "timetable.section",
+    "pk": 13591,
+    "fields": {
+        "course": 37,
+        "meeting_section": "(000)",
+        "size": 0,
+        "enrolment": 0,
+        "waitlist": -1,
+        "waitlist_size": -1,
+        "section_type": "L",
+        "instructors": "TBA",
+        "semester": 6,
+        "was_full": false,
+        "course_section_id": 673084
+    }
+},
+{
+    "model": "timetable.section",
+    "pk": 9937,
+    "fields": {
+        "course": 37,
+        "meeting_section": "(000)",
+        "size": 0,
+        "enrolment": 0,
+        "waitlist": -1,
+        "waitlist_size": -1,
+        "section_type": "L",
+        "instructors": "TBA",
+        "semester": 46,
+        "was_full": false,
+        "course_section_id": 695860
+    }
+},
+{
+    "model": "timetable.section",
+    "pk": 54,
+    "fields": {
+        "course": 37,
+        "meeting_section": "(000)",
+        "size": 0,
+        "enrolment": 0,
+        "waitlist": -1,
+        "waitlist_size": -1,
+        "section_type": "L",
+        "instructors": "TBA",
+        "semester": 4,
+        "was_full": false,
+        "course_section_id": 713369
+    }
+},
+{
+    "model": "timetable.section",
+    "pk": 23663,
+    "fields": {
+        "course": 36,
+        "meeting_section": "(01)",
+        "size": 0,
+        "enrolment": 0,
+        "waitlist": -1,
+        "waitlist_size": -1,
+        "section_type": "L",
+        "instructors": "Dept. Faculty",
+        "semester": 5,
+        "was_full": false,
+        "course_section_id": 696335
+    }
+},
+{
+    "model": "timetable.section",
+    "pk": 13590,
+    "fields": {
+        "course": 36,
+        "meeting_section": "(01)",
+        "size": 0,
+        "enrolment": 0,
+        "waitlist": -1,
+        "waitlist_size": -1,
+        "section_type": "L",
+        "instructors": "Dept. Faculty",
+        "semester": 6,
+        "was_full": false,
+        "course_section_id": 673153
+    }
+},
+{
+    "model": "timetable.section",
+    "pk": 9936,
+    "fields": {
+        "course": 36,
+        "meeting_section": "(01)",
+        "size": 0,
+        "enrolment": 0,
+        "waitlist": -1,
+        "waitlist_size": -1,
+        "section_type": "L",
+        "instructors": "Dept. Faculty",
+        "semester": 46,
+        "was_full": false,
+        "course_section_id": 695844
+    }
+},
+{
+    "model": "timetable.section",
+    "pk": 53,
+    "fields": {
+        "course": 36,
+        "meeting_section": "(01)",
+        "size": 0,
+        "enrolment": 0,
+        "waitlist": -1,
+        "waitlist_size": -1,
+        "section_type": "L",
+        "instructors": "Dept. Faculty",
+        "semester": 4,
+        "was_full": false,
+        "course_section_id": 713426
+    }
+},
+{
+    "model": "timetable.section",
+    "pk": 23662,
+    "fields": {
+        "course": 6134,
+        "meeting_section": "(41)",
+        "size": 0,
+        "enrolment": 0,
+        "waitlist": -1,
+        "waitlist_size": -1,
+        "section_type": "L",
+        "instructors": "S. Hicks",
+        "semester": 5,
+        "was_full": false,
+        "course_section_id": 731653
+    }
+},
+{
+    "model": "timetable.section",
+    "pk": 23661,
+    "fields": {
+        "course": 6134,
+        "meeting_section": "(01)",
+        "size": 0,
+        "enrolment": 0,
+        "waitlist": -1,
+        "waitlist_size": -1,
+        "section_type": "L",
+        "instructors": "S. Hicks",
+        "semester": 5,
+        "was_full": false,
+        "course_section_id": 696194
+    }
+},
+{
+    "model": "timetable.section",
+    "pk": 23660,
+    "fields": {
+        "course": 6133,
+        "meeting_section": "(41)",
+        "size": 0,
+        "enrolment": 0,
+        "waitlist": -1,
+        "waitlist_size": -1,
+        "section_type": "L",
+        "instructors": "M. Lindquist",
+        "semester": 5,
+        "was_full": false,
+        "course_section_id": 696192
+    }
+},
+{
+    "model": "timetable.section",
+    "pk": 23659,
+    "fields": {
+        "course": 6133,
+        "meeting_section": "(01)",
+        "size": 0,
+        "enrolment": 0,
+        "waitlist": -1,
+        "waitlist_size": -1,
+        "section_type": "L",
+        "instructors": "M. Lindquist",
+        "semester": 5,
+        "was_full": false,
+        "course_section_id": 696191
+    }
+},
+{
+    "model": "timetable.section",
+    "pk": 23658,
+    "fields": {
+        "course": 6132,
+        "meeting_section": "(41)",
+        "size": 0,
+        "enrolment": 0,
+        "waitlist": -1,
+        "waitlist_size": -1,
+        "section_type": "L",
+        "instructors": "E. Ogburn",
+        "semester": 5,
+        "was_full": false,
+        "course_section_id": 696408
+    }
+},
+{
+    "model": "timetable.section",
+    "pk": 23657,
+    "fields": {
+        "course": 6132,
+        "meeting_section": "(01)",
+        "size": 0,
+        "enrolment": 0,
+        "waitlist": -1,
+        "waitlist_size": -1,
+        "section_type": "L",
+        "instructors": "E. Ogburn",
+        "semester": 5,
+        "was_full": false,
+        "course_section_id": 696407
+    }
+},
+{
+    "model": "timetable.section",
+    "pk": 23656,
+    "fields": {
+        "course": 6131,
+        "meeting_section": "(41)",
+        "size": 0,
+        "enrolment": 0,
+        "waitlist": -1,
+        "waitlist_size": -1,
+        "section_type": "L",
+        "instructors": "M. Rosenblum",
+        "semester": 5,
+        "was_full": false,
+        "course_section_id": 696454
+    }
+},
+{
+    "model": "timetable.section",
+    "pk": 23655,
+    "fields": {
+        "course": 6131,
+        "meeting_section": "(01)",
+        "size": 0,
+        "enrolment": 0,
+        "waitlist": -1,
+        "waitlist_size": -1,
+        "section_type": "L",
+        "instructors": "M. Rosenblum",
+        "semester": 5,
+        "was_full": false,
+        "course_section_id": 696453
+    }
+},
+{
+    "model": "timetable.section",
+    "pk": 23654,
+    "fields": {
+        "course": 6130,
+        "meeting_section": "(01)",
+        "size": 50,
+        "enrolment": 29,
+        "waitlist": -1,
+        "waitlist_size": -1,
+        "section_type": "L",
+        "instructors": "B. Caffo",
+        "semester": 5,
+        "was_full": false,
+        "course_section_id": 696424
+    }
+},
+{
+    "model": "timetable.section",
+    "pk": 23653,
+    "fields": {
+        "course": 4881,
+        "meeting_section": "(41)",
+        "size": 0,
+        "enrolment": 0,
+        "waitlist": -1,
+        "waitlist_size": -1,
+        "section_type": "L",
+        "instructors": "S. Zeger",
+        "semester": 5,
+        "was_full": false,
+        "course_section_id": 720401
+    }
+},
+{
+    "model": "timetable.section",
+    "pk": 23652,
+    "fields": {
+        "course": 4881,
+        "meeting_section": "(01)",
+        "size": 0,
+        "enrolment": 0,
+        "waitlist": -1,
+        "waitlist_size": -1,
+        "section_type": "L",
+        "instructors": "S. Zeger",
+        "semester": 5,
+        "was_full": false,
+        "course_section_id": 720255
+    }
+},
+{
+    "model": "timetable.section",
+    "pk": 13581,
+    "fields": {
+        "course": 4881,
+        "meeting_section": "(41)",
+        "size": 0,
+        "enrolment": 0,
+        "waitlist": -1,
+        "waitlist_size": -1,
+        "section_type": "L",
+        "instructors": "S. Zeger",
+        "semester": 6,
+        "was_full": false,
+        "course_section_id": 699408
+    }
+},
+{
+    "model": "timetable.section",
+    "pk": 13580,
+    "fields": {
+        "course": 4881,
+        "meeting_section": "(01)",
+        "size": 0,
+        "enrolment": 0,
+        "waitlist": -1,
+        "waitlist_size": -1,
+        "section_type": "L",
+        "instructors": "S. Zeger",
+        "semester": 6,
+        "was_full": false,
+        "course_section_id": 672980
+    }
+},
+{
+    "model": "timetable.section",
+    "pk": 23651,
+    "fields": {
+        "course": 6129,
+        "meeting_section": "(41)",
+        "size": 0,
+        "enrolment": 0,
+        "waitlist": -1,
+        "waitlist_size": -1,
+        "section_type": "L",
+        "instructors": "Dept. FacultyR. Varadhan",
+        "semester": 5,
+        "was_full": false,
+        "course_section_id": 720400
+    }
+},
+{
+    "model": "timetable.section",
+    "pk": 23650,
+    "fields": {
+        "course": 6129,
+        "meeting_section": "(01)",
+        "size": 0,
+        "enrolment": 0,
+        "waitlist": -1,
+        "waitlist_size": -1,
+        "section_type": "L",
+        "instructors": "Dept. Faculty",
+        "semester": 5,
+        "was_full": false,
+        "course_section_id": 696189
+    }
+},
+{
+    "model": "timetable.section",
+    "pk": 23649,
+    "fields": {
+        "course": 6128,
+        "meeting_section": "(41)",
+        "size": 0,
+        "enrolment": 0,
+        "waitlist": -1,
+        "waitlist_size": -1,
+        "section_type": "L",
+        "instructors": "M. Wang",
+        "semester": 5,
+        "was_full": false,
+        "course_section_id": 696187
+    }
+},
+{
+    "model": "timetable.section",
+    "pk": 23648,
+    "fields": {
+        "course": 6128,
+        "meeting_section": "(01)",
+        "size": 0,
+        "enrolment": 0,
+        "waitlist": -1,
+        "waitlist_size": -1,
+        "section_type": "L",
+        "instructors": "M. Wang",
+        "semester": 5,
+        "was_full": false,
+        "course_section_id": 696186
+    }
+},
+{
+    "model": "timetable.section",
+    "pk": 23647,
+    "fields": {
+        "course": 6127,
+        "meeting_section": "(01)",
+        "size": 0,
+        "enrolment": 0,
+        "waitlist": -1,
+        "waitlist_size": -1,
+        "section_type": "L",
+        "instructors": "Y. Zhu",
+        "semester": 5,
+        "was_full": false,
+        "course_section_id": 696447
+    }
+},
+{
+    "model": "timetable.section",
+    "pk": 23646,
+    "fields": {
+        "course": 6126,
+        "meeting_section": "(01)",
+        "size": 0,
+        "enrolment": 0,
+        "waitlist": -1,
+        "waitlist_size": -1,
+        "section_type": "L",
+        "instructors": "B. Harvey",
+        "semester": 5,
+        "was_full": false,
+        "course_section_id": 696610
+    }
+},
+{
+    "model": "timetable.section",
+    "pk": 23645,
+    "fields": {
+        "course": 6125,
+        "meeting_section": "(81)",
+        "size": 0,
+        "enrolment": 0,
+        "waitlist": -1,
+        "waitlist_size": -1,
+        "section_type": "L",
+        "instructors": "C. Wang",
+        "semester": 5,
+        "was_full": false,
+        "course_section_id": 696561
+    }
+},
+{
+    "model": "timetable.section",
+    "pk": 23644,
+    "fields": {
+        "course": 6124,
+        "meeting_section": "(81)",
+        "size": 0,
+        "enrolment": 0,
+        "waitlist": -1,
+        "waitlist_size": -1,
+        "section_type": "L",
+        "instructors": "K. Bandeen RocheM. Diener West",
+        "semester": 5,
+        "was_full": false,
+        "course_section_id": 696185
+    }
+},
+{
+    "model": "timetable.section",
+    "pk": 24049,
+    "fields": {
+        "course": 4241,
+        "meeting_section": "(94)",
+        "size": 0,
+        "enrolment": 0,
+        "waitlist": -1,
+        "waitlist_size": -1,
+        "section_type": "L",
+        "instructors": "Dept. Faculty",
+        "semester": 5,
+        "was_full": false,
+        "course_section_id": 713028
+    }
+},
+{
+    "model": "timetable.section",
+    "pk": 23643,
+    "fields": {
+        "course": 4241,
+        "meeting_section": "(81)",
+        "size": 0,
+        "enrolment": 0,
+        "waitlist": -1,
+        "waitlist_size": -1,
+        "section_type": "L",
+        "instructors": "J. McGready",
+        "semester": 5,
+        "was_full": false,
+        "course_section_id": 696182
+    }
+},
+{
+    "model": "timetable.section",
+    "pk": 9800,
+    "fields": {
+        "course": 4241,
+        "meeting_section": "(49)",
+        "size": 0,
+        "enrolment": 0,
+        "waitlist": -1,
+        "waitlist_size": -1,
+        "section_type": "L",
+        "instructors": "N. Blades",
+        "semester": 46,
+        "was_full": false,
+        "course_section_id": 714534
+    }
+},
+{
+    "model": "timetable.section",
+    "pk": 9799,
+    "fields": {
+        "course": 4241,
+        "meeting_section": "(11)",
+        "size": 0,
+        "enrolment": 0,
+        "waitlist": -1,
+        "waitlist_size": -1,
+        "section_type": "L",
+        "instructors": "N. Blades",
+        "semester": 46,
+        "was_full": false,
+        "course_section_id": 695966
+    }
+},
+{
+    "model": "timetable.section",
+    "pk": 23642,
+    "fields": {
+        "course": 4325,
+        "meeting_section": "(000)",
+        "size": 0,
+        "enrolment": 0,
+        "waitlist": -1,
+        "waitlist_size": -1,
+        "section_type": "L",
+        "instructors": "TBA",
+        "semester": 5,
+        "was_full": false,
+        "course_section_id": 696378
+    }
+},
+{
+    "model": "timetable.section",
+    "pk": 13562,
+    "fields": {
+        "course": 4325,
+        "meeting_section": "(000)",
+        "size": 0,
+        "enrolment": 0,
+        "waitlist": -1,
+        "waitlist_size": -1,
+        "section_type": "L",
+        "instructors": "TBA",
+        "semester": 6,
+        "was_full": false,
+        "course_section_id": 673197
+    }
+},
+{
+    "model": "timetable.section",
+    "pk": 9935,
+    "fields": {
+        "course": 4325,
+        "meeting_section": "(000)",
+        "size": 0,
+        "enrolment": 0,
+        "waitlist": -1,
+        "waitlist_size": -1,
+        "section_type": "L",
+        "instructors": "TBA",
+        "semester": 46,
+        "was_full": false,
+        "course_section_id": 695900
+    }
+},
+{
+    "model": "timetable.section",
+    "pk": 23641,
+    "fields": {
+        "course": 6123,
+        "meeting_section": "(01)",
+        "size": 0,
+        "enrolment": 0,
+        "waitlist": -1,
+        "waitlist_size": -1,
+        "section_type": "L",
+        "instructors": "M. Matunis",
+        "semester": 5,
+        "was_full": false,
+        "course_section_id": 696356
+    }
+},
+{
+    "model": "timetable.section",
+    "pk": 23640,
+    "fields": {
+        "course": 15,
+        "meeting_section": "(01)",
+        "size": 0,
+        "enrolment": 0,
+        "waitlist": -1,
+        "waitlist_size": -1,
+        "section_type": "L",
+        "instructors": "M. Matunis",
+        "semester": 5,
+        "was_full": false,
+        "course_section_id": 696609
+    }
+},
+{
+    "model": "timetable.section",
+    "pk": 13560,
+    "fields": {
+        "course": 15,
+        "meeting_section": "(01)",
+        "size": 0,
+        "enrolment": 0,
+        "waitlist": -1,
+        "waitlist_size": -1,
+        "section_type": "L",
+        "instructors": "M. Matunis",
+        "semester": 6,
+        "was_full": false,
+        "course_section_id": 673403
+    }
+},
+{
+    "model": "timetable.section",
+    "pk": 19,
+    "fields": {
+        "course": 15,
+        "meeting_section": "(01)",
+        "size": 0,
+        "enrolment": 0,
+        "waitlist": -1,
+        "waitlist_size": -1,
+        "section_type": "L",
+        "instructors": "M. Matunis",
+        "semester": 4,
+        "was_full": false,
+        "course_section_id": 713676
+    }
+},
+{
+    "model": "timetable.section",
+    "pk": 23639,
+    "fields": {
+        "course": 14,
+        "meeting_section": "(01)",
+        "size": 0,
+        "enrolment": 0,
+        "waitlist": -1,
+        "waitlist_size": -1,
+        "section_type": "L",
+        "instructors": "Dept. Faculty",
+        "semester": 5,
+        "was_full": false,
+        "course_section_id": 696180
+    }
+},
+{
+    "model": "timetable.section",
+    "pk": 13559,
+    "fields": {
+        "course": 14,
+        "meeting_section": "(01)",
+        "size": 0,
+        "enrolment": 0,
+        "waitlist": -1,
+        "waitlist_size": -1,
+        "section_type": "L",
+        "instructors": "Dept. Faculty",
+        "semester": 6,
+        "was_full": false,
+        "course_section_id": 672981
+    }
+},
+{
+    "model": "timetable.section",
+    "pk": 18,
+    "fields": {
+        "course": 14,
+        "meeting_section": "(01)",
+        "size": 0,
+        "enrolment": 0,
+        "waitlist": -1,
+        "waitlist_size": -1,
+        "section_type": "L",
+        "instructors": "Dept. Faculty",
+        "semester": 4,
+        "was_full": false,
+        "course_section_id": 713316
+    }
+},
+{
+    "model": "timetable.section",
+    "pk": 23638,
+    "fields": {
+        "course": 13,
+        "meeting_section": "(000)",
+        "size": 0,
+        "enrolment": 0,
+        "waitlist": -1,
+        "waitlist_size": -1,
+        "section_type": "L",
+        "instructors": "TBA",
+        "semester": 5,
+        "was_full": false,
+        "course_section_id": 696281
+    }
+},
+{
+    "model": "timetable.section",
+    "pk": 13558,
+    "fields": {
+        "course": 13,
+        "meeting_section": "(000)",
+        "size": 0,
+        "enrolment": 0,
+        "waitlist": -1,
+        "waitlist_size": -1,
+        "section_type": "L",
+        "instructors": "TBA",
+        "semester": 6,
+        "was_full": false,
+        "course_section_id": 673108
+    }
+},
+{
+    "model": "timetable.section",
+    "pk": 9933,
+    "fields": {
+        "course": 13,
+        "meeting_section": "(000)",
+        "size": 0,
+        "enrolment": 0,
+        "waitlist": -1,
+        "waitlist_size": -1,
+        "section_type": "L",
+        "instructors": "TBA",
+        "semester": 46,
+        "was_full": false,
+        "course_section_id": 695843
+    }
+},
+{
+    "model": "timetable.section",
+    "pk": 17,
+    "fields": {
+        "course": 13,
+        "meeting_section": "(000)",
+        "size": 0,
+        "enrolment": 0,
+        "waitlist": -1,
+        "waitlist_size": -1,
+        "section_type": "L",
+        "instructors": "TBA",
+        "semester": 4,
+        "was_full": false,
+        "course_section_id": 713393
+    }
+},
+{
+    "model": "timetable.section",
+    "pk": 23637,
+    "fields": {
+        "course": 12,
+        "meeting_section": "(000)",
+        "size": 0,
+        "enrolment": 0,
+        "waitlist": -1,
+        "waitlist_size": -1,
+        "section_type": "L",
+        "instructors": "TBA",
+        "semester": 5,
+        "was_full": false,
+        "course_section_id": 696271
+    }
+},
+{
+    "model": "timetable.section",
+    "pk": 13557,
+    "fields": {
+        "course": 12,
+        "meeting_section": "(000)",
+        "size": 0,
+        "enrolment": 0,
+        "waitlist": -1,
+        "waitlist_size": -1,
+        "section_type": "L",
+        "instructors": "TBA",
+        "semester": 6,
+        "was_full": false,
+        "course_section_id": 673098
+    }
+},
+{
+    "model": "timetable.section",
+    "pk": 16,
+    "fields": {
+        "course": 12,
+        "meeting_section": "(000)",
+        "size": 0,
+        "enrolment": 0,
+        "waitlist": -1,
+        "waitlist_size": -1,
+        "section_type": "L",
+        "instructors": "TBA",
+        "semester": 4,
+        "was_full": false,
+        "course_section_id": 713383
+    }
+},
+{
+    "model": "timetable.section",
+    "pk": 23636,
+    "fields": {
+        "course": 10,
+        "meeting_section": "(41)",
+        "size": 0,
+        "enrolment": 0,
+        "waitlist": -1,
+        "waitlist_size": -1,
+        "section_type": "L",
+        "instructors": "J. Wang",
+        "semester": 5,
+        "was_full": false,
+        "course_section_id": 696365
+    }
+},
+{
+    "model": "timetable.section",
+    "pk": 23635,
+    "fields": {
+        "course": 10,
+        "meeting_section": "(01)",
+        "size": 0,
+        "enrolment": 0,
+        "waitlist": -1,
+        "waitlist_size": -1,
+        "section_type": "L",
+        "instructors": "J. Wang",
+        "semester": 5,
+        "was_full": false,
+        "course_section_id": 696364
+    }
+},
+{
+    "model": "timetable.section",
+    "pk": 13555,
+    "fields": {
+        "course": 10,
+        "meeting_section": "(41)",
+        "size": 0,
+        "enrolment": 0,
+        "waitlist": -1,
+        "waitlist_size": -1,
+        "section_type": "L",
+        "instructors": "J. Wang",
+        "semester": 6,
+        "was_full": false,
+        "course_section_id": 692007
+    }
+},
+{
+    "model": "timetable.section",
+    "pk": 13554,
+    "fields": {
+        "course": 10,
+        "meeting_section": "(01)",
+        "size": 0,
+        "enrolment": 0,
+        "waitlist": -1,
+        "waitlist_size": -1,
+        "section_type": "L",
+        "instructors": "J. Wang",
+        "semester": 6,
+        "was_full": false,
+        "course_section_id": 673186
+    }
+},
+{
+    "model": "timetable.section",
+    "pk": 14,
+    "fields": {
+        "course": 10,
+        "meeting_section": "(41)",
+        "size": 0,
+        "enrolment": 0,
+        "waitlist": -1,
+        "waitlist_size": -1,
+        "section_type": "L",
+        "instructors": "J. Wang",
+        "semester": 4,
+        "was_full": false,
+        "course_section_id": 713462
+    }
+},
+{
+    "model": "timetable.section",
+    "pk": 13,
+    "fields": {
+        "course": 10,
+        "meeting_section": "(01)",
+        "size": 0,
+        "enrolment": 0,
+        "waitlist": -1,
+        "waitlist_size": -1,
+        "section_type": "L",
+        "instructors": "J. Wang",
+        "semester": 4,
+        "was_full": false,
+        "course_section_id": 713461
+    }
+},
+{
+    "model": "timetable.section",
+    "pk": 23632,
+    "fields": {
+        "course": 4,
+        "meeting_section": "(41)",
+        "size": 0,
+        "enrolment": 0,
+        "waitlist": -1,
+        "waitlist_size": -1,
+        "section_type": "L",
+        "instructors": "TBA",
+        "semester": 5,
+        "was_full": false,
+        "course_section_id": 723107
+    }
+},
+{
+    "model": "timetable.section",
+    "pk": 23631,
+    "fields": {
+        "course": 4,
+        "meeting_section": "(01)",
+        "size": 0,
+        "enrolment": 0,
+        "waitlist": -1,
+        "waitlist_size": -1,
+        "section_type": "L",
+        "instructors": "TBA",
+        "semester": 5,
+        "was_full": false,
+        "course_section_id": 696605
+    }
+},
+{
+    "model": "timetable.section",
+    "pk": 13547,
+    "fields": {
+        "course": 4,
+        "meeting_section": "(41)",
+        "size": 0,
+        "enrolment": 0,
+        "waitlist": -1,
+        "waitlist_size": -1,
+        "section_type": "L",
+        "instructors": "P. Jordan",
+        "semester": 6,
+        "was_full": false,
+        "course_section_id": 700731
+    }
+},
+{
+    "model": "timetable.section",
+    "pk": 13546,
+    "fields": {
+        "course": 4,
+        "meeting_section": "(01)",
+        "size": 0,
+        "enrolment": 0,
+        "waitlist": -1,
+        "waitlist_size": -1,
+        "section_type": "L",
+        "instructors": "P. Jordan",
+        "semester": 6,
+        "was_full": false,
+        "course_section_id": 700717
+    }
+},
+{
+    "model": "timetable.section",
+    "pk": 7,
+    "fields": {
+        "course": 4,
+        "meeting_section": "(41)",
+        "size": 0,
+        "enrolment": 0,
+        "waitlist": -1,
+        "waitlist_size": -1,
+        "section_type": "L",
+        "instructors": "R. Selimyan",
+        "semester": 4,
+        "was_full": false,
+        "course_section_id": 738676
+    }
+},
+{
+    "model": "timetable.section",
+    "pk": 6,
+    "fields": {
+        "course": 4,
+        "meeting_section": "(01)",
+        "size": 0,
+        "enrolment": 0,
+        "waitlist": -1,
+        "waitlist_size": -1,
+        "section_type": "L",
+        "instructors": "TBA",
+        "semester": 4,
+        "was_full": false,
+        "course_section_id": 713295
+    }
+},
+{
+    "model": "timetable.section",
+    "pk": 23630,
+    "fields": {
+        "course": 1,
+        "meeting_section": "(41)",
+        "size": 0,
+        "enrolment": 0,
+        "waitlist": -1,
+        "waitlist_size": -1,
+        "section_type": "L",
+        "instructors": "R. Selimyan",
+        "semester": 5,
+        "was_full": false,
+        "course_section_id": 720252
+    }
+},
+{
+    "model": "timetable.section",
+    "pk": 23629,
+    "fields": {
+        "course": 1,
+        "meeting_section": "(01)",
+        "size": 0,
+        "enrolment": 0,
+        "waitlist": -1,
+        "waitlist_size": -1,
+        "section_type": "L",
+        "instructors": "R. Selimyan",
+        "semester": 5,
+        "was_full": false,
+        "course_section_id": 720251
+    }
+},
+{
+    "model": "timetable.section",
+    "pk": 13543,
+    "fields": {
+        "course": 1,
+        "meeting_section": "(41)",
+        "size": 0,
+        "enrolment": 0,
+        "waitlist": -1,
+        "waitlist_size": -1,
+        "section_type": "L",
+        "instructors": "R. Selimyan",
+        "semester": 6,
+        "was_full": false,
+        "course_section_id": 708701
+    }
+},
+{
+    "model": "timetable.section",
+    "pk": 13542,
+    "fields": {
+        "course": 1,
+        "meeting_section": "(01)",
+        "size": 0,
+        "enrolment": 0,
+        "waitlist": -1,
+        "waitlist_size": -1,
+        "section_type": "L",
+        "instructors": "R. Selimyan",
+        "semester": 6,
+        "was_full": false,
+        "course_section_id": 701027
+    }
+},
+{
+    "model": "timetable.section",
+    "pk": 2,
+    "fields": {
+        "course": 1,
+        "meeting_section": "(41)",
+        "size": 0,
+        "enrolment": 0,
+        "waitlist": -1,
+        "waitlist_size": -1,
+        "section_type": "L",
+        "instructors": "R. Selimyan",
+        "semester": 4,
+        "was_full": false,
+        "course_section_id": 738673
+    }
+},
+{
+    "model": "timetable.section",
+    "pk": 1,
+    "fields": {
+        "course": 1,
+        "meeting_section": "(01)",
+        "size": 0,
+        "enrolment": 0,
+        "waitlist": -1,
+        "waitlist_size": -1,
+        "section_type": "L",
+        "instructors": "R. Selimyan",
+        "semester": 4,
+        "was_full": false,
+        "course_section_id": 738674
+    }
+},
+{
+    "model": "timetable.section",
+    "pk": 23628,
+    "fields": {
+        "course": 6121,
+        "meeting_section": "(81)",
+        "size": 0,
+        "enrolment": 0,
+        "waitlist": -1,
+        "waitlist_size": -1,
+        "section_type": "L",
+        "instructors": "S. Bailey",
+        "semester": 5,
+        "was_full": false,
+        "course_section_id": 696502
+    }
+},
+{
+    "model": "timetable.section",
+    "pk": 23627,
+    "fields": {
+        "course": 6120,
+        "meeting_section": "(01)",
+        "size": 120,
+        "enrolment": 76,
+        "waitlist": -1,
+        "waitlist_size": -1,
+        "section_type": "L",
+        "instructors": "S. BaileyA. Leung",
+        "semester": 5,
+        "was_full": false,
+        "course_section_id": 696476
+    }
+},
+{
+    "model": "timetable.section",
+    "pk": 23626,
+    "fields": {
+        "course": 6119,
+        "meeting_section": "(81)",
+        "size": 80,
+        "enrolment": 75,
+        "waitlist": -1,
+        "waitlist_size": -1,
+        "section_type": "L",
+        "instructors": "F. Bryant",
+        "semester": 5,
+        "was_full": false,
+        "course_section_id": 730901
+    }
+},
+{
+    "model": "timetable.course",
+    "pk": 6135,
+    "fields": {
+        "school": "jhu",
+        "code": "PH.140.921",
+        "name": "Biostats Lab for 140.621",
+        "description": "",
+        "notes": "",
+        "info": "",
+        "unstopped_description": "",
+        "campus": "",
+        "prerequisites": "",
+        "corequisites": "",
+        "exclusions": "",
+        "num_credits": 0.0,
+        "department": "Biostatistics",
+        "level": "900",
+        "cores": null,
+        "geneds": null,
+        "same_as": null,
+        "pos": "[]",
+        "areas": "[]",
+        "sub_school": "Bloomberg School of Public Health",
+        "writing_intensive": "No",
+        "related_courses": []
+    }
+},
+{
+    "model": "timetable.course",
+    "pk": 42,
+    "fields": {
+        "school": "jhu",
+        "code": "PH.140.895",
+        "name": "Mph Practicum: Biostatistics",
+        "description": "The MPH Practicum is a mentored, hands-on practical public health experience, which involves meaningful participation and interaction with public health professionalsm.",
+        "notes": "",
+        "info": "",
+        "unstopped_description": "",
+        "campus": "",
+        "prerequisites": "",
+        "corequisites": "",
+        "exclusions": "",
+        "num_credits": 0.0,
+        "department": "Biostatistics",
+        "level": "800",
+        "cores": null,
+        "geneds": null,
+        "same_as": null,
+        "pos": "[]",
+        "areas": "[]",
+        "sub_school": "Bloomberg School of Public Health",
+        "writing_intensive": "No",
+        "related_courses": []
+    }
+},
+{
+    "model": "timetable.course",
+    "pk": 41,
+    "fields": {
+        "school": "jhu",
+        "code": "PH.140.860",
+        "name": "Current Topics in Biostatistics Research",
+        "description": "Features presentations by Biostatistics faculty, postdocs and senior students on their research, with a focus on the public health and scientific questions driving the work, why the research makes a difference for the subject area and how to translate the research into practice. Offers an opportunity for discussion and clarification of key Biostatistical concepts being taught in the core courses and how they apply to problems in public health and science. Provides an opportunity for students and faculty to come together and discuss novel research questions and the role that Biostatisticians have in helping to support, enrich and promote solutions to these novel research questions.",
+        "notes": "",
+        "info": "",
+        "unstopped_description": "",
+        "campus": "",
+        "prerequisites": "",
+        "corequisites": "",
+        "exclusions": "",
+        "num_credits": 1.0,
+        "department": "Biostatistics",
+        "level": "800",
+        "cores": null,
+        "geneds": null,
+        "same_as": null,
+        "pos": "[]",
+        "areas": "[]",
+        "sub_school": "Bloomberg School of Public Health",
+        "writing_intensive": "No",
+        "related_courses": []
+    }
+},
+{
+    "model": "timetable.course",
+    "pk": 40,
+    "fields": {
+        "school": "jhu",
+        "code": "PH.140.850",
+        "name": "Advanced Special Topics in Biostatistics",
+        "description": "Exposes Biostatistics PhD students to advanced special topics that are not covered in the core courses. Comprises two- and four-week modules, with revolving instructors and topics. Possible topics include: theory underlying analysis for correlated data; latent variable modeling; advanced survival analysis; image analysis; time series; and likelihood inference.",
+        "notes": "",
+        "info": "",
+        "unstopped_description": "",
+        "campus": "",
+        "prerequisites": "",
+        "corequisites": "",
+        "exclusions": "",
+        "num_credits": 0.0,
+        "department": "Biostatistics",
+        "level": "800",
+        "cores": null,
+        "geneds": null,
+        "same_as": null,
+        "pos": "[]",
+        "areas": "[]",
+        "sub_school": "Bloomberg School of Public Health",
+        "writing_intensive": "No",
+        "related_courses": []
+    }
+},
+{
+    "model": "timetable.course",
+    "pk": 39,
+    "fields": {
+        "school": "jhu",
+        "code": "PH.140.840",
+        "name": "Special Studies and Research Biostatistics",
+        "description": "",
+        "notes": "",
+        "info": "",
+        "unstopped_description": "",
+        "campus": "",
+        "prerequisites": "",
+        "corequisites": "",
+        "exclusions": "",
+        "num_credits": 0.0,
+        "department": "Biostatistics",
+        "level": "800",
+        "cores": null,
+        "geneds": null,
+        "same_as": null,
+        "pos": "[]",
+        "areas": "[]",
+        "sub_school": "Bloomberg School of Public Health",
+        "writing_intensive": "No",
+        "related_courses": []
+    }
+},
+{
+    "model": "timetable.course",
+    "pk": 38,
+    "fields": {
+        "school": "jhu",
+        "code": "PH.140.830",
+        "name": "Postdoctoral Research Biostatistics",
+        "description": "",
+        "notes": "",
+        "info": "",
+        "unstopped_description": "",
+        "campus": "",
+        "prerequisites": "",
+        "corequisites": "",
+        "exclusions": "",
+        "num_credits": 0.0,
+        "department": "Biostatistics",
+        "level": "800",
+        "cores": null,
+        "geneds": null,
+        "same_as": null,
+        "pos": "[]",
+        "areas": "[]",
+        "sub_school": "Bloomberg School of Public Health",
+        "writing_intensive": "No",
+        "related_courses": []
+    }
+},
+{
+    "model": "timetable.course",
+    "pk": 37,
+    "fields": {
+        "school": "jhu",
+        "code": "PH.140.820",
+        "name": "Thesis Research Biostatistics",
+        "description": "",
+        "notes": "",
+        "info": "",
+        "unstopped_description": "",
+        "campus": "",
+        "prerequisites": "",
+        "corequisites": "",
+        "exclusions": "",
+        "num_credits": 0.0,
+        "department": "Biostatistics",
+        "level": "800",
+        "cores": null,
+        "geneds": null,
+        "same_as": null,
+        "pos": "[]",
+        "areas": "[]",
+        "sub_school": "Bloomberg School of Public Health",
+        "writing_intensive": "No",
+        "related_courses": []
+    }
+},
+{
+    "model": "timetable.course",
+    "pk": 36,
+    "fields": {
+        "school": "jhu",
+        "code": "PH.140.800",
+        "name": "Mph Capstone Biostatistics",
+        "description": "The MPH Capstone is an opportunity for students to work on public health practice projects that are of particular interest to them. The goal is for students to apply the skills and competencies they have acquired to a public health problem that simulates a professional practice experience.",
+        "notes": "",
+        "info": "",
+        "unstopped_description": "",
+        "campus": "",
+        "prerequisites": "",
+        "corequisites": "",
+        "exclusions": "",
+        "num_credits": 2.0,
+        "department": "Biostatistics",
+        "level": "800",
+        "cores": null,
+        "geneds": null,
+        "same_as": null,
+        "pos": "[]",
+        "areas": "[]",
+        "sub_school": "Bloomberg School of Public Health",
+        "writing_intensive": "No",
+        "related_courses": []
+    }
+},
+{
+    "model": "timetable.course",
+    "pk": 6134,
+    "fields": {
+        "school": "jhu",
+        "code": "PH.140.776",
+        "name": "Statistical Computing",
+        "description": "Covers the basics of practical issues in programming and other computer skills required for the research and application of statistical methods. Includes programming in R and the tidyverse, data ethics, best practices for coding and reproducible research, introduction to data visualizations, best practices for working with special data types (dates/times, text data, etc), best practices for storing data, basics of debugging, organizing and commenting code, basics of leveraging Python from R. Topics in statistical data analysis provide working examples.",
+        "notes": "",
+        "info": "",
+        "unstopped_description": "",
+        "campus": "",
+        "prerequisites": "",
+        "corequisites": "",
+        "exclusions": "",
+        "num_credits": 3.0,
+        "department": "Biostatistics",
+        "level": "700",
+        "cores": null,
+        "geneds": null,
+        "same_as": null,
+        "pos": "[]",
+        "areas": "[]",
+        "sub_school": "Bloomberg School of Public Health",
+        "writing_intensive": "No",
+        "related_courses": []
+    }
+},
+{
+    "model": "timetable.course",
+    "pk": 6133,
+    "fields": {
+        "school": "jhu",
+        "code": "PH.140.751",
+        "name": "Advanced Methods in Biostatistics I",
+        "description": "Introduces students to applied statistics for biomedical sciences. Illustrates the motivations behind many of the methods explained in 140.752-756. Focuses on analyzing data and interpreting results relevant to scientific questions of interest. Presents various case studies in detail and provides students with hands-on experience in analyzing data. Requires students to present results in both written and oral form, which in turn requires them to learn the software package R and a handful of statistical methods. General topics covered include descriptive statistics, basic probability, chance variability, sampling, chance models, inference, and regression.",
+        "notes": "",
+        "info": "",
+        "unstopped_description": "",
+        "campus": "",
+        "prerequisites": "",
+        "corequisites": "",
+        "exclusions": "",
+        "num_credits": 3.0,
+        "department": "Biostatistics",
+        "level": "700",
+        "cores": null,
+        "geneds": null,
+        "same_as": null,
+        "pos": "[]",
+        "areas": "[]",
+        "sub_school": "Bloomberg School of Public Health",
+        "writing_intensive": "No",
+        "related_courses": []
+    }
+},
+{
+    "model": "timetable.course",
+    "pk": 6132,
+    "fields": {
+        "school": "jhu",
+        "code": "PH.140.731",
+        "name": "Statistical Theory I",
+        "description": "Introduces probability and inference, including random variables; probability distributions; transformations and sums of random variables; expectations, variances, and moments; properties of random samples; and hypothesis testing.",
+        "notes": "",
+        "info": "",
+        "unstopped_description": "",
+        "campus": "",
+        "prerequisites": "",
+        "corequisites": "",
+        "exclusions": "",
+        "num_credits": 4.0,
+        "department": "Biostatistics",
+        "level": "700",
+        "cores": null,
+        "geneds": null,
+        "same_as": null,
+        "pos": "[]",
+        "areas": "[]",
+        "sub_school": "Bloomberg School of Public Health",
+        "writing_intensive": "No",
+        "related_courses": []
+    }
+},
+{
+    "model": "timetable.course",
+    "pk": 6131,
+    "fields": {
+        "school": "jhu",
+        "code": "PH.140.721",
+        "name": "Probability Theory I",
+        "description": "Presents key concepts needed to understand measure-theoretic probability, including the following: set theory, limits of sequences, metric spaces, continuity of functions between metric spaces, convergence of sequences of functions, sigma algebras, probability measure. Emphasizes rigorous proof technique.",
+        "notes": "",
+        "info": "",
+        "unstopped_description": "",
+        "campus": "",
+        "prerequisites": "",
+        "corequisites": "",
+        "exclusions": "",
+        "num_credits": 3.0,
+        "department": "Biostatistics",
+        "level": "700",
+        "cores": null,
+        "geneds": null,
+        "same_as": null,
+        "pos": "[]",
+        "areas": "[]",
+        "sub_school": "Bloomberg School of Public Health",
+        "writing_intensive": "No",
+        "related_courses": []
+    }
+},
+{
+    "model": "timetable.course",
+    "pk": 6130,
+    "fields": {
+        "school": "jhu",
+        "code": "PH.140.711",
+        "name": "Advanced Data Science I",
+        "description": "Teaches how to organize the components of a data analysis – statistics, data manipulation, and visualization.  Teaches how to produce a complete data analysis to answer a targeted scientific question.  Focuses on synthesis, communication, ethics, and interpretation of data analytic products.",
+        "notes": "",
+        "info": "",
+        "unstopped_description": "",
+        "campus": "",
+        "prerequisites": "",
+        "corequisites": "",
+        "exclusions": "",
+        "num_credits": 3.0,
+        "department": "Biostatistics",
+        "level": "700",
+        "cores": null,
+        "geneds": null,
+        "same_as": null,
+        "pos": "[]",
+        "areas": "[]",
+        "sub_school": "Bloomberg School of Public Health",
+        "writing_intensive": "No",
+        "related_courses": []
+    }
+},
+{
+    "model": "timetable.course",
+    "pk": 4881,
+    "fields": {
+        "school": "jhu",
+        "code": "PH.140.655",
+        "name": "Analysis of Longitudinal Data",
+        "description": "Explores statistical models for drawing scientific inferences from longitudinal data. Includes topics: longitudinal study design; exploring longitudinal data; linear and generalized linear regression models for correlated data, including marginal, random effects, and transition models; and handling missing data. Intended for doctoral students in quantitative sciences.\n&nbsp;",
+        "notes": "",
+        "info": "",
+        "unstopped_description": "",
+        "campus": "",
+        "prerequisites": "",
+        "corequisites": "",
+        "exclusions": "",
+        "num_credits": 4.0,
+        "department": "Biostatistics",
+        "level": "600",
+        "cores": null,
+        "geneds": null,
+        "same_as": null,
+        "pos": "[]",
+        "areas": "[]",
+        "sub_school": "Bloomberg School of Public Health",
+        "writing_intensive": "No",
+        "related_courses": []
+    }
+},
+{
+    "model": "timetable.course",
+    "pk": 6129,
+    "fields": {
+        "school": "jhu",
+        "code": "PH.140.651",
+        "name": "Methods in Biostatistics I",
+        "description": "Presents fundamental concepts in applied probability, exploratory data analysis, and statistical inference, focusing on probability and analysis of one and two samples. Includes topics discrete and continuous probability models; expectation and variance; central limit theorem; inference, including hypothesis testing and confidence interval for means, proportions, and counts; maximum likelihood estimation; sample size determinations; elementary non-parametric methods; graphical displays; and data transformations. Introduces R and concepts are presented both from a theoretical, practical and computational perspective.",
+        "notes": "",
+        "info": "",
+        "unstopped_description": "",
+        "campus": "",
+        "prerequisites": "",
+        "corequisites": "",
+        "exclusions": "",
+        "num_credits": 4.0,
+        "department": "Biostatistics",
+        "level": "600",
+        "cores": null,
+        "geneds": null,
+        "same_as": null,
+        "pos": "[]",
+        "areas": "[]",
+        "sub_school": "Bloomberg School of Public Health",
+        "writing_intensive": "No",
+        "related_courses": []
+    }
+},
+{
+    "model": "timetable.course",
+    "pk": 6128,
+    "fields": {
+        "school": "jhu",
+        "code": "PH.140.646",
+        "name": "Essentials of Probability and Statistical Inference I: Probability",
+        "description": "Introduces students to the theory of probability and the formal language of uncertainty. Includes the basic concepts of probability; random variables and their distributions; joint, marginal and conditional distributions; independence; distributions of functions of random variables; expectations; moment generating functions; probability and expectation inequalities; convergence concepts and limit theorems; order statistics. Emphasizes rigorous analysis (including proofs), as well as interpretation of results and simulation for illustration.",
+        "notes": "",
+        "info": "",
+        "unstopped_description": "",
+        "campus": "",
+        "prerequisites": "",
+        "corequisites": "",
+        "exclusions": "",
+        "num_credits": 4.0,
+        "department": "Biostatistics",
+        "level": "600",
+        "cores": null,
+        "geneds": null,
+        "same_as": null,
+        "pos": "[]",
+        "areas": "[]",
+        "sub_school": "Bloomberg School of Public Health",
+        "writing_intensive": "No",
+        "related_courses": []
+    }
+},
+{
+    "model": "timetable.course",
+    "pk": 6127,
+    "fields": {
+        "school": "jhu",
+        "code": "PH.140.641",
+        "name": "Survival Analysis",
+        "description": "Introduces fundamental concepts, theory and methods in survival analysis. Emphasizes statistical tools and model interpretations which are useful in medical follow-up studies and in general time-to-event studies. Includes hazard function, survival function, different types of censoring, Kaplan-Meier estimate, log-rank test and its generalization. For parametric inference, includes likelihood estimation and the exponential, Weibull, log-logistic and other relevant distributions. Discusses in detail statistical methods and theory for the proportional hazard models (Cox model), with extensions to time-dependent covariates. Includes clinical and epidemiological examples (through class presentations). Introduces basic concepts and methods for competing risks data, including the cause-specific hazard models and other models based of cumulative incidence function (CIF).  Illustrates various statistical procedures (through homework assignments).",
+        "notes": "",
+        "info": "",
+        "unstopped_description": "",
+        "campus": "",
+        "prerequisites": "",
+        "corequisites": "",
+        "exclusions": "",
+        "num_credits": 3.0,
+        "department": "Biostatistics",
+        "level": "600",
+        "cores": null,
+        "geneds": null,
+        "same_as": null,
+        "pos": "[]",
+        "areas": "[]",
+        "sub_school": "Bloomberg School of Public Health",
+        "writing_intensive": "No",
+        "related_courses": []
+    }
+},
+{
+    "model": "timetable.course",
+    "pk": 6126,
+    "fields": {
+        "school": "jhu",
+        "code": "PH.140.636",
+        "name": "Scalable Computational Bioinformatics",
+        "description": "Discusses a distributed programming paradigm, high level APIs, and scalable analytics platforms that simplify implementing algorithms for analyzing large genomic datasets. Discusses tools built on Apache Spark, enabling students to scale to thousands of cores, achieving a balance necessary for processing genomics data.  Discusses how to solve some of these problems by bridging bioinformatics, data science, machine learning and the big data ecosystem. Enables students to leverage statistical methods of bioinformaticians and computational biologists in combination with best practices used by data engineers and data scientists across industry.",
+        "notes": "",
+        "info": "",
+        "unstopped_description": "",
+        "campus": "",
+        "prerequisites": "",
+        "corequisites": "",
+        "exclusions": "",
+        "num_credits": 4.0,
+        "department": "Biostatistics",
+        "level": "600",
+        "cores": null,
+        "geneds": null,
+        "same_as": null,
+        "pos": "[]",
+        "areas": "[]",
+        "sub_school": "Bloomberg School of Public Health",
+        "writing_intensive": "No",
+        "related_courses": []
+    }
+},
+{
+    "model": "timetable.course",
+    "pk": 6125,
+    "fields": {
+        "school": "jhu",
+        "code": "PH.140.633",
+        "name": "Biostatistics in Medical Product Regulation",
+        "description": "Addresses the application of many principles of biostatistics in the context of medical product development and regulation. Provides a basis for understanding international regulation as outlined in various guidance documents. Opportunities provided through presentations and discussions to learn about applications to study design, conduct, analyses, and inferences. Presents examples of products, product development processes, and opportunities for innovation in clinical trial design and analysis.",
+        "notes": "",
+        "info": "",
+        "unstopped_description": "",
+        "campus": "",
+        "prerequisites": "",
+        "corequisites": "",
+        "exclusions": "",
+        "num_credits": 2.0,
+        "department": "Biostatistics",
+        "level": "600",
+        "cores": null,
+        "geneds": null,
+        "same_as": null,
+        "pos": "[]",
+        "areas": "[]",
+        "sub_school": "Bloomberg School of Public Health",
+        "writing_intensive": "No",
+        "related_courses": []
+    }
+},
+{
+    "model": "timetable.course",
+    "pk": 6124,
+    "fields": {
+        "school": "jhu",
+        "code": "PH.140.621",
+        "name": "Statistical Methods in Public Health I",
+        "description": "Introduces the basic concepts and methods of statistics as applied to diverse problems in public health and medicine. Demonstrates methods of exploring, organizing, and presenting data, and introduces fundamentals of probability, including probability distributions and conditional probability, with applications to 2x2 tables. Presents the foundations of statistical inference, including concepts of population, sample parameter, and estimate; and approaches to inferences using the likelihood function, confidence intervals, and hypothesis tests. Introduces and employs the statistical computing package, STATA or R, to manipulate data and prepare students for remaining course work in this sequence.",
+        "notes": "",
+        "info": "",
+        "unstopped_description": "",
+        "campus": "",
+        "prerequisites": "",
+        "corequisites": "",
+        "exclusions": "",
+        "num_credits": 4.0,
+        "department": "Biostatistics",
+        "level": "600",
+        "cores": null,
+        "geneds": null,
+        "same_as": null,
+        "pos": "[]",
+        "areas": "[]",
+        "sub_school": "Bloomberg School of Public Health",
+        "writing_intensive": "No",
+        "related_courses": []
+    }
+},
+{
+    "model": "timetable.course",
+    "pk": 4241,
+    "fields": {
+        "school": "jhu",
+        "code": "PH.140.611",
+        "name": "Statistical Reasoning in Public Health I",
+        "description": "Provides students with a broad overview of biostatistical methods and concepts used in the public health sciences. Emphasizes the interpretation and conceptual foundations of statistical estimation and inference.",
+        "notes": "",
+        "info": "",
+        "unstopped_description": "",
+        "campus": "",
+        "prerequisites": "",
+        "corequisites": "",
+        "exclusions": "",
+        "num_credits": 3.0,
+        "department": "Biostatistics",
+        "level": "600",
+        "cores": null,
+        "geneds": null,
+        "same_as": null,
+        "pos": "[]",
+        "areas": "[]",
+        "sub_school": "Bloomberg School of Public Health",
+        "writing_intensive": "No",
+        "related_courses": []
+    }
+},
+{
+    "model": "timetable.course",
+    "pk": 4325,
+    "fields": {
+        "school": "jhu",
+        "code": "PH.120.895",
+        "name": "Mph Practicum: Biochemistry and Molecular Biology",
+        "description": "",
+        "notes": "",
+        "info": "",
+        "unstopped_description": "",
+        "campus": "",
+        "prerequisites": "",
+        "corequisites": "",
+        "exclusions": "",
+        "num_credits": 0.0,
+        "department": "Biochemistry and Molecular Biology",
+        "level": "800",
+        "cores": null,
+        "geneds": null,
+        "same_as": null,
+        "pos": "[]",
+        "areas": "[]",
+        "sub_school": "Bloomberg School of Public Health",
+        "writing_intensive": "No",
+        "related_courses": []
+    }
+},
+{
+    "model": "timetable.course",
+    "pk": 6123,
+    "fields": {
+        "school": "jhu",
+        "code": "PH.120.872",
+        "name": "Special Studies-Current Topics in Bmb",
+        "description": "Introduces students to the research interests of faculty within the Department of Biochemistry and Molecular Biology and is affiliated with the department's Cancer Biology Training Program. One or two 30-minute faculty presentations are scheduled for each session. All students are required to attend or review 12 of the 15 scheduled sessions.",
+        "notes": "",
+        "info": "",
+        "unstopped_description": "",
+        "campus": "",
+        "prerequisites": "",
+        "corequisites": "",
+        "exclusions": "",
+        "num_credits": 1.0,
+        "department": "Biochemistry and Molecular Biology",
+        "level": "800",
+        "cores": null,
+        "geneds": null,
+        "same_as": null,
+        "pos": "[]",
+        "areas": "[]",
+        "sub_school": "Bloomberg School of Public Health",
+        "writing_intensive": "No",
+        "related_courses": []
+    }
+},
+{
+    "model": "timetable.course",
+    "pk": 15,
+    "fields": {
+        "school": "jhu",
+        "code": "PH.120.852",
+        "name": "Core Research Literature",
+        "description": "Provides a complement to the BCMB core curriculum. Student reads research papers relating to a core lecture topic. Discussions are led by a student while a faculty member from Biochemistry or MMI act as facilitator. Helps students to develop skills in reading the primary literature and provides an introduction to the experimental paradigms underlying the concepts presented in the core course.",
+        "notes": "",
+        "info": "",
+        "unstopped_description": "",
+        "campus": "",
+        "prerequisites": "",
+        "corequisites": "",
+        "exclusions": "",
+        "num_credits": 0.0,
+        "department": "Biochemistry and Molecular Biology",
+        "level": "800",
+        "cores": null,
+        "geneds": null,
+        "same_as": null,
+        "pos": "[]",
+        "areas": "[]",
+        "sub_school": "Bloomberg School of Public Health",
+        "writing_intensive": "No",
+        "related_courses": []
+    }
+},
+{
+    "model": "timetable.course",
+    "pk": 14,
+    "fields": {
+        "school": "jhu",
+        "code": "PH.120.850",
+        "name": "Biochemical Techniques",
+        "description": "All departmental students spend seven weeks participating in the research activities of a faculty member’s laboratory. During the academic year each student rotates through five laboratories.",
+        "notes": "",
+        "info": "",
+        "unstopped_description": "",
+        "campus": "",
+        "prerequisites": "",
+        "corequisites": "",
+        "exclusions": "",
+        "num_credits": 6.0,
+        "department": "Biochemistry and Molecular Biology",
+        "level": "800",
+        "cores": null,
+        "geneds": null,
+        "same_as": null,
+        "pos": "[]",
+        "areas": "[]",
+        "sub_school": "Bloomberg School of Public Health",
+        "writing_intensive": "No",
+        "related_courses": []
+    }
+},
+{
+    "model": "timetable.course",
+    "pk": 13,
+    "fields": {
+        "school": "jhu",
+        "code": "PH.120.840",
+        "name": "Special Studies and Research Biochemistry",
+        "description": "",
+        "notes": "",
+        "info": "",
+        "unstopped_description": "",
+        "campus": "",
+        "prerequisites": "",
+        "corequisites": "",
+        "exclusions": "",
+        "num_credits": 0.0,
+        "department": "Biochemistry and Molecular Biology",
+        "level": "800",
+        "cores": null,
+        "geneds": null,
+        "same_as": null,
+        "pos": "[]",
+        "areas": "[]",
+        "sub_school": "Bloomberg School of Public Health",
+        "writing_intensive": "No",
+        "related_courses": []
+    }
+},
+{
+    "model": "timetable.course",
+    "pk": 12,
+    "fields": {
+        "school": "jhu",
+        "code": "PH.120.830",
+        "name": "Postdoctoral Research Biochemistry",
+        "description": "",
+        "notes": "",
+        "info": "",
+        "unstopped_description": "",
+        "campus": "",
+        "prerequisites": "",
+        "corequisites": "",
+        "exclusions": "",
+        "num_credits": 0.0,
+        "department": "Biochemistry and Molecular Biology",
+        "level": "800",
+        "cores": null,
+        "geneds": null,
+        "same_as": null,
+        "pos": "[]",
+        "areas": "[]",
+        "sub_school": "Bloomberg School of Public Health",
+        "writing_intensive": "No",
+        "related_courses": []
+    }
+},
+{
+    "model": "timetable.course",
+    "pk": 10,
+    "fields": {
+        "school": "jhu",
+        "code": "PH.120.822",
+        "name": "Seminars in Research in Biochemistry and Molecular Biology",
+        "description": "Integrates academic training with current research in biochemistry and molecular biology and the implications of this research in addressing major public health concerns. Weekly presentations are held by researchers from JHU and other biomedical research institutions on the results of state of the art investigations conducted in their laboratories, emphasizing experimental design and methodology.",
+        "notes": "",
+        "info": "",
+        "unstopped_description": "",
+        "campus": "",
+        "prerequisites": "",
+        "corequisites": "",
+        "exclusions": "",
+        "num_credits": 1.0,
+        "department": "Biochemistry and Molecular Biology",
+        "level": "800",
+        "cores": null,
+        "geneds": null,
+        "same_as": null,
+        "pos": "[]",
+        "areas": "[]",
+        "sub_school": "Bloomberg School of Public Health",
+        "writing_intensive": "No",
+        "related_courses": []
+    }
+},
+{
+    "model": "timetable.course",
+    "pk": 4,
+    "fields": {
+        "school": "jhu",
+        "code": "PH.120.616",
+        "name": "Advanced Concepts in Biochemistry, Cell and Molecular Biology",
+        "description": "Provides a platform for students, postdoctoral fellows and faculty to present and discuss scientific papers from the current literature that deal with mechanisms underlying disease along with accompanying methods. Explores additional aspects that are relevant to conducting and conveying laboratory research, including study design and statistical analysis, manuscript and grant review, policy and practice, and risk assessment.",
+        "notes": "",
+        "info": "",
+        "unstopped_description": "",
+        "campus": "",
+        "prerequisites": "",
+        "corequisites": "",
+        "exclusions": "",
+        "num_credits": 0.0,
+        "department": "Biochemistry and Molecular Biology",
+        "level": "600",
+        "cores": null,
+        "geneds": null,
+        "same_as": null,
+        "pos": "[]",
+        "areas": "[]",
+        "sub_school": "Bloomberg School of Public Health",
+        "writing_intensive": "No",
+        "related_courses": []
+    }
+},
+{
+    "model": "timetable.course",
+    "pk": 1,
+    "fields": {
+        "school": "jhu",
+        "code": "PH.120.607",
+        "name": "Premedical Seminars: Planning and Preparing for Medical School Application",
+        "description": "Helps students prepare to apply to medical school. Covers specific topics to address the complex premedical journey, including planning the months/years leading up to the application, reviewing the application process, addressing the medical schools’ expectations, medical school selection, writing the personal statement, requesting letters of evaluation, interviewing and more.",
+        "notes": "",
+        "info": "",
+        "unstopped_description": "",
+        "campus": "",
+        "prerequisites": "",
+        "corequisites": "",
+        "exclusions": "",
+        "num_credits": 1.0,
+        "department": "Biochemistry and Molecular Biology",
+        "level": "600",
+        "cores": null,
+        "geneds": null,
+        "same_as": null,
+        "pos": "[]",
+        "areas": "[]",
+        "sub_school": "Bloomberg School of Public Health",
+        "writing_intensive": "No",
+        "related_courses": []
+    }
+},
+{
+    "model": "timetable.course",
+    "pk": 6121,
+    "fields": {
+        "school": "jhu",
+        "code": "PH.120.604",
+        "name": "Introduction to Molecular Biology",
+        "description": "Molecular biology deals with how nucleic acids and proteins interact within the cell to promote proper growth, division, and development. This course will provide an overview of these processes, including DNA replication, repair, transcription, splicing, protein synthesis, and gene regulation in different organisms. We will also explore many biological tools that have been developed from molecular biology processes, such as DNA sequencing and gene editing (CRISPR-Cas9).",
+        "notes": "",
+        "info": "",
+        "unstopped_description": "",
+        "campus": "",
+        "prerequisites": "",
+        "corequisites": "",
+        "exclusions": "",
+        "num_credits": 3.0,
+        "department": "Biochemistry and Molecular Biology",
+        "level": "600",
+        "cores": null,
+        "geneds": null,
+        "same_as": null,
+        "pos": "[]",
+        "areas": "[]",
+        "sub_school": "Bloomberg School of Public Health",
+        "writing_intensive": "No",
+        "related_courses": []
+    }
+},
+{
+    "model": "timetable.course",
+    "pk": 6120,
+    "fields": {
+        "school": "jhu",
+        "code": "PH.120.602",
+        "name": "Concepts of Molecular Biology",
+        "description": "Discusses synthesis of macromolecules, the genetic code, regulation of gene expression and gene function, and recent advances in biotechnology.",
+        "notes": "",
+        "info": "",
+        "unstopped_description": "",
+        "campus": "",
+        "prerequisites": "",
+        "corequisites": "",
+        "exclusions": "",
+        "num_credits": 4.0,
+        "department": "Biochemistry and Molecular Biology",
+        "level": "600",
+        "cores": null,
+        "geneds": null,
+        "same_as": null,
+        "pos": "[]",
+        "areas": "[]",
+        "sub_school": "Bloomberg School of Public Health",
+        "writing_intensive": "No",
+        "related_courses": []
+    }
+},
+{
+    "model": "timetable.course",
+    "pk": 6119,
+    "fields": {
+        "school": "jhu",
+        "code": "PH.120.600",
+        "name": "Biochemistry I: Protein Structure and Enzyme Catalysis",
+        "description": "Covers the physical and chemical properties of the amino acids, the various elements of protein structure, and the cooperative behavior of multimeric proteins. Explore the kinetics of enzyme-catalyzed reactions, and the active site mechanisms of representative classes of enzymes. Describes the molecular basis of action for selected enzyme inhibitor-based drugs.",
+        "notes": "",
+        "info": "",
+        "unstopped_description": "",
+        "campus": "",
+        "prerequisites": "",
+        "corequisites": "",
+        "exclusions": "",
+        "num_credits": 3.0,
+        "department": "Biochemistry and Molecular Biology",
+        "level": "600",
+        "cores": null,
+        "geneds": null,
+        "same_as": null,
+        "pos": "[]",
+        "areas": "[]",
+        "sub_school": "Bloomberg School of Public Health",
+        "writing_intensive": "No",
+        "related_courses": []
+    }
+}
+]
