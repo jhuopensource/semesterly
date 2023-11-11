@@ -17,6 +17,7 @@ import React from "react";
 import classNames from "classnames";
 import ClickOutHandler from "react-onclickout";
 import * as SemesterlyPropTypes from "../constants/semesterlyPropTypes";
+import { getSaveSettingsEndpoint } from "../constants/endpoints";
 
 /**
  * This component displays the student's profile picture in the top right when they are
@@ -29,7 +30,6 @@ class SocialProfile extends React.Component {
     this.toggleDropdown = this.toggleDropdown.bind(this);
     this.hideDropDown = this.hideDropDown.bind(this);
     this.toggleDropdown = this.toggleDropdown.bind(this);
-    console.log("SocialProfile props: ", props);
   }
 
   toggleDropdown() {
@@ -63,7 +63,7 @@ class SocialProfile extends React.Component {
               <i className="fa fa-cog" />
               <span>Account</span>
             </a>
-            <a href="/user/settings/">
+            <a href={getSaveSettingsEndpoint(this.props.userInfo.id)}>
               <i className="fa fa-bar-chart" />
               <span>Profile</span>
             </a>
