@@ -10,11 +10,11 @@
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 
-from django.test import SimpleTestCase
+from rest_framework.test import APITestCase
 from django.urls import resolve
 
 
-class UrlTestCase(SimpleTestCase):
+class UrlTestCase(APITestCase):
     def assertUrlResolvesToView(self, url, view_name, kwargs=None):
         resolved = resolve(url)
         self.assertEqual(resolved.view_name, view_name)

@@ -29,6 +29,7 @@ from helpers.test.utils import (
     create_student,
     get_response,
     get_auth_response,
+    get_profile_route,
 )
 from helpers.test.test_cases import UrlTestCase
 from timetable.serializers import EventSerializer
@@ -120,10 +121,14 @@ class MiscellaneousTest(APITestCase):
 class UrlsTest(UrlTestCase):
     """Test student/urls.py"""
 
+    def setUp(self):
+        self.user = create_user(username="Bob", password="security")
+        self.student = create_student(user=self.user)
+
     def test_urls_call_correct_views(self):
         # profile management
 
-        self.assertUrlResolvesToView("/user/settings/", "student.views.UserView")
+        self.assertUrlResolvesToView(get_profile_route(self.student.id), "student.views.UserView")
 
         # timetable management
         self.assertUrlResolvesToView(
@@ -173,18 +178,18 @@ class UserViewTest(APITestCase):
 
     def test_profile_page(self):
         self.client.force_login(self.user)
-        response = self.client.get("/user/settings/")
+        response = self.client.get(get_profile_route(self.student.id))
         self.assertTemplateUsed(response, "profile.html")
 
     def test_profile_page_context(self):
         self.client.force_login(self.user)
-        response = self.client.get("/user/settings/")
+        response = self.client.get(get_profile_route(self.student.id))
         self.assertEquals(response.context["major"], "STAD")
         self.assertEquals(response.context["student"], self.student)
 
     def test_profile_page_not_signed_in(self):
         self.client.logout()
-        response = self.client.get("/user/settings/")
+        response = self.client.get(get_profile_route(self.student.id))
         self.assertRedirects(response, "/signup/")
 
     def test_add_reactions(self):
@@ -201,8 +206,8 @@ class UserViewTest(APITestCase):
 
     def test_update_settings(self):
         new_settings = {"emails_enabled": True, "social_courses": True, "major": "CS"}
-        request = self.factory.patch("/user/settings/", new_settings, format="json")
-        response = get_auth_response(request, self.user, "/user/settings/")
+        request = self.factory.patch(get_profile_route(self.student.id), new_settings, format="json")
+        response = get_auth_response(request, self.user, get_profile_route(self.student.id))
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
         self.student = Student.objects.get(user=self.user)
         self.assertDictContainsSubset(new_settings, model_to_dict(self.student))
@@ -228,8 +233,8 @@ class UserViewTest(APITestCase):
         tt.sections.add(section)
         tt.save()
 
-        request = self.factory.delete("/user/settings/")
-        response = get_auth_response(request, self.user, "/user/settings/")
+        request = self.factory.delete(get_profile_route(self.student.id))
+        response = get_auth_response(request, self.user, get_profile_route(self.student.id))
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
 
         # all student related data should be deleted
