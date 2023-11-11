@@ -96,7 +96,7 @@ export const fetchMostClassmatesCount = (timetable) => (dispatch, getState) => {
           mostFriendsCount: json.count,
           mostFriendsClassId: json.id,
           totalFriendsCount: json.total_count,
-        })
+        }),
       );
     });
 };

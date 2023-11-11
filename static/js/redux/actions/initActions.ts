@@ -36,7 +36,7 @@ export const receiveCourses = createAction("global/receiveCourses", (courses) =>
 export const changeActiveTimetable = createAction("global/changeActiveTimetable");
 
 export const changeActiveSavedTimetable = createAction(
-  "global/changeActiveSavedTimetable"
+  "global/changeActiveSavedTimetable",
 );
 
 export const receiveSchoolInfo = createAction("global/receiveSchoolInfo");
@@ -49,14 +49,14 @@ export const receiveSearchResults = createAction(
   "global/receiveSearchResults",
   (response) => ({
     payload: { courses: normalize(response.data, [courseSchema]), page: response.page },
-  })
+  }),
 );
 
 export const receiveAdvancedSearchResults = createAction(
   "global/receiveAdvancedSearchResults",
   (response) => ({
     payload: { courses: normalize(response.data, [courseSchema]), page: response.page },
-  })
+  }),
 );
 
 export const requestCourses = createAction("global/requestCourses");
@@ -79,5 +79,5 @@ export const setTheme = createAction("global/setTheme", (theme: Theme) => ({
  */
 export const setShowWeekend = createAction(
   "global/setShowWeekend",
-  (showWeekend: boolean) => ({ payload: showWeekend })
+  (showWeekend: boolean) => ({ payload: showWeekend }),
 );

@@ -29,5 +29,6 @@ def get_auth_response(request, user, url, *args, **kwargs):
     view = resolve(url).func
     return view(request, *args, **kwargs)
 
+
 def get_profile_route(studentId):
-    return f'/user/{studentId}/profile/'
+    return f"/user/{studentId}/profile/"

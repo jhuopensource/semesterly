@@ -156,8 +156,8 @@ export const lockTimetable = (timetable) => (dispatch, getState) => {
   }
   dispatch(
     courseSectionsActions.receiveCourseSections(
-      lockActiveSections(getDenormTimetable(state, timetable))
-    )
+      lockActiveSections(getDenormTimetable(state, timetable)),
+    ),
   );
   dispatch(receiveTimetables([timetable]));
   if (state.userInfo.data.isLoggedIn) {
@@ -187,7 +187,7 @@ export const loadTimetable =
         changeActiveSavedTimetable({
           timetable: displayTimetable,
           upToDate: !isLoadingNewTimetable,
-        })
+        }),
       );
       return dispatch(lockTimetable(displayTimetable));
     }
@@ -195,7 +195,7 @@ export const loadTimetable =
       changeActiveSavedTimetable({
         timetable: displayTimetable,
         upToDate: !isLoadingNewTimetable,
-      })
+      }),
     );
   };
 
@@ -211,8 +211,8 @@ export const createNewTimetable =
           has_conflict: false,
           show_weekend: false,
         },
-        true
-      )
+        true,
+      ),
     );
   };
 
@@ -223,7 +223,7 @@ export const nullifyTimetable = () => (dispatch) => {
     changeActiveSavedTimetable({
       timetable: emptyTimetable,
       upToDate: false,
-    })
+    }),
   );
   dispatch(customEventsActions.clearCustomEvents());
 };
@@ -236,22 +236,22 @@ const getSemesterIndex = function getSemesterIndex(allSemesters, oldSemesters) {
     if (cachedSemesterIndex === "S") {
       // last timetable was cached using old old format
       cachedSemesterIndex = allSemesters.findIndex(
-        (s) => (s.name === "Spring" || s.name === "Winter") && s.year === "2017"
+        (s) => (s.name === "Spring" || s.name === "Winter") && s.year === "2017",
       );
     } else if (cachedSemesterIndex === "F") {
       cachedSemesterIndex = allSemesters.findIndex(
-        (s) => s.name === "Fall" && s.year === "2016"
+        (s) => s.name === "Fall" && s.year === "2016",
       );
     }
     const semester = oldSemesters[Number(cachedSemesterIndex)];
     return allSemesters.findIndex(
-      (s) => s.name === semester.name && s.year === semester.year
+      (s) => s.name === semester.name && s.year === semester.year,
     );
   }
   const cachedSemesterName = localStorage.getItem("semesterName");
   const cachedYear = localStorage.getItem("year");
   return allSemesters.findIndex(
-    (sem) => sem.name === cachedSemesterName && sem.year === cachedYear
+    (sem) => sem.name === cachedSemesterName && sem.year === cachedYear,
   );
 };
 
@@ -324,8 +324,8 @@ export const handleCreateNewTimetable = () => (dispatch, getState) => {
 
   return dispatch(
     createNewTimetable(
-      getNumberedName("Untitled Schedule", state.userInfo.data.timetables)
-    )
+      getNumberedName("Untitled Schedule", state.userInfo.data.timetables),
+    ),
   );
 };
 
@@ -399,7 +399,7 @@ export const addCustomSlot =
         credits: 0.0,
         id,
         preview,
-      })
+      }),
     );
     dispatch(savingTimetableActions.setUpToDate(false));
   };
@@ -508,7 +508,7 @@ export const finalizeCustomSlot = (id) => (dispatch, getState) => {
         customEventsActions.replacePreviewEvent({
           oldId: id,
           newId: newEvent.id,
-        })
+        }),
       );
       dispatch(savingTimetableActions.setUpToDate(true));
     });

@@ -128,7 +128,9 @@ class UrlsTest(UrlTestCase):
     def test_urls_call_correct_views(self):
         # profile management
 
-        self.assertUrlResolvesToView(get_profile_route(self.student.id), "student.views.UserView")
+        self.assertUrlResolvesToView(
+            get_profile_route(self.student.id), "student.views.UserView"
+        )
 
         # timetable management
         self.assertUrlResolvesToView(
@@ -206,8 +208,12 @@ class UserViewTest(APITestCase):
 
     def test_update_settings(self):
         new_settings = {"emails_enabled": True, "social_courses": True, "major": "CS"}
-        request = self.factory.patch(get_profile_route(self.student.id), new_settings, format="json")
-        response = get_auth_response(request, self.user, get_profile_route(self.student.id))
+        request = self.factory.patch(
+            get_profile_route(self.student.id), new_settings, format="json"
+        )
+        response = get_auth_response(
+            request, self.user, get_profile_route(self.student.id)
+        )
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
         self.student = Student.objects.get(user=self.user)
         self.assertDictContainsSubset(new_settings, model_to_dict(self.student))
@@ -234,7 +240,9 @@ class UserViewTest(APITestCase):
         tt.save()
 
         request = self.factory.delete(get_profile_route(self.student.id))
-        response = get_auth_response(request, self.user, get_profile_route(self.student.id))
+        response = get_auth_response(
+            request, self.user, get_profile_route(self.student.id)
+        )
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
 
         # all student related data should be deleted

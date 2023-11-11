@@ -17,7 +17,7 @@ export const addSearchSlot =
         time_start: timeStart,
         time_end: timeEnd,
         day,
-      })
+      }),
     );
   };
 
@@ -27,7 +27,7 @@ export const updateSearchSlot =
       updateDragSearchSlot({
         time_start: timeStart,
         time_end: timeEnd,
-      })
+      }),
     );
   };
 

@@ -18,7 +18,7 @@ searchneu.default
         }
 
         global.console.log("saved semesterly data");
-      }
+      },
     );
   })
   .catch((err) => {

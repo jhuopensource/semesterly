@@ -25,7 +25,7 @@ describe("maybeSetSemester", () => {
         semester: sampleSemesters,
         entities,
       },
-      applyMiddleware(thunkMiddleware)
+      applyMiddleware(thunkMiddleware),
     );
 
     const newSemester = 1;
@@ -51,7 +51,7 @@ describe("maybeSetSemester", () => {
     const store = createStore(
       combineReducers(reducers),
       { semester: sampleSemesters },
-      applyMiddleware(thunkMiddleware)
+      applyMiddleware(thunkMiddleware),
     );
     store.dispatch(maybeSetSemester(1));
     expect(store.getState().semester.current).toEqual(1);
@@ -61,7 +61,7 @@ describe("maybeSetSemester", () => {
     const store = createStore(
       combineReducers(reducers),
       { semester: sampleSemesters, timetables: withTimetables, entities },
-      applyMiddleware(thunkMiddleware)
+      applyMiddleware(thunkMiddleware),
     );
     store.dispatch(maybeSetSemester(1));
     const newState = store.getState();

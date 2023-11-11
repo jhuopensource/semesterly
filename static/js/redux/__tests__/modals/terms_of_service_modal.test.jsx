@@ -38,7 +38,7 @@ describe("TOS Modal", () => {
       preloadedState: initialState,
     });
     expect(container).toHaveTextContent(
-      "Our Terms of Service and Privacy Policy have been updated"
+      "Our Terms of Service and Privacy Policy have been updated",
     );
   });
 

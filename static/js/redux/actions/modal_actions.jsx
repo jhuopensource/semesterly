@@ -72,7 +72,7 @@ export const react = (cid, title) => (dispatch) => {
           setCourseReactions({
             id: cid,
             reactions: json.reactions,
-          })
+          }),
         );
       }
     });

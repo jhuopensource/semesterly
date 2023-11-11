@@ -36,11 +36,11 @@ it("CourseModalBody correctly renders", () => {
     <CourseModalBody course={course} hideModal={() => null} />,
     {
       preloadedState: initialState,
-    }
+    },
   );
 
   expect(container).toHaveTextContent(
-    "The use of microeconomics to analyze a variety of issues from marketing and finance to organizational structure. Consumer preferences and behavior; demand, cost analysis and estimation; allocation of inputs, pricing and firm behavior under perfect and imperfect competition; game theory and public policy, including competition policy. Business cases are used to connect theory and practice and to highlight differences and similarities between economics and accounting, marketing and finance. This course is restricted to students in the Commerce programs."
+    "The use of microeconomics to analyze a variety of issues from marketing and finance to organizational structure. Consumer preferences and behavior; demand, cost analysis and estimation; allocation of inputs, pricing and firm behavior under perfect and imperfect competition; game theory and public policy, including competition policy. Business cases are used to connect theory and practice and to highlight differences and similarities between economics and accounting, marketing and finance. This course is restricted to students in the Commerce programs.",
   );
   expect(container).toMatchSnapshot();
 });
