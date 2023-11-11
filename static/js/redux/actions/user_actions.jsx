@@ -21,7 +21,7 @@ import {
   getFriendsEndpoint,
   getLoadSavedTimetablesEndpoint,
   getMostClassmatesCountEndpoint,
-  getSaveSettingsEndpoint,
+  getProfileEndpoint,
   getSaveTimetableEndpoint,
   acceptTOSEndpoint,
 } from "../constants/endpoints";
@@ -228,7 +228,7 @@ export const saveSettings = (callback) => async (dispatch, getState) => {
   dispatch(userInfoActions.requestSaveUserInfo());
   // TODO: refactor all fetch promise logic to async/await axios
   try {
-    await fetch(getSaveSettingsEndpoint(), {
+    await fetch(getProfileEndpoint(), {
       headers: {
         "X-CSRFToken": Cookie.get("csrftoken"),
         Accept: "application/json",
@@ -305,7 +305,7 @@ export const autoSave = () => (dispatch, getState) => {
 };
 
 export const deleteUser = () => (dispatch) => {
-  fetch(getSaveSettingsEndpoint(), {
+  fetch(getProfileEndpoint(), {
     headers: {
       "X-CSRFToken": Cookie.get("csrftoken"),
       Accept: "application/json",

@@ -17,7 +17,7 @@ import React from "react";
 import classNames from "classnames";
 import ClickOutHandler from "react-onclickout";
 import * as SemesterlyPropTypes from "../constants/semesterlyPropTypes";
-import { getSaveSettingsEndpoint } from "../constants/endpoints";
+import { getProfileEndpoint } from "../constants/endpoints";
 
 /**
  * This component displays the student's profile picture in the top right when they are
@@ -63,7 +63,7 @@ class SocialProfile extends React.Component {
               <i className="fa fa-cog" />
               <span>Account</span>
             </a>
-            <a href={getSaveSettingsEndpoint(this.props.userInfo.id)}>
+            <a href={getProfileEndpoint(this.props.userInfo.id)}>
               <i className="fa fa-bar-chart" />
               <span>Profile</span>
             </a>
