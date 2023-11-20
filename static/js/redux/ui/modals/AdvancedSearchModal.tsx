@@ -364,7 +364,7 @@ const AdvancedSearchModal = () => {
     );
   }
 
-  const filterTypes = ["departments", "areas", "levels"];
+  const filterTypes = ["departments", "areas", "levels", "subSchools"];
   const filters = filterTypes.map(
     (filterType) =>
       (schoolCourseFilters as any)[filterType].length !== 0 && (
@@ -402,7 +402,6 @@ const AdvancedSearchModal = () => {
       />
     ));
     const name = (schoolSpecificInfo as any)[`${filterType}Name`];
-
     return (
       <SelectedFilterSection
         key={filterType}
@@ -415,43 +414,6 @@ const AdvancedSearchModal = () => {
       </SelectedFilterSection>
     );
   });
-
-  const subSchoolFilterSection = () => {
-    const selected = () => {
-      console.log(schoolCourseFilters);
-      //todo remove this
-      if ((schoolCourseFilters as any)["subSchools"] == undefined || (schoolCourseFilters as any)["subSchools"].length === 0) {
-        return null;
-      }
-      const availableFilters = (schoolCourseFilters as any)["subSchools"];
-      const sortedFilters = (filterData as any)["subSchools"]
-        .concat()
-        .sort(
-          (a: string, b: string) =>
-            availableFilters.indexOf(a) - availableFilters.indexOf(b)
-        );
-      const selectedItems = sortedFilters.map((name: string) => (
-        <SelectedFilter
-          key={name}
-          name={name}
-          remove={() => removeFilter("subSchools", name)}
-        />
-      ));
-      return selectedItems;
-    }
-    
-    return (
-      <SelectedFilterSection
-        key={"subSchools"}
-        name={"subSchools"}
-        type={"subSchools"}
-        toggle={toggleFilter("subSchools")}
-        removeAll={() => removeFilter("subSchools")}
-      >
-        {selected()}
-      </SelectedFilterSection>
-    );
-  };
 
   const timeFilters = filterData.addedDays.map((d) => {
     const timeState = filterData.times.find((t) => t.day === d);
@@ -537,18 +499,6 @@ const AdvancedSearchModal = () => {
             >
               {timeFilters}
             </SelectedFilterSection>
-            <SelectedFilterSection
-              key={"subschools"}
-              // for some reason it only appears correclty when using two L's
-              name={"Schooll"}
-              toggle={toggleFilter("subschools")}
-              type={"subschools"}
-              removeAll={() => {
-                removeFilter("subSchools");
-              }}
-              >
-                {subSchoolFilterSection()}
-            </SelectedFilterSection>
           </div>
           <div
             className="col-5-16 advanced-search-results"
@@ -585,29 +535,6 @@ const AdvancedSearchModal = () => {
             filterType={"times"}
             add={addDayForTimesFilter}
             show={filterVisibility.show_times}
-            isFiltered={isFiltered}
-            isFetching={isFetching}
-            onClickOut={hideAllFilters}
-            schoolSpecificInfo={schoolSpecificInfo}
-          />
-          <Filter
-            results={[
-              "Krieger School of Arts and Sciences",
-              "Whiting School of Engineering",
-              "School of Nursing",
-              "Bloomberg School of Public Health",
-              "Bloomberg School of Public Health Non-Credit",
-              "Carey Business School",
-              "Krieger School of Arts and Sciences Advanced Avademic Programs",
-              "Nitze School of Advanced International Studies",
-              "School of Education",
-              "School of Medicine", 
-              "The Peabody Institute",
-              "Whiting School of Engineering for Professionals",
-            ]}
-            filterType={"subSchools"} //todo change
-            add={addFilter}
-            show={filterVisibility.show_subschools}
             isFiltered={isFiltered}
             isFetching={isFetching}
             onClickOut={hideAllFilters}

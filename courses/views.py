@@ -223,7 +223,7 @@ class SchoolList(APIView):
                     .distinct()
                 )
             ),
-            "sub_schools": sorted(
+            "subSchools": sorted(
                 list(
                     Course.objects.filter(school=school)
                     .exclude(sub_school__exact="")
@@ -233,7 +233,6 @@ class SchoolList(APIView):
             ),
             "last_updated": last_updated,
         }
-
         return Response(json_data, status=status.HTTP_200_OK)
 
 

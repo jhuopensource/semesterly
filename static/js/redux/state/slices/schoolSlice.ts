@@ -36,7 +36,14 @@ const schoolSlice = createSlice({
           subSchools,
           last_updated: dataLastUpdated,
         } = action.payload;
-        return { school: state.school, areas, departments, levels, subSchools, dataLastUpdated };
+        return {
+          school: state.school,
+          areas,
+          departments,
+          levels,
+          subSchools,
+          dataLastUpdated,
+        };
       });
   },
 });
