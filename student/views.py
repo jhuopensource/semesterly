@@ -94,8 +94,7 @@ class UserView(RedirectToSignupMixin, APIView):
         Renders the user profile/stats page which indicates all of a student's
         reviews of courses, what social they have connected, etc.
         """
-        print("user id is", studentId)
-        student: Student = Student.objects.get(user=request.user)
+        student: Student = Student.objects.get(id=studentId)
         img_url = (
             f"https://graph.facebook.com/{student.fbook_uid}/picture?width=700&height=700"
             if student.is_signed_up_through_fb()
