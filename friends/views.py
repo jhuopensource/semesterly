@@ -2,6 +2,8 @@ from django.shortcuts import get_object_or_404
 from django.http import JsonResponse
 from django.db.models import Q
 from django.contrib.auth.models import User
+from django.db.models import Value as V
+from django.db.models.functions import Concat 
 from student.models import Student
 from friends.models import FriendRequest
 
@@ -62,20 +64,24 @@ def search_friends(request, query):
     Searches for friends based on the given query and returns a list of matches. Excludes existing friends.
     """
     logged_in_student = get_object_or_404(Student, user=request.user)
-    search_results = (
-        User.objects.filter(
-            Q(first_name__icontains=query)
-            | Q(last_name__icontains=query)
-            | Q(username__icontains=query)
-        )
-        .select_related("student")
-        .only("email", "first_name", "last_name", "username", "student__img_url")
-    )
+
+    full_name = User.objects.annotate(full_name=Concat('first_name', V(' '), 'last_name'))
+    
+    full_name_starts_with = full_name.filter(full_name__startswith=query)
+
+    full_name_contains = full_name.filter(full_name__icontains=query)
+
+    # exclusive and on full_name_starts_with and full_name_contains
+    search_results = full_name_starts_with.select_related("student")\
+            .union(full_name_contains.select_related("student"))
+        
+
     search_results_excluding_friends = []
     for user in search_results:
         if (
             hasattr(user, "student")
             and user.student not in logged_in_student.friends.all()
+            and user.student != logged_in_student
         ):
             search_results_excluding_friends.append(get_student_data(user.student))
     return JsonResponse(search_results_excluding_friends, safe=False)
