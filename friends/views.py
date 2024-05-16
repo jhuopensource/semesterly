@@ -3,7 +3,7 @@ from django.http import JsonResponse
 from django.db.models import Q
 from django.contrib.auth.models import User
 from django.db.models import Value as V
-from django.db.models.functions import Concat 
+from django.db.models.functions import Concat
 from student.models import Student
 from friends.models import FriendRequest
 
@@ -65,16 +65,18 @@ def search_friends(request, query):
     """
     logged_in_student = get_object_or_404(Student, user=request.user)
 
-    full_name = User.objects.annotate(full_name=Concat('first_name', V(' '), 'last_name'))
-    
+    full_name = User.objects.annotate(
+        full_name=Concat("first_name", V(" "), "last_name")
+    )
+
     full_name_starts_with = full_name.filter(full_name__startswith=query)
 
     full_name_contains = full_name.filter(full_name__icontains=query)
 
     # exclusive and on full_name_starts_with and full_name_contains
-    search_results = full_name_starts_with.select_related("student")\
-            .union(full_name_contains.select_related("student"))
-        
+    search_results = full_name_starts_with.select_related("student").union(
+        full_name_contains.select_related("student")
+    )
 
     search_results_excluding_friends = []
     for user in search_results:
@@ -93,6 +95,15 @@ def send_friend_request(request, userId):
     """
     from_student = get_object_or_404(Student, user=request.user)
     to_student = get_object_or_404(Student, user__id=userId)
+
+    # check if there's already a request from to_student to from_student
+    if FriendRequest.objects.filter(
+        from_friend=to_student, to_friend=from_student
+    ).exists():
+        return JsonResponse(
+            {"message": "The friend already has a request to you"}, status=400
+        )
+
     friend_request, created = FriendRequest.objects.get_or_create(
         from_friend=from_student, to_friend=to_student
     )
