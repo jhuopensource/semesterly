@@ -15,7 +15,7 @@ resources:
 variables:
 
   # Container registry service connection established during pipeline creation
-  dockerRegistryServiceConnection: '720df4c3-7872-4076-aa73-375f702f7e7c'
+  dockerRegistryServiceConnection: '7ab1d48e-244b-4080-9ced-d2c1bb7eccd6'
   imageRepository: 'semesterly'
   containerRegistry: 'semesterly.azurecr.io'
   tag: '$(Build.BuildId)'
