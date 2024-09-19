@@ -175,6 +175,7 @@ INSTALLED_APPS = (
     "student",
     "timetable",
     "ckeditor",
+    "friends",
 )
 
 REST_FRAMEWORK = {"UNICODE_JSON": False}

@@ -94,7 +94,6 @@ class CourseAPI:
 
     @staticmethod
     def _get_course_dict(details):
-
         course_details = []
 
         if len(details) == 6:

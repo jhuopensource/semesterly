@@ -189,7 +189,6 @@ class Parser(BaseParser):
     def parse_page_of_courses(self, soup):
         last_class_number = 0
         for course in soup.find_all("tr", class_="classRow"):
-
             try:
                 last_class_number = self.parse_course(course)
             except ParseJump:
@@ -241,7 +240,6 @@ class Parser(BaseParser):
             raise ParseError("there should be equal detail headers and panels")
 
         for i in range(len(detail_headers)):
-
             # Extract header name
             header = detail_headers[i].text.strip()
 
@@ -278,7 +276,6 @@ class Parser(BaseParser):
         self.ingestor["areas"] = labels
 
     def parse_labeled_table(self, soup):
-
         # Gather all labeled table entries
         labels = soup.find_all("td", class_="label")
 
@@ -286,7 +283,6 @@ class Parser(BaseParser):
             siblings = label.find_next_siblings()
             # Check if label value exists
             if len(siblings) != 0:
-
                 # Extract pure label from html
                 key = label.text[:-1].strip()
 
@@ -365,11 +361,9 @@ class Parser(BaseParser):
         self.ingestor["time_end"] = ampm(search.group(2))
 
     def extract_instructors(self, string):
-
         instructors = string.splitlines()
 
         for i in range(len(instructors)):
-
             # Deal with instance of primary instructor
             search = re.match(r"(.*) \(Primary\)", instructors[i])
             if search is not None:

@@ -8,19 +8,19 @@ working on the team.
 
 ## Getting Paid
 
-You should be hearing from Ali Soylu @ JHIT about getting put on payroll. This is a
+You should be hearing from IT Department about getting put on payroll. This is a
 process that might take a while, especially if you've never worked at JHU before. While
 I think it'd be ideal for you to start tracking your hours and log them later when you
 can, it's up to you whether you want to start working when you know you'll actually get
 paid.
 
-Logging hours is done through our
-[JIRA](https://jira.sset.jhu.edu/jira/projects/SEM/issues/SEM-175?filter=allopenissues);
-click on the `More` dropdown and click `Log Time`. Enter a description and the amount of
-time you've worked to log time for the day. You'll also have to *submit your timesheet*
-when the current week passes. You can do this by selecting `Tempo` in the menu bar and
-clicking on `My Work`. From there, you can select the `Current Period` dropdown and
-click `Submit`.
+Logging hours is done through your [TimesheetX](https://studentjob.jh.edu/timesheetx.cfm).
+Click on the `Student Employees` card, choose `Enter Your Hours`, choose 
+`Enter time and submit timesheets for JHU!`, and select the appropriate job title for
+semester.ly that falls under the IT Department. Click `Start time sheet` and 
+`Add New Entry`. Choose your start and end time and add a brief description to log what
+you did. You'll also have to click `Submit Time Sheet` when you are done logging the
+current week. Pay attention to the deadline of the time sheet.
 
 You should log all hours you work for Semester.ly, including hours you spend learning
 new material for the job.

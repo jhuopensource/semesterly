@@ -76,7 +76,6 @@ def add_mock(apps, schema_editor):
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("student", "0028_pilotoffering_course_name"),
     ]

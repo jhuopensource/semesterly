@@ -19,7 +19,6 @@ from django.db import models, migrations
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("student", "0002_personaltimetable_has_conflict"),
     ]

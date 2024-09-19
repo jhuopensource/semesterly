@@ -27,7 +27,6 @@ tables_to_update = [
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("student", "0017_personaltimetable_semester"),
     ]

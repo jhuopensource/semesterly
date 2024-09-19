@@ -6,7 +6,6 @@ import django.db.models.deletion
 
 
 class Migration(migrations.Migration):
-
     replaces = [
         ("analytics", "0022_uierrorlog"),
         ("analytics", "0023_alter_uierrorlog_user"),

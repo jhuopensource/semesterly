@@ -20,7 +20,6 @@ from django.db import migrations
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("timetable", "0014_migrate_uoft_y_courses"),
         ("timetable", "0009_section_was_full"),

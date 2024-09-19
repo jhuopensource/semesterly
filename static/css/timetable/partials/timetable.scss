@@ -49,6 +49,13 @@ button {
       margin-right: 2px;
     }
 
+    &.add-button-manual-hover {
+      margin-right: 2px;
+      @include theme() {
+        color: t("toolbar-icon-hover");
+      }
+    }
+
     i {
       font-size: 18px;
       left: 0;

@@ -138,7 +138,6 @@ class Parser(BaseParser):
                     for row in rows:
                         info = row.find_all("td")
                         if info[1].find("a"):
-
                             # general info
                             self.ingestor.update(
                                 {

@@ -41,7 +41,6 @@ def move_y_courses(apps, schema_editor):
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("timetable", "0013_update_semester_field"),
     ]

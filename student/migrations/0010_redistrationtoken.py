@@ -20,7 +20,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("student", "0009_student_emails_enabled"),
     ]

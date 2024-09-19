@@ -29,7 +29,6 @@ tables_to_update = [
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("analytics", "0012_auto_20170311_1924"),
     ]

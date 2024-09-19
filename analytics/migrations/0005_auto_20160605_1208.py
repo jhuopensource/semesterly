@@ -21,7 +21,6 @@ import django.db.models.deletion
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("student", "0005_reaction_time_created"),
         ("analytics", "0004_remove_analyticscoursesearch_student"),

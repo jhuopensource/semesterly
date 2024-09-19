@@ -20,7 +20,6 @@ from django.db import migrations
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("timetable", "0016_course_same_course"),
     ]

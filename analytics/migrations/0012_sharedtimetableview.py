@@ -21,7 +21,6 @@ import django.db.models.deletion
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("analytics", "0011_finalexammodalview"),
     ]

@@ -20,7 +20,6 @@ from django.db import migrations
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("student", "0011_auto_20161002_1701"),
         ("student", "0014_remove_registrationtoken_token"),

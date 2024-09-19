@@ -20,7 +20,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("timetable", "0005_auto_20160926_1822"),
         ("student", "0009_student_emails_enabled"),

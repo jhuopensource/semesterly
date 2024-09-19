@@ -19,7 +19,6 @@ from django.db import models, migrations
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("student", "0003_auto_20160519_1920"),
     ]

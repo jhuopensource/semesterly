@@ -30,7 +30,6 @@ def create_new_semesters(apps, schema_editor):
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("timetable", "0009_semester"),
     ]

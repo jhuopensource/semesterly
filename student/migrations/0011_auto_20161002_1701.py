@@ -20,7 +20,6 @@ from django.db import migrations
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("student", "0010_student_users"),
     ]

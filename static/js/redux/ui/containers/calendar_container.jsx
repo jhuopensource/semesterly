@@ -46,7 +46,6 @@ const CalendarContainer = connect(mapStateToProps, {
   fetchShareTimetableLink,
   triggerSaveCalendarModal: saveCalendarModalActions.triggerSaveCalendarModal,
   createICalFromTimetable,
-  handleCreateNewTimetable,
   fetchSISTimetableData,
 })(Calendar);
 

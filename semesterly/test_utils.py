@@ -862,11 +862,11 @@ class SeleniumTestCase(StaticLiveServerTestCase):
         """
         if finish_saving:
             self.assert_invisibility((By.CLASS_NAME, "unsaved"))
-        self.find(
-            (
-                By.XPATH,
-                "//button[contains(@class,'add-button')]//i[contains(@class,'fa fa-plus')]",
-            )
+        self.find_element(
+            By.XPATH, "//span[contains(@clas, 'tip-down')]"
+        ).click().find_element(
+            By.XPATH,
+            "//button[contains(@class,'save-timetable') and contains(@class,'add-button')]",
         ).click()
         name_input = self.find((By.CLASS_NAME, "timetable-name"))
         WebDriverWait(self.driver, self.TIMEOUT).until(

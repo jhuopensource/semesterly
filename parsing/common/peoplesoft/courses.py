@@ -307,7 +307,6 @@ class PeoplesoftParser(BaseParser, metaclass=ABCMeta):
 
         # Parse offering details.
         for sched, loc, date in zip(scheds, locs, dates):
-
             rsched = re.match(r"([a-zA-Z]*) (.*) - (.*)", sched.text)
 
             if rsched:

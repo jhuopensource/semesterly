@@ -168,7 +168,6 @@ class JSONStreamWriterTest(SimpleTestCase):
 
 
 class ValidationTest(SimpleTestCase):
-
     config = {
         "kind": "config",
         "school": {"code": "test", "name": "University of Test"},
@@ -431,7 +430,6 @@ School = namedtuple("School", " ".join(_school_attrs))
 
 
 class DigestionTest(TestCase):
-
     config = {
         "kind": "config",
         "school": {"code": "test", "name": "University of Test"},

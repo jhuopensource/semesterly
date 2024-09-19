@@ -21,7 +21,6 @@ import django.db.models.deletion
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("student", "0018_update_semester_field"),
         ("analytics", "0014_merge"),

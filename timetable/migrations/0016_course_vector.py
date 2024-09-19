@@ -7,7 +7,6 @@ import picklefield.fields
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("timetable", "0015_merge"),
     ]

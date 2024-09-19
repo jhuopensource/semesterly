@@ -85,10 +85,8 @@ class Parser(BaseParser):
 
         # Make sure that table exists on page
         if len(overview_table) > 3:
-
             # Fun way to extract Score link
             for row in overview_table[3].find_all("tr"):
-
                 cells = row.find_all("td")
 
                 # Parse scores if available
@@ -126,7 +124,6 @@ class Parser(BaseParser):
         total_score = 0
 
         for question in questions:
-
             # extract table of results for question
             table = question.find_next("table")
 
@@ -146,7 +143,6 @@ class Parser(BaseParser):
 
             # Iterate over adjectives
             for adj, i in zip(adjs, list(range(len(adjs)))):
-
                 # Label (adjective) to describe numeric score
                 label = adj.contents[0].strip()
 

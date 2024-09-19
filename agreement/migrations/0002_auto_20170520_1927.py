@@ -27,7 +27,6 @@ def load_agreement(apps, schema_editor):
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("agreement", "0001_initial"),
     ]

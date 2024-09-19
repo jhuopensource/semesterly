@@ -600,7 +600,7 @@ class PersonalEventView(ValidateSubdomainMixin, RedirectToSignupMixin, APIView):
     def delete(self, request: HttpRequest):
         try:
             event = PersonalEvent.objects.get(id=request.data["id"])
-        except (PersonalEvent.DoesNotExist):
+        except PersonalEvent.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
 
         if event.timetable.student != get_student(request):

@@ -36,7 +36,6 @@ class Parser(BaseParser):
         pass
 
     def start(self, **kwargs):
-
         path = os.path.join(os.path.dirname(__file__), "main.js")
         subprocess.call(["node", "--max_old_space_size=8192", path])
         print("done scraping neu")

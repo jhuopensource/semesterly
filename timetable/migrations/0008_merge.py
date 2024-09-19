@@ -20,7 +20,6 @@ from django.db import migrations
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("timetable", "0007_auto_20161101_1541"),
         ("timetable", "0006_auto_20161031_2057"),

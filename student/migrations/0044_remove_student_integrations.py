@@ -4,7 +4,6 @@ from django.db import migrations
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("student", "0043_personaltimetable_show_weekend"),
     ]

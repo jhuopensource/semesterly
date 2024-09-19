@@ -32,6 +32,7 @@ import { setShowWeekend } from "../actions/initActions";
 import { getMaxTimetableHeightBasedOnWindowHeight } from "../util";
 import useWindowSize from "../hooks/useWindowSize";
 import { getFirstTTStartHour } from "../state";
+import html2canvas from "html2canvas";
 
 interface RowProps {
   isLoggedIn: boolean;
@@ -44,7 +45,6 @@ interface CalendarProps {
   triggerSaveCalendarModal: Function;
   isFetchingShareLink: boolean;
   endHour: number;
-  handleCreateNewTimetable: Function;
   shareLinkValid: boolean;
   fetchSISTimetableData: Function;
   fetchShareTimetableLink: Function;
@@ -126,6 +126,7 @@ export const ShowWeekendsSwitch = (props: { isMobile: boolean }) => {
  */
 const Calendar = (props: CalendarProps) => {
   const dispatch = useDispatch();
+  const calendarRef = useRef(null);
 
   const showWeekend = useAppSelector((state) => state.preferences.showWeekend);
   const [shareLinkShown, setShareLinkShown] = useState(false);
@@ -211,6 +212,19 @@ const Calendar = (props: CalendarProps) => {
     form.submit();
   };
 
+  const screenshotButtonClicked = () => {
+    const timetableElement = calendarRef.current;
+    html2canvas(timetableElement).then((canvas: HTMLCanvasElement) => {
+      const downloadLink = document.createElement("a");
+      const dataURL = canvas.toDataURL("image/png");
+      downloadLink.href = dataURL;
+      downloadLink.download = "timetable.png";
+      document.body.appendChild(downloadLink);
+      downloadLink.click();
+      document.body.removeChild(downloadLink);
+    });
+  };
+
   const customEventModeButtonClicked = () => {
     if (props.isLoggedIn) {
       setCustomEventModeOn((previous) => !previous);
@@ -237,6 +251,27 @@ const Calendar = (props: CalendarProps) => {
           onClick={sisButtonClicked}
         >
           <img src="/static/img/addtosis.svg" alt="SIS" />
+        </button>
+      </Tooltip>
+    </div>
+  ) : null;
+
+  const screenShotButton = props.registrarSupported ? (
+    <div className="cal-btn-wrapper">
+      <Tooltip title={<Typography fontSize={12}>Screeshot</Typography>}>
+        <button
+          type="submit"
+          form="form1"
+          className="save-timetable add-button"
+          data-for="sis-btn-tooltip"
+          data-tip
+          onClick={screenshotButtonClicked}
+        >
+          <img
+            src="/static/img/screenshot.svg"
+            alt="Sreenshot"
+            style={{ width: "20px", height: "auto" }}
+          />
         </button>
       </Tooltip>
     </div>
@@ -271,21 +306,6 @@ const Calendar = (props: CalendarProps) => {
       onClickOut={() => setShareLinkShown(false)}
     />
   ) : null;
-
-  const addNewTimetableButton = (
-    <div className="cal-btn-wrapper">
-      <Tooltip title={<Typography fontSize={12}>New Timetable</Typography>}>
-        <button
-          onClick={() => props.handleCreateNewTimetable()}
-          className="save-timetable add-button"
-          data-tip
-          data-for="add-btn-tooltip"
-        >
-          <i className="fa fa-plus" />
-        </button>
-      </Tooltip>
-    </div>
-  );
 
   const toggleCustomEventModeButton = (
     <div className="cal-btn-wrapper">
@@ -331,10 +351,10 @@ const Calendar = (props: CalendarProps) => {
   ) : (
     <>
       {addSISButton}
+      {screenShotButton}
       {toggleCustomEventModeButton}
       {shareButton}
       {shareLink}
-      {addNewTimetableButton}
       {saveToCalendarButton}
       <ShowWeekendsSwitch isMobile={false} />
     </>
@@ -374,7 +394,7 @@ const Calendar = (props: CalendarProps) => {
           style={{ height: getMaxTimetableHeightBasedOnWindowHeight(windowHeight) }}
           ref={timetableParentDivRef}
         >
-          <table>
+          <table ref={calendarRef}>
             <thead className="fc-head">
               <tr>
                 <td className="fc-head-container fc-widget-header">

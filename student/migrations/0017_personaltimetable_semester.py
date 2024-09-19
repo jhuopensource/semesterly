@@ -21,7 +21,6 @@ import django.db.models.deletion
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("timetable", "0012_section_semester"),
         ("student", "0016_auto_20170311_1924"),

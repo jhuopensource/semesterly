@@ -124,11 +124,15 @@ const Semesterly = () => {
     alertNewTimetable,
   ]);
 
-  const toLocalDate = () => {
+  const toLocalDate = (): string => {
+    if (!(dataLastUpdated && dataLastUpdated.length && dataLastUpdated !== "null")) {
+      return "";
+    }
+
     // DataLastUpdated Input example-  2021-05-02 14:42 UTC
     // Params: How the backend sends a timestamp
     // dateString: of the form yyyy-mm-dd hh:mm
-    const dateString = dataLastUpdated.toString();
+    const dateString: string = dataLastUpdated.toString();
 
     if (!dateString || dateString.length === 0) return "";
 
@@ -137,7 +141,7 @@ const Semesterly = () => {
 
     const curDate: Date = new Date(dateString);
 
-    const months = [
+    const months: string[] = [
       "January",
       "February",
       "March",
@@ -151,33 +155,34 @@ const Semesterly = () => {
       "November",
       "December",
     ];
-
-    let dayEnding: String;
-    const curDay = curDate.getDay();
-    if (curDay >= 11 && curDay <= 13) {
-      dayEnding = "th";
-    }
-
-    switch (curDay % 10) {
-      case 1:
-        dayEnding = "st";
-        break;
-      case 2:
-        dayEnding = "nd";
-        break;
-      case 3:
-        dayEnding = "rd";
-        break;
-      default:
-        dayEnding = "th";
-    }
-
+    
+    const curDay: number = curDate.getDate();
+    const dateEnding: string = dayToDayEnding(curDay);
     const monthIndex: number = curDate.getMonth();
+    const curMonth: string = months[monthIndex];
+    const curYear = curDate.getFullYear();
 
-    return `${
-      months[monthIndex]
-    } ${curDate.getUTCDate()}${dayEnding}, ${curDate.getFullYear()}`;
+    return `${curMonth} ${curDay}${dateEnding}, ${curYear}`;
   };
+
+  const dayToDayEnding = (day: number): string => {
+    if (day >= 11 && day <= 13) {
+      return "th";
+    }
+
+    switch (day % 10) {
+      case 0:
+        return "th";
+      case 1:
+        return "st";
+      case 2:
+        return "nd";
+      case 3:
+        return "rd";
+      default:
+        return "th";
+    }
+  }
 
   const mobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
     navigator.userAgent
@@ -216,9 +221,7 @@ const Semesterly = () => {
           <footer className="timetable-footer navbar no-print">
             <p className="data-last-updated no-print">
               Data last updated:{" "}
-              {dataLastUpdated && dataLastUpdated.length && dataLastUpdated !== "null"
-                ? toLocalDate()
-                : null}
+              {toLocalDate()}
             </p>
             <ul className="nav nav-pills no-print">
               <li className="footer-button" role="presentation">

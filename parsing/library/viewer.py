@@ -129,7 +129,6 @@ class StatProgressBar(Viewer):
 
 class ETAProgressBar(Viewer):
     def __init__(self):
-
         self.format_custom_text = progressbar.FormatCustomText(
             "(%(school)s) ==%(mode)s== ",
         )

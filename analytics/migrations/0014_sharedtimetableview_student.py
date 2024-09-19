@@ -21,7 +21,6 @@ import django.db.models.deletion
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("student", "0015_merge"),
         ("analytics", "0013_sharedcourseview"),

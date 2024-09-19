@@ -21,7 +21,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("student", "0005_reaction_time_created"),
     ]

@@ -202,7 +202,6 @@ class Parser(BaseParser):
             data = json.loads(self.s.get(url=request_url, cookies=self.cookies).text)
             for key in data:
                 try:
-
                     course_data = data[key]
                     course_code = course_data["code"]
                     num_credits = 1 if course_code[6].upper() == "Y" else 0.5
@@ -293,7 +292,6 @@ class Parser(BaseParser):
         self.start_utm()
 
     def start_utm(self):
-
         print("Parsing UTM")
         found_map = {"1": 0, "2": 0, "3": 0, "4": 0}
         for year_of_study in self.years_of_study:
@@ -492,7 +490,6 @@ class Parser(BaseParser):
     def get_excl_prereq_breadth(self, tag):
         excl_prereq_breadth = {"exclusions": "", "prerequisites": "", "breadth": ""}
         while tag and tag.name != "a":
-
             if (
                 "Exclusion" not in tag
                 and "Prerequisite" not in tag
