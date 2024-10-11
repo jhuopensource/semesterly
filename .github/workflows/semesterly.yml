@@ -50,6 +50,8 @@ jobs:
 
       - name: Install Python Dependencies
         run: |
+          sudo apt-get --allow-releaseinfo-change update
+          sudo apt install libxmlsec1 libxmlsec1-dev -y
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
