@@ -64,7 +64,7 @@ const FindNewFriends = () => {
     const endpoint = requestSent[userId]
       ? getRejectFriendRequestEndpoint(userId)
       : getSendFriendRequestEndpoint(userId);
-    await fetch(endpoint, {
+    const res = await fetch(endpoint, {
       headers: {
         "X-CSRFToken": Cookie.get("csrftoken"),
         Accept: "application/json",
@@ -73,7 +73,13 @@ const FindNewFriends = () => {
       method: "POST",
       credentials: "include",
     });
-    setRequestSent((prevStatus) => ({ ...prevStatus, [userId]: !prevStatus[userId] }));
+    const json = await res.json();
+    if (res.status === 200) {
+      setRequestSent((prevStatus) => ({
+        ...prevStatus,
+        [userId]: !prevStatus[userId],
+      }));
+    }
   };
   return (
     <Box width="100%" display="flex" flexDirection="column" alignItems="center">
