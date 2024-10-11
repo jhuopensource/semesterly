@@ -1,0 +1,36 @@
+{
+    "school": {
+        "code": "itcr",
+        "name": "Instituto Tecnológico de Costa Rica"
+    },
+    "course_code_regex": "([A-Z]{2}\\d{4})$",
+    "terms": [
+        "1",
+        "2",
+        "V"
+    ],
+    "granularity": 5,
+    "ampm": false,
+    "full_academic_year_registration": false,
+    "single_access": false,
+    "active_semesters": {
+        "2023": [
+            "1"
+        ],
+        "2022": [
+            "V",
+            "2",
+            "1"
+        ],
+        "2021": [
+            "V",
+            "2",
+            "1"
+        ],
+        "2020": [
+            "2",
+            "1"
+        ]
+    },
+    "registrar": false
+}
