@@ -13,7 +13,7 @@ GNU General Public License for more details.
 */
 
 import React from "react";
-import twemoji from "twemoji";
+import twemoji from "@twemoji/api";
 // @ts-ignore
 import renderHTML from "react-render-html";
 import { useAppDispatch, useAppSelector } from "../../hooks";
