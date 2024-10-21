@@ -15,7 +15,7 @@ GNU General Public License for more details.
 import PropTypes from "prop-types";
 import React from "react";
 import Evaluation from "./evaluation";
-import SideScroller from "./side_scroller";
+import SideScroller from "./SideScroller";
 import { SEMESTER_RANKS } from "../constants/constants";
 import * as SemesterlyPropTypes from "../constants/semesterlyPropTypes";
 

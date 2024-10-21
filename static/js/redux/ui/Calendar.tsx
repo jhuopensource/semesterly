@@ -258,7 +258,7 @@ const Calendar = (props: CalendarProps) => {
 
   const screenShotButton = props.registrarSupported ? (
     <div className="cal-btn-wrapper">
-      <Tooltip title={<Typography fontSize={12}>Screeshot</Typography>}>
+      <Tooltip title={<Typography fontSize={12}>Screenshot</Typography>}>
         <button
           type="submit"
           form="form1"

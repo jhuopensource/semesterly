@@ -14,7 +14,7 @@ GNU General Public License for more details.
 
 import PropTypes from "prop-types";
 import React from "react";
-import twemoji from "twemoji";
+import twemoji from "@twemoji/api";
 import renderHTML from "react-render-html";
 import classNames from "classnames";
 import REACTION_MAP from "../constants/reactions";
@@ -57,6 +57,7 @@ class Reaction extends React.Component {
   render() {
     const size = 20 + (this.props.count / this.props.total) * 45;
     const emojiStyle = { height: size, width: size };
+    const emojiHTMLString = twemoji.parse(REACTION_MAP[this.props.emoji].unicode);
     return (
       <div
         className={classNames({
@@ -67,8 +68,9 @@ class Reaction extends React.Component {
         onClick={this.toggleSelected}
       >
         <div className="emoji" style={emojiStyle}>
-          {renderHTML(twemoji.parse(REACTION_MAP[this.props.emoji].unicode))}
+          {renderHTML(emojiHTMLString)}
         </div>
+
         <div
           className={classNames({
             "action-container": true,
