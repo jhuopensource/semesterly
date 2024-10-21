@@ -25,7 +25,7 @@ export const VALID_SCHOOLS = [
   "salisbury",
 ];
 
-export const getSchoolSpecificInfo = (school) => {
+export const getSchoolSpecificInfo = (school: string) => {
   switch (school) {
     case "uoft":
       return {
