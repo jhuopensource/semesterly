@@ -24,6 +24,9 @@ COPY ./build/local_settings.py /code/semesterly/local_settings.py
 # Add parser script
 COPY ./build/run_parser.sh /code/run_parser.sh
 
+RUN apt-get --allow-releaseinfo-change update
+RUN apt install libxmlsec1 libxmlsec1-dev -y
+
 RUN pip3 install -r /code/requirements.txt
 
 # Install package.json dependencies

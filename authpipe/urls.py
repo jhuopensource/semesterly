@@ -19,4 +19,5 @@ urlpatterns = [
     # auth
     re_path("", include("social_django.urls", namespace="social")),
     re_path("", include(("django.contrib.auth.urls", "auth"), namespace="auth")),
+    re_path(r"^saml/metadata$", authpipe.views.saml_metadata_view),
 ]

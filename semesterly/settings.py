@@ -68,6 +68,38 @@ ALLOWED_HOSTS = ["*"]
 
 USE_X_FORWARDED_HOST = True
 
+SOCIAL_AUTH_SAML_SP_ENTITY_ID = "http://jhu.semester.ly"
+
+SOCIAL_AUTH_SAML_SP_PUBLIC_CERT = get_secret("SOCIAL_AUTH_SAML_SP_PUBLIC_CERT")
+
+SOCIAL_AUTH_SAML_SP_PRIVATE_KEY = get_secret("SOCIAL_AUTH_SAML_SP_PRIVATE_KEY")
+
+SOCIAL_AUTH_SAML_ORG_INFO = {
+    "en-US": {
+        "name": "semesterly",
+        "displayname": "Semester.ly",
+        "url": "http://jhu.semester.ly",
+    }
+}
+
+SOCIAL_AUTH_SAML_TECHNICAL_CONTACT = {
+    "givenName": "Semester.ly",
+    "emailAddress": "semester.ly@jh.edu",
+}
+
+SOCIAL_AUTH_SAML_SUPPORT_CONTACT = {
+    "givenName": "Semester.ly",
+    "emailAddress": "semester.ly@jh.edu",
+}
+
+SOCIAL_AUTH_SAML_ENABLED_IDPS = {
+    "jhu": {
+        "entity_id": "https://idp.jh.edu/idp/shibboleth",
+        "url": "https://idp.jh.edu/idp/profile/SAML2/Redirect/SSO",
+        "x509cert": get_secret("JHU_SAML_IDP_CERT"),
+    }
+}
+
 SOCIAL_AUTH_FACEBOOK_SCOPE = [
     "email",
     "user_friends",
@@ -104,6 +136,7 @@ SOCIAL_AUTH_AUTHENTICATION_BACKENDS = (
     "social_core.backends.google.GooglePlusAuth",
     "social_core.backends.google.GoogleOAuth2",
     "social_core.backends.azuread_tenant.AzureADTenantOAuth2",
+    "social_core.backends.saml.SAMLAuth",
 )
 FIELDS_STORED_IN_SESSION = ["student_token", "login_hash"]
 
@@ -229,6 +262,7 @@ AUTHENTICATION_BACKENDS = (
     "social_core.backends.google.GoogleOAuth2",
     "social_core.backends.twitter.TwitterOAuth",
     "social_core.backends.azuread_tenant.AzureADTenantOAuth2",
+    "social_core.backends.saml.SAMLAuth",
     "django.contrib.auth.backends.ModelBackend",
 )
 

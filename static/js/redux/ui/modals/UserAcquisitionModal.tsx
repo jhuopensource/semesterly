@@ -79,7 +79,7 @@ const UserAcquisitionModal = () => {
           className="btn abnb-btn secondary"
           onClick={() => {
             const link = document.createElement("a");
-            link.href = `/login/azuread-tenant-oauth2/?student_token=${LoginToken}&login_hash=${LoginHash}`;
+            link.href = `/login/saml/?idp=jhu&student_token=${LoginToken}&login_hash=${LoginHash}`;
             document.body.appendChild(link);
             link.click();
           }}
