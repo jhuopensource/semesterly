@@ -31,4 +31,4 @@ RUN npm install
 RUN npm run build
 
 # To enable unbuffered logging
-ENV PYTHONUNBUFFERED=1
+# ENV PYTHONUNBUFFERED=1

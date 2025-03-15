@@ -9,7 +9,7 @@ services:
     image: semesterly
     environment:
       - NODE_ENV=development
-      - PYTHONUNBUFFERED=1
+      - PYTHONUNBUFFERED=0
     build: .
     command: bash -c "python manage.py migrate; npm run watch & python /code/manage.py runserver 0.0.0.0:8000"
     volumes:
@@ -20,17 +20,10 @@ services:
       - "3000:3000"
     depends_on:
       - db
-    logging:
-      options:
-        max-size: "10m"
-        max-file: "3"
   localssl:
     image: jhuopensource/semesterly-caddy
     logging:
-      driver: "json-file"
-      options:
-        max-size: "10m"
-        max-file: "3"
+      driver: none
     volumes:
       - ./build/caddy/Caddyfile:/etc/Caddyfile
     ports:

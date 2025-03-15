@@ -18,7 +18,8 @@ from django.contrib.auth.models import User
 from django.core.signing import TimestampSigner, BadSignature, SignatureExpired
 from django.db.models import F
 from hashids import Hashids
-import logging
+
+# import logging
 import re
 
 from student.models import Student
@@ -26,7 +27,7 @@ from semesterly.settings import get_secret
 
 hashids = Hashids(salt=get_secret("HASHING_SALT"))
 
-logger = logging.getLogger(__name__)
+# logger = logging.getLogger(__name__)
 
 
 def check_student_token(student, token):
@@ -67,17 +68,17 @@ def associate_students(strategy, details, response, user, *args, **kwargs):
         user_updated_in_this_function = try_associate_token(strategy, kwargs)
 
     # LOGGING CLAUSE
-    try:
-        logger.debug(
-            f"associate_students: end of function, kwargs['user']={kwargs['user']}, User id={kwargs['user'].id}"
-        )
+    # try:
+    #     logger.debug(
+    #         f"associate_students: end of function, kwargs['user']={kwargs['user']}, User id={kwargs['user'].id}"
+    #     )
 
-        if not user_updated_in_this_function:
-            logger.warning(
-                "associate_students: User was not matched using this function, returning User associated previously in the pipeline."
-            )
-    except Exception as e:
-        logger.debug(f"kwargs['user'] error: {e}")
+    #     if not user_updated_in_this_function:
+    #         logger.warning(
+    #             "associate_students: User was not matched using this function, returning User associated previously in the pipeline."
+    #         )
+    # except Exception as e:
+    #     logger.debug(f"kwargs['user'] error: {e}")
 
     return kwargs
 
@@ -92,9 +93,10 @@ def get_most_recently_logged_in_user(users_queryset):
         "-last_login"
     ).first()  # `-last_login` ensures descending order
     if user is None:
-        raise Exception(
-            "get_most_recently_logged_in_user: received queryset with no Users. THIS SHOULD NEVER HAPPEN. YOU SHOULD NEVER SEE THIS LOG!"
-        )
+        # raise Exception(
+        #     "get_most_recently_logged_in_user: received queryset with no Users. THIS SHOULD NEVER HAPPEN. YOU SHOULD NEVER SEE THIS LOG!"
+        # )
+        return None
     return user
 
 
@@ -113,27 +115,30 @@ def get_most_recently_logged_in_student(students_queryset):
 
     if most_recent_student:
         return most_recent_student, most_recent_student.user
-    raise Exception(
-        "get_most_recently_logged_in_student: received queryset with no Students. THIS SHOULD NEVER HAPPEN. YOU SHOULD NEVER SEE THIS LOG!"
-    )
+    # raise Exception(
+    #     "get_most_recently_logged_in_student: received queryset with no Students. THIS SHOULD NEVER HAPPEN. YOU SHOULD NEVER SEE THIS LOG!"
+    # )
+    return None, None
 
 
 def try_associate_email(response, kwargs):
     try:
         kwargs_base = kwargs.get("details") or kwargs
         if kwargs_base is None:
-            raise Exception("try_associate_email: 'kwargs_base' is None")
+            # raise Exception("try_associate_email: 'kwargs_base' is None")
+            return False
 
         email = kwargs_base.get("email")
         if email is None:
-            logger.debug(
-                "try_associate_email: 'email' from kwargs_base is None. trying from 'response'..."
-            )
+            # logger.debug(
+            #     "try_associate_email: 'email' from kwargs_base is None. trying from 'response'..."
+            # )
             email = response.get("email")
             if email is None:
-                raise Exception("try_associate_email: 'email' is None")
+                # raise Exception("try_associate_email: 'email' is None")
+                return False
 
-        logger.debug(f"found email: {email}")
+        # logger.debug(f"found email: {email}")
         found_users = User.objects.filter(email=email)
         if not found_users.exists():
             # It is possible that the 'email' found is unexpectedly in @jhu.edu format, for Hopkins students.
@@ -141,26 +146,26 @@ def try_associate_email(response, kwargs):
             email = re.sub(r"(?<=@)jhu(?=\.edu)", "jh", email)
             found_users = User.objects.filter(email=email)
             if not found_users.exists():
-                raise Exception(
-                    f"try_associate_email: No student found for email: {email}"
-                )
+                # raise Exception(
+                #     f"try_associate_email: No student found for email: {email}"
+                # )
+                return False
 
         final_user = get_most_recently_logged_in_user(found_users)
 
         # LOGGING CLAUSE
-        if found_users.count() > 1:
-            logger.debug(
-                f"try_associate_email: Found multiple users for email: {email}. Returning the user that has most recently logged in, with id={final_user.id}."
-            )
+        # if found_users.count() > 1:
+        # logger.debug(
+        #     f"try_associate_email: Found multiple users for email: {email}. Returning the user that has most recently logged in, with id={final_user.id}."
+        # )
 
         kwargs["user"] = final_user
-        print(f"hello world, final_user id={final_user.id}")
-        logger.debug("try_associate_email: successfully associated student via email.")
+        # logger.debug("try_associate_email: successfully associated student via email.")
         return True
     except Exception as e:
-        logger.debug(
-            f"try_associate_email: error while trying to associate via email: {e}"
-        )
+        # logger.debug(
+        #     f"try_associate_email: error while trying to associate via email: {e}"
+        # )
         return False
 
 
@@ -169,33 +174,35 @@ def try_associate_jhed_oidc(response, kwargs):
     try:
         jh_email = response.get("openid")
         if not jh_email or "@" not in jh_email:
-            raise Exception("try_associate_jhed_oidc: openid key format invalid")
+            # raise Exception("try_associate_jhed_oidc: openid key format invalid")
+            return False
 
         jhed = jh_email.split("@", 1)[0]
         students = Student.objects.filter(jhed=jhed)
 
         if not students.exists():
-            raise Exception(
-                f"try_associate_jhed_oidc: No student found for JHED: {jhed}"
-            )
+            # raise Exception(
+            #     f"try_associate_jhed_oidc: No student found for JHED: {jhed}"
+            # )
+            return False
 
         final_student, final_user = get_most_recently_logged_in_student(students)
 
         # LOGGING CLAUSE
-        if students.count() > 1:
-            logger.debug(
-                f"try_associate_jhed_oidc: Multiple students found for JHED: {jhed}. Returning the most recently logged in 'student' with id={final_student.id}, with associated User id={final_user.id}."
-            )
+        # if students.count() > 1:
+        #     logger.debug(
+        #         f"try_associate_jhed_oidc: Multiple students found for JHED: {jhed}. Returning the most recently logged in 'student' with id={final_student.id}, with associated User id={final_user.id}."
+        #     )
 
         kwargs["user"] = final_user
-        logger.debug(
-            f"try_associate_jhed_oidc: successfully associated student via JHED={jhed}, auth_user id={final_student.user.id}, student_student id={final_student.id}."
-        )
+        # logger.debug(
+        #     f"try_associate_jhed_oidc: successfully associated student via JHED={jhed}, auth_user id={final_student.user.id}, student_student id={final_student.id}."
+        # )
         return True
     except Exception as e:
-        logger.debug(
-            f"try_associate_jhed_oidc: error while trying to associate via JHED: {e}"
-        )
+        # logger.debug(
+        # f"try_associate_jhed_oidc: error while trying to associate via JHED: {e}"
+        # )
         return False
 
 
@@ -204,40 +211,44 @@ def try_associate_token(strategy, kwargs):
         token = strategy.session_get("student_token")
         ref = strategy.session_get("login_hash")
         if not token or not ref:
-            raise Exception(
-                "try_associate_token: strategy.token and/or strategy.ref invalid"
-            )
+            # raise Exception(
+            #     "try_associate_token: strategy.token and/or strategy.ref invalid"
+            # )
+            return False
 
         decrypted_ref = hashids.decrypt(ref)
         if not decrypted_ref:
-            raise Exception("try_associate_token: hashids.decrypt(ref) invalid")
+            return False
+            # raise Exception("try_associate_token: hashids.decrypt(ref) invalid")
 
         students = Student.objects.filter(id=decrypted_ref[0])
         if not students.exists():
-            raise Exception(
-                f"try_associate_token: no student found for token reference: {ref}"
-            )
+            return False
+            # raise Exception(
+            #     f"try_associate_token: no student found for token reference: {ref}"
+            # )
 
         final_student, final_user = get_most_recently_logged_in_student(students)
 
         # LOGGING CLAUSE
-        if students.count() > 1:
-            logger.debug(
-                f"try_associate_token: Found multiple students for token reference: {ref}. Returning the most recently logged in student with id={students.first().id}."
-            )
+        # if students.count() > 1:
+        #     logger.debug(
+        #         f"try_associate_token: Found multiple students for token reference: {ref}. Returning the most recently logged in student with id={students.first().id}."
+        #     )
 
         if check_student_token(final_student, token):
             kwargs["user"] = final_user
-            logger.debug(
-                "try_associate_token: successfully associated student via token."
-            )
+            # logger.debug(
+            #     "try_associate_token: successfully associated student via token."
+            # )
             return True
         else:
-            raise Exception("try_associate_token: failed to associate via token.")
+            return False
+            # raise Exception("try_associate_token: failed to associate via token.")
     except Exception as e:
-        logger.debug(
-            f"try_associate_token: error while trying to associate via token: {e}"
-        )
+        # logger.debug(
+        #     f"try_associate_token: error while trying to associate via token: {e}"
+        # )
         return False
 
 
@@ -252,16 +263,16 @@ def create_student(strategy, details, response, user, *args, **kwargs):
     student, status = Student.objects.get_or_create(user=user)
 
     # LOGGING CLAUSE
-    if status is True:
-        logger.debug(
-            f"create_student: could not find existing Student for user with id={user.id}, so created a new one"
-        )
+    # if status is True:
+    #     logger.debug(
+    #         f"create_student: could not find existing Student for user with id={user.id}, so created a new one"
+    #     )
 
     # LOGGING CLAUSE
-    if Student.objects.filter(user=user).count() > 1:
-        logger.debug(
-            f"create_student: multiple Student objects found for user with id={user.id}. Returned first student, with id={student.id}."
-        )
+    # if Student.objects.filter(user=user).count() > 1:
+    #     logger.debug(
+    #         f"create_student: multiple Student objects found for user with id={user.id}. Returned first student, with id={student.id}."
+    #     )
 
     social_user = user.social_auth.filter(provider=backend_name).first()
     hasFacebook = user.social_auth.filter(provider="facebook").exists()

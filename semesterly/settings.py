@@ -23,8 +23,6 @@ https://docs.djangoproject.com/en/1.6/ref/settings/
 import os
 import yaml
 
-import logging, logging.config
-
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 PROJECT_DIRECTORY = os.getcwd()
@@ -149,39 +147,39 @@ SOCIAL_AUTH_PIPELINE = (
     "authpipe.utils.create_student",
 )
 
-LOGGING = {
-    "version": 1,
-    "disable_existing_loggers": False,
-    "formatters": {
-        "standard": {"format": "%(asctime)s %(levelname)s %(name)s -> %(message)s"}
-    },
-    "handlers": {
-        "console": {
-            "class": "logging.StreamHandler",
-            "level": "DEBUG",
-            "formatter": "standard",
-            "filters": [],
-        },
-    },
-    "root": {
-        "handlers": ["console"],
-        "level": "DEBUG",
-    },
-    "loggers": {
-        "django": {
-            "handlers": ["console"],
-            "level": "INFO",
-            "propagate": False,
-        },
-        "authpipe": {
-            "handlers": ["console"],
-            "level": "DEBUG",
-            "propagate": False,
-        },
-    },
-}
+# LOGGING = {
+#     "version": 1,
+#     "disable_existing_loggers": False,
+#     "formatters": {
+#         "standard": {"format": "%(asctime)s %(levelname)s %(name)s -> %(message)s"}
+#     },
+#     "handlers": {
+#         "console": {
+#             "class": "logging.StreamHandler",
+#             "level": "DEBUG",
+#             "formatter": "standard",
+#             "filters": [],
+#         },
+#     },
+#     "root": {
+#         "handlers": ["console"],
+#         "level": "DEBUG",
+#     },
+#     "loggers": {
+#         "django": {
+#             "handlers": ["console"],
+#             "level": "INFO",
+#             "propagate": False,
+#         },
+#         "authpipe": {
+#             "handlers": ["console"],
+#             "level": "DEBUG",
+#             "propagate": False,
+#         },
+#     },
+# }
 
-logging.config.dictConfig(LOGGING)
+# logging.config.dictConfig(LOGGING)
 # Webpack
 
 WEBPACK_LOADER = {
@@ -234,6 +232,7 @@ MIDDLEWARE = (
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "semesterly.middleware.subdomain_middleware.SubdomainMiddleware",
     "social_django.middleware.SocialAuthExceptionMiddleware",
+    "rollbar.contrib.django.middleware.RollbarNotifierMiddleware",
 )
 
 TEMPLATES = [
@@ -379,6 +378,16 @@ try:
     from .local_settings import *
 except ModuleNotFoundError:
     pass
+
+if not DEBUG:
+    ROLLBAR = {
+        "access_token": "23c5a378cd1943cfb40d5217dfb7f766",
+        "environment": "development" if DEBUG else "production",
+        "root": BASE_DIR,
+    }
+    import rollbar
+
+    rollbar.init(**ROLLBAR)
 
 if SHOW_DEBUG_TOOLBAR:
     DEBUG_TOOLBAR_CONFIG = {"SHOW_TOOLBAR_CALLBACK": lambda request: True}
