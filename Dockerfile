@@ -32,3 +32,6 @@ RUN npm run build
 
 # To enable unbuffered logging
 ENV PYTHONUNBUFFERED=1
+
+# Temporary measure to ensure Rollbar is not being run...
+RUN pip uninstall -y rollbar || true

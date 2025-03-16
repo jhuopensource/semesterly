@@ -14,6 +14,16 @@
 import os
 import sys
 
+try:
+    import rollbar
+
+    def dummy_function(*args, **kwargs):
+        pass
+
+    rollbar.send_payload = dummy_function
+except ImportError:
+    pass
+
 if __name__ == "__main__":
     os.environ.setdefault("DJANGO_SETTINGS_MODULE", "semesterly.settings")
 
