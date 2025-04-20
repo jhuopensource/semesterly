@@ -7,7 +7,7 @@ import logging
 logger = logging.getLogger(__name__)
 
 class Command(BaseCommand):
-    help = 'Deletes users whose last login time is 2 years ago'
+    help = 'Deletes users whose last login time is 2 years ago (inclusive)'
 
     def add_arguments(self, parser):
         parser.add_argument(
@@ -37,8 +37,10 @@ class Command(BaseCommand):
         # Calculate the cutoff date (2 years ago from now)
         cutoff_date = timezone.now() - timedelta(days=years*365)
         
-        # Get users whose last login is older than the cutoff date, limited to batch_size
-        inactive_users = User.objects.filter(last_login__lt=cutoff_date)[:batch_size]
+        # Get users primary keys since slicing cannot be used with delete
+        inactive_users_pks = User.objects.filter(last_login__lte=cutoff_date).values_list('pk')[:batch_size]
+        # Get users by primary keys without slicing
+        inactive_users = User.objects.filter(pk__in=inactive_users_pks)
         
         count = inactive_users.count()
         
