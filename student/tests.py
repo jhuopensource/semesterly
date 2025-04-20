@@ -836,83 +836,85 @@ class PersonalEventTest(APITestCase):
 
 class DeleteInactiveUserCommandTest(TestCase):
     """Test the deleteinactiveuser management command."""
-    
+
     def setUp(self):
         # Create test users with different last login times
         self.now = timezone.now()
-        self.two_years_ago = self.now - timedelta(days=365*2)
-        self.three_years_ago = self.now - timedelta(days=365*3)
+        self.two_years_ago = self.now - timedelta(days=365 * 2)
+        self.three_years_ago = self.now - timedelta(days=365 * 3)
         self.one_year_ago = self.now - timedelta(days=365)
-        
+
         # Create users with different last login times
-        self.active_user = create_user(username='active_user')
+        self.active_user = create_user(username="active_user")
         self.active_user.last_login = self.one_year_ago
         self.active_user.save()
-        
-        self.inactive_user1 = create_user(username='inactive_user1')
+
+        self.inactive_user1 = create_user(username="inactive_user1")
         self.inactive_user1.last_login = self.two_years_ago
         self.inactive_user1.save()
-        
-        self.inactive_user2 = create_user(username='inactive_user2')
+
+        self.inactive_user2 = create_user(username="inactive_user2")
         self.inactive_user2.last_login = self.three_years_ago
         self.inactive_user2.save()
-        
+
         # Create student profiles for the users
         create_student(self.active_user)
         create_student(self.inactive_user1)
         create_student(self.inactive_user2)
-    
+
     def test_delete_inactive_users_default(self):
         """Test that the command deletes users inactive for 2+ years by default."""
         # Run the command
-        call_command('deleteinactiveuser')
-        
+        call_command("deleteinactiveuser")
+
         # Check that active user still exists
-        self.assertTrue(User.objects.filter(username='active_user').exists())
-        
+        self.assertTrue(User.objects.filter(username="active_user").exists())
+
         # Check that inactive users were deleted
-        self.assertFalse(User.objects.filter(username='inactive_user1').exists())
-        self.assertFalse(User.objects.filter(username='inactive_user2').exists())
-    
+        self.assertFalse(User.objects.filter(username="inactive_user1").exists())
+        self.assertFalse(User.objects.filter(username="inactive_user2").exists())
+
     def test_delete_inactive_users_custom_years(self):
         """Test that the command deletes users inactive for the specified number of years."""
         # Run the command with 3 years
-        call_command('deleteinactiveuser', years=3)
-        
+        call_command("deleteinactiveuser", years=3)
+
         # Check that active user still exists
-        self.assertTrue(User.objects.filter(username='active_user').exists())
-        
+        self.assertTrue(User.objects.filter(username="active_user").exists())
+
         # Check that user inactive for 2 years still exists
-        self.assertTrue(User.objects.filter(username='inactive_user1').exists())
-        
+        self.assertTrue(User.objects.filter(username="inactive_user1").exists())
+
         # Check that user inactive for 3 years was deleted
-        self.assertFalse(User.objects.filter(username='inactive_user2').exists())
-    
+        self.assertFalse(User.objects.filter(username="inactive_user2").exists())
+
     def test_delete_inactive_users_batch_size(self):
         """Test that the command respects the batch size limit."""
         # Create additional inactive users
         for i in range(3, 6):
-            user = create_user(username=f'inactive_user{i}')
+            user = create_user(username=f"inactive_user{i}")
             user.last_login = self.two_years_ago
             user.save()
             create_student(user)
-        
+
         # Run the command with batch size of 2
-        call_command('deleteinactiveuser', batch_size=2)
-        
+        call_command("deleteinactiveuser", batch_size=2)
+
         # Check that active user still exists
-        self.assertTrue(User.objects.filter(username='active_user').exists())
-        
+        self.assertTrue(User.objects.filter(username="active_user").exists())
+
         # Check that only 2 inactive users were deleted
-        remaining_inactive = User.objects.filter(last_login__lte=self.two_years_ago).count()
+        remaining_inactive = User.objects.filter(
+            last_login__lte=self.two_years_ago
+        ).count()
         self.assertEqual(remaining_inactive, 3)  # 3 inactive users should remain
-    
+
     def test_delete_inactive_users_dry_run(self):
         """Test that the dry run option doesn't actually delete users."""
         # Run the command with dry run
-        call_command('deleteinactiveuser', dry_run=True)
-        
+        call_command("deleteinactiveuser", dry_run=True)
+
         # Check that all users still exist
-        self.assertTrue(User.objects.filter(username='active_user').exists())
-        self.assertTrue(User.objects.filter(username='inactive_user1').exists())
-        self.assertTrue(User.objects.filter(username='inactive_user2').exists())
+        self.assertTrue(User.objects.filter(username="active_user").exists())
+        self.assertTrue(User.objects.filter(username="inactive_user1").exists())
+        self.assertTrue(User.objects.filter(username="inactive_user2").exists())

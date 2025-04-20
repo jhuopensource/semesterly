@@ -371,7 +371,7 @@ CKEDITOR_CONFIGS = {
 # this is the default cache
 CACHES = {
     "default": {
-        'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
+        "BACKEND": "django.core.cache.backends.dummy.DummyCache",
     }
 }
 CACHALOT_ENABLED = True

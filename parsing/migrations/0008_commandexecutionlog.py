@@ -6,26 +6,45 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('parsing', '0007_auto_20250329_2337'),
+        ("parsing", "0007_auto_20250329_2337"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='CommandExecutionLog',
+            name="CommandExecutionLog",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('command_name', models.CharField(max_length=255)),
-                ('arguments', models.TextField(blank=True, null=True)),
-                ('start_time', models.DateTimeField(auto_now_add=True)),
-                ('end_time', models.DateTimeField(blank=True, null=True)),
-                ('status', models.CharField(choices=[('success', 'Success'), ('error', 'Error'), ('warning', 'Warning')], default='success', max_length=20)),
-                ('error_message', models.TextField(blank=True, null=True)),
-                ('output', models.TextField(blank=True, null=True)),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("command_name", models.CharField(max_length=255)),
+                ("arguments", models.TextField(blank=True, null=True)),
+                ("start_time", models.DateTimeField(auto_now_add=True)),
+                ("end_time", models.DateTimeField(blank=True, null=True)),
+                (
+                    "status",
+                    models.CharField(
+                        choices=[
+                            ("success", "Success"),
+                            ("error", "Error"),
+                            ("warning", "Warning"),
+                        ],
+                        default="success",
+                        max_length=20,
+                    ),
+                ),
+                ("error_message", models.TextField(blank=True, null=True)),
+                ("output", models.TextField(blank=True, null=True)),
             ],
             options={
-                'verbose_name': 'Command Execution Log',
-                'verbose_name_plural': 'Command Execution Logs',
-                'ordering': ['-start_time'],
+                "verbose_name": "Command Execution Log",
+                "verbose_name_plural": "Command Execution Logs",
+                "ordering": ["-start_time"],
             },
         ),
     ]

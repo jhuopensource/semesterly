@@ -18,9 +18,18 @@ class DataUpdateSettingsAdmin(admin.ModelAdmin):
         # Prevent deletion of the single instance
         return False
 
+
 @admin.register(CommandExecutionLog)
 class CommandExecutionLogAdmin(admin.ModelAdmin):
-    list_display = ('command_name', 'start_time', 'end_time', 'status')
-    list_filter = ('status',)
-    search_fields = ('command_name',)
-    readonly_fields = ('command_name', 'arguments', 'start_time', 'end_time', 'status', 'error_message', 'output')
+    list_display = ("command_name", "start_time", "end_time", "status")
+    list_filter = ("status",)
+    search_fields = ("command_name",)
+    readonly_fields = (
+        "command_name",
+        "arguments",
+        "start_time",
+        "end_time",
+        "status",
+        "error_message",
+        "output",
+    )

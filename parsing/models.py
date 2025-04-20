@@ -187,7 +187,7 @@ class DataUpdateSettings(models.Model):
 class CommandExecutionLog(models.Model):
     """
     Stores logs of management command executions.
-    
+
     Attributes:
         command_name (CharField): The name of the management command that was executed
         arguments (TextField): The arguments passed to the command
@@ -197,29 +197,29 @@ class CommandExecutionLog(models.Model):
         error_message (TextField): Any error message if the command failed
         output (TextField): The output of the command
     """
-    
+
     STATUS_CHOICES = (
-        ('success', 'Success'),
-        ('error', 'Error'),
-        ('warning', 'Warning'),
+        ("success", "Success"),
+        ("error", "Error"),
+        ("warning", "Warning"),
     )
-    
+
     command_name = models.CharField(max_length=255)
     arguments = models.TextField(blank=True, null=True)
     start_time = models.DateTimeField(auto_now_add=True)
     end_time = models.DateTimeField(null=True, blank=True)
-    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='success')
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default="success")
     error_message = models.TextField(blank=True, null=True)
     output = models.TextField(blank=True, null=True)
-    
+
     class Meta:
         verbose_name = "Command Execution Log"
         verbose_name_plural = "Command Execution Logs"
-        ordering = ['-start_time']
-    
+        ordering = ["-start_time"]
+
     def __str__(self):
         return f"{self.command_name} - {self.start_time} - {self.status}"
-    
+
     @property
     def duration(self):
         """Calculate the duration of the command execution in seconds"""
