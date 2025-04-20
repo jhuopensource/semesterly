@@ -3,6 +3,7 @@ from django.contrib.auth import get_user_model
 from django.utils import timezone
 from datetime import timedelta
 import logging
+from parsing.command_logger import CommandLogger
 
 logger = logging.getLogger(__name__)
 
@@ -29,36 +30,50 @@ class Command(BaseCommand):
         )
 
     def handle(self, *args, **options):
-        User = get_user_model()
-        dry_run = options['dry_run']
-        years = options['years']
-        batch_size = options['batch_size']
+        # Create a dictionary of arguments for logging
+        log_args = {
+            'dry_run': options['dry_run'],
+            'years': options['years'],
+            'batch_size': options['batch_size']
+        }
         
-        # Calculate the cutoff date (2 years ago from now)
-        cutoff_date = timezone.now() - timedelta(days=years*365)
-        
-        # Get users primary keys since slicing cannot be used with delete
-        inactive_users_pks = User.objects.filter(last_login__lte=cutoff_date).values_list('pk')[:batch_size]
-        # Get users by primary keys without slicing
-        inactive_users = User.objects.filter(pk__in=inactive_users_pks)
-        
-        count = inactive_users.count()
-        
-        if count == 0:
-            self.stdout.write(self.style.SUCCESS('No inactive users found.'))
-            return
-        
-        self.stdout.write(f'Found {count} inactive users (last login before {cutoff_date}).')
-        
-        if dry_run:
-            self.stdout.write(self.style.WARNING('DRY RUN: No users will be deleted.'))
-            for user in inactive_users:
-                self.stdout.write(f'Would delete: {user.username} (last login: {user.last_login})')
-        else:
-            # Log the users that will be deleted
-            for user in inactive_users:
-                logger.info(f'Deleting inactive user: {user.username} (last login: {user.last_login})')
+        # Use the command logger
+        with  CommandLogger('deleteinactiveuser', log_args) as cmd_logger:
+            try:
+                User = get_user_model()
+                dry_run = options['dry_run']
+                years = options['years']
+                batch_size = options['batch_size']
+                # Calculate the cutoff date (2 years ago from now)
+                cutoff_date = timezone.now() - timedelta(days=years*365)
+                
+                # Get users primary keys since slicing cannot be used with delete
+                inactive_users_pks = User.objects.filter(last_login__lte=cutoff_date).values_list('pk')[:batch_size]
+                # Get users by primary keys without slicing
+                inactive_users = User.objects.filter(pk__in=inactive_users_pks)
+                
+                count = inactive_users.count()
+                
+                if count == 0:
+                    cmd_logger.log_output('No inactive users found.')
+                    return
+                
+                cmd_logger.log_output(f'Found {count} inactive users (last login before {cutoff_date}).')
+                
+                if dry_run:
+                    cmd_logger.log_output('DRY RUN: No users will be deleted.')
+                    for user in inactive_users:
+                        cmd_logger.log_output(f'Would delete: {user.username} (last login: {user.last_login})')
+                else:
+                    # Log the users that will be deleted
+                    for user in inactive_users:
+                        logger.info(f'Deleting inactive user: {user.username} (last login: {user.last_login})')
+                        cmd_logger.log_output(f'Deleting user: {user.username} (last login: {user.last_login})')
+                    
+                    # Delete the users
+                    inactive_users.delete()
+                    cmd_logger.log_output(f'Successfully deleted {count} inactive users.')
             
-            # Delete the users
-            inactive_users.delete()
-            self.stdout.write(self.style.SUCCESS(f'Successfully deleted {count} inactive users.'))
+            except Exception as e:
+                cmd_logger.log_error(f"Error in deleteinactiveuser command: {str(e)}")
+                raise
