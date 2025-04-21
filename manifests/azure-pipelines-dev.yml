@@ -37,6 +37,16 @@ stages:
     pool:
       vmImage: $(vmImageName)
     steps:
+    - task: NodeTool@0
+      inputs:
+        versionSpec: '18.x'
+      displayName: 'Install Node.js 18'
+
+    - script: |
+        npm install
+        npm run build
+      displayName: 'Install dependencies and build'
+
     - task: Docker@2
       displayName: Build Django Container
       inputs:
@@ -47,6 +57,7 @@ stages:
         containerRegistry: $(dockerRegistryServiceConnection)
         tags: |
           $(tag)
+
     - task: Docker@2
       displayName: Push Django Container
       inputs:
@@ -55,6 +66,7 @@ stages:
         command: push
         tags: |
           $(tag)
+
     - task: Docker@2
       displayName: Build nginx Container
       inputs:
@@ -65,6 +77,7 @@ stages:
         containerRegistry: $(dockerRegistryServiceConnection)
         tags: |
           $(tag)
+
     - task: Docker@2
       displayName: Push nginx Container
       inputs:
