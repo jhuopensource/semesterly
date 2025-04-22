@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import DataUpdateSettings
+from .models import DataUpdateSettings, CommandExecutionLog
 
 
 @admin.register(DataUpdateSettings)
@@ -17,3 +17,19 @@ class DataUpdateSettingsAdmin(admin.ModelAdmin):
     def has_delete_permission(self, request, obj=None):
         # Prevent deletion of the single instance
         return False
+
+
+@admin.register(CommandExecutionLog)
+class CommandExecutionLogAdmin(admin.ModelAdmin):
+    list_display = ("command_name", "start_time", "end_time", "status")
+    list_filter = ("status",)
+    search_fields = ("command_name",)
+    readonly_fields = (
+        "command_name",
+        "arguments",
+        "start_time",
+        "end_time",
+        "status",
+        "error_message",
+        "output",
+    )
