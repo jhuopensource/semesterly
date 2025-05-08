@@ -21,7 +21,7 @@ def advanced_course_search_from_view(
             raise ValueError("No semesters available.")
         sem_name = sem_name or latest.name
         year = year or latest.year
-        
+
     sem = Semester.objects.filter(name=sem_name, year=year).first()
     if not sem:
         raise ValueError(f"Semester '{sem_name} {year}' not found")
@@ -63,10 +63,7 @@ def get_chatbot_response(query, subdomain, default_sem_name=None, default_year=N
 
     URL = "https://api.openai.com/v1/chat/completions"
 
-    prompt = {
-        "role": "system",
-        "content": get_system_prompt()
-    }
+    prompt = {"role": "system", "content": get_system_prompt()}
 
     headers = {"Authorization": f"Bearer {API_KEY}", "Content-Type": "application/json"}
 
@@ -81,7 +78,7 @@ def get_chatbot_response(query, subdomain, default_sem_name=None, default_year=N
 
     try:
         initial_response = requests.post(URL, headers=headers, json=data)
-        initial_response.raise_for_status()  
+        initial_response.raise_for_status()
 
         # Extract chatbot response from the JSON
         data = initial_response.json()
