@@ -183,6 +183,7 @@ INSTALLED_APPS = (
     "timetable",
     "ckeditor",
     "friends",
+    "chatbot",
 )
 
 REST_FRAMEWORK = {"UNICODE_JSON": False}

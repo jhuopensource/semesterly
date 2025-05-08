@@ -1,66 +1,212 @@
 .chatbot-container {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    z-index: 9000;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 9000;
+}
+
+.chatbot-button {
+  border: none;
+  border-radius: 25px;
+  padding: 10px 15px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: background-color 0.2s, box-shadow 0.2s, transform 0.2s;
+  @include theme() {
+    background-color: t("search-course-save-background");
+    color: t("primary-button-text");
   }
-  
-  .chatbot-button {
-    background-color: #007bff;
-    color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+  &:hover {
+    @include theme() {
+      background-color: t("search-course-save-hover");
+    }
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  }
+}
+
+.chatbot-window {
+  position: fixed;
+  bottom: 80px;
+  right: 20px;
+  width: 300px;
+  height: 400px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  overflow: hidden;
+  z-index: 9000;
+  @include theme() {
+    background-color: t("search-bar-background");
+    box-shadow: 0 3px 4px t("search-results-box-shadow");
+    border: 1px solid t("search-border");
+  }
+}
+
+.chatbot-header {
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 16px;
+  font-weight: 400;
+  border-radius: 10px 10px 0 0;
+  @include theme() {
+    background-color: t("search-bar-focused-background");
+    color: t("primary-button-text");
+  }
+
+  button {
+    background: none;
     border: none;
-    border-radius: 50px;
-    padding: 10px 15px;
-    font-size: 16px;
     cursor: pointer;
+    font-size: 12px;
+    padding: 4px;
+    @include theme() {
+      color: t("primary-button-text");
+    }
   }
-  
-  .chatbot-window {
-    position: fixed;
-    bottom: 80px;
-    right: 20px;
-    width: 300px;
-    height: 400px;
-    background-color: white;
-    border-radius: 10px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-    display: flex;
-    flex-direction: column;
+}
+
+.chatbot-body {
+  flex-grow: 1;
+  padding: 10px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  font-size: 12px;
+  color: #333;
+}
+
+.chatbot-messages {
+  flex: 1;
+  overflow-y: auto;
+  margin-bottom: 10px;
+}
+
+.chatbot-message {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 12px;
+  max-width: 80%;
+}
+
+.chatbot-message-bot {
+  align-self: flex-start;
+}
+
+.chatbot-message:not(.chatbot-message-bot) {
+  align-self: flex-end;
+}
+
+.chatbot-message-content {
+  font-size: 12px;
+  line-height: 1.4;
+  color: #222;
+}
+
+// User message = bubble
+.chatbot-message:not(.chatbot-message-bot) .chatbot-message-content {
+  padding: 10px 14px;
+  border-radius: 18px;
+  align-self: flex-end;
+  @include theme() {
+    background-color: t("search-course-save-background");
+    color: t("search-bar-side-text");
   }
-  
-  .chatbot-header {
-    background-color: #007bff;
-    color: white;
-    padding: 10px;
-    text-align: center;
+}
+
+// Bot message = no bubble
+.chatbot-message-bot .chatbot-message-content {
+  padding: 0;
+  background: none;
+  border-radius: 0;
+}
+
+.chatbot-input-container {
+  display: flex;
+  padding: 10px;
+  border-top: 1px solid #ddd;
+  gap: 8px;
+  @include theme() {
+    border-top: 1px solid t("search-border");
   }
-  
-  .chatbot-body {
-    flex-grow: 1;
-    padding: 10px;
-    overflow-y: auto;
+}
+
+.chatbot-input {
+  flex: 1;
+  padding: 8px 12px;
+  font-size: 12px;
+  border-radius: 20px;
+  outline: none;
+  transition: border-color 0.2s;
+  @include theme() {
+    background-color: t("search-bar-background");
+    color: t("search-bar-side-text");
+    border: 1px solid t("search-border");
   }
-  
-  /* Optional extras for a nice UX */
-  .chatbot-input {
-    display: flex;
-    padding: 10px;
-    border-top: 1px solid #ddd;
+
+  &:focus {
+    @include theme() {
+      border-color: t("search-course-save-hover");
+    }
   }
-  
-  .chatbot-input input {
-    flex: 1;
-    padding: 8px;
-    border-radius: 4px;
-    border: 1px solid #ccc;
+}
+
+.chatbot-send-button {
+  padding: 8px 16px;
+  font-size: 12px;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  @include theme() {
+    background-color: t("search-course-save-background");
+    color: t("primary-button-text");
   }
-  
-  .chatbot-input button {
-    margin-left: 5px;
-    padding: 8px 16px;
+
+  &:hover {
+    @include theme() {
+      background-color: t("search-course-save-hover");
+    }
+  }
+}
+
+.chatbot-course-results {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.chatbot-course-tile {
+  padding: 8px 12px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background-color 0.2s;
+  @include theme() {
+    background-color: t("search-bar-background");
+  }
+
+  button {
     border: none;
-    background: #007bff;
-    color: white;
-    border-radius: 4px;
+    padding: 4px 10px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 12px;
+    @include theme() {
+      background-color: t("search-course-save-background");
+      color: t("primary-button-text");
+    }
+
+    &:hover {
+      @include theme() {
+        background-color: t("search-course-save-hover");
+      }
+    }
   }
-  
+}
