@@ -30,8 +30,8 @@ jobs:
 
     strategy:
       matrix:
-        python-version: [3.8]
-        node-version: [14.x]
+        python-version: [3.11]
+        node-version: [18.x]
 
     steps:
       - name: Adjust hosts file
