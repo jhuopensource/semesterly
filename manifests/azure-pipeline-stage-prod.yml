@@ -7,7 +7,7 @@ trigger:
         include:
         - prod
 
-pr: none # will disable PR builds 
+pr: none # will disable PR builds
 
 resources:
 - repo: self
@@ -15,7 +15,7 @@ resources:
 variables:
 
   # Container registry service connection established during pipeline creation
-  dockerRegistryServiceConnection: '2cb2d51e-8ab0-41ae-ae85-072613bd7a29'
+  dockerRegistryServiceConnection: 'c64eb771-50fb-4880-949e-582d23c3b40a'
   imageRepository: 'semesterly'
   containerRegistry: 'semesterly.azurecr.io'
   tag: '$(Build.BuildId)'
@@ -64,7 +64,7 @@ stages:
         Dockerfile: './build/semesterly-nginx/Dockerfile'
         containerRegistry: $(dockerRegistryServiceConnection)
         tags: |
-          $(tag)          
+          $(tag)
     - task: Docker@2
       displayName: Push nginx Container
       inputs:
@@ -76,7 +76,7 @@ stages:
 
     - upload: manifests
       artifact: manifests
-      
+
 
 - stage: DeployStage
   displayName: DeployStage
@@ -85,7 +85,7 @@ stages:
 # Deploy to stage environment
   jobs:
   - deployment: DeployStage
-    condition: and(succeeded(), not(startsWith(variables['Build.SourceBranch'], 'refs/pull/'))) 
+    condition: and(succeeded(), not(startsWith(variables['Build.SourceBranch'], 'refs/pull/')))
     displayName: DeployStage
     pool:
       vmImage: $(vmImageName)
@@ -122,10 +122,10 @@ stages:
 # Await stage environment validation
   jobs:
   - job: waitForValidation
-    displayName: Wait for external validation  
-    pool: server    
+    displayName: Wait for external validation
+    pool: server
     timeoutInMinutes: 10080 # job times out in 7 days
-    steps:   
+    steps:
     - task: ManualValidation@0
       timeoutInMinutes: 10080 # task times out in 7 days
       inputs:
@@ -141,7 +141,7 @@ stages:
 # Deploy to prod
   jobs:
   - deployment: DeployProd
-    condition: and(succeeded(), not(startsWith(variables['Build.SourceBranch'], 'refs/pull/'))) 
+    condition: and(succeeded(), not(startsWith(variables['Build.SourceBranch'], 'refs/pull/')))
     displayName: DeployProd
     pool:
       vmImage: $(vmImageName)
