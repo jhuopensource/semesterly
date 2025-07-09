@@ -16,6 +16,7 @@ from collections import namedtuple
 from courses.utils import get_sections_by_section_type
 from timetable.models import Section, Semester
 from timetable.school_mappers import SCHOOLS_MAP
+from parsing.models import DataUpdateSettings
 from student.models import PersonalTimetable
 from parsing.library.utils import short_date
 
@@ -324,7 +325,12 @@ def get_current_semesters(school):
     (semester name, year) pairs.
     """
     semesters = []
-    for year, terms in reversed(list(SCHOOLS_MAP[school].active_semesters.items())):
+    settings = DataUpdateSettings.load()
+    if school == "jhu" and settings.active:
+        active_semesters = settings.get_active_semesters()
+    else:
+        active_semesters = SCHOOLS_MAP[school].active_semesters
+    for year, terms in reversed(list(active_semesters.items())):
         for term in terms:
             # Ensure DB has all semesters.
             Semester.objects.update_or_create(name=term, year=year)

@@ -30,16 +30,16 @@ jobs:
 
     strategy:
       matrix:
-        python-version: [3.8]
-        node-version: [14.x]
+        python-version: [3.11]
+        node-version: [18.x]
 
     steps:
       - name: Adjust hosts file
         run: sudo echo "127.0.0.1 jhu.sem.ly sem.ly jhu" | sudo tee -a /etc/hosts
 
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python-version }}
 
@@ -54,16 +54,16 @@ jobs:
           pip install -r requirements.txt
 
       - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
-          cache: "npm"
-      - run: npm install
-      - run: npm -g install chromedriver
-      - run: npm -g install jest@20
-      - run: npm run build --if-present
-      - run: npm run lint
-      - run: npm run test
+          cache: "yarn"
+      - run: yarn install --frozen-lockfile
+      - run: yarn global add chromedriver@2.46.0
+      - run: yarn global add jest@20
+      - run: yarn build --if-present
+      - run: yarn lint
+      - run: yarn test
 
       - name: Run Backend Tests
         env:

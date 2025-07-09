@@ -1,22 +1,25 @@
-ARG BASE_IMAGE=jhuopensource/semesterly-base-py3
-FROM $BASE_IMAGE
-# sgerli/horariotec-base:
+#! should update to newer version of node base image
+FROM node:18-bookworm
+
+# Create code dir
 RUN mkdir /code
 WORKDIR /code
 
-# Just adding basics
-# ADD ./requirements.txt /code/
-# ADD ./package.json /code/
+# Install Python dependencies
+RUN apt-get update && apt-get install -y python3-pip python3-venv && \
+  apt-get clean && \
+  rm -rf /var/lib/apt/lists/*
 
 # Add everything
 ADD . /code/
 
+# Create and activate virtual environment
+ENV VIRTUAL_ENV=/code/venv
+RUN python3 -m venv $VIRTUAL_ENV
+ENV PATH="$VIRTUAL_ENV/bin:$PATH"
 
-# Nginx moved out
-# COPY ./build/semesterly-nginx.conf /etc/nginx/sites-available/
-# RUN rm /etc/nginx/sites-enabled/*
-# RUN ln -s /etc/nginx/sites-available/semesterly-nginx.conf /etc/nginx/sites-enabled
-# RUN echo "daemon off;" >> /etc/nginx/nginx.conf
+# Install dependencies in the virtual environment
+RUN pip install --no-cache-dir -r /code/requirements.txt
 
 # Use environment based config
 COPY ./build/local_settings.py /code/semesterly/local_settings.py
@@ -24,11 +27,9 @@ COPY ./build/local_settings.py /code/semesterly/local_settings.py
 # Add parser script
 COPY ./build/run_parser.sh /code/run_parser.sh
 
-RUN pip3 install -r /code/requirements.txt
-
 # Install package.json dependencies
-RUN npm install
-RUN npm run build
+RUN yarn
+RUN yarn build
 
 # To enable unbuffered logging
 ENV PYTHONUNBUFFERED=1

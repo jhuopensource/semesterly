@@ -2,6 +2,43 @@
   "name": "semesterly",
   "version": "1.0.0",
   "description": "A Timetable Generator",
+  "jest": {
+    "setupFilesAfterEnv": [
+      "./misc/test_env.jsx"
+    ],
+    "transformIgnorePatterns": [
+      "node_modules",
+      "__mocks__"
+    ],
+    "transform": {
+      "^.+\\.(j|t)sx?$": "ts-jest"
+    },
+    "moduleNameMapper": {
+      "\\.(css|less|scss)$": "<rootDir>/__mocks__/styleMock.js"
+    },
+    "testEnvironment": "jest-environment-jsdom"
+  },
+  "scripts": {
+    "test": "NODE_ENV=production jest",
+    "test:watch": "npm test -- --watch",
+    "build": "./node_modules/.bin/webpack --config ./webpack.config.js --progress",
+    "watch": "node misc/server.js",
+    "lint": "./node_modules/.bin/eslint \"static/js/redux/**\"; ./node_modules/.bin/sass-lint -c .sass-lint.yml 'static/css/timetable/*.scss, static/css/timetable/**/*.scss' -v -q",
+    "lint-fix": "./node_modules/.bin/eslint --fix \"static/js/redux/**\" ",
+    "prettier-check": "npx prettier \"**/*.{js,jsx,ts,tsx}\" --check",
+    "prettier": "npx prettier \"**/*.{js,jsx,ts,tsx}\" --write",
+    "validate": "npm ls"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rohandas/semesterly.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rohandas/semesterly/issues"
+  },
+  "homepage": "https://github.com/rohandas/semesterly#readme",
   "dependencies": {
     "@emotion/react": "^11.10.4",
     "@emotion/styled": "^11.10.4",
@@ -55,11 +92,11 @@
     "lodash": "^4.17.21",
     "loose-envify": "^1.4.0",
     "moment": "^2.29.4",
-    "node-sass": "^9.0.0",
+    "node-sass": "^7.0.3",
     "normalizr": "^3.6.1",
     "postcss-loader": "^2.1.6",
     "prop-types": "^15.8.1",
-    "react": "^16.14.0",
+    "react": "^17.0.2",
     "react-addons-css-transition-group": "^15.6.2",
     "react-addons-shallow-compare": "^15.6.3",
     "react-alert": "^2.4.0",
@@ -68,7 +105,7 @@
     "react-date-picker": "^5.3.28",
     "react-dnd": "^14.0.4",
     "react-dnd-html5-backend": "^14.0.2",
-    "react-dom": "^16.14.0",
+    "react-dom": "^17.0.2",
     "react-error-boundary": "^3.1.4",
     "react-hot-loader": "^1.3.1",
     "react-infinite-scroll-component": "^6.1.0",
@@ -80,7 +117,7 @@
     "react-render-html": "^0.1.6",
     "react-select": "^5.3.2",
     "react-swipeable": "^5.5.1",
-    "react-test-renderer": "^16.14.0",
+    "react-test-renderer": "^17.0.2",
     "react-tooltip": "^4.2.21",
     "reactify": "^1.1.1",
     "redux": "^4.1.2",
@@ -106,57 +143,20 @@
     "webpack-cli": "^3.0.4",
     "webpack-dev-server": "^2.4.2"
   },
-  "jest": {
-    "setupFilesAfterEnv": [
-      "./misc/test_env.jsx"
-    ],
-    "transformIgnorePatterns": [
-      "node_modules",
-      "__mocks__"
-    ],
-    "transform": {
-      "^.+\\.(j|t)sx?$": "ts-jest"
-    },
-    "moduleNameMapper": {
-      "\\.(css|less|scss)$": "<rootDir>/__mocks__/styleMock.js"
-    },
-    "testEnvironment": "jest-environment-jsdom"
-  },
-  "scripts": {
-    "test": "NODE_ENV=production jest",
-    "test:watch": "npm test -- --watch",
-    "build": "./node_modules/.bin/webpack --config ./webpack.config.js --progress",
-    "watch": "node misc/server.js",
-    "lint": "./node_modules/.bin/eslint \"static/js/redux/**\"; ./node_modules/.bin/sass-lint -c .sass-lint.yml 'static/css/timetable/*.scss, static/css/timetable/**/*.scss' -v -q",
-    "lint-fix": "./node_modules/.bin/eslint --fix \"static/js/redux/**\" ",
-    "prettier-check": "npx prettier \"**/*.{js,jsx,ts,tsx}\" --check",
-    "prettier": "npx prettier \"**/*.{js,jsx,ts,tsx}\" --write",
-    "validate": "npm ls"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/rohandas/semesterly.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/rohandas/semesterly/issues"
-  },
-  "homepage": "https://github.com/rohandas/semesterly#readme",
   "devDependencies": {
-    "@types/lodash": "^4.14.178",
-    "@types/react": "^18.3.11",
-    "@types/react-dom": "^18.3.1",
-    "@types/twemoji": "^13.1.2",
     "@types/clipboard": "^2.0.7",
     "@types/html2canvas": "^1.0.0",
     "@types/jest": "^27.0.3",
     "@types/jquery": "^3.5.14",
     "@types/js-cookie": "^3.0.1",
+    "@types/lodash": "^4.14.178",
+    "@types/react": "^18.3.11",
     "@types/react-copy-to-clipboard": "^5.0.2",
+    "@types/react-dom": "^18.3.1",
     "@types/react-swipeable": "^5.2.0",
     "@types/react-tooltip": "^4.2.4",
     "@types/tinycolor2": "^1.4.3",
+    "@types/twemoji": "^13.1.2",
     "@typescript-eslint/eslint-plugin": "^5.6.0",
     "@typescript-eslint/parser": "^5.6.0",
     "eslint-config-prettier": "^8.3.0",

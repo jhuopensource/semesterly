@@ -11,7 +11,9 @@
 # GNU General Public License for more details.
 
 import collections
+import collections.abc
 import dateutil
+import dateutil.parser
 import os
 import re
 import simplejson as json
@@ -168,7 +170,7 @@ def update(d, u):
         {0: {1: 2}}
     """
     for k, v in u.items():
-        if isinstance(v, collections.Mapping):
+        if isinstance(v, collections.abc.Mapping):
             r = update(d.get(k, {}), v)
             d[k] = r
         else:
@@ -192,7 +194,7 @@ def iterrify(x):
         ...     print(i)
         'hello'
     """
-    if isinstance(x, collections.Iterable) and not isinstance(x, str):
+    if isinstance(x, collections.abc.Iterable) and not isinstance(x, str):
         return x
     else:
         return (x,)

@@ -26,6 +26,7 @@ const isDev = process.env.NODE_ENV === "development";
 console.log(`Running Webpack for ${process.env.NODE_ENV}`);
 
 const config = {
+  mode: isDev ? "development" : "production",
   // the base directory (absolute path) for resolving the entry option
   context: __dirname,
   // the entry point we created earlier. Note that './' means
