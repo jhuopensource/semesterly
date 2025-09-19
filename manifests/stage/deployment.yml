@@ -5,19 +5,21 @@ metadata:
   namespace: semesterly-stage
 spec:
   selector:
-    matchLabels: 
+    matchLabels:
       app: semesterly
   replicas: 2
   strategy:
     rollingUpdate:
       maxSurge: 1
       maxUnavailable: 1
-  minReadySeconds: 5 
+  minReadySeconds: 5
   template:
     metadata:
       labels:
         app: semesterly
     spec:
+      imagePullSecrets:
+        - name: semesterly193122b2-auth
       containers:
       - name: nginx
         image: semesterly.azurecr.io/semesterly-nginx:Version
@@ -37,7 +39,7 @@ spec:
             cpu: 100m
             memory: 2000M
           limits:
-            cpu: 250m   
+            cpu: 250m
             memory: 4000M
       - name: pgbouncer
         image: uisacr.azurecr.io/pgbouncer:latest
@@ -52,7 +54,7 @@ spec:
             cpu: 100m
             memory: 250M
           limits:
-            cpu: 250m   
+            cpu: 250m
             memory: 2000M
         env:
             - name: DB_HOST
@@ -83,7 +85,7 @@ spec:
             - name: AUTH_TYPE
               value: plain
             - name: SERVER_TLS_SSLMODE
-              value: verify-ca
+              value: require
             - name: PGBOUNCER_CLIENT_TLS_CA_FILE
               value: "/etc/pgbouncer/client_root_ca.crt"
             - name: MAX_CLIENT_CONN
@@ -97,7 +99,7 @@ spec:
       - name: gunicorn
         image: semesterly.azurecr.io/semesterly:Version
         command: ["bash"]
-        args: ["-c","python manage.py migrate; gunicorn semesterly.wsgi wsgi:application --bind=0.0.0.0:8000 --preload --workers=16 --max-requests=16384 --access-logfile - --error-logfile - --log-level info"]  
+        args: ["-c","python3 manage.py migrate; gunicorn semesterly.wsgi wsgi:application --bind=0.0.0.0:8000 --preload --workers=16 --max-requests=16384 --access-logfile - --error-logfile - --log-level info"]
         workingDir: /code
         ports:
         - containerPort: 8000
@@ -172,21 +174,6 @@ spec:
                 secretKeyRef:
                   name: semesterly-secrets
                   key: SOCIAL_AUTH_FACEBOOK_OAUTH2_SECRET
-            - name: SOCIAL_AUTH_AZURE_TENANT_ID
-              valueFrom:
-                secretKeyRef:
-                  name: semesterly-secrets
-                  key: SOCIAL_AUTH_AZURE_TENANT_ID
-            - name: SOCIAL_AUTH_AZURE_TENANT_KEY
-              valueFrom:
-                secretKeyRef:
-                  name: semesterly-secrets
-                  key: SOCIAL_AUTH_AZURE_TENANT_KEY
-            - name: SOCIAL_AUTH_AZURE_TENANT_SECRET
-              valueFrom:
-                secretKeyRef:
-                  name: semesterly-secrets
-                  key: SOCIAL_AUTH_AZURE_TENANT_SECRET
             - name: STUDENT_SIS_AUTH_SECRET
               valueFrom:
                 secretKeyRef:

@@ -85,7 +85,7 @@ def get_meeting_sections(course, semester, school):
 if __name__ == "__main__":
     if len(sys.argv) != 3:
         print(
-            "Must specify school semester. e.g: python " + sys.argv[0] + " jhu F/f/S/s"
+            "Must specify school semester. e.g: python3 " + sys.argv[0] + " jhu F/f/S/s"
         )
         exit(1)
     school = sys.argv[1].lower()

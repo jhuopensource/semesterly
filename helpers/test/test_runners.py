@@ -13,7 +13,7 @@
 from django.test import TransactionTestCase
 from django.test.runner import DiscoverRunner
 
-from mock import patch
+from unittest.mock import patch
 
 
 class NoDatabaseMixin:

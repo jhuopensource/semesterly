@@ -13,7 +13,7 @@
 from datetime import datetime
 from django.db import models
 from django.core.exceptions import ValidationError
-
+from collections import OrderedDict
 from timetable.models import Semester
 
 
@@ -57,12 +57,18 @@ class DataUpdate(models.Model):
 
 class DataUpdateSettings(models.Model):
     """
-    Stores the settings for the data update used by the ingestion process.
+    Stores the settings for the data update used by the ingestion process
+    and configures the active semesters users allowed to see.
 
     Attributes:
-        year (IntegerField): the year of the update
-        term (CharField): the term of the update
-        active (BooleanField): whether to perform the update
+        year (IntegerField): the year the parser ingesting courses is for
+        term (CharField): the term the parser ingesting courses is for
+        active (BooleanField): whether to run the parser
+
+        min_allowed_year (IntegerField): the minimum year the user can select in the UI
+        min_allowed_term (CharField): the minimum term the user can select in the UI
+        max_allowed_year (IntegerField): the maximum year the user can select in the UI
+        max_allowed_term (CharField): the maximum term the user can select in the UI
     """
 
     SPRING = "Spring"
@@ -82,6 +88,22 @@ class DataUpdateSettings(models.Model):
     year = models.IntegerField()
     active = models.BooleanField(default=True)
 
+    # the min and max terms user can select in the UI
+    min_allowed_year = models.IntegerField(default=2020)
+    min_allowed_term = models.CharField(
+        max_length=10,
+        choices=TERM_CHOICES,
+        default=FALL,
+        help_text="Select either Spring or Fall term",
+    )
+    max_allowed_year = models.IntegerField(default=datetime.now().year)
+    max_allowed_term = models.CharField(
+        max_length=10,
+        choices=TERM_CHOICES,
+        default=FALL,
+        help_text="Select either Spring or Fall term",
+    )
+
     def save(self, *args, **kwargs):
         if not self.pk and DataUpdateSettings.objects.exists():
             # If trying to create a new object while one exists, update the existing one
@@ -100,6 +122,62 @@ class DataUpdateSettings(models.Model):
         super().clean()
         if self.term not in [self.SPRING, self.FALL]:
             raise ValidationError({"term": "Term must be either Spring or Fall"})
+
+        # Validate min and max allowed years
+        if self.min_allowed_year > self.max_allowed_year:
+            raise ValidationError(
+                {
+                    "min_allowed_year": "Minimum allowed year cannot be greater than maximum allowed year",
+                    "max_allowed_year": "Maximum allowed year cannot be less than minimum allowed year",
+                }
+            )
+
+        # Validate years are in 2000s
+        if not (2000 <= self.min_allowed_year <= 2099):
+            raise ValidationError(
+                {"min_allowed_year": "Year must be between 2000 and 2099"}
+            )
+
+        if not (2000 <= self.max_allowed_year <= 2099):
+            raise ValidationError(
+                {"max_allowed_year": "Year must be between 2000 and 2099"}
+            )
+
+    def get_active_semesters(self):
+        """
+        Returns an OrderedDict of active semesters based on the model's settings.
+        The format matches the config.json structure with years as keys and lists of terms as values.
+        Fall terms appear before Spring terms in the list.
+        """
+        from collections import OrderedDict
+
+        active_semesters = OrderedDict()
+
+        # Generate semesters from min to max year
+        for year in range(self.min_allowed_year, self.max_allowed_year + 1):
+            terms = []
+
+            # For each year, determine which terms should be included
+            if year == self.min_allowed_year:
+                # For min year, only include terms from min_term onwards
+                if self.min_allowed_term == self.SPRING:
+                    terms = [self.FALL, self.SPRING]
+                else:
+                    terms = [self.FALL]
+            elif year == self.max_allowed_year:
+                # For max year, only include terms up to max_term
+                if self.max_allowed_term == self.FALL:
+                    terms = [self.FALL, self.SPRING]
+                else:
+                    terms = [self.SPRING]
+            else:
+                # For years in between, include both terms
+                terms = [self.FALL, self.SPRING]
+
+            if terms:
+                active_semesters[str(year)] = terms
+
+        return active_semesters
 
     class Meta:
         verbose_name = "Data Update Settings"

@@ -131,7 +131,7 @@ Parse and Test
 ~~~~~~~~~~~~~~
 When you're ready you can go ahead and run your parser. You can do this by::
 
-    python manage.py ingest [SCHOOL_CODE]
+    python3 manage.py ingest [SCHOOL_CODE]
 
 Replacing SCHOOL_CODE with whatever your school's code (e.g. jhu) is. This will start the ingestion process, creating a file `data/courses.json` in your school's directory.
 
@@ -139,6 +139,6 @@ If, along the way, your ingestion fails to validate, the ingestor will throw use
 
 Once it runs to completion, you can *digest* the JSON, entering it into the database by running::
 
-    python manage.py digest [SCHOOL_CODE]
+    python3 manage.py digest [SCHOOL_CODE]
 
 .. note:: To learn more, checkout the :ref:`pipeline`

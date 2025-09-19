@@ -282,6 +282,7 @@ export const ShareLink = ({ link, onClickOut, type }: ShareLinkProps) => {
           onFocus={(e) => e.target.select()}
           readOnly
         />
+        {/* @ts-ignore */}
         <CopyToClipboard text={location.host + link}>
           <div className="clipboardBtn" onClick={() => setShareBtnText("Copied!")}>
             {shareBtnText}

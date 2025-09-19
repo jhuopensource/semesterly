@@ -18,6 +18,7 @@ const webpack = require("webpack");
 const BundleTracker = require("webpack-bundle-tracker");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
+const sass = require("sass");
 
 const isProd = process.env.NODE_ENV === "production";
 const isDev = process.env.NODE_ENV === "development";
@@ -26,6 +27,7 @@ const isDev = process.env.NODE_ENV === "development";
 console.log(`Running Webpack for ${process.env.NODE_ENV}`);
 
 const config = {
+  mode: isDev ? "development" : "production",
   // the base directory (absolute path) for resolving the entry option
   context: __dirname,
   // the entry point we created earlier. Note that './' means
@@ -108,6 +110,7 @@ const config = {
               loader: "sass-loader",
               options: {
                 sourceMap: isDev,
+                implementation: sass,
               },
             },
           ],

@@ -3,28 +3,30 @@ name: TSLint
 
 on:
   push:
-    branches:
-      - prod
-      - develop
-      - feature/dark-mode-timetable
+    branches: [prod, develop, feature/dark-mode-timetable]
   pull_request:
-    branches:
-      - prod
-      - develop
-      - feature/dark-mode-timetable
+    branches: [prod, develop, feature/dark-mode-timetable]
 
 jobs:
   lint:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
         with:
-          node-version: 14
-          cache: "npm"
+          node-version: 22.x
+
+      - name: Enable Yarn 1 via Corepack
+        run: |
+          corepack enable
+          corepack prepare yarn@1.22.22 --activate
+
       - name: Install Dependencies
-        run: npm install
+        run: yarn install --non-interactive || (sleep 5 && yarn install --non-interactive)
+
       - name: Run Prettier
         run: npx prettier "**/*.{js,jsx,ts,tsx}" --check
+
       - name: Run ESLint
         run: npx eslint . --ext .js,.jsx,.ts,.tsx --max-warnings 0
