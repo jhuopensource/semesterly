@@ -39,6 +39,8 @@ urlpatterns = [
     re_path(
         r"^manifest(.*.json)$", semesterly.views.manifest_json, name="manifest_json"
     ),
+    # Health check endpoint
+    re_path(r"^health/?$", semesterly.views.health_check, name="health_check"),
     # error page testing
     re_path(r"^404testing/?", TemplateView.as_view(template_name="404.html")),
     re_path(r"^500testing/?", TemplateView.as_view(template_name="500.html")),

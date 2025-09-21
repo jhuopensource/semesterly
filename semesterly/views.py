@@ -10,16 +10,13 @@
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 
-from django.shortcuts import render
-from django.http import HttpResponse, HttpResponseRedirect, Http404
-from django.template.context_processors import csrf
+from django.http import HttpResponse, Http404
 from django.template.loader import get_template
-from django.views.decorators.cache import never_cache
 from django.views.decorators.csrf import csrf_exempt
 from django.conf import settings
 from django.core.mail import send_mail
-import datetime, hashlib, hmac, json, pprint, os, subprocess
-
+import datetime, hashlib, hmac, json, pprint, requests
+from django.db import connections
 
 @csrf_exempt
 def deploy_staging(request):
@@ -106,3 +103,40 @@ def manifest_json(request, js):
     template = get_template("manifest.json")
     html = template.render()
     return HttpResponse(html, content_type="application/json")
+
+
+def health_check(request):
+    message = "Database check failed"
+    try:
+        database_check()
+        message = "Endpoint check failed"
+        return HttpResponse(
+            json.dumps({"status": "healthy"}),
+            content_type="application/json",
+            status=200
+        )
+    except Exception as e:
+        alert_discord(message)
+        return HttpResponse(
+            json.dumps({"status": "unhealthy", "error": str(e)}),
+            content_type="application/json",
+            status=500
+        )
+
+def database_check():
+    db_conn = connections["default"]
+    cursor = db_conn.cursor()
+    cursor.execute("SELECT 1;")
+    # TODO: add more checks for database
+
+def endpoint_check():
+    # TODO: add more checks for endpoints
+    pass
+
+def alert_discord(message):
+    discord_webhook = getattr(settings, "DISCORD_WEBHOOK_URL", False) # TODO: set up discord webhook
+    payload = {
+        "content": f"Semesterly Web health check failed\n{message}",
+        "username": "AlertBot" # TODO: set up alert bot
+    }
+    requests.post(discord_webhook, json=payload)
