@@ -34,7 +34,7 @@ SECRETS = {
     # Not essential for testing, but can be filled in for advanced usage
     "GW_PASS": None,
     "GW_SECURITY_ANSWER": None,
-    "JHU_API_KEY": None,
+    "JHU_API_KEY": "qySSDXh0sSvWVMEwEMEpOzjoWt67sNJx",
     "VANDY_USER": None,
     "VANDY_PASS": None,
     # Not essential for testing, but can be filled in for advanced mailing usage
