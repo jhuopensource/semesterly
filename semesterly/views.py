@@ -57,7 +57,6 @@ def deploy_staging(request):
     else:
         return HttpResponse(status=403)
 
-
 def set_commit_info(email_info, commit):
     email_info.update(
         {
@@ -104,7 +103,6 @@ def manifest_json(request, js):
     html = template.render()
     return HttpResponse(html, content_type="application/json")
 
-
 def health_check(request):
     message = "Database check failed"
     try:
@@ -116,6 +114,7 @@ def health_check(request):
             status=200
         )
     except Exception as e:
+        # if last time is less 30 min
         alert_discord(message)
         return HttpResponse(
             json.dumps({"status": "unhealthy", "error": str(e)}),
@@ -128,10 +127,14 @@ def database_check():
     cursor = db_conn.cursor()
     cursor.execute("SELECT 1;")
     # TODO: add more checks for database
+    # auth_user, student_student
 
 def endpoint_check():
     # TODO: add more checks for endpoints
     pass
+    # log in/out
+    # course search (10s timeout)
+    # add course (10s timeout)
 
 def alert_discord(message):
     discord_webhook = getattr(settings, "DISCORD_WEBHOOK_URL", False) # TODO: set up discord webhook
