@@ -21,9 +21,9 @@ Ingest
 
 .. code-block:: bash
 
-    python manage.py ingest [SCHOOLCODE] --years [YEARS] --terms [TERMS]
+    python3 manage.py ingest [SCHOOLCODE] --years [YEARS] --terms [TERMS]
 
-For example, use ``python manage.py ingest jhu --years 2023 --terms Spring`` to parse
+For example, use ``python3 manage.py ingest jhu --years 2023 --terms Spring`` to parse
 Spring 2023 courses. You may also leave out the school code to parse all schools. This
 will run for a substantial amount of time and is not recommended.
 
@@ -34,7 +34,7 @@ Digest
 
 .. code-block:: bash
 
-    python manage.py digest [SCHOOLCODE]
+    python3 manage.py digest [SCHOOLCODE]
 
 You may leave out the school code to digest all schools.
 
@@ -67,7 +67,7 @@ Run the following command in the web container shell:
 
 .. code-block:: bash
   
-    python parsing/library/evals_parser.py
+    python3 parsing/library/evals_parser.py
   
 .. note::Enter your **JHU email and password** when prompted.
 
@@ -77,7 +77,7 @@ To digest the evaluations into the local database, run:
 
 .. code-block:: bash
   
-    python manage.py digest jhu --types evals
+    python3 manage.py digest jhu --types evals
   
 
 Final Step for Production Database
@@ -108,7 +108,7 @@ There are advanced methods for using these tools. Detailed options can be viewed
 
 .. code-block:: bash
 
-	python manage.py [command] --help
+	python3 manage.py [command] --help
 
 
 If you are developing a parser or contributing to the pipeline design, you will more than likely need to learn more. Checkout :ref:`pipeline` or :ref:`addaschool`

@@ -20,23 +20,23 @@ Backend
 
 Run all tests::
 
-    python manage.py test
+    python3 manage.py test
 
 Run all tests for a single app::
   
-    python manage.py test timetable
+    python3 manage.py test timetable
 
 Run single test suite::
 
-    python manage.py test timetable.tests.UrlsTest
+    python3 manage.py test timetable.tests.UrlsTest
 
 Run single test case::
 
-    python manage.py test timetable.tests.UrlTest.test_urls_call_correct_views
+    python3 manage.py test timetable.tests.UrlTest.test_urls_call_correct_views
 
 Run tests without resetting db::
 
-    python manage.py test -k
+    python3 manage.py test -k
 
 Our current test runner will only run db setup if the tests you're running
 touch the db.

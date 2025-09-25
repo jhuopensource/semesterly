@@ -4,7 +4,7 @@ from .models import DataUpdateSettings
 
 @admin.register(DataUpdateSettings)
 class DataUpdateSettingsAdmin(admin.ModelAdmin):
-    list_display = ("year", "term", "active")
+    list_display = ("year", "term", "active", "min_allowed_year", "max_allowed_year")
     list_filter = ("year", "term", "active")
     search_fields = ("year", "term")
 

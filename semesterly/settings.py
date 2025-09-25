@@ -23,6 +23,8 @@ https://docs.djangoproject.com/en/1.6/ref/settings/
 import os
 import yaml
 
+import logging, logging.config
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 PROJECT_DIRECTORY = os.getcwd()
@@ -94,17 +96,24 @@ SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = get_secret("SOCIAL_AUTH_GOOGLE_OAUTH2_KEY")
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = get_secret("SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET")
 SOCIAL_AUTH_FACEBOOK_KEY = get_secret("SOCIAL_AUTH_FACEBOOK_KEY")
 SOCIAL_AUTH_FACEBOOK_SECRET = get_secret("SOCIAL_AUTH_FACEBOOK_SECRET")
-SOCIAL_AUTH_AZUREAD_TENANT_OAUTH2_KEY = get_secret("SOCIAL_AUTH_AZURE_TENANT_KEY")
-SOCIAL_AUTH_AZUREAD_TENANT_OAUTH2_SECRET = get_secret("SOCIAL_AUTH_AZURE_TENANT_SECRET")
-SOCIAL_AUTH_AZUREAD_TENANT_OAUTH2_TENANT_ID = get_secret("SOCIAL_AUTH_AZURE_TENANT_ID")
 STUDENT_SIS_AUTH_SECRET = get_secret("STUDENT_SIS_AUTH_SECRET")
 
-SOCIAL_AUTH_AUTHENTICATION_BACKENDS = (
+SOCIAL_AUTH_OIDC_OIDC_ENDPOINT = get_secret("SOCIAL_AUTH_OIDC_OIDC_ENDPOINT")
+SOCIAL_AUTH_OIDC_KEY = get_secret("SOCIAL_AUTH_OIDC_KEY")
+SOCIAL_AUTH_OIDC_SECRET = get_secret("SOCIAL_AUTH_OIDC_SECRET")
+
+SOCIAL_AUTH_REDIRECT_IS_HTTPS = True
+SOCIAL_AUTH_OIDC_TOKEN_ENDPOINT_AUTH_METHOD = "client_secret_post"
+SOCIAL_AUTH_OIDC_USERNAME_KEY = "sub"
+
+AUTHENTICATION_BACKENDS = (
+    "social_core.backends.open_id_connect.OpenIdConnectAuth",
     "social_core.backends.facebook.FacebookOAuth2",
-    "social_core.backends.google.GooglePlusAuth",
     "social_core.backends.google.GoogleOAuth2",
-    "social_core.backends.azuread_tenant.AzureADTenantOAuth2",
+    "social_core.backends.twitter.TwitterOAuth",
+    "django.contrib.auth.backends.ModelBackend",
 )
+
 FIELDS_STORED_IN_SESSION = ["student_token", "login_hash"]
 
 SOCIAL_AUTH_PIPELINE = (
@@ -140,6 +149,39 @@ SOCIAL_AUTH_PIPELINE = (
     "authpipe.utils.create_student",
 )
 
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "formatters": {
+        "standard": {"format": "%(asctime)s %(levelname)s %(name)s -> %(message)s"}
+    },
+    "handlers": {
+        "console": {
+            "class": "logging.StreamHandler",
+            "level": "INFO",
+            "formatter": "standard",
+            "filters": [],
+        },
+    },
+    "root": {
+        "handlers": ["console"],
+        "level": "INFO",
+    },
+    "loggers": {
+        "django": {
+            "handlers": ["console"],
+            "level": "INFO",
+            "propagate": False,
+        },
+        "authpipe": {
+            "handlers": ["console"],
+            "level": "INFO",
+            "propagate": False,
+        },
+    },
+}
+
+logging.config.dictConfig(LOGGING)
 # Webpack
 
 WEBPACK_LOADER = {
@@ -224,13 +266,6 @@ TEMPLATES = [
     }
 ]
 
-AUTHENTICATION_BACKENDS = (
-    "social_core.backends.facebook.FacebookOAuth2",
-    "social_core.backends.google.GoogleOAuth2",
-    "social_core.backends.twitter.TwitterOAuth",
-    "social_core.backends.azuread_tenant.AzureADTenantOAuth2",
-    "django.contrib.auth.backends.ModelBackend",
-)
 
 SESSION_COOKIE_SAMESITE = None
 

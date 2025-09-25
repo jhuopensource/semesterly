@@ -8,7 +8,7 @@ that table.
 This module is adapted from the django-fixture-magic module to support Django 1.9 and recursive "kitchensink" behaviour.
 
 Example usage:
-    python manage.py dump_courses timetable.course 50 --query \
+    python3 manage.py dump_courses timetable.course 50 --query \
     '{"section__semester__name": "Fall", "section__semester__year": "2022", "school": "jhu"}' \
     > timetable/fixtures/jhu_fall_2022.json
 """
