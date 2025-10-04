@@ -317,6 +317,10 @@ EMAIL_PORT = 587
 DEFAULT_FROM_EMAIL = "semesterly.logging@gmail.com"
 SERVER_EMAIL = DEFAULT_FROM_EMAIL
 
+# Discord Bot Configuration (ID: 1284673443111112746)
+DISCORD_BOT_TOKEN = get_secret("DISCORD_BOT_TOKEN")
+DISCORD_CHANNEL_ID = get_secret("DISCORD_CHANNEL_ID")
+
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
 
