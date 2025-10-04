@@ -132,14 +132,20 @@ def database_check():
     cursor.execute("SELECT COUNT(*) FROM student_student LIMIT 1;")
 
 def endpoint_check():
+    from django.test import Client
     client = Client()
-    response = client.get("/login/")
-    response = client.get("/logout/")
-    response = client.get("/courses/search/")
-    response = client.post("/courses/add/", {
-        "course_id": "123456",
-        "course_name": "Test Course",
-    })
+    
+    response = client.get("/courses/")
+    if response.status_code not in [200, 302]:
+        raise Exception(f"Course listing endpoint failed with status {response.status_code}")
+
+    response = client.get("/search/fall/2024/test/")
+    if response.status_code not in [200, 302, 404]:
+        raise Exception(f"Search endpoint failed with status {response.status_code}")
+    
+    response = client.get("/timetables/")
+    if response.status_code not in [200, 302]:
+        raise Exception(f"Timetables endpoint failed with status {response.status_code}")
 
 def alert_discord(message, cooldown=1800):
     """Send Discord alert through Semester.ly bot"""
