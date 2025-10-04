@@ -106,7 +106,6 @@ def manifest_json(request, js):
     return HttpResponse(html, content_type="application/json")
 
 def health_check(request):
-    print("health_check")
     try:
         database_check()
         endpoint_check()
