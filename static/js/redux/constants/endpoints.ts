@@ -89,3 +89,5 @@ export function getCourseShareLink(code: Course["code"] | number, semester: Seme
 
 export const getNewsEndpoint = () => "/notifications/news";
 export const getUIErrorLogEndpoint = () => "/ui-error-logs/";
+
+export const getChatbotEndpoint = () => "/chatbot/query/";

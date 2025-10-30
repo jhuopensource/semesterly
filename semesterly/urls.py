@@ -33,6 +33,7 @@ urlpatterns = [
     re_path("", include("agreement.urls")),
     re_path("", include("notifications.urls")),
     re_path("", include("friends.urls")),
+    re_path(r"^chatbot/", include("chatbot.urls")),
     re_path(r"admin/?", admin.site.urls),
     # Automatic deployment endpoint
     re_path(r"deploy_staging/?", semesterly.views.deploy_staging),

@@ -45,6 +45,7 @@ import entities, * as fromEntities from "./slices/entitiesSlice";
 import dragSearch from "./slices/dragSearchSlice";
 import theme from "./slices/themeSlice";
 import { Slot, Timetable } from "../constants/commonTypes";
+import chatbot from "./slices/chatbotSlice";
 
 export const reducers = {
   alerts,
@@ -75,6 +76,7 @@ export const reducers = {
   userInfo,
   compareTimetable,
   dragSearch,
+  chatbot,
 };
 
 const store = configureStore({ reducer: reducers });

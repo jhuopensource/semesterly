@@ -42,6 +42,7 @@ import { timetablesActions } from "./state/slices/timetablesSlice";
 import { saveCalendarModalActions } from "./state/slices/saveCalendarModalSlice";
 import { togglePeerModal } from "./state/slices/peerModalSlice";
 
+
 // load initial timetable from user data if logged in or local storage
 const setupTimetables = (userTimetables, allSemesters, oldSemesters) => (dispatch) => {
   if (userTimetables.length > 0) {

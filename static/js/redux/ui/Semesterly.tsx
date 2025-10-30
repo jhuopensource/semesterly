@@ -24,6 +24,7 @@ import ChangeSemesterAlertContainer from "./alerts/change_semester_alert_contain
 import NewTimetableAlertContainer from "./alerts/new_timetable_alert_container";
 import OptimizeScheduleAlertContainer from "./alerts/optimize_schedule_alert_container";
 import TopBar from "./TopBar";
+import ChatbotContainer from "./containers/chatbot_container";
 import SignupModal from "./modals/SignupModal";
 import TutorialModal from "./modals/TutorialModal";
 import PeerModal from "./modals/PeerModal";
@@ -211,6 +212,7 @@ const Semesterly = () => {
     <div className="page-wrapper">
       <NewsModal />
       <TopBar />
+      <ChatbotContainer />
       <UserSettingsModal />
       <AdvancedSearchModal />
       <SignupModal />

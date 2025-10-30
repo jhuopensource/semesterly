@@ -149,6 +149,11 @@ spec:
                 secretKeyRef:
                   name: semesterly-secrets
                   key: JHU_API_KEY
+            - name: OPENAI_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: semesterly-secrets
+                  key: OPENAI_API_KEY
             - name: SOCIAL_AUTH_GOOGLE_OAUTH2_KEY
               valueFrom:
                 secretKeyRef:
