@@ -10,12 +10,15 @@
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 
-from django.http import HttpResponse, Http404
+from django.shortcuts import render
+from django.http import HttpResponse, HttpResponseRedirect, Http404
+from django.template.context_processors import csrf
 from django.template.loader import get_template
+from django.views.decorators.cache import never_cache
 from django.views.decorators.csrf import csrf_exempt
 from django.conf import settings
 from django.core.mail import send_mail
-import datetime, hashlib, hmac, json, pprint, requests, time
+import datetime, hashlib, hmac, json, pprint, os, subprocess, requests, time
 from django.db import connections
 from django.core.cache import cache
 from django.test import Client

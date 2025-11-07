@@ -34,11 +34,14 @@ SECRETS = {
     # Not essential for testing, but can be filled in for advanced usage
     "GW_PASS": None,
     "GW_SECURITY_ANSWER": None,
-    "JHU_API_KEY": "qySSDXh0sSvWVMEwEMEpOzjoWt67sNJx",
+    "JHU_API_KEY": None,
     "VANDY_USER": None,
     "VANDY_PASS": None,
     # Not essential for testing, but can be filled in for advanced mailing usage
     "EMAIL_HOST_USER": None,
     "EMAIL_HOST_PASSWORD": None,
     "EMAIL_PASSWORD": None,
+    # Not essential for testing, but can be filled in for testing health check alerts
+    "DISCORD_BOT_TOKEN": None,
+    "DISCORD_CHANNEL_ID": None,
 }
