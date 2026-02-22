@@ -731,9 +731,8 @@ const SideBar = () => {
               color: curTheme.name === "dark" ? "#A0A0A0" : "#555",
             }}
           >
-            Upload your unofficial transcript (PDF) to add courses to your course
-            history, then click [View] to check them. When searching for courses, you
-            can check if you have alerady satisfied the necessary prerequisites.
+            Upload your unofficial transcript (PDF) to update your course history. 
+             When searching for courses, you can instantly check if you've met the prerequisites.
           </p>
         </div>
         <div
