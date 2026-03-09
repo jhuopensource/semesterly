@@ -23,6 +23,7 @@ import TimetableExistsAlertContainer from "./alerts/timetable_exists_alert_conta
 import ChangeSemesterAlertContainer from "./alerts/change_semester_alert_container";
 import NewTimetableAlertContainer from "./alerts/new_timetable_alert_container";
 import OptimizeScheduleAlertContainer from "./alerts/optimize_schedule_alert_container";
+import UploadIssueAlert from "./alerts/upload_issue_alert";
 import TopBar from "./TopBar";
 import SignupModal from "./modals/SignupModal";
 import TutorialModal from "./modals/TutorialModal";
@@ -67,6 +68,8 @@ const Semesterly = () => {
   const alertTimetableExists = useAppSelector(
     (state) => state.alerts.alertTimetableExists
   );
+
+  const alertUploadIssue = useAppSelector((state) => state.alerts.alertUploadIssue);
 
   const isComparingTimetables = useAppSelector(
     (state) => state.compareTimetable.isComparing
@@ -119,6 +122,9 @@ const Semesterly = () => {
       showAlert(<NewTimetableAlertContainer />, "info", 12000);
     } else if (alertCoursePlan) {
       showAlert(<OptimizeScheduleAlertContainer />, "info", 12000);
+    } else if (alertUploadIssue) {
+      // Add this condition
+      showAlert(<UploadIssueAlert />, "info", 10000);
     } else {
       alertBoxRef.current?.removeAll();
     }
@@ -129,6 +135,7 @@ const Semesterly = () => {
     alertChangeSemester,
     alertNewTimetable,
     alertCoursePlan,
+    alertUploadIssue,
   ]);
 
   const toLocalDate = (): string => {
@@ -246,7 +253,7 @@ const Semesterly = () => {
                 <a href="/privacypolicy">Privacy</a>
               </li>
               <li className="footer-button" role="presentation">
-                <a href="mailto:semesterly@jhu.edu?Subject=Semesterly">Contact us</a>
+                <a href="https://forms.gle/4LgQAw7ySfEmnCX29">Contact us</a>
               </li>
               <li className="footer-button" role="presentation">
                 <a
@@ -261,7 +268,7 @@ const Semesterly = () => {
                 <a
                   target="_blank"
                   rel="noopener noreferrer"
-                  href="https://discord.gg/HmnwdbehBh"
+                  href="https://discord.gg/5444sdzjZZ"
                 >
                   Discord
                 </a>

@@ -5,3 +5,4 @@ export * from "./search_actions";
 export * from "./timetable_actions";
 export * from "./user_actions";
 export * from "./initActions";
+export * from "./course_history_actions";

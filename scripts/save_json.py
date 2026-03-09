@@ -10,7 +10,7 @@
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 
-""" A parser which reads from json outputed by a BaseWriter and saved to db. """
+"""A parser which reads from json outputed by a BaseWriter and saved to db."""
 import json
 import os
 import sys

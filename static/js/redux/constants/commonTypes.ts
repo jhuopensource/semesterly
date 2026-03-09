@@ -245,3 +245,8 @@ export interface SlotColorData {
   border: string;
   font: string;
 }
+
+// CourseHistory stores the course ID's of previously taken courses as a string array.
+export interface CourseHistory {
+  history: string[];
+}
