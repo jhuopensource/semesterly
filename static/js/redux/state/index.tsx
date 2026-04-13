@@ -44,6 +44,7 @@ import registrar from "./slices/registrarSlice";
 import entities, * as fromEntities from "./slices/entitiesSlice";
 import dragSearch from "./slices/dragSearchSlice";
 import theme from "./slices/themeSlice";
+import ghostTimetable from "./slices/ghostTimetableSlice";
 import { Slot, Timetable } from "../constants/commonTypes";
 
 export const reducers = {
@@ -75,6 +76,7 @@ export const reducers = {
   userInfo,
   compareTimetable,
   dragSearch,
+  ghostTimetable,
 };
 
 const store = configureStore({ reducer: reducers });

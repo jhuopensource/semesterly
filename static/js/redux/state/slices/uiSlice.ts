@@ -13,12 +13,14 @@ interface UiSliceState {
   searchHover: number;
   courseToColourIndex: any; // { courseId: index }
   uses12HrTime: boolean;
+  enableSocialSyncGhost: boolean;
 }
 
 const initialState: UiSliceState = {
   searchHover: 0,
   courseToColourIndex: {},
   uses12HrTime: false,
+  enableSocialSyncGhost: false,
 };
 
 const uiSlice = createSlice({
@@ -33,6 +35,7 @@ const uiSlice = createSlice({
     builder
       .addCase(initAllState, (state, action: PayloadAction<any>) => {
         state.uses12HrTime = action.payload.uses12HrTime;
+        state.enableSocialSyncGhost = !!action.payload.enableSocialSyncGhost;
       })
       .addCase(receiveTimetables, (state, action: PayloadAction<Timetable[]>) => {
         const courses =

@@ -16,6 +16,8 @@ django-picklefield==3.3
 django-webpack-loader==0.7.0
 djangorestframework==3.16.1
 drf-yasg==1.21.11
+channels==4.2.2
+channels-redis==4.2.1
 fake-useragent==2.2.0
 future==1.0.0
 rapidfuzz==3.14.1

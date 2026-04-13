@@ -14,8 +14,8 @@
 import itertools
 import logging
 
-from django.shortcuts import get_object_or_404
-from hashids import Hashids
+from django.utils import timezone
+from django.http import Http404
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -26,14 +26,17 @@ from courses.serializers import CourseSerializer
 from student.utils import get_student
 from timetable.serializers import DisplayTimetableSerializer
 from timetable.models import Semester, Course, Section
+from timetable.share_links import (
+    get_shared_timetable_slug,
+    resolve_shared_timetable_by_slug,
+)
 from timetable.utils import (
     update_locked_sections,
     courses_to_timetables,
 )
 from helpers.mixins import ValidateSubdomainMixin, FeatureFlowView, CsrfExemptMixin
-from semesterly.settings import get_secret
+from semesterly.settings import ENABLE_SOCIAL_SYNC_GHOST
 
-hashids = Hashids(salt=get_secret("HASHING_SALT"))
 logger = logging.getLogger(__name__)
 
 
@@ -140,10 +143,9 @@ class TimetableLinkView(FeatureFlowView):
         decrypts the hashed database id, and either retrieves the corresponding
         timetable or hits a 404.
         """
-        timetable_id = hashids.decrypt(slug)[0]
-        shared_timetable = get_object_or_404(
-            SharedTimetable, id=timetable_id, school=request.subdomain
-        )
+        shared_timetable = resolve_shared_timetable_by_slug(slug, request.subdomain)
+        if not self.is_share_access_valid(shared_timetable):
+            raise Http404
         context = {
             "semester": shared_timetable.semester,
             "school": request.subdomain,
@@ -169,12 +171,38 @@ class TimetableLinkView(FeatureFlowView):
         has_conflict = timetable.get("has_conflict", False)
         semester, _ = Semester.objects.get_or_create(**request.data["semester"])
         student = get_student(request)
+        source_timetable = None
+        timetable_id = timetable.get("id")
+        if student is not None and timetable_id:
+            source_timetable = (
+                student.personaltimetable_set.filter(
+                    id=timetable_id, school=school, semester=semester
+                ).first()
+            )
+        if source_timetable is None and student is not None:
+            # Fallback for legacy clients that omit timetable id in share payload.
+            source_timetable = (
+                student.personaltimetable_set.filter(
+                    school=school, semester=semester
+                )
+                .order_by("-last_updated")
+                .first()
+            )
+        permission = request.data.get("permission", "view")
+        if permission not in {"view", "edit"}:
+            permission = "view"
         shared_timetable = SharedTimetable.objects.create(
-            student=student, school=school, semester=semester, has_conflict=has_conflict
+            student=student,
+            school=school,
+            semester=semester,
+            has_conflict=has_conflict,
+            source_timetable=source_timetable,
+            permission=permission,
         )
         shared_timetable.save()
         self.save_courses(timetable, shared_timetable)
-        response = {"slug": hashids.encrypt(shared_timetable.id)}
+        shared_timetable.ensure_share_token()
+        response = {"slug": get_shared_timetable_slug(shared_timetable)}
         return Response(response, status=status.HTTP_200_OK)
 
     def save_courses(self, timetable: dict, shared_timetable: SharedTimetable):
@@ -191,3 +219,51 @@ class TimetableLinkView(FeatureFlowView):
             if section_obj.course.id not in added_courses:
                 return Response(status=status.HTTP_400_BAD_REQUEST)
         shared_timetable.save()
+
+    def is_share_access_valid(self, shared_timetable):
+        if shared_timetable.revoked_at is not None:
+            return False
+        if (
+            shared_timetable.expires_at is not None
+            and shared_timetable.expires_at <= timezone.now()
+        ):
+            return False
+        return True
+
+
+class SharedTimetableGhostView(ValidateSubdomainMixin, APIView):
+    """
+    Read-only API for loading a shared timetable as a ghost overlay.
+    """
+
+    def get(self, request, slug):
+        if not ENABLE_SOCIAL_SYNC_GHOST:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+        shared_timetable = resolve_shared_timetable_by_slug(slug, request.subdomain)
+        if not self._is_share_access_valid(shared_timetable):
+            return Response(status=status.HTTP_404_NOT_FOUND)
+        context = {
+            "semester": shared_timetable.semester,
+            "school": request.subdomain,
+            "student": get_student(request),
+        }
+        response = {
+            "slug": get_shared_timetable_slug(shared_timetable),
+            "permission": shared_timetable.permission,
+            "updatedAt": shared_timetable.updated_at.isoformat(),
+            "sharedTimetable": DisplayTimetableSerializer.from_model(shared_timetable).data,
+            "courses": CourseSerializer(
+                shared_timetable.courses, context=context, many=True
+            ).data,
+        }
+        return Response(response, status=status.HTTP_200_OK)
+
+    def _is_share_access_valid(self, shared_timetable):
+        if shared_timetable.revoked_at is not None:
+            return False
+        if (
+            shared_timetable.expires_at is not None
+            and shared_timetable.expires_at <= timezone.now()
+        ):
+            return False
+        return True

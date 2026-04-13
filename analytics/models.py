@@ -10,8 +10,12 @@
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 
+import secrets
+
+from django.db import models
+
 from timetable.models import *
-from student.models import Student
+from student.models import Student, PersonalTimetable
 from django.contrib.auth.models import User
 
 
@@ -25,9 +29,38 @@ class SharedTimetable(Timetable):
 
     has_conflict = models.BooleanField(blank=True, default=False)
     time_created = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
     student = models.ForeignKey(
         Student, null=True, default=None, on_delete=models.deletion.CASCADE
     )
+    source_timetable = models.ForeignKey(
+        PersonalTimetable,
+        null=True,
+        blank=True,
+        default=None,
+        on_delete=models.deletion.SET_NULL,
+        related_name="shared_timetables",
+    )
+    share_token = models.CharField(
+        max_length=64, null=True, blank=True, unique=True, db_index=True
+    )
+    permission = models.CharField(
+        max_length=10,
+        default="view",
+        choices=(("view", "View"), ("edit", "Edit")),
+    )
+    expires_at = models.DateTimeField(null=True, blank=True, default=None)
+    revoked_at = models.DateTimeField(null=True, blank=True, default=None)
+
+    def ensure_share_token(self):
+        if self.share_token:
+            return self.share_token
+        token = secrets.token_urlsafe(24)
+        while SharedTimetable.objects.filter(share_token=token).exists():
+            token = secrets.token_urlsafe(24)
+        self.share_token = token
+        self.save(update_fields=["share_token"])
+        return token
 
 
 class SharedTimetableView(models.Model):
