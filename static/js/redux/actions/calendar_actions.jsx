@@ -18,6 +18,8 @@ import FileSaver from "browser-filesaver";
 import {
   // getAddTTtoGCalEndpoint,
   getLogiCalEndpoint,
+  getGhostTimetableEndpoint,
+  getGhostTimetableWebsocketEndpoint,
   getRequestShareTimetableLinkEndpoint,
   getCourseShareLink,
 } from "../constants/endpoints";
@@ -28,7 +30,11 @@ import {
   getActiveTimetable,
 } from "../state";
 import { calendarActions } from "../state/slices";
+import { ghostTimetableActions } from "../state/slices/ghostTimetableSlice";
 import { saveCalendarModalActions } from "../state/slices/saveCalendarModalSlice";
+import { receiveCourses } from "./initActions";
+
+let ghostTimetableSocket = null;
 
 const DAY_MAP = {
   M: "mo",
@@ -78,6 +84,107 @@ export const fetchShareTimetableLink = () => (dispatch, getState) => {
     .then((ref) => {
       dispatch(receiveShareLink(`/timetables/links/${ref.slug}`));
     });
+};
+
+export const fetchGhostTimetableBySlug = (slug) => (dispatch) => {
+  dispatch(ghostTimetableActions.startGhostLoad(slug));
+  return fetch(getGhostTimetableEndpoint(slug), {
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    method: "GET",
+    credentials: "include",
+  })
+    .then((response) => {
+      if (response.status !== 200) {
+        throw new Error("Unable to load ghost timetable");
+      }
+      return response.json();
+    })
+    .then((payload) => applyGhostTimetablePayload(dispatch, payload))
+    .catch(() => {
+      dispatch(
+        ghostTimetableActions.setGhostError(
+          "Could not load shared timetable overlay."
+        )
+      );
+      return null;
+    });
+};
+
+export const disconnectGhostTimetableSocket = () => (dispatch) => {
+  if (ghostTimetableSocket !== null) {
+    ghostTimetableSocket.close();
+    ghostTimetableSocket = null;
+  }
+  dispatch(ghostTimetableActions.setGhostWebsocketConnected(false));
+};
+
+export const connectGhostTimetableSocket = (slug) => (dispatch) => {
+  dispatch(disconnectGhostTimetableSocket());
+  try {
+    ghostTimetableSocket = new WebSocket(getGhostTimetableWebsocketEndpoint(slug));
+  } catch (error) {
+    dispatch(
+      ghostTimetableActions.setGhostError(
+        "Could not connect to live ghost updates."
+      )
+    );
+    return;
+  }
+
+  ghostTimetableSocket.onopen = () => {
+    dispatch(ghostTimetableActions.setGhostWebsocketConnected(true));
+  };
+  ghostTimetableSocket.onclose = () => {
+    dispatch(ghostTimetableActions.setGhostWebsocketConnected(false));
+  };
+  ghostTimetableSocket.onerror = () => {
+    dispatch(
+      ghostTimetableActions.setGhostError("Live updates disconnected unexpectedly.")
+    );
+  };
+  ghostTimetableSocket.onmessage = (event) => {
+    try {
+      const payload = JSON.parse(event.data);
+      if (payload.type === "timetable.updated") {
+        if (payload.sharedTimetable && payload.courses) {
+          applyGhostTimetablePayload(dispatch, payload);
+          return;
+        }
+        // Backward-compatible fallback while websocket payload rolls out.
+        dispatch(fetchGhostTimetableBySlug(slug));
+      }
+    } catch (error) {
+      // Ignore malformed events and keep stream alive.
+    }
+  };
+};
+
+const applyGhostTimetablePayload = (dispatch, payload) => {
+  dispatch(receiveCourses(payload.courses));
+  dispatch(
+    ghostTimetableActions.receiveGhostTimetable({
+      slug: payload.slug,
+      timetable: payload.sharedTimetable,
+      permission: payload.permission || "view",
+      updatedAt: payload.updatedAt || null,
+    })
+  );
+  return payload;
+};
+
+export const startGhostOverlay = (slug) => (dispatch) =>
+  dispatch(fetchGhostTimetableBySlug(slug)).then((payload) => {
+    if (payload) {
+      dispatch(connectGhostTimetableSocket(payload.slug));
+    }
+  });
+
+export const stopGhostOverlay = () => (dispatch) => {
+  dispatch(disconnectGhostTimetableSocket());
+  dispatch(ghostTimetableActions.clearGhostOverlay());
 };
 
 export const fetchSISTimetableData = () => (dispatch, getState) => {

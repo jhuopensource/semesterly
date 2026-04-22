@@ -33,6 +33,10 @@ import { getMaxTimetableHeightBasedOnWindowHeight } from "../util";
 import useWindowSize from "../hooks/useWindowSize";
 import { getFirstTTStartHour } from "../state";
 import html2canvas from "html2canvas";
+import {
+  startGhostOverlay,
+  stopGhostOverlay,
+} from "../actions/calendar_actions";
 
 interface RowProps {
   isLoggedIn: boolean;
@@ -344,6 +348,68 @@ const Calendar = (props: CalendarProps) => {
   const isComparingTimetables = useAppSelector(
     (state) => state.compareTimetable.isComparing
   );
+  const enableSocialSyncGhost = useAppSelector(
+    (state) => state.ui.enableSocialSyncGhost
+  );
+  const ghostOverlay = useAppSelector((state) => state.ghostTimetable);
+  const parseGhostSlug = (input: string) => {
+    const trimmed = input.trim();
+    if (!trimmed) {
+      return null;
+    }
+    if (!trimmed.includes("/")) {
+      return trimmed;
+    }
+    const match = trimmed.match(/\/timetables\/links\/([^/]+)/);
+    return match ? match[1] : null;
+  };
+  const toggleGhostOverlay = () => {
+    if (ghostOverlay.enabled) {
+      dispatch(stopGhostOverlay());
+      return;
+    }
+    const raw = window.prompt(
+      "Paste a shared timetable link or code.\n\nExample link: jhu.sem.ly/timetables/links/abc123\nExample code: abc123"
+    );
+    if (!raw) {
+      return;
+    }
+    const slug = parseGhostSlug(raw);
+    if (!slug) {
+      return;
+    }
+    dispatch(startGhostOverlay(slug));
+  };
+  useEffect(() => {
+    return () => {
+      dispatch(stopGhostOverlay());
+    };
+  }, [dispatch]);
+
+  const ghostOverlayButton = (
+    <div className="cal-btn-wrapper">
+      <Tooltip
+        title={
+          <Typography fontSize={12}>
+            {ghostOverlay.enabled ? "Disable Ghost Overlay" : "Enable Ghost Overlay"}
+          </Typography>
+        }
+      >
+        <button
+          onClick={toggleGhostOverlay}
+          className="save-timetable add-button"
+          data-tip
+        >
+          <i
+            className={classnames("fa", {
+              "fa-user-plus": !ghostOverlay.enabled,
+              "fa-user-times": ghostOverlay.enabled,
+            })}
+          />
+        </button>
+      </Tooltip>
+    </div>
+  );
   const toolbar = isComparingTimetables ? (
     <>
       <ShowWeekendsSwitch isMobile={false} />
@@ -353,6 +419,7 @@ const Calendar = (props: CalendarProps) => {
       {addSISButton}
       {screenShotButton}
       {toggleCustomEventModeButton}
+      {enableSocialSyncGhost && ghostOverlayButton}
       {shareButton}
       {shareLink}
       {saveToCalendarButton}
