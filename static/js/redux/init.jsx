@@ -35,6 +35,7 @@ import { fetchSchoolInfo } from "./actions/school_actions";
 import { fetchCourseClassmates } from "./actions/modal_actions";
 import { userAcquisitionModalActions, userInfoActions } from "./state/slices";
 import { receiveCourses } from "./actions/initActions";
+import { startCollaborationSession } from "./actions/calendar_actions";
 import { browserSupportsLocalStorage } from "./util";
 // import { addTTtoGCal } from './actions/calendar_actions';
 import { initAllState, setCourseInfo } from "./actions";
@@ -76,6 +77,18 @@ const handleFlows = (featureFlow) => (dispatch) => {
         dispatch(handleCreateNewTimetable());
       }
       dispatch(lockTimetable(featureFlow.sharedTimetable));
+      if (initData.enableSocialSyncCollab && featureFlow.slug) {
+        dispatch(
+          startCollaborationSession({
+            slug: featureFlow.slug,
+            permission: featureFlow.permission || "view",
+            canEdit: !!featureFlow.canEdit,
+            editToken: featureFlow.editorToken || null,
+            revision: featureFlow.revision || 0,
+            updatedAt: featureFlow.updatedAt || null,
+          })
+        );
+      }
       break;
     case "SHARE_COURSE":
       dispatch(setCourseInfo(featureFlow.sharedCourse));

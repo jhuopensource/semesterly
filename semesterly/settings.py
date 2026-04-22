@@ -29,6 +29,12 @@ import logging, logging.config
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 PROJECT_DIRECTORY = os.getcwd()
 PARSING_MODULE = "parsing"
+ENABLE_SOCIAL_SYNC_GHOST = (
+    os.environ.get("ENABLE_SOCIAL_SYNC_GHOST", "true").strip().lower() == "true"
+)
+ENABLE_SOCIAL_SYNC_COLLAB = (
+    os.environ.get("ENABLE_SOCIAL_SYNC_COLLAB", "true").strip().lower() == "true"
+)
 
 
 def get_secret(key):
@@ -205,6 +211,7 @@ INSTALLED_APPS = (
     "drf_yasg",
     "rest_framework",
     "social_django",
+    "channels",
     "webpack_loader",
     "agreement",
     "analytics",
@@ -273,6 +280,7 @@ SESSION_COOKIE_SAMESITE = None
 ROOT_URLCONF = "semesterly.urls"
 
 WSGI_APPLICATION = "semesterly.wsgi.application"
+ASGI_APPLICATION = "semesterly.asgi.application"
 
 DEFAULT_AUTO_FIELD = "django.db.models.AutoField"
 
@@ -376,6 +384,19 @@ CACHES = {
     }
 }
 CACHALOT_ENABLED = True
+
+REDIS_URL = os.environ.get("REDIS_URL")
+if REDIS_URL:
+    CHANNEL_LAYERS = {
+        "default": {
+            "BACKEND": "channels_redis.core.RedisChannelLayer",
+            "CONFIG": {"hosts": [REDIS_URL]},
+        }
+    }
+else:
+    CHANNEL_LAYERS = {
+        "default": {"BACKEND": "channels.layers.InMemoryChannelLayer"}
+    }
 
 try:
     from .local_settings import *

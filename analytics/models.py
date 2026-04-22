@@ -10,8 +10,12 @@
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 
+import secrets
+
+from django.db import IntegrityError, models
+
 from timetable.models import *
-from student.models import Student
+from student.models import Student, PersonalTimetable
 from django.contrib.auth.models import User
 
 
@@ -25,9 +29,78 @@ class SharedTimetable(Timetable):
 
     has_conflict = models.BooleanField(blank=True, default=False)
     time_created = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True, null=True)
+    revision = models.PositiveIntegerField(default=0)
     student = models.ForeignKey(
         Student, null=True, default=None, on_delete=models.deletion.CASCADE
     )
+    source_timetable = models.ForeignKey(
+        PersonalTimetable,
+        null=True,
+        blank=True,
+        default=None,
+        on_delete=models.deletion.SET_NULL,
+        related_name="shared_timetables",
+    )
+    share_token = models.CharField(
+        max_length=64, null=True, blank=True, unique=True, db_index=True
+    )
+    edit_token = models.CharField(
+        max_length=64, null=True, blank=True, unique=True, db_index=True
+    )
+    permission = models.CharField(
+        max_length=10,
+        default="view",
+        choices=(("view", "View"), ("edit", "Edit")),
+    )
+    expires_at = models.DateTimeField(null=True, blank=True, default=None)
+    revoked_at = models.DateTimeField(null=True, blank=True, default=None)
+
+    def ensure_share_token(self):
+        if self.share_token:
+            return self.share_token
+        while True:
+            token = secrets.token_urlsafe(24)
+            self.share_token = token
+            try:
+                self.save(update_fields=["share_token"])
+                return token
+            except IntegrityError:
+                # Extremely unlikely token collision; retry with a fresh token.
+                self.share_token = None
+
+    def ensure_edit_token(self):
+        if self.edit_token:
+            return self.edit_token
+        while True:
+            token = secrets.token_urlsafe(24)
+            self.edit_token = token
+            try:
+                self.save(update_fields=["edit_token"])
+                return token
+            except IntegrityError:
+                # Extremely unlikely token collision; retry with a fresh token.
+                self.edit_token = None
+
+
+class SharedTimetableOperation(models.Model):
+    shared_timetable = models.ForeignKey(
+        SharedTimetable,
+        on_delete=models.deletion.CASCADE,
+        related_name="operations",
+    )
+    actor = models.ForeignKey(
+        Student,
+        null=True,
+        blank=True,
+        default=None,
+        on_delete=models.deletion.SET_NULL,
+    )
+    operation_type = models.CharField(max_length=64)
+    payload = models.JSONField(default=dict, blank=True)
+    base_revision = models.PositiveIntegerField()
+    applied_revision = models.PositiveIntegerField()
+    time_created = models.DateTimeField(auto_now_add=True)
 
 
 class SharedTimetableView(models.Model):
