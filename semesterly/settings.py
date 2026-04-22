@@ -32,6 +32,9 @@ PARSING_MODULE = "parsing"
 ENABLE_SOCIAL_SYNC_GHOST = (
     os.environ.get("ENABLE_SOCIAL_SYNC_GHOST", "true").strip().lower() == "true"
 )
+ENABLE_SOCIAL_SYNC_COLLAB = (
+    os.environ.get("ENABLE_SOCIAL_SYNC_COLLAB", "true").strip().lower() == "true"
+)
 
 
 def get_secret(key):

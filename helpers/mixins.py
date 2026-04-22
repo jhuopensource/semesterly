@@ -28,7 +28,7 @@ from timetable.models import Semester
 from timetable.school_mappers import SCHOOLS_MAP
 from parsing.schools.active import ACTIVE_SCHOOLS
 from timetable.utils import get_current_semesters
-from semesterly.settings import ENABLE_SOCIAL_SYNC_GHOST
+from semesterly.settings import ENABLE_SOCIAL_SYNC_COLLAB, ENABLE_SOCIAL_SYNC_GHOST
 
 
 class ValidateSubdomainMixin:
@@ -108,6 +108,7 @@ class FeatureFlowView(ValidateSubdomainMixin, APIView):
             "timeUpdatedTos": Agreement.objects.latest().last_updated.isoformat(),
             "featureFlow": dict(feature_flow, name=self.feature_name),
             "enableSocialSyncGhost": ENABLE_SOCIAL_SYNC_GHOST,
+            "enableSocialSyncCollab": ENABLE_SOCIAL_SYNC_COLLAB,
         }
 
         return render(request, "timetable.html", {"init_data": json.dumps(init_data)})

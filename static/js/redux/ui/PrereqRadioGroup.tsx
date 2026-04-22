@@ -25,6 +25,7 @@ const PrereqRadioGroup: React.FC<PrereqRadioGroupProps> = ({ active, onChange })
       {[PrereqModeStatus.ORIGINAL, PrereqModeStatus.NAME, PrereqModeStatus.CODE].map(
         (button: PrereqModeStatus) => (
           <div
+            key={button}
             onClick={() => onChange(button)}
             className={[
               "prerequisites-radio-btn",

@@ -144,6 +144,9 @@ class UrlsTest(UrlTestCase):
         self.assertUrlResolvesToView(
             "/timetables/links/SecAV/ghost/", "timetable.views.SharedTimetableGhostView"
         )
+        self.assertUrlResolvesToView(
+            "/timetables/links/SecAV/ops/", "timetable.views.SharedTimetableOpsView"
+        )
 
 
 class TimetableViewTest(APITestCase):
@@ -238,6 +241,23 @@ class TimetableLinkViewTest(APITestCase):
         self.assertIn("sharedTimetable", response.data)
         self.assertIn("courses", response.data)
 
+    def test_create_edit_link_returns_editor_token(self):
+        data = {
+            "timetable": {
+                "id": self.personal_timetable.id,
+                "slots": [{"course": 1, "section": 1, "offerings": []}],
+                "has_conflict": False,
+            },
+            "semester": {"name": "Fall", "year": "2000"},
+            "permission": "edit",
+        }
+        self.client.force_authenticate(self.user)
+        response = self.client.post(
+            "/timetables/links/", data, format="json", **self.request_headers
+        )
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertIn("editorToken", response.data)
+
     def test_revoked_or_expired_share_is_not_accessible(self):
         shared = SharedTimetable.objects.create(
             school="uoft",
@@ -262,6 +282,118 @@ class TimetableLinkViewTest(APITestCase):
             source_timetable=self.personal_timetable,
         )
         shared.ensure_share_token()
-        with patch("timetable.realtime._broadcast_shared_timetable_update") as mocked:
+        with patch("timetable.realtime.broadcast_shared_timetable_payload") as mocked:
             sync_and_broadcast_shared_timetables_for_source(self.personal_timetable)
             self.assertTrue(mocked.called)
+
+    def test_ops_endpoint_updates_shared_timetable_revision(self):
+        shared = SharedTimetable.objects.create(
+            school="uoft",
+            semester=self.sem,
+            has_conflict=False,
+            source_timetable=self.personal_timetable,
+            permission="edit",
+        )
+        shared.courses.add(self.course)
+        shared.sections.add(self.section)
+        shared.ensure_share_token()
+        shared.ensure_edit_token()
+        payload = {
+            "baseRevision": 0,
+            "editToken": shared.edit_token,
+            "operations": [
+                {
+                    "type": "replace_timetable",
+                    "payload": {
+                        "timetable": {
+                            "slots": [{"course": 1, "section": 1, "offerings": []}],
+                            "has_conflict": True,
+                        }
+                    },
+                }
+            ],
+        }
+        response = self.client.post(
+            f"/timetables/links/{shared.share_token}/ops/",
+            payload,
+            format="json",
+            **self.request_headers,
+        )
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.data["revision"], 1)
+        shared.refresh_from_db()
+        self.assertEqual(shared.revision, 1)
+        self.assertTrue(shared.has_conflict)
+
+    def test_ops_endpoint_rejects_stale_revision(self):
+        shared = SharedTimetable.objects.create(
+            school="uoft",
+            semester=self.sem,
+            has_conflict=False,
+            source_timetable=self.personal_timetable,
+            permission="edit",
+            revision=4,
+        )
+        shared.courses.add(self.course)
+        shared.sections.add(self.section)
+        shared.ensure_share_token()
+        shared.ensure_edit_token()
+        payload = {
+            "baseRevision": 0,
+            "editToken": shared.edit_token,
+            "operations": [
+                {
+                    "type": "replace_timetable",
+                    "payload": {
+                        "timetable": {
+                            "slots": [{"course": 1, "section": 1, "offerings": []}],
+                            "has_conflict": False,
+                        }
+                    },
+                }
+            ],
+        }
+        response = self.client.post(
+            f"/timetables/links/{shared.share_token}/ops/",
+            payload,
+            format="json",
+            **self.request_headers,
+        )
+        self.assertEqual(response.status_code, status.HTTP_409_CONFLICT)
+        self.assertIn("latest", response.data)
+        self.assertEqual(response.data["latest"]["revision"], 4)
+
+    def test_ops_endpoint_requires_valid_edit_token(self):
+        shared = SharedTimetable.objects.create(
+            school="uoft",
+            semester=self.sem,
+            has_conflict=False,
+            source_timetable=self.personal_timetable,
+            permission="edit",
+        )
+        shared.courses.add(self.course)
+        shared.sections.add(self.section)
+        shared.ensure_share_token()
+        shared.ensure_edit_token()
+        payload = {
+            "baseRevision": 0,
+            "editToken": "not-valid",
+            "operations": [
+                {
+                    "type": "replace_timetable",
+                    "payload": {
+                        "timetable": {
+                            "slots": [{"course": 1, "section": 1, "offerings": []}],
+                            "has_conflict": False,
+                        }
+                    },
+                }
+            ],
+        }
+        response = self.client.post(
+            f"/timetables/links/{shared.share_token}/ops/",
+            payload,
+            format="json",
+            **self.request_headers,
+        )
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)

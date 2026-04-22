@@ -34,6 +34,10 @@ urlpatterns = [
         timetable.views.SharedTimetableGhostView.as_view(),
     ),
     re_path(
+        r"^timetables/links/(?P<slug>.+)/ops/$",
+        timetable.views.SharedTimetableOpsView.as_view(),
+    ),
+    re_path(
         r"^timetables/links/(?P<slug>.+)/$", timetable.views.TimetableLinkView.as_view()
     ),
     re_path(  # maintain backwards compatibility

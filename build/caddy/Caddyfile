@@ -13,7 +13,7 @@
         path /
         content_type text/html
         search_pattern http://localhost:3000/assets/
-        replacement https://jhu.sem.ly/assets/
+        replacement https://jhu.sem.ly/static/
     }
 }
 sem.ly:443 {

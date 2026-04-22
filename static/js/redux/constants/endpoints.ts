@@ -79,9 +79,20 @@ export const getReactToCourseEndpoint = () => "/user/reactions/";
 export const getRequestShareTimetableLinkEndpoint = () => "/timetables/links/";
 export const getGhostTimetableEndpoint = (slug: string) =>
   `/timetables/links/${slug}/ghost/`;
+export const getSharedTimetableOpsEndpoint = (slug: string) =>
+  `/timetables/links/${slug}/ops/`;
 export const getGhostTimetableWebsocketEndpoint = (slug: string) => {
   const protocol = window.location.protocol === "https:" ? "wss" : "ws";
   return `${protocol}://${window.location.host}/ws/timetables/links/${slug}/`;
+};
+export const getSharedTimetableWebsocketEndpoint = (
+  slug: string,
+  params: Record<string, string> = {}
+) => {
+  const protocol = window.location.protocol === "https:" ? "wss" : "ws";
+  const query = new URLSearchParams(params).toString();
+  const base = `${protocol}://${window.location.host}/ws/timetables/links/${slug}/`;
+  return query ? `${base}?${query}` : base;
 };
 export const acceptTOSEndpoint = () => "/tos/accept/";
 export function getCourseShareLinkFromModal(code: Course["code"], semester: Semester) {

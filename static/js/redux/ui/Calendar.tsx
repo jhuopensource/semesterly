@@ -36,6 +36,7 @@ import html2canvas from "html2canvas";
 import {
   startGhostOverlay,
   stopGhostOverlay,
+  stopCollaborationSession,
 } from "../actions/calendar_actions";
 
 interface RowProps {
@@ -352,16 +353,19 @@ const Calendar = (props: CalendarProps) => {
     (state) => state.ui.enableSocialSyncGhost
   );
   const ghostOverlay = useAppSelector((state) => state.ghostTimetable);
+  const collaboration = useAppSelector((state) => state.collaboration);
   const parseGhostSlug = (input: string) => {
     const trimmed = input.trim();
     if (!trimmed) {
       return null;
     }
+    const sanitizeSlug = (value: string) =>
+      value.split(/[?#]/)[0].trim().replace(/\/+$/, "");
     if (!trimmed.includes("/")) {
-      return trimmed;
+      return sanitizeSlug(trimmed);
     }
-    const match = trimmed.match(/\/timetables\/links\/([^/]+)/);
-    return match ? match[1] : null;
+    const match = trimmed.match(/\/timetables\/links\/([^/?#]+)/);
+    return match ? sanitizeSlug(match[1]) : null;
   };
   const toggleGhostOverlay = () => {
     if (ghostOverlay.enabled) {
@@ -383,6 +387,7 @@ const Calendar = (props: CalendarProps) => {
   useEffect(() => {
     return () => {
       dispatch(stopGhostOverlay());
+      dispatch(stopCollaborationSession());
     };
   }, [dispatch]);
 
@@ -427,6 +432,20 @@ const Calendar = (props: CalendarProps) => {
     </>
   );
 
+  const collaborationBadge = collaboration.active ? (
+    <h4 className="custom-instructions" style={{ marginTop: "6px" }}>
+      {collaboration.role === "editor" ? "Collaborating (edit)" : "Collaborating (view)"} |{" "}
+      {collaboration.websocketConnected ? "online" : "offline"} | Peers:{" "}
+      {collaboration.peers.length}
+    </h4>
+  ) : null;
+
+  const collaborationConflictNotice = collaboration.staleConflict ? (
+    <h4 className="custom-instructions">
+      Your changes were behind newer updates. Calendar was refreshed to the latest version.
+    </h4>
+  ) : null;
+
   const timetableParentDivRef = useRef<HTMLDivElement>(null);
   const firstTTStartHour = useAppSelector(getFirstTTStartHour);
   // This is needed because React doesn't detect when the window innerHeight changes
@@ -450,6 +469,8 @@ const Calendar = (props: CalendarProps) => {
         <div className="fc-left">
           {!customEventModeOn ? <PaginationContainer /> : null}
           {customEventDescription}
+          {collaborationBadge}
+          {collaborationConflictNotice}
         </div>
         <div className="fc-right">{toolbar}</div>
         <div className="fc-center" />

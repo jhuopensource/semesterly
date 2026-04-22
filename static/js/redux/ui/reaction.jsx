@@ -35,7 +35,7 @@ class Reaction extends React.Component {
     this.animate();
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     this.setState({ didSelect: nextProps.selected === true });
   }
 
