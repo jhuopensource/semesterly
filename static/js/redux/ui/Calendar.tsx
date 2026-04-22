@@ -369,7 +369,7 @@ const Calendar = (props: CalendarProps) => {
       return;
     }
     const raw = window.prompt(
-      "Paste a shared timetable link or slug to overlay as ghost."
+      "Paste a shared timetable link or code.\n\nExample link: jhu.sem.ly/timetables/links/abc123\nExample code: abc123"
     );
     if (!raw) {
       return;

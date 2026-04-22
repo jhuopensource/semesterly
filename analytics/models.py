@@ -12,7 +12,7 @@
 
 import secrets
 
-from django.db import models
+from django.db import IntegrityError, models
 
 from timetable.models import *
 from student.models import Student, PersonalTimetable
@@ -55,12 +55,15 @@ class SharedTimetable(Timetable):
     def ensure_share_token(self):
         if self.share_token:
             return self.share_token
-        token = secrets.token_urlsafe(24)
-        while SharedTimetable.objects.filter(share_token=token).exists():
+        while True:
             token = secrets.token_urlsafe(24)
-        self.share_token = token
-        self.save(update_fields=["share_token"])
-        return token
+            self.share_token = token
+            try:
+                self.save(update_fields=["share_token"])
+                return token
+            except IntegrityError:
+                # Extremely unlikely token collision; retry with a fresh token.
+                self.share_token = None
 
 
 class SharedTimetableView(models.Model):

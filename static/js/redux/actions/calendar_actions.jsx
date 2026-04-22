@@ -102,18 +102,7 @@ export const fetchGhostTimetableBySlug = (slug) => (dispatch) => {
       }
       return response.json();
     })
-    .then((payload) => {
-      dispatch(receiveCourses(payload.courses));
-      dispatch(
-        ghostTimetableActions.receiveGhostTimetable({
-          slug: payload.slug,
-          timetable: payload.sharedTimetable,
-          permission: payload.permission || "view",
-          updatedAt: payload.updatedAt || null,
-        })
-      );
-      return payload;
-    })
+    .then((payload) => applyGhostTimetablePayload(dispatch, payload))
     .catch(() => {
       dispatch(
         ghostTimetableActions.setGhostError(
@@ -160,12 +149,30 @@ export const connectGhostTimetableSocket = (slug) => (dispatch) => {
     try {
       const payload = JSON.parse(event.data);
       if (payload.type === "timetable.updated") {
+        if (payload.sharedTimetable && payload.courses) {
+          applyGhostTimetablePayload(dispatch, payload);
+          return;
+        }
+        // Backward-compatible fallback while websocket payload rolls out.
         dispatch(fetchGhostTimetableBySlug(slug));
       }
     } catch (error) {
       // Ignore malformed events and keep stream alive.
     }
   };
+};
+
+const applyGhostTimetablePayload = (dispatch, payload) => {
+  dispatch(receiveCourses(payload.courses));
+  dispatch(
+    ghostTimetableActions.receiveGhostTimetable({
+      slug: payload.slug,
+      timetable: payload.sharedTimetable,
+      permission: payload.permission || "view",
+      updatedAt: payload.updatedAt || null,
+    })
+  );
+  return payload;
 };
 
 export const startGhostOverlay = (slug) => (dispatch) =>

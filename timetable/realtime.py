@@ -1,7 +1,9 @@
 from asgiref.sync import async_to_sync
 from django.utils import timezone
 
+from courses.serializers import CourseSerializer
 from semesterly.settings import ENABLE_SOCIAL_SYNC_GHOST
+from timetable.serializers import DisplayTimetableSerializer
 from timetable.share_links import get_shared_timetable_slug
 
 
@@ -9,7 +11,7 @@ def get_shared_timetable_group(slug):
     return f"shared_timetable_{slug}"
 
 
-def _broadcast_shared_timetable_update(slug, updated_at=None):
+def _broadcast_shared_timetable_update(payload):
     try:
         from channels.layers import get_channel_layer
     except ImportError:
@@ -19,17 +21,8 @@ def _broadcast_shared_timetable_update(slug, updated_at=None):
     if channel_layer is None:
         return
 
-    payload = {
-        "type": "timetable.updated",
-        "slug": slug,
-        "updated_at": (
-            updated_at.isoformat()
-            if hasattr(updated_at, "isoformat")
-            else timezone.now().isoformat()
-        ),
-    }
     async_to_sync(channel_layer.group_send)(
-        get_shared_timetable_group(slug),
+        get_shared_timetable_group(payload["slug"]),
         {"type": "timetable_update", "payload": payload},
     )
 
@@ -54,4 +47,23 @@ def sync_and_broadcast_shared_timetables_for_source(source_timetable):
     for shared_timetable in shared_timetables:
         _refresh_shared_timetable_snapshot(shared_timetable, source_timetable)
         slug = get_shared_timetable_slug(shared_timetable)
-        _broadcast_shared_timetable_update(slug, shared_timetable.updated_at)
+        serializer_context = {
+            "semester": shared_timetable.semester,
+            "school": shared_timetable.school,
+            "student": None,
+        }
+        payload = {
+            "type": "timetable.updated",
+            "slug": slug,
+            "permission": shared_timetable.permission,
+            "updatedAt": (
+                shared_timetable.updated_at.isoformat()
+                if hasattr(shared_timetable.updated_at, "isoformat")
+                else timezone.now().isoformat()
+            ),
+            "sharedTimetable": DisplayTimetableSerializer.from_model(shared_timetable).data,
+            "courses": CourseSerializer(
+                shared_timetable.courses, context=serializer_context, many=True
+            ).data,
+        }
+        _broadcast_shared_timetable_update(payload)
