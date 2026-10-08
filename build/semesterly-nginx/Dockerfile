@@ -2,9 +2,9 @@ ARG djangoTag=0
 ARG djangoImage=semesterly.azurecr.io/semesterly:$djangoTag
 
 # This is just to create an alias
-FROM $djangoImage as latestDjango
+FROM $djangoImage AS latestdjango
 
-FROM nginx:1.21.4
+FROM nginx:1.30
 
 
 # Need curl for health checks
@@ -17,4 +17,4 @@ COPY ./50x.html /usr/share/nginx/html/50x.html
 RUN mkdir /code
 
 RUN echo ${DJANGOTAG}
-COPY --from=latestDjango /code/static /code/static
+COPY --from=latestdjango /code/static /code/static
