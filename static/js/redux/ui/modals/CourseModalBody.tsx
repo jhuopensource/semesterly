@@ -80,9 +80,13 @@ const CourseModalBody = (props: CourseModalBodyProps) => {
   );
 
   useEffect(() => {
-    window.addEventListener("resize", () => {
+    const handleResize = () => {
       setIsMobile(window.innerWidth < mobileWidth);
-    });
+    };
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
   }, []);
 
   // Code to detect if arrow keys were hit. When detected, will hover over section times
@@ -229,16 +233,14 @@ const CourseModalBody = (props: CourseModalBodyProps) => {
         shortCourseSection = (
           <div>
             <p>
-              <p>
-                <img alt="Short Course" src="/static/img/short_course_icon_25x25.png" />
-                : This is a short term course. <br />
-              </p>
-              <p>
-                Dates offered:&nbsp;
-                <b>{offeringSample.date_start}</b>
-                <span> to </span>
-                <b>{offeringSample.date_end}</b>
-              </p>
+              <img alt="Short Course" src="/static/img/short_course_icon_25x25.png" />: This is
+              a short term course.
+            </p>
+            <p>
+              Dates offered:&nbsp;
+              <b>{offeringSample.date_start}</b>
+              <span> to </span>
+              <b>{offeringSample.date_end}</b>
             </p>
           </div>
         );

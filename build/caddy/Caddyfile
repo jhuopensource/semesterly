@@ -1,6 +1,9 @@
 #This is a local self-signed SSL proxy for development
 *.sem.ly:443 {
     tls self_signed
+    proxy /ws web:8000 {
+        websocket
+    }
     proxy / web:8000 {
         transparent
     }
@@ -10,11 +13,14 @@
         path /
         content_type text/html
         search_pattern http://localhost:3000/assets/
-        replacement https://jhu.sem.ly/assets/
+        replacement https://jhu.sem.ly/static/
     }
 }
 sem.ly:443 {
     tls self_signed
+    proxy /ws web:8000 {
+        websocket
+    }
     proxy / web:8000 {
         transparent
     }

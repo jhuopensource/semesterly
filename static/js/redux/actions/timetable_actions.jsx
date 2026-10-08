@@ -34,6 +34,7 @@ import {
   lockActiveSections,
   getUserSavedTimetables,
 } from "./user_actions";
+import { submitCollaborationReplaceOperation } from "./calendar_actions";
 import { alertsActions } from "../state/slices";
 import {
   changeActiveTimetable,
@@ -124,6 +125,7 @@ export const fetchTimetables =
         ) {
           dispatch(fetchClassmates(json.timetables[0]));
         }
+        dispatch(submitCollaborationReplaceOperation());
         // dispatch only after this promise resolves
         dispatch(autoSave());
       });
@@ -458,6 +460,7 @@ export const removeCustomSlot = (id) => (dispatch, getState) => {
     credentials: "include",
   }).then(() => {
     dispatch(customEventsActions.removeCustomEvent(id));
+    dispatch(submitCollaborationReplaceOperation());
     dispatch(savingTimetableActions.setUpToDate(true));
   });
 };
@@ -505,6 +508,7 @@ const updateEvent = (dispatch, newValues) => {
     credentials: "include",
   }).then(() => {
     dispatch(customEventsActions.updateExistingEvent(newValues));
+    dispatch(submitCollaborationReplaceOperation());
     dispatch(savingTimetableActions.setUpToDate(true));
   });
 };
@@ -548,6 +552,7 @@ export const finalizeCustomSlot = (id) => (dispatch, getState) => {
           newId: newEvent.id,
         })
       );
+      dispatch(submitCollaborationReplaceOperation());
       dispatch(savingTimetableActions.setUpToDate(true));
     });
 };

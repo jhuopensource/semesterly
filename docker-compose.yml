@@ -13,14 +13,25 @@ services:
       timeout: 5s
       retries: 5
 
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
   web:
     image: semesterly
     container_name: semesterly-web
     environment:
       - NODE_ENV=development
       - PYTHONUNBUFFERED=1
+      - REDIS_URL=redis://redis:6379/0
     build: .
-    command: bash -c "python3 manage.py migrate; yarn watch & python3 /code/manage.py runserver 0.0.0.0:8000"
+    command: bash -c "python3 manage.py migrate; yarn watch & python3 -m uvicorn semesterly.asgi:application --host 0.0.0.0 --port 8000"
     volumes:
       - .:/code
       - /code/node_modules
@@ -29,6 +40,8 @@ services:
       - "3000:3000"
     depends_on:
       db:
+        condition: service_healthy
+      redis:
         condition: service_healthy
     logging:
       options:
