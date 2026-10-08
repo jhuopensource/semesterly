@@ -397,6 +397,7 @@ const UserSettingsModal = () => {
               { value: 2027, label: 2027 },
               { value: 2028, label: 2028 },
               { value: 2029, label: 2029 },
+              { value: 2030, label: 2030 },
             ]}
             menuShouldScrollIntoView={false}
             isSearchable
