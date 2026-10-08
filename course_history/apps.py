@@ -10,13 +10,8 @@
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 
-from django.urls import include, re_path
-
-import authpipe.views
+from django.apps import AppConfig
 
 
-urlpatterns = [
-    # auth
-    re_path("", include("social_django.urls", namespace="social")),
-    re_path("", include(("django.contrib.auth.urls", "auth"), namespace="auth")),
-]
+class CourseHistoryConfig(AppConfig):
+    name = "course_history"

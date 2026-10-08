@@ -7,7 +7,7 @@ Learning The Stack
   
     Learning a new thing can be scary, especially when all you have are some docs and a 
     massive code base to learn from. That's why we are here to help you learn, build, 
-    and contribute. Ask us questions at our `Discord <https://discord.gg/txYbphsAV7>`_!
+    and contribute. Ask us questions at our `Discord <https://discord.gg/5444sdzjZZ>`_!
 
 
 Our Stack

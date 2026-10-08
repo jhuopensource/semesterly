@@ -266,6 +266,7 @@ TEMPLATES = [
     }
 ]
 
+CSRF_TRUSTED_ORIGINS = ["https://jhu.sem.ly"]
 
 SESSION_COOKIE_SAMESITE = None
 
@@ -280,7 +281,7 @@ DEFAULT_AUTO_FIELD = "django.db.models.AutoField"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.postgresql_psycopg2",
+        "ENGINE": "django.db.backends.postgresql",
         "NAME": os.path.join(
             BASE_DIR, "db.postgresql"
         ),  # os.path.join(BASE_DIR, 'db.postgresql')

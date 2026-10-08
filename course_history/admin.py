@@ -10,13 +10,6 @@
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 
-from django.urls import include, re_path
+from django.contrib import admin
 
-import authpipe.views
-
-
-urlpatterns = [
-    # auth
-    re_path("", include("social_django.urls", namespace="social")),
-    re_path("", include(("django.contrib.auth.urls", "auth"), namespace="auth")),
-]
+# Register your models here.

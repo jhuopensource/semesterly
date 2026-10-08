@@ -10,13 +10,13 @@
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 
-from django.urls import include, re_path
+from django.db import models
 
-import authpipe.views
+# Create your models here.
 
 
-urlpatterns = [
-    # auth
-    re_path("", include("social_django.urls", namespace="social")),
-    re_path("", include(("django.contrib.auth.urls", "auth"), namespace="auth")),
-]
+class CourseHistory(models.Model):
+    ids_list = models.TextField  # list contains course history in form of class ids
+
+    def __str__(self):
+        return self.ids_list

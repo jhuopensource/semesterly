@@ -22,6 +22,7 @@ import { isIncomplete as TOSIncomplete } from "../../util";
 import { isUserInfoIncomplete as areUserSettingsIncomplete } from "../../state/slices";
 import { getIsUserInfoIncomplete } from "../../state";
 import { selectTheme } from "../../state/slices/themeSlice";
+import Cookie from "js-cookie";
 
 interface Option {
   value: string;
@@ -57,10 +58,10 @@ const UserSettingsModal = () => {
   const showOverrided = useAppSelector((state) => state.userInfo.overrideShow);
   const hideOverrided = useAppSelector((state) => state.userInfo.overrideHide);
   const isUserInfoIncomplete = useAppSelector((state) =>
-    getIsUserInfoIncomplete(state),
+    getIsUserInfoIncomplete(state)
   );
   const isSigningUp = useAppSelector(
-    (state) => !state.userInfo.overrideShow && getIsUserInfoIncomplete(state),
+    (state) => !state.userInfo.overrideShow && getIsUserInfoIncomplete(state)
   );
   const isDeleted = useAppSelector((state) => state.userInfo.isDeleted);
 
@@ -157,10 +158,13 @@ const UserSettingsModal = () => {
 
   useEffect(() => {
     if (isDeleted) {
-      const link = document.createElement("a");
-      link.href = "/user/logout/";
-      document.body.appendChild(link);
-      link.click();
+      fetch("/user/logout/", {
+        method: "POST",
+        credentials: "include",
+        headers: { "X-CSRFToken": Cookie.get("csrftoken") },
+      }).then(() => {
+        window.location.href = "/";
+      });
     }
   }, [isDeleted]);
 

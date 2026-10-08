@@ -54,6 +54,28 @@ exports[`CourseModalBody correctly renders 1`] = `
         <div
           class="modal-module prerequisites"
         >
+          <div
+            style="display: flex; align-items: center; gap: 1rem;"
+          >
+            <h3
+              class="modal-module-header"
+              style="margin: 0px;"
+            >
+              Check Satisfied Prerequisites
+            </h3>
+            <button>
+              Check
+            </button>
+          </div>
+          <p
+            style="color: gray;"
+          >
+            ⚪Check if you've satisfied the necessary prerequisites by pressing the [Check] button
+          </p>
+        </div>
+        <div
+          class="modal-module prerequisites"
+        >
           <h3
             class="modal-module-header"
           >
