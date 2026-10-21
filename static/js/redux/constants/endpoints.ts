@@ -77,6 +77,12 @@ export const getRejectFriendRequestEndpoint = (
 export const getSchoolInfoEndpoint = (school: string) => `/school/${school}/`;
 export const getReactToCourseEndpoint = () => "/user/reactions/";
 export const getRequestShareTimetableLinkEndpoint = () => "/timetables/links/";
+export const getGhostTimetableEndpoint = (slug: string) =>
+  `/timetables/links/${slug}/ghost/`;
+export const getGhostTimetableWebsocketEndpoint = (slug: string) => {
+  const protocol = window.location.protocol === "https:" ? "wss" : "ws";
+  return `${protocol}://${window.location.host}/ws/timetables/links/${slug}/`;
+};
 export const acceptTOSEndpoint = () => "/tos/accept/";
 export function getCourseShareLinkFromModal(code: Course["code"], semester: Semester) {
   return `/course/${encodeURIComponent(code)}/${semester.name}/${semester.year}`;

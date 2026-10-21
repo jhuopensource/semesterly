@@ -45,6 +45,7 @@ import { uniqBy } from "lodash";
 import { selectGradient } from "../state/slices/compareTimetableSlice";
 import { selectSlotColorData, selectTheme } from "../state/slices/themeSlice";
 import SearchSlot from "./SearchSlot";
+import GhostSlot from "./GhostSlot";
 
 function getConflictStyles(slotsByDay: any) {
   const styledSlotsByDay = slotsByDay;
@@ -172,6 +173,11 @@ const SlotManager = (props: { days: string[] }) => {
   );
   const slots = isComparingTimetables ? comparedSlots : timetableSlots;
   const gradient = useAppSelector(selectGradient);
+  const ghostOverlayEnabled = useAppSelector((state) => state.ghostTimetable.enabled);
+  const ghostTimetable = useAppSelector((state) => state.ghostTimetable.timetable);
+  const ghostSlots = useAppSelector((state) =>
+    ghostOverlayEnabled && ghostTimetable ? getDenormTimetable(state, ghostTimetable).slots : []
+  );
   const courseToColourIndex = useAppSelector((state) => state.ui.courseToColourIndex);
   const customEvents = useAppSelector((state) => state.customEvents.events);
   const searchSlot = useAppSelector((state) => state.dragSearch.slot);
@@ -276,7 +282,48 @@ const SlotManager = (props: { days: string[] }) => {
     return getConflictStyles(slotsByDay);
   };
 
+  const getGhostSlotsByDay = () => {
+    const ghostSlotsByDay: any = {
+      M: [],
+      T: [],
+      W: [],
+      R: [],
+      F: [],
+      S: [],
+      U: [],
+    };
+    const ghostColorData = [
+      {
+        background: "#9fc4ff",
+        highlight: "#9fc4ff",
+        border: "#3f62a6",
+        font: "#1d2433",
+      },
+    ];
+    if (!ghostOverlayEnabled) {
+      return ghostSlotsByDay;
+    }
+    ghostSlots.forEach((slot) => {
+      const { course, section, offerings } = slot;
+      offerings
+        .filter((offering) => offering.day in ghostSlotsByDay)
+        .forEach((offering) => {
+          const displaySlot = slotToDisplayOffering(
+            course,
+            section,
+            offering,
+            0,
+            ghostColorData
+          );
+          displaySlot.ghostText = course.name;
+          ghostSlotsByDay[offering.day].push(displaySlot);
+        });
+    });
+    return getConflictStyles(ghostSlotsByDay);
+  };
+
   const slotsByDay = getSlotsByDay();
+  const ghostSlotsByDay = getGhostSlotsByDay();
 
   const courseSections = useAppSelector((state) => state.courseSections);
   const isLocked = (courseId: number, section: number) => {
@@ -315,6 +362,23 @@ const SlotManager = (props: { days: string[] }) => {
 
   const dispatch = useAppDispatch();
   const allSlots = props.days.map((day, i) => {
+    const ghostDaySlots = ghostSlotsByDay[day].map((slot: any, j: number) => (
+      <GhostSlot
+        id={`ghost-${slot.id}-${i}-${j}`}
+        key={`ghost-${slot.id}-${i}-${j}`}
+        color={slot.colorData[slot.colourId]?.background || "#9fc4ff"}
+        borderColor={slot.colorData[slot.colourId]?.border || "#3f62a6"}
+        text={slot.ghostText || slot.name || "Shared course"}
+        section={slot.meeting_section || ""}
+        location={slot.location || ""}
+        time_start={slot.time_start}
+        time_end={slot.time_end}
+        num_conflicts={slot.num_conflicts || 1}
+        shift_index={slot.shift_index || 0}
+        depth_level={slot.depth_level || 0}
+        uses12HrTime={uses12HrTime}
+      />
+    ));
     const daySlots = slotsByDay[day].map((slot: any, j: number) => {
       const courseId = slot.courseId;
       const locked = isLocked(courseId, slot.meeting_section);
@@ -359,7 +423,10 @@ const SlotManager = (props: { days: string[] }) => {
     });
     return (
       <td key={day}>
-        <div className="fc-content-col">{daySlots}</div>
+        <div className="fc-content-col">
+          {ghostDaySlots}
+          {daySlots}
+        </div>
       </td>
     );
   });

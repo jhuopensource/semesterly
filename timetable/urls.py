@@ -30,6 +30,10 @@ urlpatterns = [
     # sharing
     re_path(r"^timetables/links/$", timetable.views.TimetableLinkView.as_view()),
     re_path(
+        r"^timetables/links/(?P<slug>.+)/ghost/$",
+        timetable.views.SharedTimetableGhostView.as_view(),
+    ),
+    re_path(
         r"^timetables/links/(?P<slug>.+)/$", timetable.views.TimetableLinkView.as_view()
     ),
     re_path(  # maintain backwards compatibility

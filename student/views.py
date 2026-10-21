@@ -13,6 +13,7 @@
 import json
 
 from django.urls import reverse
+from django.db import transaction
 from django.db.models import Q, Count
 from django.forms.models import model_to_dict
 from django.http import Http404, HttpRequest, HttpResponse, HttpResponseRedirect
@@ -50,6 +51,7 @@ from timetable.serializers import (
     EventSerializer,
     PersonalTimeTablePreferencesSerializer,
 )
+from timetable.realtime import sync_and_broadcast_shared_timetables_for_source
 from helpers.mixins import ValidateSubdomainMixin, RedirectToSignupMixin
 from helpers.decorators import validate_subdomain
 from semesterly.settings import get_secret
@@ -262,6 +264,9 @@ class UserTimetableView(ValidateSubdomainMixin, RedirectToSignupMixin, APIView):
         self.update_events(
             personal_timetable, request.data["events"]
         )  # events correspond to PersonalEvent model
+        transaction.on_commit(
+            lambda: sync_and_broadcast_shared_timetables_for_source(personal_timetable)
+        )
 
         response = {
             "timetables": get_student_tts(student, school, semester),
