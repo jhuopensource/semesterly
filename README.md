@@ -10,7 +10,7 @@
   <a href="https://www.gnu.org/licenses/gpl-3.0"><img src="https://img.shields.io/badge/License-GPL%20v3-blue.svg"/></a>
   <a href="https://github.com/jhuopensource/semesterly/pulls"><img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg"/></a>
   <a href='https://semesterly-v2.readthedocs.io/en/latest/?badge=latest' target="_blank"><img src='https://readthedocs.org/projects/semesterly-v2/badge/?version=latest' alt='Documentation Status' /></a>
-  <a href="https://discord.gg/txYbphsAV7" target="_blank"><img src="https://img.shields.io/badge/chat-on%20discord-7289da.svg?sanitize=true" alt="Chat"></a>
+  <a href="https://discord.gg/5444sdzjZZ" target="_blank"><img src="https://img.shields.io/badge/chat-on%20discord-7289da.svg?sanitize=true" alt="Chat"></a>
 </p>
 
 ## Documentation
@@ -29,7 +29,7 @@ Read [Add a School](https://semesterly-v2.readthedocs.io/en/latest/addaschool.ht
 
 ## Questions
 
-For questions and support, please contact us at <semesterly@jhu.edu> or ask in the [community forum](https://discord.gg/txYbphsAV7). The [Issues section](https://github.com/jhuopensource/semesterly/issues) of this repository is **ONLY** for bug reports and feature requests.
+For questions and support, please contact us at <semesterly@jhu.edu> or ask in the [community forum](https://discord.gg/5444sdzjZZ). The [Issues section](https://github.com/jhuopensource/semesterly/issues) of this repository is **ONLY** for bug reports and feature requests.
 
 ## Our Contributors
 <div align="center">

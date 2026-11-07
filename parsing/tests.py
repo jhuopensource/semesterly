@@ -483,7 +483,7 @@ class DigestionTest(TestCase):
         diff = [
             {
                 "$context": {},
-                "$new": {
+                "$insert": {
                     "code": "ABC",
                     "corequisites": "A, AB, BC, B, C",
                     "department": "English",
@@ -552,7 +552,7 @@ class DigestionTest(TestCase):
         diff = [
             {
                 "$context": {"course": "ABC: Alphabet", "semester": "Bar 2017"},
-                "$new": {
+                "$insert": {
                     "enrolment": 41,
                     "instructors": "Sem LySemesterly",
                     "meeting_section": "001",
@@ -603,7 +603,7 @@ class DigestionTest(TestCase):
                 "$context": {
                     "section": "Course: ABC: Alphabet; Section: ABC: Alphabet; Semester: ABC: Alphabet"
                 },
-                "$new": {
+                "$insert": {
                     "day": "M",
                     "location": "Malone Ugrad",
                     "date_start": "08-29-2017",
@@ -617,7 +617,7 @@ class DigestionTest(TestCase):
                 "$context": {
                     "section": "Course: ABC: Alphabet; Section: ABC: Alphabet; Semester: ABC: Alphabet"
                 },
-                "$new": {
+                "$insert": {
                     "day": "W",
                     "location": "Malone Ugrad",
                     "date_start": "08-29-2017",
@@ -631,7 +631,7 @@ class DigestionTest(TestCase):
                 "$context": {
                     "section": "Course: ABC: Alphabet; Section: ABC: Alphabet; Semester: ABC: Alphabet"
                 },
-                "$new": {
+                "$insert": {
                     "day": "F",
                     "location": "Malone Ugrad",
                     "date_start": "08-29-2017",
@@ -729,7 +729,7 @@ class DigestionTest(TestCase):
         diff = [
             {
                 "$context": {},
-                "$new": {
+                "$insert": {
                     "code": "ABC",
                     "corequisites": "A, AB, BC, B, C",
                     "department": "English",
@@ -742,7 +742,7 @@ class DigestionTest(TestCase):
             },
             {
                 "$context": {"course": "ABC: Alphabet", "semester": "Bar 2017"},
-                "$new": {
+                "$insert": {
                     "enrolment": 41,
                     "instructors": "Sem LySemesterly",
                     "meeting_section": "001",
@@ -754,7 +754,7 @@ class DigestionTest(TestCase):
             },
             {
                 "$context": {"course": "ABC: Alphabet", "semester": "Bar 2017"},
-                "$new": {
+                "$insert": {
                     "enrolment": 36,
                     "instructors": "Semesterly",
                     "meeting_section": "002",
@@ -768,7 +768,7 @@ class DigestionTest(TestCase):
                 "$context": {
                     "section": "Course: ABC: Alphabet; Section: ABC: Alphabet; Semester: ABC: Alphabet"
                 },
-                "$new": {
+                "$insert": {
                     "day": "M",
                     "location": "Malone Ugrad",
                     "date_start": "08-29-2017",
@@ -782,7 +782,7 @@ class DigestionTest(TestCase):
                 "$context": {
                     "section": "Course: ABC: Alphabet; Section: ABC: Alphabet; Semester: ABC: Alphabet"
                 },
-                "$new": {
+                "$insert": {
                     "day": "F",
                     "location": "Malone Ugrad",
                     "date_start": "08-29-2017",
@@ -796,7 +796,7 @@ class DigestionTest(TestCase):
                 "$context": {
                     "section": "Course: ABC: Alphabet; Section: ABC: Alphabet; Semester: ABC: Alphabet"
                 },
-                "$new": {
+                "$insert": {
                     "day": "W",
                     "location": " ",
                     "date_start": "08-29-2017",

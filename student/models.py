@@ -10,7 +10,7 @@
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 
-""" Models pertaining to Students. """
+"""Models pertaining to Students."""
 
 from django.core.signing import TimestampSigner
 from django.db import models

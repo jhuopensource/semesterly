@@ -16,8 +16,9 @@ from django.urls import reverse
 from django.db.models import Q, Count
 from django.forms.models import model_to_dict
 from django.http import Http404, HttpRequest, HttpResponse, HttpResponseRedirect
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, render, redirect
 from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth import logout
 from django.utils import timezone
 from hashids import Hashids
 from rest_framework.generics import GenericAPIView
@@ -84,6 +85,11 @@ def accept_tos(request):
     student.time_accepted_tos = timezone.now()
     student.save()
     return HttpResponse(status=204)
+
+
+def logout_view(request):
+    logout(request)
+    return redirect("/")
 
 
 class UserView(RedirectToSignupMixin, APIView):

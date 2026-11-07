@@ -10,15 +10,14 @@
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 
-from django.conf.urls import re_path
-from django.contrib.auth.views import LogoutView
+from django.urls import re_path
 
 from helpers.mixins import FeatureFlowView
 import student.views
 
 urlpatterns = [
     # profile management
-    re_path(r"^user/logout/$", LogoutView.as_view(next_page="/")),
+    re_path(r"^user/logout/$", student.views.logout_view),
     re_path(r"^user/settings/$", student.views.UserView.as_view()),
     re_path(
         r"^delete_account/$",
