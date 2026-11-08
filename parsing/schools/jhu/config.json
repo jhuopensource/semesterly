@@ -16,7 +16,8 @@
     "2023": ["Fall", "Spring"],
     "2024": ["Fall", "Spring"],
     "2025": ["Fall", "Spring"],
-    "2026": ["Spring"]
+    "2026": ["Fall", "Spring"],
+    "2027": ["Spring"]
   },
   "final_exams": {},
   "registrar": true,
