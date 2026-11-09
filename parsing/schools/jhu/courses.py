@@ -31,7 +31,7 @@ class Parser(BaseParser):
         verbosity (TYPE): Description
     """
 
-    API_URL = "https://sis.jhu.edu/api/classes"
+    API_URL = "https://sis.jhu.edu/api/classes/"
     DAY_MAP = {"m": "M", "t": "T", "w": "W", "th": "R", "f": "F", "sa": "S", "s": "U"}
 
     def __new__(cls, *args, **kwargs):
