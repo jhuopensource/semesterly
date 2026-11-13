@@ -7,6 +7,7 @@ import EvaluationList from "../evaluation_list";
 import CourseModalSection from "../CourseModalSection";
 import SlotHoverTip from "../SlotHoverTip";
 import CoursePrereq from "../CoursePrereq";
+import CheckPrerequisites from "../CheckPrerequisites";
 
 import { getSectionTypeDisplayName, strPropertyCmp } from "../../util";
 import {
@@ -516,6 +517,7 @@ const CourseModalBody = (props: CourseModalBodyProps) => {
           </div>
           {!showCapacityAttention && capacityTracker}
           {showCapacityAttention && isMobile && attentioncapacityTracker}
+          <CheckPrerequisites prerequisites={props.course.prerequisites} />
           <CoursePrereq
             courseRegex={courseRegex}
             prerequisites={props.course.prerequisites}

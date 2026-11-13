@@ -1,10 +1,21 @@
 services:
   db:
-    image: postgres:12.1
+    image: postgres:14
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
     ports:
       - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
   web:
     image: semesterly
+    container_name: semesterly-web
     environment:
       - NODE_ENV=development
       - PYTHONUNBUFFERED=1
@@ -12,17 +23,21 @@ services:
     command: bash -c "python3 manage.py migrate; yarn watch & python3 /code/manage.py runserver 0.0.0.0:8000"
     volumes:
       - .:/code
+      - /code/node_modules
     ports:
       - "8000:8000"
       - "3000:3000"
     depends_on:
-      - db
+      db:
+        condition: service_healthy
     logging:
       options:
         max-size: "10m"
         max-file: "3"
+
   localssl:
     image: jhuopensource/semesterly-caddy
+    container_name: semesterly-localssl
     logging:
       driver: "json-file"
       options:

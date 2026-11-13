@@ -1,5 +1,5 @@
 """
-Deletes Sections, Offerings, and Timetables for a given year. 
+Deletes Sections, Offerings, and Timetables for a given year.
 
 Example usage: python manage.py remove_old_courses 2022
 Removes all of the above for the year 2022

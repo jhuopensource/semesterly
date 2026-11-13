@@ -54,6 +54,8 @@ Cloning your Semester.ly fork will create a directory with all of the code requi
 
          git clone https://github.com/[YOUR-USERNAME]/semesterly
 
+    .. note:: **ATTENTION:** If you are using WSL make sure to NOT clone into the `/mnt` directory (or any of its subdirectories). You can enusre this by immediately `cd`ing after logging into WSL --- this will take you out of the `mnt` subdirectory. If you clone anywhere into `mnt`, `docker compoe build && docker compose up` will be reading from your original Windows machine to load containers or images, taking about 6-8x longer than it would otherwise.
+
 3. Enter the directory:
 
     .. code-block:: bash

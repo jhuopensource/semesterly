@@ -2,12 +2,14 @@ from rest_framework import serializers
 from .models import UIErrorLog
 
 
-class CurrentUserDefault(object):
-    def set_context(self, serializer_field):
-        self.user = serializer_field.context["request"].user
+class CurrentUserDefault:
+    requires_context = True
 
-    def __call__(self):
-        return self.user if self.user.is_authenticated else None
+    def __call__(self, serializer_field):
+        request = serializer_field.context.get("request")
+        if request and hasattr(request, "user") and request.user.is_authenticated:
+            return request.user
+        return None
 
     def __repr__(self):
         return "%s()" % self.__class__.__name__

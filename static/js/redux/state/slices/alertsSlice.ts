@@ -24,6 +24,8 @@ interface AlertsSliceState {
   timetableToDelete: null | Timetable;
   alertCoursePlan: boolean;
   alertCoursePlanType: number;
+  alertUploadIssue: boolean;
+  uploadIssueMessage: string;
 }
 
 const initialState: AlertsSliceState = {
@@ -39,6 +41,8 @@ const initialState: AlertsSliceState = {
   timetableToDelete: null,
   alertCoursePlan: false,
   alertCoursePlanType: 0,
+  alertUploadIssue: false,
+  uploadIssueMessage: "",
 };
 
 const alertsSlice = createSlice({
@@ -102,6 +106,16 @@ const alertsSlice = createSlice({
     },
     dismissAlertCoursePlan: (state) => {
       state.alertCoursePlan = false;
+    },
+    // failure to upload transcript
+    alertUploadFailed: (state, action: PayloadAction<string | undefined>) => {
+      state.alertUploadIssue = true;
+      state.uploadIssueMessage =
+        action.payload || "File upload failed. Please try again.";
+    },
+    dismissAlertUploadIssue: (state) => {
+      state.alertUploadIssue = false;
+      state.uploadIssueMessage = "";
     },
   },
   extraReducers: (builder) => {
